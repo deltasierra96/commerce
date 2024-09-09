@@ -1,13 +1,31 @@
+import '../styles/main.css';
+
+import {
+  fontBasierCircle,
+  fontFutura,
+  fontGeogrotesque,
+  fontGreycliff,
+  fontInter,
+  fontMontserrat,
+  fontPoppins,
+  fontRecoleta,
+  fontRoboto,
+  fontStolzl
+} from '@/fonts/next-fonts';
+import { AriaProvider } from '@/providers/aria-provider';
+import { clsx } from '@/utils';
 import { CartProvider } from 'components/cart/cart-context';
 import { Navbar } from 'components/layout/navbar';
-import { GeistSans } from 'geist/font/sans';
 import { getCart } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
+import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
-// test
-
+import { Banner } from './_components/banner';
+import { Footer } from './_components/footer';
+import { Header } from './_components/header';
+import { SecondaryNavigation } from './_components/header/_components/secondary-navigation';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -42,16 +60,66 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const cart = getCart(cartId);
 
   return (
-    <html lang="en" className={GeistSans.variable}>
-      <body className="text-black bg-neutral-50 selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        <CartProvider cartPromise={cart}>
-          <Navbar />
-          <main>
-            {children}
-            <Toaster closeButton />
-          </main>
-        </CartProvider>
-      </body>
-    </html>
+    <AriaProvider>
+      <html
+        lang="en"
+        className={clsx(
+          fontRoboto.variable,
+          fontMontserrat.variable,
+          fontStolzl.variable,
+          fontInter.variable,
+          fontBasierCircle.variable,
+          fontRecoleta.variable,
+          fontGreycliff.variable,
+          fontFutura.variable,
+          fontGeogrotesque.variable,
+          fontPoppins.variable
+        )}
+      >
+        <body
+          className={clsx(
+            'scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 text-neutral-700 antialiased'
+          )}
+        >
+          <NextTopLoader
+            initialPosition={0.1}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={true}
+            easing="ease"
+            speed={750}
+          />
+          <CartProvider cartPromise={cart}>
+            <Navbar />
+            <div className="flex h-full min-h-screen flex-col bg-white">
+              <div className="flex-1">
+                <div className={clsx('flex flex-col')}>
+                  <div className="block lg:hidden">
+                    <Banner />
+                  </div>
+                  <div className="sticky top-0 z-header">
+                    <div className="hidden lg:block">
+                      <SecondaryNavigation />
+                    </div>
+                    <Header />
+                  </div>
+                  <div className="hidden lg:block">
+                    <Banner />
+                  </div>
+                  <div className="flex-1">
+                    <main>
+                      {children}
+                      <Toaster closeButton />
+                    </main>
+                  </div>
+                  <Footer />
+                </div>
+              </div>
+            </div>
+          </CartProvider>
+        </body>
+      </html>
+    </AriaProvider>
   );
 }
