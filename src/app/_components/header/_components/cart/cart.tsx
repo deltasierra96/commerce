@@ -491,9 +491,11 @@ export const Cart = ({ ...props }: CartProps) => {
                     Shipping and taxes calculated at checkout.
                   </p>
                   <div className="mt-6 space-y-4">
-                    <Button block variant={'filled'} color={'primary'}>
-                      Checkout
-                    </Button>
+                    <form action={redirectToCheckout}>
+                      <Button type="submit" block variant={'filled'} color={'primary'}>
+                        Checkout
+                      </Button>
+                    </form>
                     <Button block variant={'ghost'} color="neutral" rightIcon="arrow-right">
                       Continue Shopping
                     </Button>
