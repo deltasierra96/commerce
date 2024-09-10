@@ -14,8 +14,6 @@ import {
 } from '@/fonts/next-fonts';
 import { AriaProvider } from '@/providers/aria-provider';
 import { clsx } from '@/utils';
-import { CartProvider } from 'components/cart/cart-context';
-import { Navbar } from 'components/layout/navbar';
 import { getCart } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
@@ -25,6 +23,7 @@ import { Toaster } from 'sonner';
 import { Banner } from './_components/banner';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
+import { CartProvider } from './_components/header/_components/cart';
 import { SecondaryNavigation } from './_components/header/_components/secondary-navigation';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
@@ -91,7 +90,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             speed={750}
           />
           <CartProvider cartPromise={cart}>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="flex h-full min-h-screen flex-col bg-white">
               <div className="flex-1">
                 <div className={clsx('flex flex-col')}>

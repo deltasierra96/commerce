@@ -1,9 +1,9 @@
 'use client';
 
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { removeItem } from 'components/cart/actions';
 import type { CartItem } from 'lib/shopify/types';
 import { useFormState } from 'react-dom';
+import { removeItem } from './actions';
 
 export function DeleteItemButton({
   item,

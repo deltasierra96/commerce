@@ -6,10 +6,12 @@ import { Logo } from '@/components/ui/logo';
 import { SearchInput } from '@/components/ui/search-input';
 import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/routes';
 import { clsx } from '@/utils';
+// import CartModal from 'components/cart/modal';
 import React, { forwardRef } from 'react';
 import { Link } from 'react-aria-components';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
+import { Cart } from './_components/cart';
 import { Favourites } from './_components/favourites';
 import { Search } from './_components/search';
 
@@ -53,7 +55,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
 
                 <div className="flex basis-2/12 justify-end">
                   <ButtonIconLink icon="user" variant={'ghost'} href={ACCOUNT_ROUTE} />
-                  {/* <Cart title='Shopping cart' position={'bottom'} size={'lg'} /> */}
+                  {/* <CartModal /> */}
                 </div>
               </div>
             </Container>
@@ -102,7 +104,9 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                     <div className="hidden sm:block">
                       <Account />
                     </div>
-                    <div className="hidden sm:block">{/* <Cart title='Your bag' /> */}</div>
+                    <div className="hidden sm:block">
+                      <Cart title="Your bag" />
+                    </div>
                   </div>
                 </div>
               </div>
