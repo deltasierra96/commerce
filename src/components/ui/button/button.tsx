@@ -1,43 +1,43 @@
 'use client';
-import React, { forwardRef } from 'react';
 import { clsx } from '@/utils';
-import { type IconTypeProps, Icon } from '../icon';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { forwardRef } from 'react';
 import { Button as AriaButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
 import { focusRing } from '../focus-ring';
 import { borderStyles } from '../focus-ring/focus-ring';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { Icon, type IconTypeProps } from '../icon';
 
 export const sharedButtonStyles = cva(
-  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent uppercase leading-none outline-none transition-all duration-150 disabled:border-neutral-50 disabled:bg-neutral-50 disabled:text-neutral-300',
+  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent uppercase leading-none outline-none transition-all duration-150 disabled:border-neutral-100 disabled:bg-neutral-100 disabled:text-neutral-400',
   {
     variants: {
       rounded: {
         true: 'rounded-full',
-        false: 'rounded-button',
+        false: 'rounded-button'
       },
       borderStyle: {
         solid: 'border-solid',
         dashed: 'border-dashed',
-        dotted: 'border-dotted',
+        dotted: 'border-dotted'
       },
       color: {
         primary: '',
         neutral: '',
-        danger: '',
+        danger: ''
       },
       variant: {
         filled: '',
         outline: '',
         subtle: '',
         ghost: '',
-        link: 'underline',
-      },
+        link: 'underline'
+      }
     },
     compoundVariants: [
       {
         color: 'primary',
         variant: 'link',
-        className: clsx(['pressed:text-primary-400', 'text-primary-500']),
+        className: clsx(['pressed:text-primary-400', 'text-primary-500'])
       },
       {
         color: 'primary',
@@ -49,8 +49,8 @@ export const sharedButtonStyles = cva(
           'hover:bg-primary-400',
           'hover:border-primary-400',
           'pressed:bg-primary-600',
-          'pressed:border-primary-600',
-        ]),
+          'pressed:border-primary-600'
+        ])
       },
       {
         color: 'primary',
@@ -62,8 +62,8 @@ export const sharedButtonStyles = cva(
           'hover:bg-primary-50',
           'hover:border-primary-50',
           'pressed:bg-primary-100',
-          'pressed:border-primary-100',
-        ]),
+          'pressed:border-primary-100'
+        ])
       },
       {
         color: 'primary',
@@ -75,8 +75,8 @@ export const sharedButtonStyles = cva(
           'hover:bg-primary-100',
           'hover:border-primary-100',
           'pressed:bg-primary-200',
-          'pressed:border-primary-200',
-        ]),
+          'pressed:border-primary-200'
+        ])
       },
       {
         color: 'primary',
@@ -87,13 +87,13 @@ export const sharedButtonStyles = cva(
           'hover:bg-primary-100',
           'hover:text-primary-700',
           'pressed:bg-primary-200',
-          'bg-white',
-        ]),
+          'bg-white'
+        ])
       },
       {
         color: 'neutral',
         variant: 'link',
-        className: clsx(['text-neutral-500']),
+        className: clsx(['text-neutral-500'])
       },
       {
         color: 'neutral',
@@ -105,8 +105,8 @@ export const sharedButtonStyles = cva(
           'hover:border-neutral-200',
           'hover:bg-neutral-200',
           'pressed:border-neutral-300',
-          'pressed:bg-neutral-300',
-        ]),
+          'pressed:bg-neutral-300'
+        ])
       },
       {
         color: 'neutral',
@@ -119,8 +119,8 @@ export const sharedButtonStyles = cva(
           'hover:bg-neutral-100',
           'hover:text-neutral-900',
           'pressed:border-neutral-200',
-          'pressed:bg-neutral-200',
-        ]),
+          'pressed:bg-neutral-200'
+        ])
       },
       {
         color: 'neutral',
@@ -132,8 +132,8 @@ export const sharedButtonStyles = cva(
           'hover:border-neutral-200',
           'hover:bg-neutral-200',
           'pressed:border-neutral-300',
-          'pressed:bg-neutral-300',
-        ]),
+          'pressed:bg-neutral-300'
+        ])
       },
       {
         color: 'neutral',
@@ -147,50 +147,50 @@ export const sharedButtonStyles = cva(
           'hover:text-neutral-900',
           'pressed:border-neutral-100',
           'pressed:bg-neutral-200',
-          'pressed:text-neutral-900',
-        ]),
+          'pressed:text-neutral-900'
+        ])
       },
 
       {
         color: 'danger',
         variant: 'link',
-        className: clsx('text-red-500 pressed:text-red-400'),
+        className: clsx('text-red-500 pressed:text-red-400')
       },
       {
         color: 'danger',
         variant: 'filled',
         className: clsx(
           'border-red-500 bg-red-500 text-white hover:border-red-400 hover:bg-red-400 pressed:border-red-600 pressed:bg-red-600'
-        ),
+        )
       },
       {
         color: 'danger',
         variant: 'outline',
         className: clsx(
           'border-red-500 bg-white text-red-500 hover:bg-red-100 hover:text-red-700 pressed:bg-red-200'
-        ),
+        )
       },
       {
         color: 'danger',
         variant: 'subtle',
         className: clsx(
           'border-red-50 bg-red-50 text-red-500 hover:border-red-100 hover:bg-red-100 pressed:border-red-200 pressed:bg-red-200'
-        ),
+        )
       },
       {
         color: 'danger',
         variant: 'ghost',
         className: clsx(
           'border-transparent bg-transparent text-red-500 hover:border-red-50 hover:bg-red-50 pressed:border-red-100 pressed:bg-red-100'
-        ),
-      },
+        )
+      }
     ],
     defaultVariants: {
       variant: 'outline',
       color: 'neutral',
       rounded: false,
-      borderStyle: 'solid',
-    },
+      borderStyle: 'solid'
+    }
   }
 );
 
@@ -199,52 +199,52 @@ export const buttonStyles = cva('text-center font-button tracking-normal', {
     size: {
       sm: 'text-sm',
       default: 'text-sm',
-      lg: 'text-sm',
+      lg: 'text-sm'
     },
     compact: {
       true: null,
-      false: null,
+      false: null
     },
     block: {
-      true: 'w-full',
-    },
+      true: 'w-full'
+    }
   },
   compoundVariants: [
     {
       compact: false,
       size: 'sm',
-      className: 'h-button-sm px-3',
+      className: 'h-button-sm px-3'
     },
     {
       compact: true,
       size: 'sm',
-      className: 'h-button-compact-sm px-2',
+      className: 'h-button-compact-sm px-2'
     },
     {
       compact: false,
       size: 'default',
-      className: 'h-button px-4',
+      className: 'h-button px-4'
     },
     {
       compact: true,
       size: 'default',
-      className: 'h-button-compact px-2',
+      className: 'h-button-compact px-2'
     },
     {
       compact: false,
       size: 'lg',
-      className: 'h-button-lg px-6',
+      className: 'h-button-lg px-6'
     },
     {
       compact: true,
       size: 'lg',
-      className: 'h-button-compact-lg px-3',
-    },
+      className: 'h-button-compact-lg px-3'
+    }
   ],
   defaultVariants: {
     size: 'default',
-    compact: false,
-  },
+    compact: false
+  }
 });
 
 export const buttonIconNodeStyles = cva(null, {
@@ -253,12 +253,12 @@ export const buttonIconNodeStyles = cva(null, {
       xs: 'h-3.5 w-3.5',
       sm: 'h-4 w-4',
       default: 'h-4 w-4',
-      lg: 'h-5 w-5',
-    },
+      lg: 'h-5 w-5'
+    }
   },
   defaultVariants: {
-    size: 'default',
-  },
+    size: 'default'
+  }
 });
 
 export type ButtonDefaultProps = {
@@ -299,8 +299,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps & RACButtonProps
     const hasLoadingIconRight = isLoading && loaderPosition === 'right';
 
     const Loader = () => (
-      <div className='flex animate-spin items-center justify-center'>
-        <Icon className={clsx(buttonIconNodeStyles({ size }))} icon='loader' />
+      <div className="flex animate-spin items-center justify-center">
+        <Icon className={clsx(buttonIconNodeStyles({ size }))} icon="loader" />
       </div>
     );
 
@@ -312,7 +312,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps & RACButtonProps
           buttonStyles({
             size,
             block,
-            compact,
+            compact
           }),
           sharedButtonStyles({ variant, color, rounded, borderStyle }),
           focusRing({ isFocusVisible: true }),

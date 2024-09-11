@@ -6,12 +6,11 @@ import { Logo } from '@/components/ui/logo';
 import { SearchInput } from '@/components/ui/search-input';
 import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/routes';
 import { clsx } from '@/utils';
-// import CartModal from 'components/cart/modal';
 import React, { forwardRef } from 'react';
 import { Link } from 'react-aria-components';
+import { Cart } from '../cart';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
-import { Cart } from './_components/cart';
 import { Favourites } from './_components/favourites';
 import { Search } from './_components/search';
 

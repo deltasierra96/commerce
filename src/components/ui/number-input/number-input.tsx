@@ -1,19 +1,19 @@
 'use client';
-import { forwardRef } from 'react';
 import { clsx } from '@/utils';
+import { cva } from 'class-variance-authority';
+import { forwardRef } from 'react';
 import {
   NumberField,
   Button as RACButton,
   Group as RACGroup,
-  type NumberFieldProps,
-  type ButtonProps as RACButtonProps,
   type GroupProps,
+  type NumberFieldProps,
+  type ButtonProps as RACButtonProps
 } from 'react-aria-components';
+import { FieldDescription, FieldError, FieldWrapper, type FieldWrapperProps } from '../form';
 import { Icon, type IconTypeProps } from '../icon';
 import { Input, type InputBaseProps } from '../input';
-import { cva } from 'class-variance-authority';
 import { Label } from '../label';
-import { FieldDescription, FieldError, FieldWrapper, type FieldWrapperProps } from '../form';
 
 type NumberInputControlIconProps = {
   incrementIcon?: IconTypeProps;
@@ -38,11 +38,11 @@ const NumberInputControl = (props: NumberInputControlProps) => {
     >
       <Icon
         icon={
-          slot === 'increment' ? incrementIcon ?? 'chevron-up' : decrementIcon ?? 'chevron-down'
+          slot === 'increment' ? (incrementIcon ?? 'chevron-up') : (decrementIcon ?? 'chevron-down')
         }
-        className='h-4 w-4'
+        className="h-4 w-4"
       />
-      <span className='sr-only'>{slot === 'increment' ? 'Increment' : 'Decrement'}</span>
+      <span className="sr-only">{slot === 'increment' ? 'Increment' : 'Decrement'}</span>
     </RACButton>
   );
 };
@@ -51,9 +51,9 @@ const numberControlWrapperStyles = cva('h-input-addon flex w-10 flex-col divide-
   variants: {
     isDisabled: {
       true: 'divide-neutral-200 border-neutral-100',
-      false: 'divide-neutral-100 border-neutral-100',
-    },
-  },
+      false: 'divide-neutral-100 border-neutral-100'
+    }
+  }
 });
 
 const NumberControlWrapper = (props: GroupProps) => {
@@ -68,7 +68,7 @@ export type NumberInputProps = InputBaseProps &
     enableControls?: boolean;
   };
 
-export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props, ref) => {
+export const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>((props, ref) => {
   const {
     leftSection,
     hideLabel,
@@ -84,15 +84,17 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props
   } = props;
 
   return (
-    <NumberField {...rest}>
-      {!hideLabel ? <Label isRequired={props.isRequired}>{label}</Label> : null}
+    <NumberField ref={ref} {...rest}>
+      <Label className={clsx(hideLabel && 'sr-only')} isRequired={props.isRequired}>
+        {label}
+      </Label>
       <FieldWrapper isInvalid={props.isInvalid} isDisabled={props.isDisabled} size={size}>
-        <Input ref={ref} />
+        <Input />
         {leftSection ? leftSection : null}
         {enableControls ? (
           <NumberControlWrapper isDisabled={props.isDisabled}>
-            <NumberInputControl slot='increment' incrementIcon={incrementIcon} />
-            <NumberInputControl slot='decrement' decrementIcon={decrementIcon} />
+            <NumberInputControl slot="increment" incrementIcon={incrementIcon} />
+            <NumberInputControl slot="decrement" decrementIcon={decrementIcon} />
           </NumberControlWrapper>
         ) : null}
         {rightSection ? rightSection : null}

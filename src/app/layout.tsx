@@ -20,9 +20,9 @@ import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import { Banner } from './_components/banner';
+import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
-import { CartProvider } from './_components/header/_components/cart';
 import { SecondaryNavigation } from './_components/header/_components/secondary-navigation';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
