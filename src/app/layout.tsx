@@ -12,14 +12,13 @@ import {
   fontRoboto,
   fontStolzl
 } from '@/fonts/next-fonts';
-import { AriaProvider } from '@/providers/aria-provider';
+import { AriaProvider } from '@/providers';
 import { clsx } from '@/utils';
 import { getCart } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
-import { Toaster } from 'sonner';
 import { Banner } from './_components/banner';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
@@ -75,11 +74,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           fontPoppins.variable
         )}
       >
-        <body
-          className={clsx(
-            'scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 text-neutral-700 antialiased'
-          )}
-        >
+        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 text-neutral-950 antialiased">
           <NextTopLoader
             initialPosition={0.1}
             crawlSpeed={200}
@@ -93,7 +88,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             {/* <Navbar /> */}
             <div className="flex h-full min-h-screen flex-col bg-white">
               <div className="flex-1">
-                <div className={clsx('flex flex-col')}>
+                <div className="flex flex-col">
                   <div className="block lg:hidden">
                     <Banner />
                   </div>
@@ -107,10 +102,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                     <Banner />
                   </div>
                   <div className="flex-1">
-                    <main>
-                      {children}
-                      <Toaster closeButton />
-                    </main>
+                    <main>{children}</main>
                   </div>
                   <Footer />
                 </div>

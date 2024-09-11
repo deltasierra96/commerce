@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { Container } from '@/components/ui/container';
 import { GridTileImage } from 'components/grid/tile';
 import Footer from 'components/layout/footer';
 import { Gallery } from 'components/product/gallery';
 import { ProductProvider } from 'components/product/product-context';
-import { ProductDescription } from 'components/product/product-description';
+import { ProductInformation } from 'components/product/product-information';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { getProduct, getProductRecommendations } from 'lib/shopify';
 import { Image } from 'lib/shopify/types';
@@ -53,6 +54,8 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
 
+  console.log('product', product);
+
   if (!product) return notFound();
 
   const productJsonLd = {
@@ -80,12 +83,12 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
+      <Container className="max-w-screen-xl py-16">
+        <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
+          <div className="lg:col-span-4 lg:row-end-1">
             <Suspense
               fallback={
-                <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
+                <div className="aspect-square relative h-full max-h-[550px] w-full overflow-hidden" />
               }
             >
               <Gallery
@@ -97,14 +100,14 @@ export default async function ProductPage({ params }: { params: { handle: string
             </Suspense>
           </div>
 
-          <div className="basis-full lg:basis-2/6">
+          <div className="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
             <Suspense fallback={null}>
-              <ProductDescription product={product} />
+              <ProductInformation product={product} />
             </Suspense>
           </div>
         </div>
         <RelatedProducts id={product.id} />
-      </div>
+      </Container>
       <Footer />
     </ProductProvider>
   );

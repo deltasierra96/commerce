@@ -1,1 +1,1 @@
-export * from './react-query-provider';
+export { AriaProvider } from './aria-provider';
