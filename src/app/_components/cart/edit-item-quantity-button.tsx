@@ -76,14 +76,13 @@ export function EditItemQuantityButton({
           if (qty > item.quantity) {
             setQty(item.quantity + 1);
             setDerpType('plus');
-            setShowUpdate(true);
           } else {
             setQty(item.quantity - 1);
             setDerpType('minus');
-            setShowUpdate(true);
           }
+          setShowUpdate(true);
         }}
-        defaultValue={qty}
+        defaultValue={item.quantity}
         minValue={1}
       >
         <Group>
