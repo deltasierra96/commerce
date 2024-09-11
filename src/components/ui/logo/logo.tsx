@@ -1,9 +1,10 @@
 'use client';
 import { clsx } from '@/utils';
+import { LinkProps } from 'next/link';
 import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
 import { borderStyles, focusRing } from '../focus-ring';
 
-type LogoProps = RACLinkProps;
+export type LogoProps = RACLinkProps & Omit<LinkProps, 'href'>;
 
 export const Logo = ({ className, href = '/', ...props }: LogoProps) => {
   const gymSharkLogo = (

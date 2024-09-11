@@ -1,7 +1,6 @@
 'use client';
 
-import { PlusIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import { Button } from '@/components/ui/button';
 import { useProduct } from 'components/product/product-context';
 import { Product, ProductVariant } from 'lib/shopify/types';
 import { useActionState } from 'react';
@@ -21,40 +20,39 @@ function SubmitButton({
 
   if (!availableForSale) {
     return (
-      <button disabled className={clsx(buttonClasses, disabledClasses)}>
+      <Button block isDisabled variant={'filled'} color={'primary'}>
         Out Of Stock
-      </button>
+      </Button>
     );
   }
 
   console.log(selectedVariantId);
   if (!selectedVariantId) {
     return (
-      <button
+      <Button
+        block
+        leftIcon="plus"
+        isDisabled
         aria-label="Please select an option"
-        disabled
-        className={clsx(buttonClasses, disabledClasses)}
+        variant={'filled'}
+        color={'primary'}
       >
-        <div className="absolute left-0 ml-4">
-          <PlusIcon className="h-5" />
-        </div>
         Add To Cart
-      </button>
+      </Button>
     );
   }
 
   return (
-    <button
+    <Button
+      type="submit"
+      block
       aria-label="Add to cart"
-      className={clsx(buttonClasses, {
-        'hover:opacity-90': true
-      })}
+      variant={'filled'}
+      color={'primary'}
+      leftIcon="plus"
     >
-      <div className="absolute left-0 ml-4">
-        <PlusIcon className="h-5" />
-      </div>
       Add To Cart
-    </button>
+    </Button>
   );
 }
 

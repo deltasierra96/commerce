@@ -1,1 +1,1 @@
-export { Logo } from './logo';
+export { Logo, type LogoProps } from './logo';
