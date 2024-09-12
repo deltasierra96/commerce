@@ -1,8 +1,7 @@
-const plugin = require('tailwindcss/plugin');
+import { type Config } from 'tailwindcss';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.tsx', './app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+export default module.exports = {
+  content: ['./src/**/*.tsx'],
   theme: {
     container: {
       center: true,
@@ -143,15 +142,12 @@ module.exports = {
       }
     }
   },
-  future: {
-    hoverOnlyWhenSupported: true
-  },
+
   plugins: [
-    require('@tailwindcss/container-queries'),
-    require('@tailwindcss/typography'),
+    require('tailwind-scrollbar'),
     require('@tailwindcss/typography'),
     require('tailwindcss-animate'),
     require('tailwindcss-react-aria-components'),
     require('@tailwindcss/aspect-ratio')
   ]
-};
+} satisfies Config;
