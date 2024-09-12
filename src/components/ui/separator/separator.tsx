@@ -4,7 +4,7 @@ import * as React from 'react';
 import { clsx } from '@/utils';
 import {
   Separator as RACSeparator,
-  type SeparatorProps as RACSeparatorProps,
+  type SeparatorProps as RACSeparatorProps
 } from 'react-aria-components';
 
 export type SeparatorProps = RACSeparatorProps;

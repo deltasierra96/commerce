@@ -15,7 +15,7 @@ const ScrollArea = React.forwardRef<
     className={clsx('relative overflow-hidden', className)}
     {...props}
   >
-    <ScrollAreaPrimitive.Viewport className='h-full w-full rounded'>
+    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded">
       {children}
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar isDarkThumb={isDarkThumb} />

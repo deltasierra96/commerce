@@ -10,5 +10,5 @@ export {
   type TableBodyProps,
   type CellProps,
   type ColumnProps,
-  type RowProps,
+  type RowProps
 } from './table';

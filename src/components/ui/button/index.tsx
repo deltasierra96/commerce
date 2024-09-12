@@ -5,6 +5,6 @@ export {
   type ButtonDefaultProps,
   buttonIconNodeStyles,
   buttonStyles,
-  sharedButtonStyles,
+  sharedButtonStyles
 } from './button';
 export { ButtonLink, type ButtonLinkProps } from './button-link';

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import {
   type InputProps as RACInputProps,
   Input as RACInput,
-  type ValidationResult as RACValidationResult,
+  type ValidationResult as RACValidationResult
 } from 'react-aria-components';
 import { clsx } from '@/utils';
 

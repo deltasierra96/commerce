@@ -2,7 +2,7 @@ import {
   Menu as RACMenu,
   type MenuProps as RACMenuProps,
   MenuTrigger as RACMenuTrigger,
-  type MenuTriggerProps as RACMenuTriggerProps,
+  type MenuTriggerProps as RACMenuTriggerProps
 } from 'react-aria-components';
 import React from 'react';
 import { DropdownItem, type DropdownItemProps } from '../list-box';
@@ -24,7 +24,7 @@ export const Menu = <T extends object>({
       <RACMenu
         selectionMode={selectionMode}
         {...props}
-        className='max-h-[inherit] overflow-auto p-1 outline-0 scrollbar-thin'
+        className="scrollbar-thin max-h-[inherit] overflow-auto p-1 outline-0"
       />
     </Popover>
   );
@@ -42,5 +42,5 @@ export const MenuItem = (props: MenuItemProps) => {
 };
 
 export const MenuSeparator = (props: SeparatorProps) => {
-  return <Separator {...props} orientation='horizontal' />;
+  return <Separator {...props} orientation="horizontal" />;
 };

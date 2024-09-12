@@ -5,7 +5,6 @@ import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
-
 type SearchProps = {
   isOpen: boolean;
   setOpen: (open: boolean) => void;

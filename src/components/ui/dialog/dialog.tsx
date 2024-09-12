@@ -6,7 +6,7 @@ import {
   Dialog as RACDialog,
   Heading as RACHeading,
   OverlayTriggerStateContext as RACOverlayTriggerStateContext,
-  Text as RACText,
+  Text as RACText
 } from 'react-aria-components';
 import { ButtonIcon } from '../button-icon';
 
@@ -17,7 +17,7 @@ export const Dialog = ({ role = 'dialog', className, ...rest }: DialogProps) => 
     {...rest}
     role={role}
     className={clsx(
-      'relative flex h-full w-full flex-col overflow-auto outline-none scrollbar-thin',
+      'scrollbar-thin relative flex h-full w-full flex-col overflow-auto outline-none',
       className
     )}
   />
@@ -40,20 +40,23 @@ export const DialogHeader = ({
   const state = useContext(RACOverlayTriggerStateContext);
 
   return (
-    <div {...rest} className={clsx('sticky top-0 z-10 bg-white p-2 px-4', className)}>
+    <div
+      {...rest}
+      className={clsx('sticky top-0 z-10 border-b border-neutral-100 bg-white p-2 px-4', className)}
+    >
       <div className={clsx('flex items-stretch')}>
-        <div className='flex flex-1 items-center'>
-          <RACHeading className={clsx('break-all text-base font-semibold')} slot='title'>
+        <div className="flex flex-1 items-center">
+          <RACHeading className={clsx('break-all text-base font-semibold')} slot="title">
             {children}
           </RACHeading>
           {description ? (
-            <RACText slot='description' className='text-sm text-neutral-600'>
+            <RACText slot="description" className="text-sm text-neutral-600">
               {description}
             </RACText>
           ) : null}
         </div>
         {showCloseButton ? (
-          <ButtonIcon icon='x' variant='ghost' color='neutral' onPress={() => state.close()} />
+          <ButtonIcon icon="x" variant="ghost" color="neutral" onPress={() => state.close()} />
         ) : null}
       </div>
     </div>

@@ -6,22 +6,22 @@ import Image from 'next/image';
 export const Hero = () => {
   return (
     <section>
-      <div className='relative'>
+      <div className="relative">
         <Container fullWidth>
-          <div className='relative z-10 lg:w-full lg:max-w-2xl'>
-            <div className='relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0'>
-              <div className='mx-auto max-w-2xl text-white lg:mx-0 lg:max-w-2xl'>
-                <h1 className='font-heading text-4xl uppercase tracking-tight sm:text-5xl'>
+          <div className="relative z-10 lg:w-full lg:max-w-2xl">
+            <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
+              <div className="mx-auto max-w-2xl text-white lg:mx-0 lg:max-w-2xl">
+                <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl">
                   This month's new drops
                 </h1>
-                <p className='mt-6 text-lg leading-8'>
+                <p className="mt-6 text-lg leading-8">
                   Go grab what you like then we’ll meet you at the gym (duh)
                 </p>
-                <div className='mt-10 flex items-center gap-x-4'>
-                  <ButtonLink size={'lg'} href='#'>
+                <div className="mt-10 flex items-center gap-x-4">
+                  <ButtonLink size={'lg'} href="#">
                     Shop Women
                   </ButtonLink>
-                  <ButtonLink size={'lg'} href='#' color={'primary'} variant={'filled'}>
+                  <ButtonLink size={'lg'} href="#" color={'primary'} variant={'filled'}>
                     Shop Men
                   </ButtonLink>
                 </div>
@@ -29,21 +29,21 @@ export const Hero = () => {
             </div>
           </div>
         </Container>
-        <div className='w-full lg:absolute lg:inset-y-0 lg:right-0'>
+        <div className="w-full lg:absolute lg:inset-y-0 lg:right-0">
           {/* <img
             className='lg:aspect-auto aspect-[3/2] object-cover lg:h-full lg:w-full'
             src='https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80'
             alt=''
           /> */}
           <video
-            poster='//images.ctfassets.net/wl6q2in9o7k3/5oK17Fr6pPw8kQIaqge2wV/07d1fa6e0115063f1b930fffd5361e2c/Headless_Desktop_-1.jpg?w=2234&amp;q=90&amp;fm=webp'
+            poster="//images.ctfassets.net/wl6q2in9o7k3/5oK17Fr6pPw8kQIaqge2wV/07d1fa6e0115063f1b930fffd5361e2c/Headless_Desktop_-1.jpg?w=2234&amp;q=90&amp;fm=webp"
             autoPlay
             loop
             playsInline
-            className='lg:aspect-auto aspect-[3/2] object-cover lg:h-full lg:w-full'
-            data-desktop-breakpoint='tablet'
+            className="lg:aspect-auto aspect-[3/2] object-cover lg:h-full lg:w-full"
+            data-desktop-breakpoint="tablet"
           >
-            <source src='https://videos.ctfassets.net/wl6q2in9o7k3/2sR03YrRnSbS1yCC2NCm6e/a91a040b34334770933eaab6d75811f0/Seasonal_Gym_Story_HERO_WEB_1920x1080.mp4' />
+            <source src="https://videos.ctfassets.net/wl6q2in9o7k3/2sR03YrRnSbS1yCC2NCm6e/a91a040b34334770933eaab6d75811f0/Seasonal_Gym_Story_HERO_WEB_1920x1080.mp4" />
           </video>
         </div>
       </div>

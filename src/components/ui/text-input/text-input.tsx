@@ -8,7 +8,7 @@ import {
   FieldError,
   FieldWrapper,
   fieldWrapperIconSizeStyles,
-  type FieldWrapperProps,
+  type FieldWrapperProps
 } from '../form';
 import { Icon, type IconTypeProps } from '../icon';
 
@@ -36,14 +36,14 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     ref
   ) => {
     return (
-      <TextField {...props} className='w-full' validationBehavior={validationBehavior}>
+      <TextField {...props} className="w-full" validationBehavior={validationBehavior}>
         <Label hidden={hideLabel} isRequired={props.isRequired}>
           {label}
         </Label>
         <FieldWrapper isInvalid={props.isInvalid} isDisabled={props.isDisabled} size={size}>
           {leftSection ? leftSection : null}
           {icon ? (
-            <div className='flex flex-col items-center justify-center pl-3'>
+            <div className="flex flex-col items-center justify-center pl-3">
               <Icon icon={icon} className={fieldWrapperIconSizeStyles({ size })} />
             </div>
           ) : null}

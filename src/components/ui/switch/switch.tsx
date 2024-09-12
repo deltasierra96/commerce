@@ -6,7 +6,7 @@ import {
   Switch as AriaSwitch,
   SwitchContext,
   useSlottedContext,
-  type SwitchProps as AriaSwitchProps,
+  type SwitchProps as AriaSwitchProps
 } from 'react-aria-components';
 import { focusRing } from '../focus-ring';
 import { useId } from 'react-aria';
@@ -28,7 +28,7 @@ const useSwitch = () => {
   }
 
   return {
-    ...switchContext,
+    ...switchContext
   };
 };
 
@@ -45,9 +45,9 @@ const ToggleTrackStyles = cva(
     variants: {
       variant: {
         default: 'h-6 w-10.5 p-0.5',
-        slim: 'h-1.5 w-9 p-0',
-      },
-    },
+        slim: 'h-1.5 w-9 p-0'
+      }
+    }
   }
 );
 
@@ -57,9 +57,9 @@ const ToggleTabStyles = cva(
     variants: {
       variant: {
         default: 'h-4.5 w-4.5 group-selected:translate-x-full',
-        slim: 'h-5 w-5 shadow-md shadow-neutral-950/20 group-selected:translate-x-full',
-      },
-    },
+        slim: 'h-5 w-5 shadow-md shadow-neutral-950/20 group-selected:translate-x-full'
+      }
+    }
   }
 );
 
@@ -74,8 +74,8 @@ const Toggle = ({ variant = 'default', showToggleIcon = true }: ToggleProps) => 
       <div className={clsx(ToggleTabStyles({ variant }))}>
         {showToggleIcon ? (
           <>
-            <Icon className='absolute h-3 w-3 opacity-0 group-selected:opacity-100' icon='check' />
-            <Icon className='absolute h-3 w-3 text-neutral-500 group-selected:opacity-0' icon='x' />
+            <Icon className="absolute h-3 w-3 opacity-0 group-selected:opacity-100" icon="check" />
+            <Icon className="absolute h-3 w-3 text-neutral-500 group-selected:opacity-0" icon="x" />
           </>
         ) : null}
       </div>
@@ -100,7 +100,7 @@ const Root = React.forwardRef<HTMLLabelElement, SwitchProps>(({ className, ...pr
         'aria-describedby': descriptionIdRAC,
         toggleId: props.toggleId ?? toggleIdRAC,
         'aria-controls': toggleIdRAC,
-        ...props,
+        ...props
       }}
     >
       <AriaSwitch className={clsx('group', className)} ref={ref} {...props} />

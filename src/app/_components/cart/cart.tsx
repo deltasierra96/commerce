@@ -3,7 +3,7 @@
 import Price from '@/app/_components/price';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { Drawer, DrawerProps } from '@/components/ui/drawer';
+import { Drawer } from '@/components/ui/drawer';
 import { DEFAULT_OPTION, STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
@@ -17,9 +17,7 @@ type MerchandiseSearchParams = {
   [key: string]: string;
 };
 
-export type CartProps = DrawerProps;
-
-export const Cart = ({ ...props }: CartProps) => {
+export const Cart = () => {
   const { cart, updateCartItem, isCartOpen, setIsCartOpen } = useCart();
   const quantityRef = useRef(cart?.totalQuantity);
 
@@ -48,9 +46,9 @@ export const Cart = ({ ...props }: CartProps) => {
         onPress={() => setIsCartOpen(true)}
         variant={'ghost'}
         counter={cart?.totalQuantity}
-        icon="shopping-bag"
+        icon="shopping-cart"
       />
-      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen} {...props}>
+      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen} title="Shopping cart">
         <Drawer.Content>
           <div className="flex h-full flex-col overflow-y-scroll">
             {!cart || cart.lines.length === 0 ? (
@@ -66,7 +64,7 @@ export const Cart = ({ ...props }: CartProps) => {
               </div>
             ) : (
               <>
-                <div className="flex h-full flex-col justify-between">
+                <div className="flex h-full flex-col justify-between px-2">
                   <ul className="divide-neutext-neutral-200 divide-y">
                     {cart.lines
                       .sort((a, b) =>

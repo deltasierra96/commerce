@@ -1,7 +1,7 @@
 'use client';
 import {
   type FileTriggerProps as RACFileTriggerProps,
-  FileTrigger as RACFileTrigger,
+  FileTrigger as RACFileTrigger
 } from 'react-aria-components';
 
 export type FileTriggerProps = RACFileTriggerProps;

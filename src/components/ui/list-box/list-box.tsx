@@ -9,7 +9,7 @@ import {
   type ListBoxProps as RACListBoxProps,
   type ListBoxItemProps as RACListBoxItemProps,
   type MenuItemProps as RACMenuItemProps,
-  type SectionProps as RACSectionProps,
+  type SectionProps as RACSectionProps
 } from 'react-aria-components';
 import React from 'react';
 import { Icon, type IconTypeProps } from '../icon';
@@ -39,7 +39,7 @@ export const ListBoxItem = ({ children, ...props }: ListBoxItemProps) => {
     <RACListBoxItem {...props} textValue={textValue} className={clsx(listBoxItemStyles)}>
       <>
         {children}
-        <div className='absolute bottom-0 left-4 right-4 hidden h-px bg-white/20 group-disabled:border-neutral-50 group-disabled:bg-white forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block' />
+        <div className="absolute bottom-0 left-4 right-4 hidden h-px bg-white/20 group-disabled:border-neutral-50 group-disabled:bg-white forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block" />
       </>
     </RACListBoxItem>
   );
@@ -57,7 +57,7 @@ export const ListBoxSection = <T extends object>({
 }: ListBoxSectionProps<T>) => {
   return (
     <RACSection {...props}>
-      <RACHeader className='font-base truncate px-2 py-1 text-xs tracking-normal text-neutral-500'>
+      <RACHeader className="font-base truncate px-2 py-1 text-xs tracking-normal text-neutral-500">
         {title}
       </RACHeader>
       <RACCollection items={items}>{children}</RACCollection>
@@ -74,15 +74,15 @@ export const DropdownItem = ({ showCheck = true, icon, ...props }: DropdownItemP
     <RACMenuItem {...props} textValue={textValue} className={clsx(listBoxItemStyles)}>
       {({ selectionMode, isSelected, hasSubmenu }) => (
         <div className={clsx('flex w-full items-center gap-x-3 whitespace-nowrap')}>
-          {icon && selectionMode !== 'multiple' && <Icon icon={icon} className='h-4 w-4' />}
-          <span className='truncate font-normal'>
+          {icon && selectionMode !== 'multiple' && <Icon icon={icon} className="h-4 w-4" />}
+          <span className="truncate font-normal">
             <>{props.children}</>
           </span>
           {showCheck && selectionMode !== 'none' && isSelected ? (
-            <Icon icon='check' aria-hidden className='ml-auto h-4 w-4' />
+            <Icon icon="check" aria-hidden className="ml-auto h-4 w-4" />
           ) : null}
           {hasSubmenu ? (
-            <Icon icon='chevron-right' aria-hidden className='ml-auto h-4 w-4' />
+            <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" />
           ) : null}
         </div>
       )}

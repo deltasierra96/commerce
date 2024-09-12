@@ -4,5 +4,5 @@ export {
   MenuItem,
   MenuSeparator,
   type MenuItemProps,
-  type MenuTriggerProps,
+  type MenuTriggerProps
 } from './menu';

@@ -2,7 +2,7 @@ import Price from '@/app/_components/price';
 import { DEFAULT_OPTION } from '@/lib/constants';
 import { CartItem as ShopifyCartItemProps } from '@/lib/shopify/types';
 import Image from 'next/image';
-import { Link, Button as RACButton } from 'react-aria-components';
+import { Link } from 'react-aria-components';
 import { UpdateCartItemProps, useCart } from './cart-context';
 import { DeleteCartItemButton } from './delete-cart-item-button';
 import { EditCartItemQuantity } from './edit-cart-item-quantity';
@@ -35,9 +35,9 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="flex justify-between text-base font-medium text-neutral-900">
-          <h3>
+      <div className="ml-4 space-y-1">
+        <div>
+          <h3 className="flex justify-between text-base font-medium text-neutral-900">
             <Link onPress={() => setIsCartOpen(false)} href={merchandiseUrl}>
               {cartItem.merchandise.product.title}
             </Link>
@@ -47,29 +47,14 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
               </p>
             ) : null}
           </h3>
-          <p className="ml-4">
-            <Price
-              className="flex justify-end space-y-2 text-right text-sm"
-              amount={cartItem.cost.totalAmount.amount}
-              currencyCode={cartItem.cost.totalAmount.currencyCode}
-            />
-          </p>
+          <Price
+            className="space-y-2 text-base"
+            amount={cartItem.cost.totalAmount.amount}
+            currencyCode={cartItem.cost.totalAmount.currencyCode}
+          />
         </div>
 
         <EditCartItemQuantity item={cartItem} updateCartItem={updateCartItem} />
-
-        <div className="flex flex-1 items-end justify-between text-sm">
-          <p className="text-neutral-500">Qty {cartItem.quantity}</p>
-
-          <div className="flex">
-            <RACButton
-              type="button"
-              className="font-medium text-primary-500 hover:text-primary-600"
-            >
-              Remove
-            </RACButton>
-          </div>
-        </div>
       </div>
     </div>
   );

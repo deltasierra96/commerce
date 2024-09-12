@@ -6,7 +6,7 @@ import {
   FieldError as RACFieldError,
   Text as RACText,
   type FieldErrorProps as RACFieldErrorProps,
-  type TextProps as RACTextProps,
+  type TextProps as RACTextProps
 } from 'react-aria-components';
 import { Icon, type IconTypeProps } from '../icon';
 import { Group as RACGroup, type GroupProps as RACGroupProps } from 'react-aria-components';
@@ -14,7 +14,7 @@ import {
   Controller,
   type ControllerProps,
   type FieldPath,
-  type FieldValues,
+  type FieldValues
 } from 'react-hook-form';
 import { borderStyles, focusRing } from '../focus-ring';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -30,7 +30,7 @@ export const FieldError = ({ className, children, ...rest }: FieldErrorProps) =>
   return (
     <RACFieldError className={clsx('mt-2 flex text-sm text-red-500', className)} {...rest}>
       <>
-        <Icon aria-hidden icon='exclamation-mark-circle' className='mr-1.5 h-4 w-4' />
+        <Icon aria-hidden icon="exclamation-mark-circle" className="mr-1.5 h-4 w-4" />
         {children}
       </>
     </RACFieldError>
@@ -42,7 +42,7 @@ export type FieldDescriptionProps = RACTextProps;
 export const FieldDescription = ({ className, ...rest }: FieldDescriptionProps) => (
   <RACText
     {...rest}
-    slot='description'
+    slot="description"
     className={clsx(
       'mt-2 block text-sm text-neutral-500 group-disabled:text-neutral-400',
       className
@@ -57,7 +57,7 @@ export type FormFieldGroupSectionProps = {
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = {
   name: TName;
   isDisabled?: boolean;
@@ -67,7 +67,7 @@ const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFi
 
 export const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
   isDisabled,
   ...props
@@ -86,12 +86,12 @@ export const fieldWrapperSizeStyles = cva('w-full', {
     size: {
       sm: 'h-input-sm',
       default: 'h-input',
-      lg: 'h-input-lg',
-    },
+      lg: 'h-input-lg'
+    }
   },
   defaultVariants: {
-    size: 'default',
-  },
+    size: 'default'
+  }
 });
 
 export const fieldWrapperIconSizeStyles = cva('text-neutral-400', {
@@ -99,12 +99,12 @@ export const fieldWrapperIconSizeStyles = cva('text-neutral-400', {
     size: {
       sm: 'h-4 w-4',
       default: 'h-4 w-4',
-      lg: 'h-5 w-5',
-    },
+      lg: 'h-5 w-5'
+    }
   },
   defaultVariants: {
-    size: 'default',
-  },
+    size: 'default'
+  }
 });
 
 export const fieldWrapperBaseStyles = cva(
@@ -113,12 +113,12 @@ export const fieldWrapperBaseStyles = cva(
     variants: {
       rounded: {
         true: 'rounded-full',
-        false: 'rounded-input',
-      },
+        false: 'rounded-input'
+      }
     },
     defaultVariants: {
-      rounded: false,
-    },
+      rounded: false
+    }
   }
 );
 

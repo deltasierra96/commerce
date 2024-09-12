@@ -49,10 +49,10 @@ const Content = ({ children, ...props }: AlertDialogProps) => {
           <Modal.Header showCloseButton={showCloseButton} description={description}>
             {title}
           </Modal.Header>
-          <div className='p-4 text-sm text-neutral-600'>{children}</div>
-          <Modal.Footer className='flex justify-end gap-2'>
+          <div className="p-4 text-sm text-neutral-600">{children}</div>
+          <Modal.Footer className="flex justify-end gap-2">
             <Button onPress={close}>{cancelLabel}</Button>
-            <Button variant='filled' color='danger' onPress={onAction}>
+            <Button variant="filled" color="danger" onPress={onAction}>
               {actionLabel}
             </Button>
           </Modal.Footer>

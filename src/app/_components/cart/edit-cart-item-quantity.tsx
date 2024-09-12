@@ -69,13 +69,13 @@ type EditCartItemQuantityProps = {
 
 export const EditCartItemQuantity = ({ item, updateCartItem }: EditCartItemQuantityProps) => {
   return (
-    <div className="inline-flex items-center rounded-full border border-neutral-200 bg-white p-0.5">
+    <div className="inline-flex items-center space-x-2 rounded-button border border-neutral-200 bg-white p-0.5">
       <EditCartItemQuantityButton
         item={item}
         updateType="decrement"
         optimisticUpdate={updateCartItem}
       />
-      <p className="w-full text-center text-sm">{item.quantity}</p>
+      <p className="pointer-events-none w-full select-none text-center text-sm">{item.quantity}</p>
       <EditCartItemQuantityButton
         item={item}
         updateType="increment"

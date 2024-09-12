@@ -8,16 +8,16 @@ const currencies: CurrencyProps[] = [
   { title: 'USD' },
   { title: 'AUD' },
   { title: 'EUR' },
-  { title: 'GBP' },
+  { title: 'GBP' }
 ];
 
 export const TopBar = () => {
   return (
-    <div className='border-b border-neutral-100 bg-neutral-50'>
+    <div className="border-b border-neutral-100 bg-neutral-50">
       <Container>
-        <div className='flex items-center justify-end py-0.5'>
+        <div className="flex items-center justify-end py-0.5">
           <HelpAndFAQs />
-          <Separator orientation='vertical' className='mx-2' />
+          <Separator orientation="vertical" className="mx-2" />
           <CurrencySelector currencies={currencies} />
         </div>
       </Container>

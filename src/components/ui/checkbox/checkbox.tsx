@@ -6,7 +6,7 @@ import {
   Checkbox as RACCheckbox,
   CheckboxGroup as RACCheckboxGroup,
   type CheckboxProps as RACCheckboxProps,
-  type CheckboxGroupProps as RACCheckboxGroupProps,
+  type CheckboxGroupProps as RACCheckboxGroupProps
 } from 'react-aria-components';
 import { Icon } from '../icon';
 import { borderStyles, focusRing } from '../focus-ring';
@@ -18,15 +18,15 @@ const styles = cva(
     variants: {
       isSelected: {
         true: 'border-primary-500 bg-primary-500 group-pressed:border-neutral-800 group-pressed:bg-neutral-800 forced-colors:!border-[Highlight] forced-colors:!bg-[Highlight]',
-        false: 'border-neutral-300 bg-white group-pressed:border-neutral-500',
+        false: 'border-neutral-300 bg-white group-pressed:border-neutral-500'
       },
       isInvalid: {
-        true: 'border-red-500 bg-red-500 text-white group-pressed:border-red-800 group-pressed:bg-red-400',
+        true: 'border-red-500 bg-red-500 text-white group-pressed:border-red-800 group-pressed:bg-red-400'
       },
       isDisabled: {
-        true: 'border-neutral-100 bg-neutral-50 forced-colors:border-[GrayText]',
-      },
-    },
+        true: 'border-neutral-100 bg-neutral-50 forced-colors:border-[GrayText]'
+      }
+    }
   }
 );
 
@@ -57,9 +57,9 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
             )}
           >
             {isSelected ? (
-              <Icon icon='check' className={iconStyles} aria-hidden='true' />
+              <Icon icon="check" className={iconStyles} aria-hidden="true" />
             ) : isIndeterminate ? (
-              <Icon icon='minus' className={iconStyles} aria-hidden='true' />
+              <Icon icon="minus" className={iconStyles} aria-hidden="true" />
             ) : null}
           </div>
           {children}

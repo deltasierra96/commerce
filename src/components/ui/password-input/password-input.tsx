@@ -2,7 +2,7 @@
 import { forwardRef, useState } from 'react';
 import {
   TextField as RACTextField,
-  type TextFieldProps as RACTextFieldProps,
+  type TextFieldProps as RACTextFieldProps
 } from 'react-aria-components';
 import { Label } from '../label';
 import {
@@ -10,7 +10,7 @@ import {
   FieldError,
   FieldWrapper,
   fieldWrapperIconSizeStyles,
-  type FieldWrapperProps,
+  type FieldWrapperProps
 } from '../form';
 import { Input, type InputBaseProps } from '../input';
 import { Button } from '../button';
@@ -46,7 +46,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
       <RACTextField
         {...rest}
         type={isPasswordInputVisible ? 'text' : 'password'}
-        className='w-full'
+        className="w-full"
         validationBehavior={validationBehavior}
       >
         <Label hidden={hideLabel} isRequired={props.isRequired}>
@@ -55,19 +55,19 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
         <FieldWrapper isInvalid={props.isInvalid} isDisabled={props.isDisabled} size={size}>
           {leftSection ? leftSection : null}
           {icon ? (
-            <div className='flex flex-col items-center justify-center pl-3'>
+            <div className="flex flex-col items-center justify-center pl-3">
               <Icon icon={icon} className={fieldWrapperIconSizeStyles({ size })} />
             </div>
           ) : null}
           <Input ref={ref} />
           {enablePasswordInputToggle ? (
-            <div className='flex items-stretch'>
-              <div className='me-1 flex items-center'>
+            <div className="flex items-stretch">
+              <div className="me-1 flex items-center">
                 <Button
                   size={size}
                   compact={true}
                   variant={'ghost'}
-                  color='neutral'
+                  color="neutral"
                   // leftIcon={isPasswordInputVisible ? 'eye-off' : 'eye'}
                   aria-hidden={!visibilityToggleLabel}
                   aria-label={visibilityToggleLabel}

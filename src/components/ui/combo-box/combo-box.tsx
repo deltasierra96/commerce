@@ -3,7 +3,7 @@ import {
   type ComboBoxProps as RACComboBoxProps,
   ComboBox as RACComboBox,
   type ValidationResult,
-  Group as RACGroup,
+  Group as RACGroup
 } from 'react-aria-components';
 import { Label } from '../label';
 import { Popover } from '../popover';
@@ -13,7 +13,7 @@ import {
   FieldError,
   FieldWrapper,
   fieldWrapperSizeStyles,
-  type FieldWrapperProps,
+  type FieldWrapperProps
 } from '../form';
 import { ButtonIcon } from '../button-icon';
 import React from 'react';
@@ -22,7 +22,7 @@ import {
   type DropdownItemProps,
   ListBoxSection,
   type ListBoxSectionProps,
-  ListBox,
+  ListBox
 } from '../list-box';
 import { clsx } from '@/utils';
 
@@ -70,9 +70,9 @@ const Root = <T extends object>(
 
       <FieldWrapper size={size} isInvalid={props.isInvalid} isDisabled={props.isDisabled}>
         {leftSection ? leftSection : null}
-        <RACGroup className='group flex w-full min-w-0 items-center pr-1 text-left'>
+        <RACGroup className="group flex w-full min-w-0 items-center pr-1 text-left">
           <Input className={clsx(fieldWrapperSizeStyles({ size }))} />
-          <ButtonIcon variant={'ghost'} color={'neutral'} compact size={size} icon='selector' />
+          <ButtonIcon variant={'ghost'} color={'neutral'} compact size={size} icon="selector" />
         </RACGroup>
         {rightSection ? rightSection : null}
       </FieldWrapper>
@@ -80,10 +80,10 @@ const Root = <T extends object>(
       {description && <FieldDescription>{description}</FieldDescription>}
       <FieldError>{errorMessage}</FieldError>
 
-      <Popover className='w-[--trigger-width]'>
+      <Popover className="w-[--trigger-width]">
         <ListBox
           items={items}
-          className='max-h-[inherit] overflow-auto p-2 outline-0 scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200'
+          className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 max-h-[inherit] overflow-auto p-2 outline-0"
         >
           {children}
         </ListBox>

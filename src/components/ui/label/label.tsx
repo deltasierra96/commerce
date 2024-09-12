@@ -21,7 +21,7 @@ export const Label = ({ className, children, hidden = false, isRequired, ...rest
         {children}
         {isRequired ? (
           <span
-            className='pointer-events-none ml-0.5 text-xs text-red-500 group-disabled:text-neutral-400'
+            className="pointer-events-none ml-0.5 text-xs text-red-500 group-disabled:text-neutral-400"
             aria-hidden
           >
             *

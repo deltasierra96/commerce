@@ -6,7 +6,7 @@ import {
   Tooltip as RACToolTip,
   TooltipTrigger,
   type TooltipProps as RACTooltipProps,
-  type TooltipTriggerComponentProps,
+  type TooltipTriggerComponentProps
 } from 'react-aria-components';
 
 type TooltipProps = Omit<RACTooltipProps, 'children'> & {
@@ -22,61 +22,61 @@ const contentStyles = cva(
         bottom: 'mt-2',
         center: 'm-2',
         left: 'mr-2',
-        right: 'ml-2',
+        right: 'ml-2'
       },
       isEntering: {
-        true: 'duration-75 ease-out animate-in fade-in',
+        true: 'duration-75 ease-out animate-in fade-in'
       },
       isExiting: {
-        true: 'duration-75 ease-in animate-out fade-out',
-      },
+        true: 'duration-75 ease-in animate-out fade-out'
+      }
     },
     compoundVariants: [
       // --------------
       {
         isEntering: true,
         position: 'top',
-        class: 'slide-in-from-top-0.5',
+        class: 'slide-in-from-top-0.5'
       },
       {
         isExiting: true,
         position: 'top',
-        class: 'slide-out-to-top-0.5',
+        class: 'slide-out-to-top-0.5'
       },
       // --------------
       {
         isEntering: true,
         position: 'bottom',
-        class: 'slide-in-from-bottom-0.5',
+        class: 'slide-in-from-bottom-0.5'
       },
       {
         isExiting: true,
         position: 'bottom',
-        class: 'slide-out-to-bottom-0.5',
+        class: 'slide-out-to-bottom-0.5'
       },
       // --------------
       {
         isEntering: true,
         position: 'left',
-        class: 'slide-in-from-left-0.5',
+        class: 'slide-in-from-left-0.5'
       },
       {
         isExiting: true,
         position: 'left',
-        class: 'slide-out-to-left-0.5',
+        class: 'slide-out-to-left-0.5'
       },
       // --------------
       {
         isEntering: true,
         position: 'right',
-        class: 'slide-in-from-right-0.5',
+        class: 'slide-in-from-right-0.5'
       },
       {
         isExiting: true,
         position: 'right',
-        class: 'slide-out-to-right-0.5',
-      },
-    ],
+        class: 'slide-out-to-right-0.5'
+      }
+    ]
   }
 );
 const arrowStyles = cva('block h-2 w-2 fill-white', {
@@ -86,9 +86,9 @@ const arrowStyles = cva('block h-2 w-2 fill-white', {
       bottom: 'rotate-180',
       center: null,
       left: '-rotate-90',
-      right: 'rotate-90',
-    },
-  },
+      right: 'rotate-90'
+    }
+  }
 });
 
 const Content = ({ children, className, ...props }: TooltipProps) => {
@@ -101,8 +101,8 @@ const Content = ({ children, className, ...props }: TooltipProps) => {
     >
       <OverlayArrow>
         {({ placement }) => (
-          <svg className={arrowStyles({ position: placement })} viewBox='0 0 8 8'>
-            <path d='M0 0 L4 4 L8 0' />
+          <svg className={arrowStyles({ position: placement })} viewBox="0 0 8 8">
+            <path d="M0 0 L4 4 L8 0" />
           </svg>
         )}
       </OverlayArrow>

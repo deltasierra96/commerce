@@ -6,14 +6,14 @@ import {
   SelectValue as RACSelectValue,
   ListBox as RACListBox,
   type SelectProps as RACSelectProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components';
 import { Icon } from '../icon';
 import {
   DropdownItem,
   ListBoxSection,
   type ListBoxSectionProps,
-  type DropdownItemProps,
+  type DropdownItemProps
 } from '../list-box';
 import { Popover } from '../popover';
 import { clsx } from '@/utils';
@@ -67,14 +67,14 @@ const Root = <T extends object>(
           className={clsx('flex w-full cursor-default items-stretch text-start', inputResetStyles)}
         >
           {leftSection ? leftSection : null}
-          <div className='group flex w-full min-w-0 select-none items-center px-3 text-left'>
-            <RACSelectValue className='truncate placeholder-shown:italic [&>div>*[slot=description]]:hidden' />
+          <div className="group flex w-full min-w-0 select-none items-center px-3 text-left">
+            <RACSelectValue className="truncate placeholder-shown:italic [&>div>*[slot=description]]:hidden" />
           </div>
-          <div className='flex select-none items-center pr-2'>
+          <div className="flex select-none items-center pr-2">
             <Icon
-              icon='selector'
+              icon="selector"
               aria-hidden
-              className='h-5 w-5 text-neutral-500 forced-colors:!text-[ButtonText]'
+              className="h-5 w-5 text-neutral-500 forced-colors:!text-[ButtonText]"
             />
           </div>
           {rightSection ? rightSection : null}
@@ -84,8 +84,8 @@ const Root = <T extends object>(
       {description && <FieldDescription>{description}</FieldDescription>}
       <FieldError>{errorMessage}</FieldError>
 
-      <Popover className='w-[--trigger-width] p-2'>
-        <RACListBox items={items} className='max-h-[inherit] overflow-auto outline-none'>
+      <Popover className="w-[--trigger-width] p-2">
+        <RACListBox items={items} className="max-h-[inherit] overflow-auto outline-none">
           {children}
         </RACListBox>
       </Popover>

@@ -7,7 +7,7 @@ import {
   type ButtonIconProps,
   ButtonIconNode,
   buttonIconStyles,
-  ButtonIconCounter,
+  ButtonIconCounter
 } from './button-icon';
 import { sharedButtonStyles } from '../button';
 

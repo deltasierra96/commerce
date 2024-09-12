@@ -15,7 +15,7 @@ import {
   type RowProps as RACRowProps,
   type TableProps as RACTableProps,
   type ColumnProps as RACColumnProps,
-  type TableHeaderProps as RACTableHeaderProps,
+  type TableHeaderProps as RACTableHeaderProps
 } from 'react-aria-components';
 
 const outlineStyles = clsx(
@@ -94,37 +94,37 @@ export const Column = ({ className, ...props }: ColumnProps) => (
   >
     {({ allowsSorting, sortDirection }) => (
       <RACGroup
-        role='presentation'
-        className='group flex items-center gap-x-1 truncate px-2 py-2.5'
+        role="presentation"
+        className="group flex items-center gap-x-1 truncate px-2 py-2.5"
       >
         {props.children}
         {allowsSorting && (
           <svg
-            role='img'
+            role="img"
             className={clsx(
               'h-5 w-5 fill-none stroke-icon opacity-100 group-hover:opacity-100 group-focus-visible:opacity-100',
               sortDirection ? 'opacity-100' : 'opacity-0'
             )}
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            aria-hidden='true'
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
           >
             {sortDirection === 'descending' ? (
               <>
-                <path strokeOpacity={1} d='M8 9l4 -4l4 4'></path>
-                <path strokeOpacity={0.33} d='M16 15l-4 4l-4 -4'></path>
+                <path strokeOpacity={1} d="M8 9l4 -4l4 4"></path>
+                <path strokeOpacity={0.33} d="M16 15l-4 4l-4 -4"></path>
               </>
             ) : sortDirection === 'ascending' ? (
               <>
-                <path strokeOpacity={0.33} d='M8 9l4 -4l4 4'></path>
-                <path strokeOpacity={1} d='M16 15l-4 4l-4 -4'></path>
+                <path strokeOpacity={0.33} d="M8 9l4 -4l4 4"></path>
+                <path strokeOpacity={1} d="M16 15l-4 4l-4 -4"></path>
               </>
             ) : (
               <>
-                <path strokeOpacity={1} d='M8 9l4 -4l4 4'></path>
-                <path strokeOpacity={1} d='M16 15l-4 4l-4 -4'></path>
+                <path strokeOpacity={1} d="M8 9l4 -4l4 4"></path>
+                <path strokeOpacity={1} d="M16 15l-4 4l-4 -4"></path>
               </>
             )}
           </svg>

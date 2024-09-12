@@ -1,17 +1,17 @@
 'use client';
 import { clsx } from '@/utils';
+import { type VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
 import { mergeProps } from 'react-aria';
 import {
   Dialog,
   DialogTrigger,
   Modal as RACModal,
-  type ModalOverlayProps as RACModalOverlayProps,
+  type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { DialogHeader } from '../dialog';
 import { Overlay } from '../overlay';
 import { popoverStyles } from '../popover';
-import { DialogHeader } from '../dialog';
 
 export type DrawerProps = _DrawerProps;
 
@@ -47,7 +47,7 @@ const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full', {
       top: 'items-start',
       bottom: 'items-end',
       left: 'justify-start',
-      right: 'justify-end',
+      right: 'justify-end'
     },
     size: {
       xs: null,
@@ -58,36 +58,36 @@ const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full', {
       full: null,
       '1/2': null,
       '2/3': null,
-      '3/4': null,
-    },
+      '3/4': null
+    }
   },
   compoundVariants: [
     // --------------------------------
     {
       position: 'top',
       size: ['1/2', '2/3', '3/4', 'default', 'lg', 'sm', 'xs', 'xl'],
-      class: 'pb-10',
+      class: 'pb-10'
     },
     {
       position: 'bottom',
       size: ['1/2', '2/3', '3/4', 'default', 'lg', 'sm', 'xs', 'xl'],
-      class: 'pt-10',
+      class: 'pt-10'
     },
     {
       position: 'right',
       size: ['1/2', '2/3', '3/4', 'default', 'lg', 'sm', 'xs', 'xl'],
-      class: 'pl-10',
+      class: 'pl-10'
     },
     {
       position: 'left',
       size: ['1/2', '2/3', '3/4', 'default', 'lg', 'sm', 'xs', 'xl'],
-      class: 'pr-10',
-    },
+      class: 'pr-10'
+    }
   ],
   defaultVariants: {
     size: 'default',
-    position: 'right',
-  },
+    position: 'right'
+  }
 });
 
 const drawerContentStyles = cva('overflow-hidden', {
@@ -96,11 +96,11 @@ const drawerContentStyles = cva('overflow-hidden', {
       top: null,
       bottom: null,
       left: null,
-      right: null,
+      right: null
     },
     rounded: {
       true: 'rounded-lg',
-      false: 'rounded-none',
+      false: 'rounded-none'
     },
     size: {
       xs: null,
@@ -108,145 +108,145 @@ const drawerContentStyles = cva('overflow-hidden', {
       default: null,
       lg: null,
       xl: null,
-      full: null,
+      full: null
     },
     isEntering: {
-      true: 'duration-200 ease-out animate-in fade-in fill-mode-forwards',
+      true: 'duration-200 ease-out animate-in fade-in fill-mode-forwards'
     },
     isExiting: {
-      true: 'duration-150 ease-in animate-out fade-out fill-mode-forwards',
-    },
+      true: 'duration-150 ease-in animate-out fade-out fill-mode-forwards'
+    }
   },
   compoundVariants: [
     {
       position: ['left', 'right'],
-      className: 'h-[--visual-viewport-height] max-h-full min-h-dvh max-w-full',
+      className: 'h-[--visual-viewport-height] max-h-full min-h-dvh max-w-full'
     },
     {
       position: ['top', 'bottom'],
-      className: 'w-full',
+      className: 'w-full'
     },
     {
       position: ['left', 'right'],
       size: 'xs',
-      className: 'flex-[0_0_18rem]',
+      className: 'flex-[0_0_18rem]'
     },
     {
       position: ['left', 'right'],
       size: 'sm',
-      className: 'flex-[0_0_22rem]',
+      className: 'flex-[0_0_22rem]'
     },
     {
       position: ['left', 'right'],
       size: 'default',
-      className: 'flex-[0_0_27rem]',
+      className: 'flex-[0_0_30rem]'
     },
     {
       position: ['left', 'right'],
       size: 'lg',
-      className: 'flex-[0_0_35rem]',
+      className: 'flex-[0_0_35rem]'
     },
     {
       position: ['left', 'right'],
       size: 'xl',
-      className: 'flex-[0_0_44rem]',
+      className: 'flex-[0_0_44rem]'
     },
     {
       position: ['left', 'right'],
       size: 'full',
-      className: 'w-full max-w-full',
+      className: 'w-full max-w-full'
     },
     {
       position: ['top', 'bottom'],
       size: 'sm',
-      className: 'h-80',
+      className: 'h-80'
     },
     {
       position: ['top', 'bottom'],
       size: 'default',
-      className: 'h-96',
+      className: 'h-96'
     },
     {
       position: ['top', 'bottom'],
       size: 'lg',
-      className: 'h-[32rem]',
+      className: 'h-[32rem]'
     },
     {
       position: ['top', 'bottom'],
       size: 'xl',
-      className: 'h-[44rem]',
+      className: 'h-[44rem]'
     },
     {
       position: ['top', 'bottom'],
       size: 'full',
-      className: 'h-[--visual-viewport-height] min-h-dvh',
+      className: 'h-[--visual-viewport-height] min-h-dvh'
     },
     {
       position: 'top',
       size: ['default', 'lg', 'sm', 'xs', 'xl'],
-      className: 'rounded-t-none',
+      className: 'rounded-t-none'
     },
     {
       position: 'bottom',
       size: ['default', 'lg', 'sm', 'xs', 'xl'],
-      className: 'rounded-b-none',
+      className: 'rounded-b-none'
     },
     {
       position: 'right',
       size: ['default', 'lg', 'sm', 'xs', 'xl'],
-      className: 'rounded-r-none',
+      className: 'rounded-r-none'
     },
     {
       position: 'left',
       size: ['default', 'lg', 'sm', 'xs', 'xl'],
-      className: 'rounded-l-none',
+      className: 'rounded-l-none'
     },
     {
       isEntering: true,
       position: 'left',
-      className: 'slide-in-from-left-96',
+      className: 'slide-in-from-left-96'
     },
     {
       isExiting: true,
       position: 'left',
-      className: 'slide-out-to-left-96',
+      className: 'slide-out-to-left-96'
     },
     {
       isEntering: true,
       position: 'right',
-      className: 'slide-in-from-right-96',
+      className: 'slide-in-from-right-96'
     },
     {
       isExiting: true,
       position: 'right',
-      className: 'slide-out-to-right-96',
+      className: 'slide-out-to-right-96'
     },
     {
       isEntering: true,
       position: 'top',
-      className: 'slide-in-from-top-96',
+      className: 'slide-in-from-top-96'
     },
     {
       isExiting: true,
       position: 'top',
-      className: 'slide-out-to-top-96',
+      className: 'slide-out-to-top-96'
     },
     {
       isEntering: true,
       position: 'bottom',
-      className: 'slide-in-from-bottom-96',
+      className: 'slide-in-from-bottom-96'
     },
     {
       isExiting: true,
       position: 'bottom',
-      className: 'slide-out-to-bottom-96',
-    },
+      className: 'slide-out-to-bottom-96'
+    }
   ],
   defaultVariants: {
     size: 'default',
     position: 'right',
-    rounded: false,
-  },
+    rounded: false
+  }
 });
 
 type ContentProps = RACModalOverlayProps & VariantProps<typeof drawerContentStyles>;
@@ -264,7 +264,7 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }
       ref={ref}
       className={overlayStyles({
         position,
-        size,
+        size
       })}
     >
       <RACModal
@@ -278,15 +278,15 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }
               isEntering,
               isExiting,
               position,
-              size,
+              size
             }),
             'border-none'
           )
         }
       >
         <Dialog
-          role='dialog'
-          className='relative flex h-full w-full flex-col overflow-auto outline-none scrollbar-thin'
+          role="dialog"
+          className="scrollbar-thin relative flex h-full w-full flex-col overflow-auto outline-none"
         >
           {hasHeader ? (
             <DialogHeader showCloseButton={showCloseButton}>{title}</DialogHeader>

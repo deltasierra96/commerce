@@ -4,7 +4,7 @@ import {
   TextArea as RACTextArea,
   TextField,
   type TextAreaProps as RACTextAreaProps,
-  type TextFieldProps,
+  type TextFieldProps
 } from 'react-aria-components';
 import { Label } from '../label';
 import { type InputBaseProps, inputResetStyles } from '../input';

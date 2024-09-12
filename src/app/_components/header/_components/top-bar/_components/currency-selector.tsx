@@ -18,11 +18,11 @@ export const CurrencySelector = ({ currencies }: CurrencySelectorProps) => {
   return (
     <RACSelect>
       <Label hidden>Currency</Label>
-      <Button rightIcon='chevron-down' compact variant={'ghost'} color='neutral'>
+      <Button rightIcon="chevron-down" compact variant={'ghost'} color="neutral">
         Currency
       </Button>
-      <Popover showArrow className='flex max-h-full w-full max-w-44 flex-col p-2'>
-        <ListBox className='outline-0'>
+      <Popover showArrow className="flex max-h-full w-full max-w-44 flex-col p-2">
+        <ListBox className="outline-0">
           {currencies.map((currency) => (
             <DropdownItem key={currency.title}>{currency.title}</DropdownItem>
           ))}

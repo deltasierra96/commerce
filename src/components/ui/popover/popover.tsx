@@ -1,7 +1,7 @@
 import {
   OverlayArrow,
   Popover as RACPopover,
-  type PopoverProps as RACPopoverProps,
+  type PopoverProps as RACPopoverProps
 } from 'react-aria-components';
 import React from 'react';
 import { clsx } from '@/utils';
@@ -45,14 +45,14 @@ export function Popover({
       }
     >
       {showArrow && (
-        <OverlayArrow className='group'>
+        <OverlayArrow className="group">
           <svg
             width={12}
             height={12}
-            viewBox='0 0 12 12'
-            className='block fill-white stroke-neutral-200 stroke-1 group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180'
+            viewBox="0 0 12 12"
+            className="block fill-white stroke-neutral-200 stroke-1 group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180"
           >
-            <path d='M0 0 L6 6 L12 0' />
+            <path d="M0 0 L6 6 L12 0" />
           </svg>
         </OverlayArrow>
       )}

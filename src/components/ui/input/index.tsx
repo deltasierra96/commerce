@@ -4,5 +4,5 @@ export {
   inputResetStyles,
   type InputBaseProps,
   type InputProps,
-  type InputTextAddonProps,
+  type InputTextAddonProps
 } from './input';

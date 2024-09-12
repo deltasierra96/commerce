@@ -74,7 +74,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                       key={item.name}
                       href={item.href}
                       className={clsx(
-                        'inline-flex items-center rounded-md px-3 py-6 font-heading text-sm font-bold uppercase outline-none',
+                        'inline-flex items-center rounded-md px-3 py-8 font-heading text-sm font-bold uppercase outline-none',
                         'text-neutral-900 hover:text-neutral-500'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -104,7 +104,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                       <Account />
                     </div>
                     <div className="hidden sm:block">
-                      <Cart title="Your bag" />
+                      <Cart />
                     </div>
                   </div>
                 </div>

@@ -7,8 +7,8 @@ const customTwMerge = extendTailwindMerge({
     ringOffset: ['ring-offset-global'],
     borderStyle: [{ border: ['input', 'button'] }],
     borderRadius: [{ border: ['input', 'button'] }],
-    borderWidth: [{ border: ['input', 'button'] }],
-  },
+    borderWidth: [{ border: ['input', 'button'] }]
+  }
 });
 
 export const clsx = (...inputs: ClassValue[]) => customTwMerge(BaseClsx(inputs));

@@ -33,8 +33,8 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>((props,
   const hasLoadingIconRight = isLoading && loaderPosition === 'right';
 
   const Loader = () => (
-    <div className='flex animate-spin items-center justify-center'>
-      <Icon className={clsx(buttonIconNodeStyles({ size }))} icon='loader' />
+    <div className="flex animate-spin items-center justify-center">
+      <Icon className={clsx(buttonIconNodeStyles({ size }))} icon="loader" />
     </div>
   );
 
@@ -47,7 +47,7 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>((props,
         buttonStyles({
           size,
           block,
-          compact,
+          compact
         }),
         sharedButtonStyles({ variant, rounded, color, borderStyle }),
         focusRing({ isFocusVisible: true }),

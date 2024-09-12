@@ -3,18 +3,18 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import {
   ModalOverlay as RACModalOverlay,
-  type ModalOverlayProps as RACModalOverlayProps,
+  type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
 
-const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full bg-black/50', {
+const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full bg-black/70', {
   variants: {
     isEntering: {
-      true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards',
+      true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards'
     },
     isExiting: {
-      true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards',
-    },
-  },
+      true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards'
+    }
+  }
 });
 
 export type OverlayProps = RACModalOverlayProps & VariantProps<typeof overlayStyles>;
@@ -29,7 +29,7 @@ export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(({ className, ..
           overlayStyles({
             isEntering,
             isExiting,
-            className,
+            className
           })
         )
       }

@@ -2,7 +2,7 @@
 import { forwardRef } from 'react';
 import {
   SearchField as RACSearchField,
-  type SearchFieldProps as RACSearchFieldProps,
+  type SearchFieldProps as RACSearchFieldProps
 } from 'react-aria-components';
 import { ButtonIcon } from '../button-icon';
 import { Icon } from '../icon';
@@ -12,7 +12,7 @@ import {
   FieldError,
   FieldWrapper,
   fieldWrapperIconSizeStyles,
-  type FieldWrapperProps,
+  type FieldWrapperProps
 } from '../form';
 import { Input, type InputBaseProps, type InputProps } from '../input';
 import { clsx } from '@/utils';
@@ -40,7 +40,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps & Field
     return (
       <RACSearchField
         className={clsx('group w-full', className)}
-        type='search'
+        type="search"
         validationBehavior={validationBehavior}
         {...rest}
       >
@@ -56,18 +56,18 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps & Field
           size={size}
         >
           {leftSection ? leftSection : null}
-          <div className='flex flex-col items-center justify-center pl-3'>
-            <Icon icon='search' className={fieldWrapperIconSizeStyles({ size })} />
+          <div className="flex flex-col items-center justify-center pl-3">
+            <Icon icon="search" className={fieldWrapperIconSizeStyles({ size })} />
           </div>
           <Input ref={ref} />
-          <div className='mr-1 flex items-center justify-center'>
+          <div className="mr-1 flex items-center justify-center">
             <ButtonIcon
               size={size}
               rounded={rounded}
-              className='group-empty:invisible'
-              variant='ghost'
-              color='neutral'
-              icon='x'
+              className="group-empty:invisible"
+              variant="ghost"
+              color="neutral"
+              icon="x"
               compact
             />
           </div>

@@ -6,14 +6,14 @@ import {
   SelectValue as RACSelectValue,
   ListBox as RACListBox,
   type SelectProps as AriaSelectProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components';
 import { Icon } from '../icon';
 import {
   DropdownItem,
   ListBoxSection,
   type ListBoxSectionProps,
-  type DropdownItemProps,
+  type DropdownItemProps
 } from '../list-box';
 import { Popover } from '../popover';
 import { clsx } from '@/utils';
@@ -68,14 +68,14 @@ const _Select = <T extends object>(
           )}
         >
           {leftSection ? leftSection : null}
-          <div className='group flex w-full min-w-0 select-none items-center px-3 text-left'>
-            <RACSelectValue className='w-full truncate placeholder-shown:italic [&>div>*[slot=description]]:hidden' />
+          <div className="group flex w-full min-w-0 select-none items-center px-3 text-left">
+            <RACSelectValue className="w-full truncate placeholder-shown:italic [&>div>*[slot=description]]:hidden" />
           </div>
-          <div className='flex select-none items-center pr-2'>
+          <div className="flex select-none items-center pr-2">
             <Icon
-              icon='selector'
+              icon="selector"
               aria-hidden
-              className='h-4 w-4 text-neutral-500 forced-colors:!text-[ButtonText]'
+              className="h-4 w-4 text-neutral-500 forced-colors:!text-[ButtonText]"
             />
           </div>
           {rightSection ? rightSection : null}
@@ -85,8 +85,8 @@ const _Select = <T extends object>(
       {description && <FieldDescription>{description}</FieldDescription>}
       <FieldError>{errorMessage}</FieldError>
 
-      <Popover className='w-[--trigger-width] p-2'>
-        <RACListBox items={items} className='max-h-[inherit] overflow-auto outline-none'>
+      <Popover className="w-[--trigger-width] p-2">
+        <RACListBox items={items} className="max-h-[inherit] overflow-auto outline-none">
           {children}
         </RACListBox>
       </Popover>

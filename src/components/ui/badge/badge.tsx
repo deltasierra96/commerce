@@ -22,12 +22,12 @@ const badgeVariants = cva(
         'blue-outline': 'border-blue-500 bg-transparent text-blue-500',
         'yellow-solid': 'border-yellow-500 bg-yellow-500 text-white',
         'yellow-subtle': 'border-yellow-500 bg-yellow-50 bg-yellow-500/15 text-yellow-500',
-        'yellow-outline': 'border-yellow-500 bg-transparent text-yellow-500',
-      },
+        'yellow-outline': 'border-yellow-500 bg-transparent text-yellow-500'
+      }
     },
     defaultVariants: {
-      variant: 'neutral-outline',
-    },
+      variant: 'neutral-outline'
+    }
   }
 );
 
@@ -39,7 +39,7 @@ export type BadgeProps = React.HTMLAttributes<HTMLDivElement> &
 export const Badge = ({ className, variant, icon, children, ...props }: BadgeProps) => {
   return (
     <div className={clsx(badgeVariants({ variant }), className)} {...props}>
-      {icon ? <Icon icon={icon} className='h-4 w-4' /> : null}
+      {icon ? <Icon icon={icon} className="h-4 w-4" /> : null}
       {children}
     </div>
   );

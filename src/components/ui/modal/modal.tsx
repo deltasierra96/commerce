@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 import {
   DialogTrigger as RACDialogTrigger,
   Modal as RACModal,
-  type ModalOverlayProps as RACModalOverlayProps,
+  type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { Overlay } from '../overlay';
@@ -17,87 +17,87 @@ const modalInnerStyles = cva('flex w-full justify-center py-10', {
     position: {
       top: 'items-start',
       bottom: 'items-end',
-      center: 'items-center',
-    },
+      center: 'items-center'
+    }
   },
   compoundVariants: [
     {
       position: 'top',
-      class: 'pt-10',
+      class: 'pt-10'
     },
     {
       position: 'bottom',
-      class: 'pb-10',
+      class: 'pb-10'
     },
     {
       position: 'center',
-      class: 'p-10',
-    },
+      class: 'p-10'
+    }
   ],
   defaultVariants: {
-    position: 'center',
-  },
+    position: 'center'
+  }
 });
 
 const modalContentStyles = cva(
-  'flex max-h-full w-full flex-col overflow-hidden align-middle scrollbar-thin',
+  'scrollbar-thin flex max-h-full w-full flex-col overflow-hidden align-middle',
   {
     variants: {
       position: {
         center: '',
         top: '',
-        bottom: '',
+        bottom: ''
       },
       size: {
         sm: 'max-w-sm',
         default: 'max-w-md',
         lg: 'max-w-lg',
         xl: 'max-w-xl',
-        full: 'max-w-full',
+        full: 'max-w-full'
       },
       isEntering: {
-        true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards',
+        true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards'
       },
       isExiting: {
-        true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards',
-      },
+        true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards'
+      }
     },
     compoundVariants: [
       {
         isEntering: true,
         position: 'top',
-        className: 'slide-in-from-top-5',
+        className: 'slide-in-from-top-5'
       },
       {
         isExiting: true,
         position: 'top',
-        className: 'slide-out-to-top-5',
+        className: 'slide-out-to-top-5'
       },
       {
         isEntering: true,
         position: 'bottom',
-        className: 'slide-in-from-bottom-5',
+        className: 'slide-in-from-bottom-5'
       },
       {
         isExiting: true,
         position: 'bottom',
-        className: 'slide-out-to-bottom-5',
+        className: 'slide-out-to-bottom-5'
       },
       {
         isEntering: true,
         position: 'center',
-        className: 'slide-in-from-top-5',
+        className: 'slide-in-from-top-5'
       },
       {
         isExiting: true,
         position: 'center',
-        className: 'slide-out-to-top-5',
-      },
+        className: 'slide-out-to-top-5'
+      }
     ],
     defaultVariants: {
       position: 'center',
-      size: 'default',
-    },
+      size: 'default'
+    }
   }
 );
 
@@ -159,7 +159,7 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }
                 isEntering,
                 isExiting,
                 position,
-                size,
+                size
               })
             )
           }

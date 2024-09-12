@@ -12,49 +12,49 @@ export const buttonIconStyles = cva('shrink-0', {
     size: {
       sm: null,
       default: null,
-      lg: null,
+      lg: null
     },
     compact: {
       true: null,
-      false: null,
-    },
+      false: null
+    }
   },
   compoundVariants: [
     {
       compact: false,
       size: 'sm',
-      className: 'h-button-icon-sm w-button-icon-sm',
+      className: 'h-button-icon-sm w-button-icon-sm'
     },
     {
       compact: true,
       size: 'sm',
-      className: 'h-button-icon-compact-sm w-button-icon-compact-sm',
+      className: 'h-button-icon-compact-sm w-button-icon-compact-sm'
     },
     {
       compact: false,
       size: 'default',
-      className: 'h-button-icon w-button-icon',
+      className: 'h-button-icon w-button-icon'
     },
     {
       compact: true,
       size: 'default',
-      className: 'h-button-icon-compact w-button-icon-compact',
+      className: 'h-button-icon-compact w-button-icon-compact'
     },
     {
       compact: false,
       size: 'lg',
-      className: 'h-button-icon-lg w-button-icon-lg',
+      className: 'h-button-icon-lg w-button-icon-lg'
     },
     {
       compact: true,
       size: 'lg',
-      className: 'h-button-icon-compact-lg w-button-icon-compact-lg',
-    },
+      className: 'h-button-icon-compact-lg w-button-icon-compact-lg'
+    }
   ],
   defaultVariants: {
     size: 'default',
-    compact: false,
-  },
+    compact: false
+  }
 });
 
 export const buttonIconNodeSizeStyles = cva('inline-flex shrink-0', {
@@ -62,49 +62,49 @@ export const buttonIconNodeSizeStyles = cva('inline-flex shrink-0', {
     size: {
       sm: null,
       default: null,
-      lg: null,
+      lg: null
     },
     compact: {
       true: null,
-      false: null,
-    },
+      false: null
+    }
   },
   compoundVariants: [
     {
       compact: false,
       size: 'sm',
-      className: 'h-4 w-4',
+      className: 'h-4 w-4'
     },
     {
       compact: true,
       size: 'sm',
-      className: 'h-3 w-3',
+      className: 'h-3 w-3'
     },
     {
       compact: false,
       size: 'default',
-      className: 'h-5 w-5',
+      className: 'h-5 w-5'
     },
     {
       compact: true,
       size: 'default',
-      className: 'h-4 w-4',
+      className: 'h-4 w-4'
     },
     {
       compact: false,
       size: 'lg',
-      className: 'h-5 w-5',
+      className: 'h-5 w-5'
     },
     {
       compact: true,
       size: 'lg',
-      className: 'h-4 w-4',
-    },
+      className: 'h-4 w-4'
+    }
   ],
   defaultVariants: {
     size: 'default',
-    compact: false,
-  },
+    compact: false
+  }
 });
 
 export const buttonIconCounterStyles = cva(
@@ -113,22 +113,22 @@ export const buttonIconCounterStyles = cva(
     variants: {
       counterPosition: {
         left: '-left-0.5',
-        right: '-right-0.5',
+        right: '-right-0.5'
       },
       counterVariant: {
-        primary: 'bg-primary-500 text-white',
+        primary: 'bg-primary-500 text-white'
       },
       size: {
         sm: 'h-4 w-4 text-xs',
         default: 'h-5 w-5 text-xs',
-        lg: 'h-5 w-5 text-xs',
-      },
+        lg: 'h-5 w-5 text-xs'
+      }
     },
     defaultVariants: {
       counterPosition: 'right',
       counterVariant: 'primary',
-      size: 'default',
-    },
+      size: 'default'
+    }
   }
 );
 
@@ -156,7 +156,7 @@ export const ButtonIconCounter = ({
   counterPosition,
   counter,
   counterVariant,
-  size,
+  size
 }: ButtonIconCounterProps) => {
   return Number.isInteger(counter) ? (
     <div className={clsx(buttonIconCounterStyles({ size, counterVariant, counterPosition }))}>
@@ -194,7 +194,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps & RACBut
         className={clsx(
           buttonIconStyles({
             size,
-            compact,
+            compact
           }),
           sharedButtonStyles({ variant, color, rounded, borderStyle }),
           focusRing({ isFocusVisible: true }),

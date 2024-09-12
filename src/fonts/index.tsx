@@ -6,5 +6,5 @@ export {
   fontGreycliff,
   fontInter,
   fontPoppins,
-  fontRecoleta,
+  fontRecoleta
 } from './next-fonts';

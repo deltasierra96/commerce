@@ -7,7 +7,7 @@ import {
   type TabsProps as RACTabsProps,
   type TabProps as RACTabProps,
   type TabListProps as RACTabListProps,
-  type TabPanelProps as RACTabPanelProps,
+  type TabPanelProps as RACTabPanelProps
 } from 'react-aria-components';
 import { borderStyles, focusRing } from '../focus-ring';
 import { Icon, type IconTypeProps } from '../icon';
@@ -58,7 +58,7 @@ const Tab = ({ className, icon, children, ...props }: TabProps) => {
         className
       )}
     >
-      <div className='flex items-center gap-x-2'>
+      <div className="flex items-center gap-x-2">
         {icon ? <Icon icon={icon} /> : null}
         <>{children}</>
       </div>

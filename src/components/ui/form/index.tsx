@@ -13,5 +13,5 @@ export {
   type FieldWrapperProps,
   type FieldErrorProps,
   type FieldDescriptionProps,
-  type FormFieldGroupSectionProps,
+  type FormFieldGroupSectionProps
 } from './form';

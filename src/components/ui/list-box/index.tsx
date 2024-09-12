@@ -6,5 +6,5 @@ export {
   ListBox,
   type ListBoxProps,
   type DropdownItemProps,
-  type ListBoxSectionProps,
+  type ListBoxSectionProps
 } from './list-box';

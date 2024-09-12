@@ -4,5 +4,5 @@ export {
   DialogFooter,
   type DialogProps,
   type DialogHeaderProps,
-  type DialogFooterProps,
+  type DialogFooterProps
 } from './dialog';

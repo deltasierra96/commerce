@@ -3,7 +3,7 @@ import {
   GridList as RACGridList,
   GridListItem as RACGridListItem,
   type GridListItemProps,
-  type GridListProps,
+  type GridListProps
 } from 'react-aria-components';
 import React from 'react';
 import { Checkbox } from '../checkbox';
@@ -31,12 +31,12 @@ const itemStyles = cva(
     variants: {
       isSelected: {
         false: 'text-gray-900 hover:bg-gray-100',
-        true: 'border-blue-200 bg-blue-100 hover:bg-blue-200',
+        true: 'border-blue-200 bg-blue-100 hover:bg-blue-200'
       },
       isDisabled: {
-        true: 'text-slate-300 forced-colors:!text-[GrayText]',
-      },
-    },
+        true: 'text-slate-300 forced-colors:!text-[GrayText]'
+      }
+    }
   }
 );
 
@@ -51,9 +51,9 @@ export function GridListItem({ children, ...props }: GridListItemProps) {
       {({ selectionMode, selectionBehavior, allowsDragging }) => (
         <>
           {/* Add elements for drag and drop and selection. */}
-          {allowsDragging && <Button slot='drag'>≡</Button>}
+          {allowsDragging && <Button slot="drag">≡</Button>}
           {selectionMode === 'multiple' && selectionBehavior === 'toggle' && (
-            <Checkbox slot='selection' />
+            <Checkbox slot="selection" />
           )}
           {children}
         </>

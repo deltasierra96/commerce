@@ -1,6 +1,7 @@
-import { type Config } from 'tailwindcss';
+const plugin = require('tailwindcss/plugin');
 
-export default module.exports = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: ['./src/**/*.tsx'],
   theme: {
     container: {
@@ -142,12 +143,28 @@ export default module.exports = {
       }
     }
   },
-
+  future: {
+    hoverOnlyWhenSupported: true
+  },
   plugins: [
-    require('tailwind-scrollbar'),
-    require('@tailwindcss/typography'),
-    require('tailwindcss-animate'),
     require('tailwindcss-react-aria-components'),
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/container-queries'),
+    require('tailwindcss-animate'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+    plugin(({ matchUtilities, theme }) => {
+      matchUtilities(
+        {
+          'animation-delay': (value) => {
+            return {
+              'animation-delay': value
+            };
+          }
+        },
+        {
+          values: theme('transitionDelay')
+        }
+      );
+    })
   ]
-} satisfies Config;
+};
