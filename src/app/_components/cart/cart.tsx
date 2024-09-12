@@ -1,12 +1,12 @@
 'use client';
 
+import Price from '@/app/_components/price';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Drawer, DrawerProps } from '@/components/ui/drawer';
 import { DEFAULT_OPTION, STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
-import Price from 'components/price';
 import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie, redirectToCheckout } from './actions';

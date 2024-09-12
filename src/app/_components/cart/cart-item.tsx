@@ -1,6 +1,6 @@
+import Price from '@/app/_components/price';
 import { DEFAULT_OPTION } from '@/lib/constants';
 import { CartItem as ShopifyCartItemProps } from '@/lib/shopify/types';
-import Price from 'components/price';
 import Image from 'next/image';
 import { Link, Button as RACButton } from 'react-aria-components';
 import { UpdateCartItemProps, useCart } from './cart-context';
