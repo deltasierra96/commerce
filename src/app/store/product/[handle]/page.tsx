@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { GridTileImage } from '@/app/_components/grid/tile';
-import Footer from '@/app/_components/layout/footer';
 import { ProductProvider } from '@/app/store/product/[handle]/_components/product-context';
 import { ProductInformation } from '@/app/store/product/[handle]/_components/product-information';
 import { Container } from '@/components/ui/container';
@@ -110,7 +109,6 @@ export default async function ProductPage({ params }: { params: { handle: string
         </div>
         <RelatedProducts id={product.id} />
       </Container>
-      <Footer />
     </ProductProvider>
   );
 }

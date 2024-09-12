@@ -25,6 +25,7 @@ function SubmitButton({
   if (!selectedVariantId) {
     return (
       <Button
+        size={'lg'}
         block
         isDisabled
         aria-label="Please select an option"
@@ -37,7 +38,14 @@ function SubmitButton({
   }
 
   return (
-    <Button type="submit" block aria-label="Add to cart" variant={'filled'} color={'primary'}>
+    <Button
+      size={'lg'}
+      type="submit"
+      block
+      aria-label="Add to cart"
+      variant={'filled'}
+      color={'primary'}
+    >
       Add To Cart
     </Button>
   );

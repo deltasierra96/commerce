@@ -191,14 +191,13 @@ input[type='search']::-webkit-search-results-decoration {
 
   /* Typography */
   --font-sans: var(--font-stolzl);
-  --font-sans: var(--font-inter);
+  /* --font-sans: var(--font-inter); */
   /* --font-sans: var(--font-poppins); */
   /* --font-sans: var(--font-futura); */
   /* --font-sans: var(--font-recoleta); */
   /* --font-sans: var(--font-montserrat); */
-  /* --font-sans: var(--font-roboto); */
+  --font-sans: var(--font-roboto);
   /* --font-sans: var(--font-geogrotesque); */
-  /* --font-sans: var(--font-stolzl); */
   /* --font-sans: var(--font-greycliff); */
 
   /* Heading */
