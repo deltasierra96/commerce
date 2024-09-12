@@ -237,7 +237,7 @@ input[type='search']::-webkit-search-results-decoration {
   /* Button */
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
-  --button-border-radius: 999px;
+  --button-border-radius: var(--input-border-radius);
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
