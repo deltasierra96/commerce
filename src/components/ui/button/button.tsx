@@ -8,7 +8,7 @@ import { borderStyles } from '../focus-ring/focus-ring';
 import { Icon, type IconTypeProps } from '../icon';
 
 export const sharedButtonStyles = cva(
-  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent uppercase leading-none outline-none transition-all duration-150 disabled:border-neutral-100 disabled:bg-neutral-100 disabled:text-neutral-400',
+  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent leading-none outline-none transition-all duration-150 disabled:border-neutral-100 disabled:bg-neutral-100 disabled:text-neutral-400',
   {
     variants: {
       rounded: {
@@ -145,7 +145,7 @@ export const sharedButtonStyles = cva(
           'hover:border-neutral-100',
           'hover:bg-neutral-100',
           'hover:text-neutral-900',
-          'pressed:border-neutral-100',
+          'pressed:border-neutral-200',
           'pressed:bg-neutral-200',
           'pressed:text-neutral-900'
         ])

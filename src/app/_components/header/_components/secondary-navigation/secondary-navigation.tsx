@@ -1,6 +1,5 @@
 'use client';
 import { Container } from '@/components/ui/container';
-import { Link } from 'react-aria-components';
 
 const secondaryLinks = [
   {
@@ -32,21 +31,12 @@ const secondaryLinks = [
 
 export const SecondaryNavigation = () => {
   return (
-    <div className="bg-neutral-100 text-neutral-900">
-      <Container fullWidth>
-        <div className="flex justify-end">
-          <ul className="flex items-center divide-x divide-neutral-300">
-            {secondaryLinks.map((item) => (
-              <li className="px-2 py-1.5" key={item.id}>
-                <Link
-                  className={'px-1 text-sm text-neutral-500 hover:text-neutral-950'}
-                  href={item.href}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+    <div className="bg-primary-500 text-white">
+      <Container>
+        <div className="flex items-center justify-center py-3">
+          <p className="flex-1 text-center text-xs font-medium lg:flex-none">
+            Free 30-Day Returns Policy. *Exclusions Apply
+          </p>
         </div>
       </Container>
     </div>

@@ -18,7 +18,6 @@ import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import '../styles/main.css';
-import { Banner } from './_components/banner';
 import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
@@ -47,7 +46,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           fontPoppins.variable
         )}
       >
-        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 text-neutral-950 antialiased">
+        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-neutral-100 font-sans text-base font-normal leading-6 text-neutral-950 antialiased">
           <NextTopLoader
             initialPosition={0.1}
             crawlSpeed={200}
@@ -59,20 +58,14 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           />
           <CartProvider cartPromise={cart}>
             {/* <Navbar /> */}
-            <div className="flex h-full min-h-screen flex-col bg-white">
+            <div className="flex h-full min-h-screen flex-col">
               <div className="flex-1">
                 <div className="flex flex-col">
-                  <div className="block lg:hidden">
-                    <Banner />
-                  </div>
                   <div className="sticky top-0 z-header">
                     <div className="hidden lg:block">
                       <SecondaryNavigation />
                     </div>
                     <Header />
-                  </div>
-                  <div className="hidden lg:block">
-                    <Banner />
                   </div>
                   <div className="flex-1">
                     <main>{children}</main>

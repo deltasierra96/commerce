@@ -26,7 +26,6 @@ function SubmitButton({
     return (
       <Button
         block
-        leftIcon="plus"
         isDisabled
         aria-label="Please select an option"
         variant={'filled'}
@@ -38,14 +37,7 @@ function SubmitButton({
   }
 
   return (
-    <Button
-      type="submit"
-      block
-      aria-label="Add to cart"
-      variant={'filled'}
-      color={'primary'}
-      leftIcon="plus"
-    >
+    <Button type="submit" block aria-label="Add to cart" variant={'filled'} color={'primary'}>
       Add To Cart
     </Button>
   );

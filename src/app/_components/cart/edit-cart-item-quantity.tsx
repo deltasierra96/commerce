@@ -17,6 +17,7 @@ function SubmitButton({ updateType }: SubmitButtonProps) {
   return (
     <ButtonIcon
       size={'sm'}
+      compact
       isLoading={pending}
       isDisabled={pending}
       variant={'ghost'}

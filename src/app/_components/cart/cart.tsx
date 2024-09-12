@@ -64,7 +64,7 @@ export const Cart = () => {
               </div>
             ) : (
               <>
-                <div className="flex h-full flex-col justify-between px-2">
+                <div className="flex h-full flex-col justify-between px-4">
                   <ul className="divide-neutext-neutral-200 divide-y">
                     {cart.lines
                       .sort((a, b) =>

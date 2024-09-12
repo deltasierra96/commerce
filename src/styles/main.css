@@ -192,16 +192,17 @@ input[type='search']::-webkit-search-results-decoration {
   /* Typography */
   --font-sans: var(--font-stolzl);
   --font-sans: var(--font-inter);
-  --font-sans: var(--font-futura);
-  --font-sans: var(--font-recoleta);
-  --font-sans: var(--font-montserrat);
-  --font-sans: var(--font-roboto);
+  /* --font-sans: var(--font-poppins); */
+  /* --font-sans: var(--font-futura); */
+  /* --font-sans: var(--font-recoleta); */
+  /* --font-sans: var(--font-montserrat); */
+  /* --font-sans: var(--font-roboto); */
   /* --font-sans: var(--font-geogrotesque); */
   /* --font-sans: var(--font-stolzl); */
   /* --font-sans: var(--font-greycliff); */
 
   /* Heading */
-  --heading-font: var(--font-montserrat);
+  --heading-font: var(--font-sans);
   --heading-font-weight: theme(fontWeight.bold);
 
   /* Layout */
@@ -236,8 +237,7 @@ input[type='search']::-webkit-search-results-decoration {
   /* Button */
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
-  --button-border-radius: var(--input-border-radius);
-  /* --button-border-radius: 999px; */
+  --button-border-radius: 999px;
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
@@ -260,29 +260,17 @@ input[type='search']::-webkit-search-results-decoration {
   --button-icon-compact-width: var(--button-icon-compact-height);
   --button-icon-compact-width-lg: var(--button-icon-compact-height-lg);
 
-  --colors-primary-50: var(--colors-brands-spotify-50);
-  --colors-primary-100: var(--colors-brands-spotify-100);
-  --colors-primary-200: var(--colors-brands-spotify-200);
-  --colors-primary-300: var(--colors-brands-spotify-300);
-  --colors-primary-400: var(--colors-brands-spotify-400);
-  --colors-primary-500: var(--colors-brands-spotify-500);
-  --colors-primary-600: var(--colors-brands-spotify-600);
-  --colors-primary-700: var(--colors-brands-spotify-700);
-  --colors-primary-800: var(--colors-brands-spotify-800);
-  --colors-primary-900: var(--colors-brands-spotify-900);
-  --colors-primary-950: var(--colors-brands-spotify-950);
-
-  --colors-primary-50: var(--colors-blue-50);
-  --colors-primary-100: var(--colors-blue-100);
-  --colors-primary-200: var(--colors-blue-200);
-  --colors-primary-300: var(--colors-blue-300);
-  --colors-primary-400: var(--colors-blue-400);
-  --colors-primary-500: var(--colors-blue-500);
-  --colors-primary-600: var(--colors-blue-600);
-  --colors-primary-700: var(--colors-blue-700);
-  --colors-primary-800: var(--colors-blue-800);
-  --colors-primary-900: var(--colors-blue-900);
-  --colors-primary-950: var(--colors-blue-950);
+  --colors-primary-50: var(--colors-brands-mss-50);
+  --colors-primary-100: var(--colors-brands-mss-100);
+  --colors-primary-200: var(--colors-brands-mss-200);
+  --colors-primary-300: var(--colors-brands-mss-300);
+  --colors-primary-400: var(--colors-brands-mss-400);
+  --colors-primary-500: var(--colors-brands-mss-500);
+  --colors-primary-600: var(--colors-brands-mss-600);
+  --colors-primary-700: var(--colors-brands-mss-700);
+  --colors-primary-800: var(--colors-brands-mss-800);
+  --colors-primary-900: var(--colors-brands-mss-900);
+  --colors-primary-950: var(--colors-brands-mss-950);
 
   --colors-neutral-50: var(--colors-zinc-50);
   --colors-neutral-100: var(--colors-zinc-100);
@@ -312,8 +300,8 @@ input[type='search']::-webkit-search-results-decoration {
     --border-radius--xl: 0.75rem;
     --border-radius--2xl: 1rem;
     --border-radius--3xl: 1.5rem;
-
     */
+
   --border-radius: 0.36rem;
   --border-radius--sm: 0.18rem;
   --border-radius--md: 0.54rem;

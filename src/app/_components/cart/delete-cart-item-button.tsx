@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonIcon } from '@/components/ui/button-icon';
+import { Button } from '@/components/ui/button';
 import { CartItem } from '@/lib/shopify/types';
 import { useActionState } from 'react';
 import { removeItem } from './actions';
@@ -23,7 +23,16 @@ export function DeleteCartItemButton({
         await actionWithVariant();
       }}
     >
-      <ButtonIcon size={'sm'} icon="x" type="submit" aria-label="Remove cart item" />
+      <Button size={'sm'} variant={'ghost'} compact type="submit" aria-label="Remove cart item">
+        Remove
+      </Button>
+      {/* <ButtonIcon
+        icon="trash"
+        size={'sm'}
+        variant={'ghost'}
+        type="submit"
+        aria-label="Remove cart item"
+      /> */}
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>
