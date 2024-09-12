@@ -16,8 +16,10 @@ function SubmitButton({ updateType }: SubmitButtonProps) {
 
   return (
     <ButtonIcon
+      size={'sm'}
       isLoading={pending}
       isDisabled={pending}
+      variant={'ghost'}
       icon={updateType === 'increment' ? 'plus' : 'minus'}
       type="submit"
       aria-label={updateType === 'increment' ? 'Increase item quantity' : 'Reduce item quantity'}
@@ -67,7 +69,7 @@ type EditCartItemQuantityProps = {
 
 export const EditCartItemQuantity = ({ item, updateCartItem }: EditCartItemQuantityProps) => {
   return (
-    <div className="inline-flex items-center rounded-full border border-neutral-200 dark:border-neutral-700">
+    <div className="inline-flex items-center rounded-full border border-neutral-200 bg-white p-0.5">
       <EditCartItemQuantityButton
         item={item}
         updateType="decrement"

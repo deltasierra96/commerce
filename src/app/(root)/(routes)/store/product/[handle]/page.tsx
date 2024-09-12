@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { Container } from '@/components/ui/container';
+import { STORE_ROUTE_PRODUCT } from '@/routes';
 import { GridTileImage } from 'components/grid/tile';
 import Footer from 'components/layout/footer';
 import { Gallery } from 'components/product/gallery';
@@ -129,7 +130,7 @@ async function RelatedProducts({ id }: { id: string }) {
           >
             <Link
               className="relative h-full w-full"
-              href={`/product/${product.handle}`}
+              href={`${STORE_ROUTE_PRODUCT}/${product.handle}`}
               prefetch={true}
             >
               <GridTileImage

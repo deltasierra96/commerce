@@ -1,3 +1,4 @@
+import { STORE_ROUTE_PRODUCT } from '@/routes';
 import { getCollections, getPages, getProducts } from 'lib/shopify';
 import { validateEnvironmentVariables } from 'lib/utils';
 import { MetadataRoute } from 'next';
@@ -30,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const productsPromise = getProducts({}).then((products) =>
     products.map((product) => ({
-      url: `${baseUrl}/product/${product.handle}`,
+      url: `${baseUrl}/${STORE_ROUTE_PRODUCT}/${product.handle}`,
       lastModified: product.updatedAt
     }))
   );

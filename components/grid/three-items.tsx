@@ -1,3 +1,4 @@
+import { STORE_ROUTE_PRODUCT } from '@/routes';
 import { GridTileImage } from 'components/grid/tile';
 import { getCollectionProducts } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
@@ -17,8 +18,8 @@ function ThreeItemGridItem({
       className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}
     >
       <Link
-        className="relative block aspect-square h-full w-full"
-        href={`/product/${item.handle}`}
+        className="aspect-square relative block h-full w-full"
+        href={`${STORE_ROUTE_PRODUCT}/${item.handle}`}
         prefetch={true}
       >
         <GridTileImage

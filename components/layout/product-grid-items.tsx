@@ -1,3 +1,4 @@
+import { STORE_ROUTE_PRODUCT } from '@/routes';
 import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
 import { Product } from 'lib/shopify/types';
@@ -10,7 +11,7 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
         <Grid.Item key={product.handle} className="animate-fadeIn">
           <Link
             className="relative inline-block h-full w-full"
-            href={`/product/${product.handle}`}
+            href={`${STORE_ROUTE_PRODUCT}/${product.handle}`}
             prefetch={true}
           >
             <GridTileImage

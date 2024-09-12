@@ -9,9 +9,11 @@ type CartAction =
   | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: CartUpdateType } }
   | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } };
 
+export type UpdateCartItemProps = (merchandiseId: string, updateType: CartUpdateType) => void;
+
 type CartContextType = {
   cart: Cart | undefined;
-  updateCartItem: (merchandiseId: string, updateType: CartUpdateType) => void;
+  updateCartItem: UpdateCartItemProps;
   addCartItem: (variant: ProductVariant, product: Product) => void;
 };
 
