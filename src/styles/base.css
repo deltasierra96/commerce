@@ -177,7 +177,7 @@
     --colors-primary-900: var(--colors-zinc-900);
     --colors-primary-950: var(--colors-zinc-950);
 
-    /* --colors-primary-50: var(--colors-brands-mss-50);
+    --colors-primary-50: var(--colors-brands-mss-50);
     --colors-primary-100: var(--colors-brands-mss-100);
     --colors-primary-200: var(--colors-brands-mss-200);
     --colors-primary-300: var(--colors-brands-mss-300);
@@ -187,7 +187,7 @@
     --colors-primary-700: var(--colors-brands-mss-700);
     --colors-primary-800: var(--colors-brands-mss-800);
     --colors-primary-900: var(--colors-brands-mss-900);
-    --colors-primary-950: var(--colors-brands-mss-950); */
+    --colors-primary-950: var(--colors-brands-mss-950);
 
     --colors-neutral-50: var(--colors-zinc-50);
     --colors-neutral-100: var(--colors-zinc-100);
