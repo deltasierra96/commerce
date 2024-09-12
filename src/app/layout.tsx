@@ -12,10 +12,10 @@ import {
   fontRoboto,
   fontStolzl
 } from '@/fonts/next-fonts';
+import { getCart } from '@/lib/shopify';
+import { ensureStartsWith } from '@/lib/utils';
 import { AriaProvider } from '@/providers';
 import { clsx } from '@/utils';
-import { getCart } from 'lib/shopify';
-import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';

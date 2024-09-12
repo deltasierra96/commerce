@@ -1,7 +1,7 @@
 'use client';
 
 import { ButtonIcon } from '@/components/ui/button-icon';
-import type { CartItem } from 'lib/shopify/types';
+import { CartItem } from '@/lib/shopify/types';
 import { useActionState } from 'react';
 import { removeItem } from './actions';
 

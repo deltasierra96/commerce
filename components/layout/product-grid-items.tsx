@@ -1,7 +1,7 @@
-import { STORE_ROUTE_PRODUCT } from '@/routes';
+import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { Product } from '@/lib/shopify/types';
 import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
-import { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
 export default function ProductGridItems({ products }: { products: Product[] }) {

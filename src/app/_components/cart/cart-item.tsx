@@ -1,9 +1,9 @@
+import { DEFAULT_OPTION } from '@/lib/constants';
+import { CartItem as ShopifyCartItemProps } from '@/lib/shopify/types';
 import Price from 'components/price';
-import { DEFAULT_OPTION } from 'lib/constants';
-import { type CartItem as ShopifyCartItemProps } from 'lib/shopify/types';
 import Image from 'next/image';
 import { Link, Button as RACButton } from 'react-aria-components';
-import { UpdateCartItemProps } from './cart-context';
+import { UpdateCartItemProps, useCart } from './cart-context';
 import { DeleteCartItemButton } from './delete-cart-item-button';
 import { EditCartItemQuantity } from './edit-cart-item-quantity';
 
@@ -14,6 +14,8 @@ type CartItemProps = {
 };
 
 export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }: CartItemProps) => {
+  const { isCartOpen, setIsCartOpen } = useCart();
+  console.log('isCartOpen', isCartOpen);
   return (
     <div className="flex py-6" {...props}>
       <div className="relative overflow-hidden">
@@ -36,7 +38,9 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
       <div className="space-y-2">
         <div className="flex justify-between text-base font-medium text-neutral-900">
           <h3>
-            <Link href={merchandiseUrl}>{cartItem.merchandise.product.title}</Link>
+            <Link onPress={() => setIsCartOpen(false)} href={merchandiseUrl}>
+              {cartItem.merchandise.product.title}
+            </Link>
             {cartItem.merchandise.title !== DEFAULT_OPTION ? (
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 {cartItem.merchandise.title}

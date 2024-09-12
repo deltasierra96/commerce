@@ -2,15 +2,14 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { Container } from '@/components/ui/container';
-import { STORE_ROUTE_PRODUCT } from '@/routes';
+import { HIDDEN_PRODUCT_TAG, STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { getProduct, getProductRecommendations } from '@/lib/shopify';
+import { Image } from '@/lib/shopify/types';
 import { GridTileImage } from 'components/grid/tile';
 import Footer from 'components/layout/footer';
 import { Gallery } from 'components/product/gallery';
 import { ProductProvider } from 'components/product/product-context';
 import { ProductInformation } from 'components/product/product-information';
-import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
-import { getProduct, getProductRecommendations } from 'lib/shopify';
-import { Image } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
@@ -54,8 +53,6 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
   const product = await getProduct(params.handle);
-
-  console.log('product', product);
 
   if (!product) return notFound();
 

@@ -2,7 +2,7 @@
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Menu, MenuItem } from '@/components/ui/menu';
 import { Separator } from '@/components/ui/separator';
-import { ACCOUNT_ROUTE, ADMIN_ROUTE } from '@/routes';
+import { ACCOUNT_ROUTE } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
 import { MenuTrigger, SubmenuTrigger, type Key } from 'react-aria-components';
 
@@ -11,9 +11,6 @@ export const Account = () => {
 
   const onAction = async (action: Key) => {
     switch (action) {
-      case 'admin':
-        router.push(ADMIN_ROUTE);
-        break;
       case 'my-account':
         router.push(ACCOUNT_ROUTE);
         break;

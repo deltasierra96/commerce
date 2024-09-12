@@ -3,12 +3,11 @@
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Drawer, DrawerProps } from '@/components/ui/drawer';
-import { STORE_ROUTE_PRODUCT } from '@/routes';
+import { DEFAULT_OPTION, STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { createUrl } from '@/lib/utils';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Price from 'components/price';
-import { DEFAULT_OPTION } from 'lib/constants';
-import { createUrl } from 'lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie, redirectToCheckout } from './actions';
 import { useCart } from './cart-context';
@@ -21,11 +20,8 @@ type MerchandiseSearchParams = {
 export type CartProps = DrawerProps;
 
 export const Cart = ({ ...props }: CartProps) => {
-  const { cart, updateCartItem } = useCart();
-  const [isOpen, setIsOpen] = useState(false);
+  const { cart, updateCartItem, isCartOpen, setIsCartOpen } = useCart();
   const quantityRef = useRef(cart?.totalQuantity);
-  const openCart = () => setIsOpen(true);
-  const closeCart = () => setIsOpen(false);
 
   useEffect(() => {
     if (!cart) {
@@ -39,22 +35,22 @@ export const Cart = ({ ...props }: CartProps) => {
       cart?.totalQuantity !== quantityRef.current &&
       cart?.totalQuantity > 0
     ) {
-      if (!isOpen) {
-        setIsOpen(true);
+      if (!isCartOpen) {
+        setIsCartOpen(true);
       }
       quantityRef.current = cart?.totalQuantity;
     }
-  }, [isOpen, cart?.totalQuantity, quantityRef]);
+  }, [isCartOpen, cart?.totalQuantity, quantityRef]);
 
   return (
     <>
       <ButtonIcon
-        onPress={openCart}
+        onPress={() => setIsCartOpen(true)}
         variant={'ghost'}
         counter={cart?.totalQuantity}
         icon="shopping-bag"
       />
-      <Drawer onOpenChange={closeCart} isOpen={isOpen} {...props}>
+      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen} {...props}>
         <Drawer.Content>
           <div className="flex h-full flex-col overflow-y-scroll">
             {!cart || cart.lines.length === 0 ? (

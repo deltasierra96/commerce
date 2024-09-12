@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Product, ProductVariant } from '@/lib/shopify/types';
 import { useProduct } from 'components/product/product-context';
-import { Product, ProductVariant } from 'lib/shopify/types';
 import { useActionState } from 'react';
 import { addItem } from './actions';
 import { useCart } from './cart-context';

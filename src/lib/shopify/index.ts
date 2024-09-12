@@ -1,9 +1,9 @@
-import { HIDDEN_PRODUCT_TAG, SHOPIFY_GRAPHQL_API_ENDPOINT, TAGS } from 'lib/constants';
-import { isShopifyError } from 'lib/type-guards';
-import { ensureStartsWith } from 'lib/utils';
 import { revalidateTag } from 'next/cache';
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { HIDDEN_PRODUCT_TAG, SHOPIFY_GRAPHQL_API_ENDPOINT, TAGS } from '../constants';
+import { isShopifyError } from '../type-guards';
+import { ensureStartsWith } from '../utils';
 import {
   addToCartMutation,
   createCartMutation,

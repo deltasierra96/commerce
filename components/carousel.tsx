@@ -1,5 +1,5 @@
-import { STORE_ROUTE_PRODUCT } from '@/routes';
-import { getCollectionProducts } from 'lib/shopify';
+import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { getCollectionProducts } from '@/lib/shopify';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 

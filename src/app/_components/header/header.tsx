@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/container';
 import { type IconTypeProps } from '@/components/ui/icon';
 import { Logo } from '@/components/ui/logo';
 import { SearchInput } from '@/components/ui/search-input';
-import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/routes';
+import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/lib/constants';
 import { clsx } from '@/utils';
 import React, { forwardRef } from 'react';
 import { Link } from 'react-aria-components';

@@ -1,6 +1,7 @@
-import { STORE_ROUTE_PRODUCT } from '@/routes';
-import { getCollections, getPages, getProducts } from 'lib/shopify';
-import { validateEnvironmentVariables } from 'lib/utils';
+import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { getCollections, getPages, getProducts } from '@/lib/shopify';
+import { validateEnvironmentVariables } from '@/lib/utils';
+
 import { MetadataRoute } from 'next';
 
 type Route = {

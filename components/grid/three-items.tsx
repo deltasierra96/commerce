@@ -1,7 +1,7 @@
-import { STORE_ROUTE_PRODUCT } from '@/routes';
+import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { getCollectionProducts } from '@/lib/shopify';
+import { Product } from '@/lib/shopify/types';
 import { GridTileImage } from 'components/grid/tile';
-import { getCollectionProducts } from 'lib/shopify';
-import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
 function ThreeItemGridItem({

@@ -1,6 +1,6 @@
 import { Logo } from '@/components/ui/logo';
-import { getMenu } from 'lib/shopify';
-import { Menu } from 'lib/shopify/types';
+import { getMenu } from '@/lib/shopify';
+import { Menu } from '@/lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
@@ -10,7 +10,6 @@ const { SITE_NAME } = process.env;
 
 export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
-  console.log('menu', menu);
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">

@@ -1,17 +1,17 @@
 'use client';
-import { STORE_ROUTE_COLLECTION } from '@/routes';
+import { STORE_ROUTE_COLLECTION } from '@/lib/constants';
 import { clsx } from '@/utils';
 import { Link } from 'react-aria-components';
 
 const navigation = [
   { name: 'Men', href: STORE_ROUTE_COLLECTION, current: false },
   { name: 'Women', href: STORE_ROUTE_COLLECTION, current: false },
-  { name: 'Accessories', href: STORE_ROUTE_COLLECTION, current: false },
+  { name: 'Accessories', href: STORE_ROUTE_COLLECTION, current: false }
 ];
 
 export const Navigation = () => {
   return (
-    <nav className='-ml-3 lg:space-x-2' aria-label='Global'>
+    <nav className="-ml-3 lg:space-x-2" aria-label="Global">
       {navigation.map((item) => (
         <Link
           key={item.name}

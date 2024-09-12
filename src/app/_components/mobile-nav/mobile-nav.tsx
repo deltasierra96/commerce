@@ -2,7 +2,7 @@
 import { ButtonLink } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Drawer, type DrawerProps } from '@/components/ui/drawer';
-import { STORE_ROUTE_COLLECTION } from '@/routes';
+import { STORE_ROUTE_COLLECTION } from '@/lib/constants';
 
 type MobileNavProps = DrawerProps;
 

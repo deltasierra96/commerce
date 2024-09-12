@@ -1,6 +1,6 @@
 import { Logo } from '@/components/ui/logo';
+import { getMenu } from '@/lib/shopify';
 import FooterMenu from 'components/layout/footer-menu';
-import { getMenu } from 'lib/shopify';
 import { Suspense } from 'react';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
