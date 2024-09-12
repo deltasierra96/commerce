@@ -15,7 +15,7 @@ import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie, redirectToCheckout } from './actions';
 import { useCart } from './cart-context';
 import { DeleteCartItemButton } from './delete-cart-item-button';
-import { EditItemQuantityButton } from './edit-item-quantity-button';
+import { EditCartItemQuantity } from './edit-cart-item-quantity';
 
 type MerchandiseSearchParams = {
   [key: string]: string;
@@ -29,8 +29,6 @@ export const Cart = ({ ...props }: CartProps) => {
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
-
-  console.log('cart', cart);
 
   useEffect(() => {
     if (!cart) {
@@ -52,69 +50,73 @@ export const Cart = ({ ...props }: CartProps) => {
   }, [isOpen, cart?.totalQuantity, quantityRef]);
 
   return (
-    <Drawer {...props}>
-      <ButtonIcon variant={'ghost'} counter={cart?.totalQuantity} icon="shopping-bag" />
-
-      <Drawer.Content>
-        <div className="flex h-full flex-col overflow-y-scroll">
-          {!cart || cart.lines.length === 0 ? (
-            <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex-1 overflow-y-scroll px-3">
-              <div className="mt-8">
-                <div className="flow-root">
-                  <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
-                    <ShoppingCartIcon className="h-16" />
-                    <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+    <>
+      <ButtonIcon
+        onPress={openCart}
+        variant={'ghost'}
+        counter={cart?.totalQuantity}
+        icon="shopping-bag"
+      />
+      <Drawer onOpenChange={closeCart} isOpen={isOpen} {...props}>
+        <Drawer.Content>
+          <div className="flex h-full flex-col overflow-y-scroll">
+            {!cart || cart.lines.length === 0 ? (
+              <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex-1 overflow-y-scroll px-3">
+                <div className="mt-8">
+                  <div className="flow-root">
+                    <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
+                      <ShoppingCartIcon className="h-16" />
+                      <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <>
-              <div className="flex h-full flex-col justify-between">
-                <ul className="divide-neutext-neutral-200 -my-6 divide-y">
-                  {cart.lines
-                    .sort((a, b) =>
-                      a.merchandise.product.title.localeCompare(b.merchandise.product.title)
-                    )
-                    .map((item, i) => {
-                      const merchandiseSearchParams = {} as MerchandiseSearchParams;
+            ) : (
+              <>
+                <div className="flex h-full flex-col justify-between">
+                  <ul className="divide-neutext-neutral-200 -my-6 divide-y">
+                    {cart.lines
+                      .sort((a, b) =>
+                        a.merchandise.product.title.localeCompare(b.merchandise.product.title)
+                      )
+                      .map((item, i) => {
+                        const merchandiseSearchParams = {} as MerchandiseSearchParams;
 
-                      item.merchandise.selectedOptions.forEach(({ name, value }) => {
-                        if (value !== DEFAULT_OPTION) {
-                          merchandiseSearchParams[name.toLowerCase()] = value;
-                        }
-                      });
+                        item.merchandise.selectedOptions.forEach(({ name, value }) => {
+                          if (value !== DEFAULT_OPTION) {
+                            merchandiseSearchParams[name.toLowerCase()] = value;
+                          }
+                        });
 
-                      const merchandiseUrl = createUrl(
-                        `/product/${item.merchandise.product.handle}`,
-                        new URLSearchParams(merchandiseSearchParams)
-                      );
+                        const merchandiseUrl = createUrl(
+                          `/product/${item.merchandise.product.handle}`,
+                          new URLSearchParams(merchandiseSearchParams)
+                        );
 
-                      return (
-                        <li key={i}>
-                          <Group className="flex py-6 hover:bg-neutral-100">
-                            <div className="relative overflow-hidden">
-                              <div className="group-hover: absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-75">
-                                <DeleteCartItemButton
-                                  item={item}
-                                  optimisticUpdate={updateCartItem}
-                                />
+                        return (
+                          <li key={i}>
+                            <Group className="flex py-6 hover:bg-neutral-100">
+                              <div className="relative overflow-hidden">
+                                <div className="absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-75">
+                                  <DeleteCartItemButton
+                                    item={item}
+                                    optimisticUpdate={updateCartItem}
+                                  />
+                                </div>
+                                <div className="border-neutext-neutral-200 relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
+                                  <Image
+                                    fill
+                                    alt={
+                                      item.merchandise.product.featuredImage.altText ||
+                                      item.merchandise.product.title
+                                    }
+                                    src={item.merchandise.product.featuredImage.url}
+                                    className="h-full w-full object-cover object-center"
+                                  />
+                                </div>
                               </div>
-                              <div className="border-neutext-neutral-200 relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
-                                <Image
-                                  fill
-                                  alt={
-                                    item.merchandise.product.featuredImage.altText ||
-                                    item.merchandise.product.title
-                                  }
-                                  src={item.merchandise.product.featuredImage.url}
-                                  className="h-full w-full object-cover object-center"
-                                />
-                              </div>
-                            </div>
 
-                            <div className="ml-4 flex flex-1 flex-col">
-                              <div>
+                              <div className="space-y-2">
                                 <div className="flex justify-between text-base font-medium text-neutral-900">
                                   <h3>
                                     <Link href={merchandiseUrl}>
@@ -134,74 +136,54 @@ export const Cart = ({ ...props }: CartProps) => {
                                     />
                                   </p>
                                 </div>
-                              </div>
 
-                              <div className="flex flex-row items-center">
-                                <EditItemQuantityButton
-                                  item={item}
-                                  type="minus"
-                                  optimisticUpdate={updateCartItem}
-                                />
-                              </div>
-                              {/* <div className="flex flex-row items-center ml-auto border rounded-full border-neutral-200 dark:border-neutral-700">
-                                <EditItemQuantityButton
-                                  item={item}
-                                  type="minus"
-                                  optimisticUpdate={updateCartItem}
-                                />
-                                <p className="w-6 text-center">
-                                  <span className="w-full text-sm">{item.quantity}</span>
-                                </p>
-                                <EditItemQuantityButton
-                                  item={item}
-                                  type="plus"
-                                  optimisticUpdate={updateCartItem}
-                                />
-                              </div> */}
-                              <div className="flex flex-1 items-end justify-between text-sm">
-                                <p className="text-neutral-500">Qty {item.quantity}</p>
+                                <EditCartItemQuantity item={item} updateCartItem={updateCartItem} />
 
-                                <div className="flex">
-                                  <RACButton
-                                    type="button"
-                                    className="font-medium text-primary-500 hover:text-primary-600"
-                                  >
-                                    Remove
-                                  </RACButton>
+                                <div className="flex flex-1 items-end justify-between text-sm">
+                                  <p className="text-neutral-500">Qty {item.quantity}</p>
+
+                                  <div className="flex">
+                                    <RACButton
+                                      type="button"
+                                      className="font-medium text-primary-500 hover:text-primary-600"
+                                    >
+                                      Remove
+                                    </RACButton>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </Group>
-                        </li>
-                      );
-                    })}
-                </ul>
-              </div>
-              <div className="border-neutext-neutral-200 border-t px-4 py-6 sm:px-6">
-                <div className="flex justify-between text-base font-medium text-neutral-900">
-                  <p>Subtotal</p>
-                  <Price
-                    amount={cart.cost.totalAmount.amount}
-                    currencyCode={cart.cost.totalAmount.currencyCode}
-                  />
+                            </Group>
+                          </li>
+                        );
+                      })}
+                  </ul>
                 </div>
-                <p className="mt-0.5 text-sm text-neutral-500">
-                  Shipping and taxes calculated at checkout.
-                </p>
-                <div className="mt-6 space-y-4">
-                  <form action={redirectToCheckout}>
-                    <CheckoutButton />
-                  </form>
-                  <Button block variant={'ghost'} color="neutral" rightIcon="arrow-right">
-                    Continue Shopping
-                  </Button>
+                <div className="border-neutext-neutral-200 border-t px-4 py-6 sm:px-6">
+                  <div className="flex justify-between text-base font-medium text-neutral-900">
+                    <p>Subtotal</p>
+                    <Price
+                      amount={cart.cost.totalAmount.amount}
+                      currencyCode={cart.cost.totalAmount.currencyCode}
+                    />
+                  </div>
+                  <p className="mt-0.5 text-sm text-neutral-500">
+                    Shipping and taxes calculated at checkout.
+                  </p>
+                  <div className="mt-6 space-y-4">
+                    <form action={redirectToCheckout}>
+                      <CheckoutButton />
+                    </form>
+                    <Button block variant={'ghost'} color="neutral" rightIcon="arrow-right">
+                      Continue Shopping
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
-        </div>
-      </Drawer.Content>
-    </Drawer>
+              </>
+            )}
+          </div>
+        </Drawer.Content>
+      </Drawer>
+    </>
   );
 };
 

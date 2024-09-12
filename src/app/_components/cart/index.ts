@@ -1,2 +1,2 @@
 export { Cart } from './cart';
-export { CartProvider, useCart } from './cart-context';
+export { CartProvider, useCart, type CartUpdateType } from './cart-context';

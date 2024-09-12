@@ -3,15 +3,15 @@
 import type { Cart, CartItem, Product, ProductVariant } from 'lib/shopify/types';
 import React, { createContext, use, useContext, useMemo, useOptimistic } from 'react';
 
-type UpdateType = 'plus' | 'minus' | 'delete';
+export type CartUpdateType = 'increment' | 'decrement' | 'delete';
 
 type CartAction =
-  | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: UpdateType } }
+  | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: CartUpdateType } }
   | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } };
 
 type CartContextType = {
   cart: Cart | undefined;
-  updateCartItem: (merchandiseId: string, updateType: UpdateType) => void;
+  updateCartItem: (merchandiseId: string, updateType: CartUpdateType) => void;
   addCartItem: (variant: ProductVariant, product: Product) => void;
 };
 
@@ -21,10 +21,10 @@ function calculateItemCost(quantity: number, price: string): string {
   return (Number(price) * quantity).toString();
 }
 
-function updateCartItem(item: CartItem, updateType: UpdateType): CartItem | null {
+function updateCartItem(item: CartItem, updateType: CartUpdateType): CartItem | null {
   if (updateType === 'delete') return null;
 
-  const newQuantity = updateType === 'plus' ? item.quantity + 1 : item.quantity - 1;
+  const newQuantity = updateType === 'increment' ? item.quantity + 1 : item.quantity - 1;
   if (newQuantity === 0) return null;
 
   const singleItemAmount = Number(item.cost.totalAmount.amount) / item.quantity;
@@ -155,7 +155,7 @@ export function CartProvider({
   const initialCart = use(cartPromise);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(initialCart, cartReducer);
 
-  const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
+  const updateCartItem = (merchandiseId: string, updateType: CartUpdateType) => {
     updateOptimisticCart({ type: 'UPDATE_ITEM', payload: { merchandiseId, updateType } });
   };
 
