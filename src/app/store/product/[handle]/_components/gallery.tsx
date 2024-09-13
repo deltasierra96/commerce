@@ -16,7 +16,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
   const [previousImageUrl, setPreviousImageUrl] = useState(previousImageIndex);
 
   return (
-    <form className="flex w-full flex-row-reverse gap-x-4">
+    <form className="w-full gap-x-4 lg:flex lg:flex-row-reverse">
       <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden rounded-md bg-white">
         {images[imageIndex] && (
           <Image
@@ -54,7 +54,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       </div>
 
       {images.length > 1 ? (
-        <ul className="flex flex-col items-center gap-2 overflow-auto">
+        <ul className="mt-4 flex items-center gap-2 overflow-auto lg:flex-col">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
 
@@ -66,7 +66,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                     updateURL(newState);
                   }}
                   aria-label="Select product image"
-                  className="flex size-24 items-center justify-center overflow-hidden rounded-md bg-white"
+                  className="flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
                 >
                   <Image alt={image.altText} src={image.src} width={80} height={80} />
                 </button>

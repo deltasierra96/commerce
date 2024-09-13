@@ -60,7 +60,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
             </Container>
           </div>
           <div className={clsx('hidden w-full items-center py-2 sm:py-0 lg:flex')}>
-            <Container>
+            <Container fullWidth>
               <div className="flex items-center justify-between gap-x-8">
                 <div className="flex items-center justify-start">
                   <Logo className="h-8 sm:h-10" />

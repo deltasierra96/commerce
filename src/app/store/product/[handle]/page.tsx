@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <Container className="max-w-screen-xl py-12">
+      <Container className="py-4 sm:py-6 lg:py-12">
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-6">
           <div className="lg:col-span-4 lg:row-end-1">
             <Suspense
@@ -97,8 +97,8 @@ export default async function ProductPage({ params }: { params: { handle: string
             </Suspense>
           </div>
 
-          <div className="mx-auto mt-14 w-full max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
-            <div className="rounded-md bg-white p-8">
+          <div className="mx-auto mt-4 w-full sm:mt-6 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
+            <div className="rounded-md bg-white p-4 sm:p-8">
               <Suspense fallback={null}>
                 <ProductInformation product={product} />
               </Suspense>
