@@ -259,6 +259,18 @@ input[type='search']::-webkit-search-results-decoration {
   --button-icon-compact-width: var(--button-icon-compact-height);
   --button-icon-compact-width-lg: var(--button-icon-compact-height-lg);
 
+  --colors-primary-50: var(--colors-blue-50);
+  --colors-primary-100: var(--colors-blue-100);
+  --colors-primary-200: var(--colors-blue-200);
+  --colors-primary-300: var(--colors-blue-300);
+  --colors-primary-400: var(--colors-blue-400);
+  --colors-primary-500: var(--colors-blue-500);
+  --colors-primary-600: var(--colors-blue-600);
+  --colors-primary-700: var(--colors-blue-700);
+  --colors-primary-800: var(--colors-blue-800);
+  --colors-primary-900: var(--colors-blue-900);
+  --colors-primary-950: var(--colors-blue-950);
+
   --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
@@ -271,17 +283,17 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-brands-mss-900);
   --colors-primary-950: var(--colors-brands-mss-950);
 
-  --colors-neutral-50: var(--colors-zinc-50);
-  --colors-neutral-100: var(--colors-zinc-100);
-  --colors-neutral-200: var(--colors-zinc-200);
-  --colors-neutral-300: var(--colors-zinc-300);
-  --colors-neutral-400: var(--colors-zinc-400);
-  --colors-neutral-500: var(--colors-zinc-500);
-  --colors-neutral-600: var(--colors-zinc-600);
-  --colors-neutral-700: var(--colors-zinc-700);
-  --colors-neutral-800: var(--colors-zinc-800);
-  --colors-neutral-900: var(--colors-zinc-900);
-  --colors-neutral-950: var(--colors-zinc-950);
+  --colors-neutral-50: var(--colors-slate-50);
+  --colors-neutral-100: var(--colors-slate-100);
+  --colors-neutral-200: var(--colors-slate-200);
+  --colors-neutral-300: var(--colors-slate-300);
+  --colors-neutral-400: var(--colors-slate-400);
+  --colors-neutral-500: var(--colors-slate-500);
+  --colors-neutral-600: var(--colors-slate-600);
+  --colors-neutral-700: var(--colors-slate-700);
+  --colors-neutral-800: var(--colors-slate-800);
+  --colors-neutral-900: var(--colors-slate-900);
+  --colors-neutral-950: var(--colors-slate-950);
 
   /* No Radius */
   --border-radius: 0rem;
@@ -301,7 +313,7 @@ input[type='search']::-webkit-search-results-decoration {
     --border-radius--3xl: 1.5rem;
     */
 
-  --border-radius: 0.36rem;
+  /* --border-radius: 0.36rem;
   --border-radius--sm: 0.18rem;
   --border-radius--md: 0.54rem;
   --border-radius--lg: 0.72rem;
@@ -315,5 +327,5 @@ input[type='search']::-webkit-search-results-decoration {
   --border-radius--lg: 1.0368rem;
   --border-radius--xl: 1.5552rem;
   --border-radius--2xl: 2.0736rem;
-  --border-radius--3xl: 3.1104rem;
+  --border-radius--3xl: 3.1104rem; */
 }

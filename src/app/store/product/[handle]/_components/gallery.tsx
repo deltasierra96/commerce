@@ -1,9 +1,9 @@
 'use client';
 
-import { GridTileImage } from '@/app/_components/grid/tile';
 import { useProduct, useUpdateURL } from '@/app/store/product/[handle]/_components/product-context';
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ButtonIcon } from '@/components/ui/button-icon';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export function Gallery({ images }: { images: { src: string; altText: string }[] }) {
   const { state, updateImage } = useProduct();
@@ -12,13 +12,12 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
 
   const nextImageIndex = imageIndex + 1 < images.length ? imageIndex + 1 : 0;
   const previousImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
-
-  const buttonClassName =
-    'h-full px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center';
+  const [nextImageUrl, setNextImageUrl] = useState(nextImageIndex);
+  const [previousImageUrl, setPreviousImageUrl] = useState(previousImageIndex);
 
   return (
-    <form className="w-full">
-      <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
+    <form className="flex w-full flex-row-reverse gap-x-4">
+      <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden rounded-md bg-white">
         {images[imageIndex] && (
           <Image
             className="object-cover object-center"
@@ -31,56 +30,45 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
         )}
 
         {images.length > 1 ? (
-          <div className="absolute bottom-[15%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
-              <button
-                formAction={() => {
+          <div className="absolute right-0 top-0 inline-flex items-start justify-end p-4">
+            <div className="inline-flex items-center gap-x-2">
+              <ButtonIcon
+                icon="chevron-left"
+                onPress={() => {
                   const newState = updateImage(previousImageIndex.toString());
                   updateURL(newState);
                 }}
                 aria-label="Previous product image"
-                className={buttonClassName}
-              >
-                <ArrowLeftIcon className="h-5" />
-              </button>
-              <div className="mx-1 h-6 w-px bg-neutral-500"></div>
-              <button
-                formAction={() => {
+              />
+              <ButtonIcon
+                icon="chevron-right"
+                onPress={() => {
                   const newState = updateImage(nextImageIndex.toString());
                   updateURL(newState);
                 }}
                 aria-label="Next product image"
-                className={buttonClassName}
-              >
-                <ArrowRightIcon className="h-5" />
-              </button>
+              />
             </div>
           </div>
         ) : null}
       </div>
 
       {images.length > 1 ? (
-        <ul className="my-12 flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+        <ul className="flex flex-col items-center gap-2 overflow-auto">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
 
             return (
-              <li key={image.src} className="h-20 w-20">
+              <li key={image.src}>
                 <button
                   formAction={() => {
                     const newState = updateImage(index.toString());
                     updateURL(newState);
                   }}
                   aria-label="Select product image"
-                  className="h-full w-full"
+                  className="flex size-20 overflow-hidden rounded-md bg-white"
                 >
-                  <GridTileImage
-                    alt={image.altText}
-                    src={image.src}
-                    width={80}
-                    height={80}
-                    active={isActive}
-                  />
+                  <Image alt={image.altText} src={image.src} width={80} height={80} />
                 </button>
               </li>
             );

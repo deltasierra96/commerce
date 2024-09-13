@@ -1,23 +1,24 @@
 'use client';
-import React from 'react';
 import { clsx } from '@/utils';
-import { FormProvider } from 'react-hook-form';
+import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
 import {
   FieldError as RACFieldError,
+  Group as RACGroup,
   Text as RACText,
   type FieldErrorProps as RACFieldErrorProps,
+  type GroupProps as RACGroupProps,
   type TextProps as RACTextProps
 } from 'react-aria-components';
-import { Icon, type IconTypeProps } from '../icon';
-import { Group as RACGroup, type GroupProps as RACGroupProps } from 'react-aria-components';
 import {
   Controller,
+  FormProvider,
   type ControllerProps,
   type FieldPath,
   type FieldValues
 } from 'react-hook-form';
 import { borderStyles, focusRing } from '../focus-ring';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { Icon, type IconTypeProps } from '../icon';
 
 export const Form = FormProvider;
 
@@ -108,7 +109,7 @@ export const fieldWrapperIconSizeStyles = cva('text-neutral-400', {
 });
 
 export const fieldWrapperBaseStyles = cva(
-  'border-input border-neutral-200 bg-white text-neutral-900 outline-none transition-colors duration-150 focus-within:bg-white hover:border-neutral-200 hover:bg-neutral-50 focus-within:hover:bg-white',
+  'border-input border-neutral-100 bg-neutral-100 text-neutral-900 outline-none transition-colors duration-150 focus-within:bg-white hover:border-neutral-200 hover:bg-neutral-50 focus-within:hover:bg-white',
   {
     variants: {
       rounded: {

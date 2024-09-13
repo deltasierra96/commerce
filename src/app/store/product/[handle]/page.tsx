@@ -80,23 +80,21 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <Container className="max-w-screen-xl py-16">
+      <Container className="max-w-screen-xl py-12">
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-10">
           <div className="lg:col-span-4 lg:row-end-1">
-            <div className="rounded-md bg-white">
-              <Suspense
-                fallback={
-                  <div className="aspect-square relative h-full max-h-[550px] w-full overflow-hidden" />
-                }
-              >
-                <Gallery
-                  images={product.images.slice(0, 5).map((image: Image) => ({
-                    src: image.url,
-                    altText: image.altText
-                  }))}
-                />
-              </Suspense>
-            </div>
+            <Suspense
+              fallback={
+                <div className="aspect-square relative h-full max-h-[550px] w-full overflow-hidden" />
+              }
+            >
+              <Gallery
+                images={product.images.slice(0, 5).map((image: Image) => ({
+                  src: image.url,
+                  altText: image.altText
+                }))}
+              />
+            </Suspense>
           </div>
 
           <div className="mx-auto mt-14 w-full max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
