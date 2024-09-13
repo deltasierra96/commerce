@@ -18,7 +18,7 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
   return (
     <Group className="flex py-6" {...props}>
       <div className="relative inline-flex overflow-hidden">
-        <div className="border-neutext-neutral-200 relative size-24 flex-shrink-0 overflow-hidden rounded-md border">
+        <div className="relative size-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-100 text-neutral-200">
           <Image
             fill
             alt={
@@ -31,9 +31,9 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
         </div>
       </div>
 
-      <div className="ml-4 flex flex-1 flex-col">
+      <div className="ml-4 flex flex-1 flex-col gap-y-2">
         <div className="flex justify-between">
-          <h3>
+          <h3 className="flex flex-col">
             <Link
               className={'text-sm font-medium hover:text-neutral-700'}
               onPress={() => setIsCartOpen(false)}
@@ -43,9 +43,7 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
             </Link>
             <div className="mt-1">
               {cartItem.merchandise.title !== DEFAULT_OPTION ? (
-                <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                  {cartItem.merchandise.title}
-                </p>
+                <p className="text-sm text-neutral-500">{cartItem.merchandise.title}</p>
               ) : null}
             </div>
           </h3>
