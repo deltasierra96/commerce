@@ -81,7 +81,7 @@ export default async function ProductPage({ params }: { params: { handle: string
         }}
       />
       <Container className="max-w-screen-xl py-12">
-        <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-10">
+        <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-6">
           <div className="lg:col-span-4 lg:row-end-1">
             <Suspense
               fallback={
@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: { params: { handle: string
           </div>
 
           <div className="mx-auto mt-14 w-full max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
-            <div className="rounded-md bg-white p-6">
+            <div className="rounded-md bg-white p-8">
               <Suspense fallback={null}>
                 <ProductInformation product={product} />
               </Suspense>

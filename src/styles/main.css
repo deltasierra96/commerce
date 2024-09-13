@@ -271,7 +271,19 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-blue-900);
   --colors-primary-950: var(--colors-blue-950);
 
-  --colors-primary-50: var(--colors-brands-mss-50);
+  --colors-primary-50: var(--colors-violet-50);
+  --colors-primary-100: var(--colors-violet-100);
+  --colors-primary-200: var(--colors-violet-200);
+  --colors-primary-300: var(--colors-violet-300);
+  --colors-primary-400: var(--colors-violet-400);
+  --colors-primary-500: var(--colors-violet-500);
+  --colors-primary-600: var(--colors-violet-600);
+  --colors-primary-700: var(--colors-violet-700);
+  --colors-primary-800: var(--colors-violet-800);
+  --colors-primary-900: var(--colors-violet-900);
+  --colors-primary-950: var(--colors-violet-950);
+
+  /* --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
   --colors-primary-300: var(--colors-brands-mss-300);
@@ -281,7 +293,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950);
+  --colors-primary-950: var(--colors-brands-mss-950); */
 
   --colors-neutral-50: var(--colors-slate-50);
   --colors-neutral-100: var(--colors-slate-100);
@@ -313,7 +325,7 @@ input[type='search']::-webkit-search-results-decoration {
     --border-radius--3xl: 1.5rem;
     */
 
-  /* --border-radius: 0.36rem;
+  --border-radius: 0.36rem;
   --border-radius--sm: 0.18rem;
   --border-radius--md: 0.54rem;
   --border-radius--lg: 0.72rem;
@@ -327,5 +339,5 @@ input[type='search']::-webkit-search-results-decoration {
   --border-radius--lg: 1.0368rem;
   --border-radius--xl: 1.5552rem;
   --border-radius--2xl: 2.0736rem;
-  --border-radius--3xl: 3.1104rem; */
+  --border-radius--3xl: 3.1104rem;
 }

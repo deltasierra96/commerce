@@ -139,7 +139,7 @@ const drawerContentStyles = cva('overflow-hidden', {
     {
       position: ['left', 'right'],
       size: 'default',
-      className: 'flex-[0_0_30rem]'
+      className: 'flex-[0_0_32rem]'
     },
     {
       position: ['left', 'right'],

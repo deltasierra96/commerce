@@ -66,7 +66,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                     updateURL(newState);
                   }}
                   aria-label="Select product image"
-                  className="flex size-20 overflow-hidden rounded-md bg-white"
+                  className="flex size-24 items-center justify-center overflow-hidden rounded-md bg-white"
                 >
                   <Image alt={image.altText} src={image.src} width={80} height={80} />
                 </button>

@@ -5,7 +5,6 @@ import { ProductStock } from './product-stock';
 import { VariantSelector } from './variant-selector';
 
 export function ProductInformation({ product }: { product: Product }) {
-  console.log('product', product);
   return (
     <div>
       <div className="space-y-2">
