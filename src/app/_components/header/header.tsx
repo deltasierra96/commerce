@@ -7,11 +7,11 @@ import { SearchInput } from '@/components/ui/search-input';
 import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/lib/constants';
 import { clsx } from '@/utils';
 import React, { forwardRef } from 'react';
-import { Link } from 'react-aria-components';
 import { Cart } from '../cart';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
 import { Favourites } from './_components/favourites';
+import { Navigation } from './_components/navigation';
 import { Search } from './_components/search';
 
 export type HeaderProps = {
@@ -65,24 +65,8 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                 <div className="flex items-center justify-start">
                   <Logo className="h-8 sm:h-10" />
                 </div>
-                <nav
-                  className="hidden flex-1 justify-center sm:flex lg:space-x-6"
-                  aria-label="Global"
-                >
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={clsx(
-                        'inline-flex items-center rounded-md px-3 py-8 font-heading text-sm font-bold uppercase outline-none',
-                        'text-neutral-900 hover:text-neutral-500'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </nav>
+                <Navigation />
+
                 <div className="hidden max-w-72 flex-1 lg:block">
                   <SearchInput
                     autoComplete="off"

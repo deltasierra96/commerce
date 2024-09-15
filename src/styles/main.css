@@ -106,6 +106,28 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-brands-christies-900: 0 15 31;
   --colors-brands-christies-950: 0 8 15;
 
+  --colors-brands-green-50: 233 247 244;
+  --colors-brands-green-100: 210 239 233;
+  --colors-brands-green-200: 165 222 211;
+  --colors-brands-green-300: 121 206 189;
+  --colors-brands-green-400: 76 189 167;
+  --colors-brands-green-500: 31 173 145;
+  --colors-brands-green-600: 25 138 116;
+  --colors-brands-green-700: 19 104 87;
+  --colors-brands-green-800: 12 69 58;
+  --colors-brands-green-900: 6 35 29;
+
+  --colors-brands-forest-50: 231 236 235;
+  --colors-brands-forest-100: 206 217 216;
+  --colors-brands-forest-200: 157 179 176;
+  --colors-brands-forest-300: 108 140 137;
+  --colors-brands-forest-400: 59 102 97;
+  --colors-brands-forest-500: 10 64 58;
+  --colors-brands-forest-600: 8 51 46;
+  --colors-brands-forest-700: 6 38 35;
+  --colors-brands-forest-800: 4 26 23;
+  --colors-brands-forest-900: 2 13 12;
+
   /* Colors */
 
   --colors-slate-50: 251 251 252;
@@ -187,22 +209,15 @@ input[type='search']::-webkit-search-results-decoration {
   --alert-border-radius: theme(borderRadius.md);
 
   /* Card */
-  --card-border-radius: theme(borderRadius.lg);
+  --card-border-radius: theme(borderRadius.md);
 
   /* Typography */
-  --font-sans: var(--font-stolzl);
-  /* --font-sans: var(--font-inter); */
-  /* --font-sans: var(--font-poppins); */
-  /* --font-sans: var(--font-futura); */
-  /* --font-sans: var(--font-recoleta); */
-  /* --font-sans: var(--font-montserrat); */
-  --font-sans: var(--font-roboto);
-  /* --font-sans: var(--font-geogrotesque); */
-  /* --font-sans: var(--font-greycliff); */
+  --font-sans: var(--font-inter);
+  --font-sans: var(--font-satoshi);
 
   /* Heading */
   --heading-font: var(--font-sans);
-  --heading-font-weight: theme(fontWeight.bold);
+  --heading-font-weight: theme(fontWeight.extrabold);
 
   /* Layout */
   --header-z-index: 999;
@@ -219,15 +234,12 @@ input[type='search']::-webkit-search-results-decoration {
   --ring-global-offset: 2px;
 
   /* Form Input */
-  --input-border-width: 1px;
+  --input-border-width: 2px;
   --input-border-radius: theme(borderRadius.md);
+  --input-border-radius: 999px;
 
-  --input-height-sm: theme(spacing.8);
-  --input-height: theme(spacing.9);
-  --input-height-lg: theme(spacing.10);
-
-  --input-height-sm: theme(spacing.9);
-  --input-height: theme(spacing.10);
+  --input-height-sm: theme(spacing.10);
+  --input-height: theme(spacing.12);
   --input-height-lg: theme(spacing.12);
 
   /* Textarea */
@@ -237,6 +249,7 @@ input[type='search']::-webkit-search-results-decoration {
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
   --button-border-radius: var(--input-border-radius);
+  --button-border-radius: 999px;
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
@@ -271,7 +284,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-blue-900);
   --colors-primary-950: var(--colors-blue-950);
 
-  --colors-primary-50: var(--colors-violet-50);
+  /* --colors-primary-50: var(--colors-violet-50);
   --colors-primary-100: var(--colors-violet-100);
   --colors-primary-200: var(--colors-violet-200);
   --colors-primary-300: var(--colors-violet-300);
@@ -281,9 +294,9 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-violet-700);
   --colors-primary-800: var(--colors-violet-800);
   --colors-primary-900: var(--colors-violet-900);
-  --colors-primary-950: var(--colors-violet-950);
+  --colors-primary-950: var(--colors-violet-950); */
 
-  /* --colors-primary-50: var(--colors-brands-mss-50);
+  --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
   --colors-primary-300: var(--colors-brands-mss-300);
@@ -293,7 +306,19 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950); */
+  --colors-primary-950: var(--colors-brands-mss-950);
+
+  --colors-primary-50: var(--colors-brands-forest-50);
+  --colors-primary-100: var(--colors-brands-forest-100);
+  --colors-primary-200: var(--colors-brands-forest-200);
+  --colors-primary-300: var(--colors-brands-forest-300);
+  --colors-primary-400: var(--colors-brands-forest-400);
+  --colors-primary-500: var(--colors-brands-forest-500);
+  --colors-primary-600: var(--colors-brands-forest-600);
+  --colors-primary-700: var(--colors-brands-forest-700);
+  --colors-primary-800: var(--colors-brands-forest-800);
+  --colors-primary-900: var(--colors-brands-forest-900);
+  --colors-primary-950: var(--colors-brands-forest-950);
 
   --colors-neutral-50: var(--colors-slate-50);
   --colors-neutral-100: var(--colors-slate-100);

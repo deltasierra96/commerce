@@ -8,6 +8,7 @@ import {
   fontPoppins,
   fontRecoleta,
   fontRoboto,
+  fontSatoshi,
   fontStolzl
 } from '@/fonts/next-fonts';
 import { getCart } from '@/lib/shopify';
@@ -34,6 +35,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       <html
         lang="en"
         className={clsx(
+          fontSatoshi.variable,
           fontRoboto.variable,
           fontMontserrat.variable,
           fontStolzl.variable,

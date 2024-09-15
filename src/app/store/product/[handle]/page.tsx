@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <Container className="py-4 sm:py-6 lg:py-12">
+      <Container className="max-w-screen-xl py-4 sm:py-6 lg:py-12">
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-6">
           <div className="lg:col-span-4 lg:row-end-1">
             <Suspense

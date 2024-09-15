@@ -54,7 +54,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       </div>
 
       {images.length > 1 ? (
-        <ul className="mt-4 flex items-center gap-2 overflow-auto lg:flex-col">
+        <ul className="mt-4 flex items-center gap-2 overflow-auto sm:mt-0 lg:flex-col">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
 

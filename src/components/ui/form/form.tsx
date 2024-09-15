@@ -109,7 +109,7 @@ export const fieldWrapperIconSizeStyles = cva('text-neutral-400', {
 });
 
 export const fieldWrapperBaseStyles = cva(
-  'border-input border-neutral-100 bg-neutral-100 text-neutral-900 outline-none transition-colors duration-150 focus-within:bg-white hover:border-neutral-200 hover:bg-neutral-50 focus-within:hover:bg-white',
+  'border-input border-neutral-200 bg-neutral-50 text-neutral-900 outline-none transition-colors duration-150 focus-within:bg-white hover:border-neutral-200 hover:bg-neutral-50 focus-within:hover:bg-white',
   {
     variants: {
       rounded: {
