@@ -17,7 +17,7 @@ export const ProductPrice = ({
   const { maxVariantPrice } = product.priceRange;
   const { currencyCode, amount } = maxVariantPrice;
   return (
-    <div className="text-2xl font-medium tracking-tight" {...props}>
+    <div className="text-3xl font-bold tracking-tight" {...props}>
       <p suppressHydrationWarning={true} className={clsx(className)}>
         {`${new Intl.NumberFormat(undefined, {
           style: 'currency',

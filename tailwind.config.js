@@ -3,6 +3,7 @@ const plugin = require('tailwindcss/plugin');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.tsx'],
+  darkMode: 'class',
   theme: {
     container: {
       center: true,
@@ -18,8 +19,8 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1350px',
-      '2xl': '1450px'
+      xl: '1280px',
+      '2xl': '1400px'
     },
     extend: {
       colors: {

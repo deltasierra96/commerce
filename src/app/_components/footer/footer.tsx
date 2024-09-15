@@ -1,8 +1,6 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { TextInput } from '@/components/ui/text-input';
 import { Link } from 'react-aria-components';
 
 const footerNavigation = {
@@ -111,9 +109,9 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-x-6 xl:gap-x-8">
-          <div className="flex items-center rounded-lg bg-neutral-100 p-6 sm:p-10">
-            <div className="mx-auto max-w-sm">
+        {/* <div className="lg:grid lg:grid-cols-2 lg:gap-x-6 xl:gap-x-8">
+          <div className="flex items-center p-6 rounded-lg bg-neutral-100 sm:p-10">
+            <div className="max-w-sm mx-auto">
               <h3 className="font-semibold text-neutral-900">Sign up for our newsletter</h3>
               <p className="mt-2 text-sm text-neutral-500">
                 The latest news, articles, and resources, sent to your inbox weekly.
@@ -132,17 +130,12 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="relative mt-6 flex items-center px-6 py-12 sm:px-10 sm:py-16 lg:mt-0">
+          <div className="relative flex items-center px-6 py-12 mt-6 sm:px-10 sm:py-16 lg:mt-0">
             <div className="absolute inset-0 overflow-hidden rounded-lg">
-              {/* <Image
-                fill
-                src='https://tailwindui.com/img/ecommerce-images/footer-02-exclusive-sale.jpg'
-                alt=''
-                className='object-cover object-center w-full h-full saturate-0 filter'
-              /> */}
+
               <div className="absolute inset-0 bg-primary-500 bg-opacity-90" />
             </div>
-            <div className="relative mx-auto max-w-sm text-center">
+            <div className="relative max-w-sm mx-auto text-center">
               <h3 className="text-2xl font-extrabold tracking-tight text-white">
                 Get early access
               </h3>
@@ -150,14 +143,14 @@ export const Footer = () => {
                 Did you sign up to the newsletter? If so, use the keyword we sent you to get access.{' '}
                 <Link
                   href="#"
-                  className="whitespace-nowrap font-bold text-white hover:text-neutral-200"
+                  className="font-bold text-white whitespace-nowrap hover:text-neutral-200"
                 >
                   Go now<span aria-hidden="true"> &rarr;</span>
                 </Link>
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="py-10 md:flex md:items-center md:justify-between">
           <div className="text-center md:text-left">
             <p className="text-sm text-neutral-500">&copy; 2021 All Rights Reserved</p>

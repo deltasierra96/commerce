@@ -1,10 +1,9 @@
 'use client';
 import { ButtonIcon, ButtonIconLink } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
-import { type IconTypeProps } from '@/components/ui/icon';
 import { Logo } from '@/components/ui/logo';
 import { SearchInput } from '@/components/ui/search-input';
-import { ACCOUNT_ROUTE, STORE_ROUTE_COLLECTION } from '@/lib/constants';
+import { ACCOUNT_ROUTE } from '@/lib/constants';
 import { clsx } from '@/utils';
 import React, { forwardRef } from 'react';
 import { Cart } from '../cart';
@@ -16,22 +15,11 @@ import { Search } from './_components/search';
 
 export type HeaderProps = {
   className?: string;
+  fullWidth?: boolean;
 };
-
-export type NavItemType = {
-  name: string;
-  icon: IconTypeProps;
-  href: string;
-};
-
-const navigation = [
-  { name: "Women's", href: STORE_ROUTE_COLLECTION, current: false },
-  { name: "Men's", href: STORE_ROUTE_COLLECTION, current: false },
-  { name: 'Accessories', href: STORE_ROUTE_COLLECTION, current: false }
-];
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, ...rest }, forwardedRef) => {
+  ({ className, fullWidth = true, ...rest }, forwardedRef) => {
     const [isOpen, setOpen] = React.useState(false);
 
     return (
@@ -41,8 +29,8 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
           className={clsx('w-full border-b border-neutral-200 bg-white', className)}
           {...rest}
         >
-          <div className={clsx('flex w-full items-center py-4 lg:hidden')}>
-            <Container fullWidth>
+          <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
+            <Container fullWidth={fullWidth}>
               <div className="flex items-center justify-between gap-x-8">
                 <div className="flex basis-2/12 justify-start">
                   <MobileNav />
@@ -59,24 +47,25 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
               </div>
             </Container>
           </div>
-          <div className={clsx('hidden w-full items-center py-2 sm:py-0 lg:flex')}>
-            <Container fullWidth>
-              <div className="flex items-center justify-between gap-x-8">
-                <div className="flex items-center justify-start">
-                  <Logo className="h-8 sm:h-10" />
+          <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
+            <Container fullWidth={fullWidth}>
+              <div className="flex items-center justify-between gap-x-8 py-5">
+                <div className="flex basis-2/12 justify-start">
+                  <Logo className="h-10" />
                 </div>
-                <Navigation />
 
-                <div className="hidden max-w-72 flex-1 lg:block">
-                  <SearchInput
-                    autoComplete="off"
-                    hideLabel
-                    name="search"
-                    placeholder="What are you looking for today?"
-                    onSelect={() => setOpen(true)}
-                  />
+                <div className="flex basis-8/12 items-center justify-center">
+                  <div className="mx-auto w-full max-w-screen-md">
+                    <SearchInput
+                      autoComplete="off"
+                      hideLabel
+                      name="search"
+                      placeholder="What are you looking for today?"
+                      onSelect={() => setOpen(true)}
+                    />
+                  </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="flex basis-2/12 justify-end">
                   <div className="block sm:hidden">
                     <MobileNav />
                   </div>
@@ -94,6 +83,12 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                 </div>
               </div>
             </Container>
+
+            <div className="border-t border-neutral-100 py-2">
+              <Container fullWidth={fullWidth}>
+                <Navigation />
+              </Container>
+            </div>
           </div>
         </header>
         <Search isOpen={isOpen} setOpen={setOpen} />

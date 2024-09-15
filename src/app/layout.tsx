@@ -22,7 +22,7 @@ import '../styles/main.css';
 import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
-import { SecondaryNavigation } from './_components/header/_components/secondary-navigation';
+import { Banner } from './_components/header/_components/banner';
 import { rootMetadata } from './meta-data';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
@@ -65,7 +65,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                 <div className="flex flex-col">
                   <div className="sticky top-0 z-header">
                     <div className="hidden lg:block">
-                      <SecondaryNavigation />
+                      <Banner />
                     </div>
                     <Header />
                   </div>

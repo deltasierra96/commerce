@@ -1,1 +1,1 @@
-export { Header, type HeaderProps, type NavItemType } from './header';
+export { Header, type HeaderProps } from './header';

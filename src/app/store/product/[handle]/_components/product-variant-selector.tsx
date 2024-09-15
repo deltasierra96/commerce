@@ -1,8 +1,10 @@
 'use client';
 
 import { useProduct, useUpdateURL } from '@/app/store/product/[handle]/_components/product-context';
+import { borderStyles, focusRing } from '@/components/ui/focus-ring';
 import { Product } from '@/lib/shopify/types';
 import clsx from 'clsx';
+import { Button } from 'react-aria-components';
 
 type Combination = {
   id: string;
@@ -38,7 +40,7 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
   return options.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
-        <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
+        <dt className="mb-4 text-sm font-semibold">{option.name}</dt>
         <dd className="flex flex-wrap gap-3">
           {option.values.map((value) => {
             const optionNameLowerCase = option.name.toLowerCase();
@@ -62,28 +64,31 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
             const isActive = state[optionNameLowerCase] === value;
 
             return (
-              <button
-                formAction={() => {
+              <Button
+                onPress={() => {
                   const newState = updateOption(optionNameLowerCase, value);
                   updateURL(newState);
                 }}
+                // variant={isAvailableForSale ? 'subtle' : 'filled'}
+                // color={isAvailableForSale ? 'primary' : 'neutral'}
                 key={value}
-                aria-disabled={!isAvailableForSale}
-                disabled={!isAvailableForSale}
-                title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
+                isDisabled={!isAvailableForSale}
+                aria-label={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
-                  'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900',
-                  {
-                    'cursor-default ring-2 ring-blue-600': isActive,
-                    'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600':
-                      !isActive && isAvailableForSale,
-                    'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700':
-                      !isAvailableForSale
-                  }
+                  focusRing({ isFocusVisible: true }),
+                  borderStyles({ isFocusVisible: true }),
+                  'flex min-w-14 items-center justify-center rounded-button border-button px-4 py-3 text-sm font-semibold outline-none transition-all duration-75',
+                  isActive &&
+                    'cursor-default border-primary-500 bg-white text-primary-500 focus-visible:border-primary-500 pressed:bg-primary-500/5',
+                  !isActive &&
+                    isAvailableForSale &&
+                    'hover:border-neutral-200 hover:bg-neutral-100',
+                  !isAvailableForSale &&
+                    'relative z-10 cursor-not-allowed border-neutral-100 bg-neutral-100 text-neutral-400'
                 )}
               >
                 {value}
-              </button>
+              </Button>
             );
           })}
         </dd>

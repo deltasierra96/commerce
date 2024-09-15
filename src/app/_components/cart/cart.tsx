@@ -46,7 +46,7 @@ export const Cart = () => {
         onPress={() => setIsCartOpen(true)}
         variant={'ghost'}
         counter={cart?.totalQuantity}
-        icon="shopping-cart"
+        icon="shopping-bag"
       />
       <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen} title="Shopping cart">
         <Drawer.Content>
@@ -65,7 +65,7 @@ export const Cart = () => {
             ) : (
               <>
                 <div className="flex h-full flex-col justify-between px-4">
-                  <ul className="divide-neutext-neutral-200 divide-y">
+                  <ul className="divide-y divide-neutral-100">
                     {cart.lines
                       .sort((a, b) =>
                         a.merchandise.product.title.localeCompare(b.merchandise.product.title)

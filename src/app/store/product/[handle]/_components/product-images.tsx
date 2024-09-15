@@ -2,10 +2,28 @@
 
 import { useProduct, useUpdateURL } from '@/app/store/product/[handle]/_components/product-context';
 import { ButtonIcon } from '@/components/ui/button-icon';
+import { type Image as ShopifyImage, Product } from '@/lib/shopify/types';
+import { clsx } from '@/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export function Gallery({ images }: { images: { src: string; altText: string }[] }) {
+type ProductImagesProps = {
+  product: Product;
+  thumbnailDirection?: 'vertical' | 'horizontal';
+};
+
+export const ProductImages = ({
+  product,
+  thumbnailDirection = 'vertical',
+  ...props
+}: ProductImagesProps) => {
+  const { images: productImages } = product;
+
+  const images = productImages.slice(0, 5).map((image: ShopifyImage) => ({
+    src: image.url,
+    altText: image.altText
+  }));
+
   const { state, updateImage } = useProduct();
   const updateURL = useUpdateURL();
   const imageIndex = state.image ? parseInt(state.image) : 0;
@@ -16,8 +34,13 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
   const [previousImageUrl, setPreviousImageUrl] = useState(previousImageIndex);
 
   return (
-    <form className="w-full gap-x-4 lg:flex lg:flex-row-reverse">
-      <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden rounded-md bg-white">
+    <form
+      className={clsx(
+        'w-full gap-x-4 lg:flex',
+        thumbnailDirection === 'vertical' ? 'flex-row-reverse' : 'flex-col'
+      )}
+    >
+      <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden bg-white lg:rounded-md">
         {images[imageIndex] && (
           <Image
             className="object-cover object-center"
@@ -54,27 +77,39 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       </div>
 
       {images.length > 1 ? (
-        <ul className="mt-4 flex items-center gap-2 overflow-auto sm:mt-0 lg:flex-col">
-          {images.map((image, index) => {
-            const isActive = index === imageIndex;
+        <div
+          className={clsx(
+            'hidden sm:flex',
+            thumbnailDirection === 'vertical' ? 'mt-4 lg:mt-0' : 'mt-4'
+          )}
+        >
+          <ul
+            className={clsx(
+              'flex items-center overflow-auto',
+              thumbnailDirection === 'vertical' ? 'gap-4 lg:flex-col' : 'gap-2 lg:flex-row'
+            )}
+          >
+            {images.map((image, index) => {
+              const isActive = index === imageIndex;
 
-            return (
-              <li key={image.src}>
-                <button
-                  formAction={() => {
-                    const newState = updateImage(index.toString());
-                    updateURL(newState);
-                  }}
-                  aria-label="Select product image"
-                  className="flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
-                >
-                  <Image alt={image.altText} src={image.src} width={80} height={80} />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={image.src}>
+                  <button
+                    formAction={() => {
+                      const newState = updateImage(index.toString());
+                      updateURL(newState);
+                    }}
+                    aria-label="Select product image"
+                    className="flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
+                  >
+                    <Image alt={image.altText} src={image.src} width={80} height={80} />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       ) : null}
     </form>
   );
-}
+};

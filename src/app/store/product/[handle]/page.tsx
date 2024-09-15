@@ -1,16 +1,21 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { AddToCart } from '@/app/_components/cart/add-to-cart';
 import { GridTileImage } from '@/app/_components/grid/tile';
 import { ProductProvider } from '@/app/store/product/[handle]/_components/product-context';
-import { ProductInformation } from '@/app/store/product/[handle]/_components/product-information';
 import { Container } from '@/components/ui/container';
 import { HIDDEN_PRODUCT_TAG, STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { getProduct, getProductRecommendations } from '@/lib/shopify';
-import { Image } from '@/lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { Gallery } from './_components/gallery';
+import { ProductDetails } from './_components/product-details';
+import { ProductImages } from './_components/product-images';
+import { ProductPrice } from './_components/product-price';
+import { ProductStock } from './_components/product-stock';
+import { ProductTitle } from './_components/product-title';
+import { ProductVariantSelector } from './_components/product-variant-selector';
+import { ProductVendor } from './_components/product-vendor';
 
 export async function generateMetadata({
   params
@@ -80,32 +85,49 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <Container className="max-w-screen-xl py-4 sm:py-6 lg:py-12">
-        <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-6">
-          <div className="lg:col-span-4 lg:row-end-1">
-            <Suspense
-              fallback={
-                <div className="aspect-square relative h-full max-h-[550px] w-full overflow-hidden" />
-              }
-            >
-              <Gallery
-                images={product.images.slice(0, 5).map((image: Image) => ({
-                  src: image.url,
-                  altText: image.altText
-                }))}
-              />
-            </Suspense>
-          </div>
-
-          <div className="mx-auto mt-4 w-full sm:mt-6 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
-            <div className="rounded-md bg-white p-4 sm:p-8">
-              <Suspense fallback={null}>
-                <ProductInformation product={product} />
+      <Container className="max-w-screen-xl px-0 sm:px-0 sm:py-6 lg:px-6 lg:py-12">
+        <div className="space-y-4">
+          <div className="space-y-4 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 lg:space-y-0 xl:gap-x-6">
+            <div className="lg:col-span-4 lg:row-end-1">
+              <Suspense
+                fallback={
+                  <div className="aspect-square relative h-full max-h-[550px] w-full overflow-hidden" />
+                }
+              >
+                <ProductImages product={product} />
               </Suspense>
             </div>
+
+            <div className="mx-auto w-full lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:max-w-none">
+              <div className="bg-white p-4 sm:p-8 lg:rounded-md">
+                <Suspense fallback={null}>
+                  <div className="space-y-6 lg:space-y-8">
+                    <div className="space-y-4">
+                      <ProductVendor product={product} />
+                      <ProductTitle product={product} />
+                      <ProductStock product={product} />
+                    </div>
+                    <div>
+                      <h2 className="sr-only">Product information</h2>
+                      <ProductPrice product={product} />
+                    </div>
+
+                    <ProductVariantSelector product={product} />
+                    <AddToCart product={product} />
+                  </div>
+                </Suspense>
+              </div>
+            </div>
           </div>
+
+          <div className="">
+            <div className="rounded-card bg-white p-6">
+              <ProductDetails product={product} />
+            </div>
+          </div>
+
+          <RelatedProducts id={product.id} />
         </div>
-        <RelatedProducts id={product.id} />
       </Container>
     </ProductProvider>
   );

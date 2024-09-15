@@ -48,7 +48,7 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
             </div>
           </h3>
           <Price
-            className="ml-4 space-y-2 text-base font-medium"
+            className="ml-4 space-y-2 text-base font-semibold"
             amount={cartItem.cost.totalAmount.amount}
             currencyCode={cartItem.cost.totalAmount.currencyCode}
           />
