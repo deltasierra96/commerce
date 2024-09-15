@@ -69,8 +69,6 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
                   const newState = updateOption(optionNameLowerCase, value);
                   updateURL(newState);
                 }}
-                // variant={isAvailableForSale ? 'subtle' : 'filled'}
-                // color={isAvailableForSale ? 'primary' : 'neutral'}
                 key={value}
                 isDisabled={!isAvailableForSale}
                 aria-label={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
