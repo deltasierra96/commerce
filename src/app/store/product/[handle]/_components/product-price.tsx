@@ -33,6 +33,14 @@ export const ProductPrice = ({
           style: 'currency',
           currency: currencyCode,
           currencyDisplay: 'narrowSymbol'
+        }).format(parseFloat(amount))}`}
+        {showCurrencyCode ? <span className={clsx('ml-1 inline')}>{`${currencyCode}`}</span> : null}
+      </p>
+      <p suppressHydrationWarning={true} className={clsx(className)}>
+        {`${new Intl.NumberFormat(undefined, {
+          style: 'currency',
+          currency: currencyCode,
+          currencyDisplay: 'narrowSymbol'
         }).format(parseFloat(variant?.price.amount))}`}
         {showCurrencyCode ? <span className={clsx('ml-1 inline')}>{`${currencyCode}`}</span> : null}
       </p>
