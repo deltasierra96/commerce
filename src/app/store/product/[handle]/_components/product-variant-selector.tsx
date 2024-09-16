@@ -21,6 +21,7 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
 
   const { state, updateOption } = useProduct();
   const updateURL = useUpdateURL();
+
   const hasNoOptionsOrJustOneOption =
     !options.length || (options.length === 1 && options[0]?.values.length === 1);
 
@@ -54,6 +55,7 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
                 (option) => option.name.toLowerCase() === key && option.values.includes(value)
               )
             );
+
             const isAvailableForSale = combinations.find((combination) =>
               filtered.every(
                 ([key, value]) => combination[key] === value && combination.availableForSale
@@ -70,19 +72,19 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
                   updateURL(newState);
                 }}
                 key={value}
+                aria-disabled={!isAvailableForSale}
                 isDisabled={!isAvailableForSale}
-                aria-label={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
                   focusRing({ isFocusVisible: true }),
                   borderStyles({ isFocusVisible: true }),
                   'flex min-w-14 items-center justify-center rounded-button border-button px-4 py-3 text-sm font-semibold outline-none transition-all duration-75',
-                  isActive &&
-                    'cursor-default border-primary-500 bg-white text-primary-500 focus-visible:border-primary-500 pressed:bg-primary-500/5',
-                  !isActive &&
-                    isAvailableForSale &&
-                    'hover:border-neutral-200 hover:bg-neutral-100',
-                  !isAvailableForSale &&
-                    'relative z-10 cursor-not-allowed border-neutral-100 bg-neutral-100 text-neutral-400'
+                  {
+                    'cursor-default border-primary-500 bg-white text-primary-500 focus-visible:border-primary-500 pressed:bg-primary-500/5':
+                      isActive,
+                    'hover:border-primary-500': !isActive && isAvailableForSale,
+                    'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform':
+                      !isAvailableForSale
+                  }
                 )}
               >
                 {value}
