@@ -1,19 +1,16 @@
 'use client';
+import { clsx } from '@/utils';
 import {
-  ListBox as RACListBox,
-  ListBoxItem as RACListBoxItem,
-  MenuItem as RACMenuItem,
   Collection as RACCollection,
   Header as RACHeader,
+  ListBox as RACListBox,
+  ListBoxItem as RACListBoxItem,
   Section as RACSection,
-  type ListBoxProps as RACListBoxProps,
   type ListBoxItemProps as RACListBoxItemProps,
-  type MenuItemProps as RACMenuItemProps,
+  type ListBoxProps as RACListBoxProps,
   type SectionProps as RACSectionProps
 } from 'react-aria-components';
-import React from 'react';
 import { Icon, type IconTypeProps } from '../icon';
-import { clsx } from '@/utils';
 
 export type ListBoxProps<T extends object> = RACListBoxProps<T>;
 
@@ -25,7 +22,7 @@ export const listBoxItemStyles = clsx(
   'group relative flex cursor-default select-none items-center rounded border-button border-transparent px-2 py-1.5 text-sm text-neutral-900 outline outline-0 forced-color-adjust-none focus:bg-primary-500 focus:text-white focus:pressed:bg-primary-600 disabled:text-neutral-500 forced-colors:focus:bg-[Highlight] forced-colors:focus:text-[HighlightText] forced-colors:disabled:!text-[GrayText]'
 );
 
-type ListBoxItemDefaultProps = {
+export type ListBoxItemDefaultProps = {
   icon?: IconTypeProps;
   isSelected?: boolean;
   showCheck?: boolean;
@@ -65,14 +62,14 @@ export const ListBoxSection = <T extends object>({
   );
 };
 
-export type DropdownItemProps = RACMenuItemProps & ListBoxItemDefaultProps;
+export type DropdownItemProps = RACListBoxItemProps & ListBoxItemDefaultProps;
 
 export const DropdownItem = ({ showCheck = true, icon, ...props }: DropdownItemProps) => {
   const textValue =
     props.textValue ?? (typeof props.children === 'string' ? props.children : undefined);
   return (
-    <RACMenuItem {...props} textValue={textValue} className={clsx(listBoxItemStyles)}>
-      {({ selectionMode, isSelected, hasSubmenu }) => (
+    <RACListBoxItem {...props} textValue={textValue} className={clsx(listBoxItemStyles)}>
+      {({ selectionMode, isSelected }) => (
         <div className={clsx('flex w-full items-center gap-x-3 whitespace-nowrap')}>
           {icon && selectionMode !== 'multiple' && <Icon icon={icon} className="h-4 w-4" />}
           <span className="truncate font-normal">
@@ -81,11 +78,8 @@ export const DropdownItem = ({ showCheck = true, icon, ...props }: DropdownItemP
           {showCheck && selectionMode !== 'none' && isSelected ? (
             <Icon icon="check" aria-hidden className="ml-auto h-4 w-4" />
           ) : null}
-          {hasSubmenu ? (
-            <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" />
-          ) : null}
         </div>
       )}
-    </RACMenuItem>
+    </RACListBoxItem>
   );
 };

@@ -1,10 +1,12 @@
 export {
+  DropdownItem,
+  ListBox,
   ListBoxItem,
   ListBoxSection,
-  DropdownItem,
   listBoxItemStyles,
-  ListBox,
-  type ListBoxProps,
   type DropdownItemProps,
+  type ListBoxItemDefaultProps,
+  type ListBoxItemProps,
+  type ListBoxProps,
   type ListBoxSectionProps
 } from './list-box';

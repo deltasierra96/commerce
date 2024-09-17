@@ -21,6 +21,7 @@ export const ProductPrice = ({
     variant.selectedOptions.every((option) => option.value === state[option.name.toLowerCase()])
   );
 
+  console.log('product', product);
   console.log('variant', variant);
 
   const { maxVariantPrice, minVariantPrice } = product.priceRange;
