@@ -18,6 +18,7 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
   const { options, variants } = product;
 
   const { state, updateOption } = useProduct();
+  console.log('state', state);
   const updateURL = useUpdateURL();
 
   const hasNoOptionsOrJustOneOption =
@@ -41,9 +42,11 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
       {options.map((option) => (
         <form key={option.id}>
           <Select
+            defaultSelectedKey={state[option.name.toLowerCase()]}
             label={option.name}
             onSelectionChange={(value) => {
               const newState = updateOption(option.name.toLowerCase(), value.toString());
+
               updateURL(newState);
             }}
           >
