@@ -40,10 +40,10 @@ export const ProductImages = ({
         thumbnailDirection === 'vertical' ? 'flex-row-reverse' : 'flex-col'
       )}
     >
-      <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden bg-white lg:rounded-md">
+      <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden bg-white lg:rounded-card">
         {images[imageIndex] && (
           <Image
-            className="object-cover object-center"
+            className="object-contain object-center"
             fill
             sizes="(min-width: 1024px) 66vw, 100vw"
             alt={images[imageIndex]?.altText as string}
@@ -56,6 +56,7 @@ export const ProductImages = ({
           <div className="absolute right-0 top-0 inline-flex items-start justify-end p-4">
             <div className="inline-flex items-center gap-x-2">
               <ButtonIcon
+                rounded
                 icon="chevron-left"
                 onPress={() => {
                   const newState = updateImage(previousImageIndex.toString());
@@ -64,6 +65,7 @@ export const ProductImages = ({
                 aria-label="Previous product image"
               />
               <ButtonIcon
+                rounded
                 icon="chevron-right"
                 onPress={() => {
                   const newState = updateImage(nextImageIndex.toString());

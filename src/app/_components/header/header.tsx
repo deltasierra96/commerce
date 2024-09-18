@@ -19,7 +19,7 @@ export type HeaderProps = {
 };
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, fullWidth = true, ...rest }, forwardedRef) => {
+  ({ className, fullWidth = false, ...rest }, forwardedRef) => {
     const [isOpen, setOpen] = React.useState(false);
 
     return (
@@ -43,6 +43,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                 <div className="flex basis-2/12 justify-end">
                   <ButtonIconLink icon="user" variant={'ghost'} href={ACCOUNT_ROUTE} />
                   {/* <CartModal /> */}
+                  <Cart />
                 </div>
               </div>
             </Container>

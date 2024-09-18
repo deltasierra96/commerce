@@ -5,14 +5,23 @@ import { useProduct } from './product-context';
 
 export type ProductPriceProps = {
   product: Product;
-  className?: string;
   showCurrencyCode?: boolean;
 };
 
+type CurrencyCodeProps = {
+  currencyCode: string;
+  className?: string;
+};
+
+const CurrencyCode = ({ currencyCode, className, ...props }: CurrencyCodeProps) => (
+  <span className={clsx(className)} {...props}>
+    {currencyCode}
+  </span>
+);
+
 export const ProductPrice = ({
   product,
-  className,
-  showCurrencyCode,
+  showCurrencyCode = false,
   ...props
 }: ProductPriceProps) => {
   const { state } = useProduct();
@@ -21,48 +30,31 @@ export const ProductPrice = ({
     variant.selectedOptions.every((option) => option.value === state[option.name.toLowerCase()])
   );
 
-  console.log('product', product);
-  console.log('variant', variant);
-
   const { maxVariantPrice, minVariantPrice } = product.priceRange;
   const { currencyCode, amount } = maxVariantPrice;
-  const { currencyCode: minAmountCurrencyCode, amount: minAmount } = minVariantPrice;
+  const isOnSale = maxVariantPrice.amount !== minVariantPrice.amount;
+
+  const formatPrice = new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: currencyCode,
+    currencyDisplay: 'narrowSymbol'
+  });
+
   return (
-    <div className="text-3xl font-bold tracking-tight" {...props}>
-      <p suppressHydrationWarning={true} className={clsx(className)}>
-        {`${new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: currencyCode,
-          currencyDisplay: 'narrowSymbol'
-        }).format(parseFloat(amount))}`}
-        {showCurrencyCode ? <span className={clsx('ml-1 inline')}>{`${currencyCode}`}</span> : null}
+    <div className="text-3xl font-semibold tracking-tight" {...props}>
+      {isOnSale ? <div className="text-sm font-medium text-neutral-950">From</div> : null}
+      <p suppressHydrationWarning={true} className={clsx(isOnSale && 'font-medium line-through')}>
+        {`${formatPrice.format(parseFloat(amount))}`}
+        {showCurrencyCode ? <CurrencyCode currencyCode={currencyCode} /> : null}
       </p>
-      <p suppressHydrationWarning={true} className={clsx(className)}>
-        {`${new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: currencyCode,
-          currencyDisplay: 'narrowSymbol'
-        }).format(parseFloat(variant?.price.amount))}`}
-        {showCurrencyCode ? <span className={clsx('ml-1 inline')}>{`${currencyCode}`}</span> : null}
-      </p>
-      {/* <p suppressHydrationWarning={true} className={clsx(className)}>
-        {`${new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: minAmountCurrencyCode,
-          currencyDisplay: 'narrowSymbol'
-        }).format(parseFloat(minAmount))}`}
-        {showCurrencyCode ? (
-          <span className={clsx('ml-1 inline')}>{`${minAmountCurrencyCode}`}</span>
-        ) : null}
-      </p>
-      <p suppressHydrationWarning={true} className={clsx(className)}>
-        {`${new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: currencyCode,
-          currencyDisplay: 'narrowSymbol'
-        }).format(parseFloat(amount))}`}
-        {showCurrencyCode ? <span className={clsx('ml-1 inline')}>{`${currencyCode}`}</span> : null}
-      </p> */}
+      {isOnSale && variant?.price.amount ? (
+        <div className="flex text-sm text-red-500">
+          <span suppressHydrationWarning={true}>
+            {`Now ${formatPrice.format(parseFloat(variant?.price.amount))}`}
+            {showCurrencyCode ? <CurrencyCode currencyCode={currencyCode} /> : null}
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };

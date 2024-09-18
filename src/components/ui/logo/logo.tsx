@@ -236,7 +236,7 @@ export const Logo = ({ className, href = '/', ...props }: LogoProps) => {
         borderStyles({ isFocusVisible: true })
       )}
     >
-      {mssLogo}
+      {christiesLogo}
     </Link>
   );
 };

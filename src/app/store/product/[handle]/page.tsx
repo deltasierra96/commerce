@@ -12,6 +12,8 @@ import { Suspense } from 'react';
 import { ProductDetails } from './_components/product-details';
 import { ProductImages } from './_components/product-images';
 import { ProductPrice } from './_components/product-price';
+import { ProductRating } from './_components/product-rating';
+import { ProductShare } from './_components/product-share';
 import { ProductStock } from './_components/product-stock';
 import { ProductTitle } from './_components/product-title';
 import { ProductVariantSelector } from './_components/product-variant-selector';
@@ -85,7 +87,7 @@ export default async function ProductPage({ params }: { params: { handle: string
           __html: JSON.stringify(productJsonLd)
         }}
       />
-      <Container className="max-w-screen-xl px-0 sm:px-0 sm:py-6 lg:px-6 lg:py-12">
+      <Container className="max-sm:px-0 sm:py-6 lg:py-12">
         <div className="space-y-4">
           <div className="space-y-4 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 lg:space-y-0 xl:gap-x-6">
             <div className="lg:col-span-4 lg:row-end-1">
@@ -99,21 +101,27 @@ export default async function ProductPage({ params }: { params: { handle: string
             </div>
 
             <div className="mx-auto w-full lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:max-w-none">
-              <div className="bg-white p-4 sm:p-8 lg:rounded-md">
+              <div className="bg-white p-4 sm:p-8 lg:rounded-card">
                 <Suspense fallback={null}>
-                  <div className="space-y-6 lg:space-y-8">
-                    <div className="space-y-4">
-                      <ProductVendor product={product} />
-                      <ProductTitle product={product} />
-                      <ProductStock product={product} />
-                    </div>
-                    <div>
-                      <h2 className="sr-only">Product information</h2>
-                      <ProductPrice product={product} />
+                  <div className="space-y-4 sm:space-y-8">
+                    <div className="space-y-4 lg:space-y-6">
+                      <div className="space-y-2 sm:space-y-4">
+                        <ProductVendor product={product} />
+                        <ProductTitle product={product} />
+                        <ProductRating />
+                        <ProductStock product={product} />
+                      </div>
+                      <div>
+                        <h2 className="sr-only">Product information</h2>
+                        <ProductPrice product={product} />
+                      </div>
                     </div>
 
-                    <ProductVariantSelector product={product} />
-                    <AddToCart product={product} />
+                    <div className="space-y-6">
+                      <ProductVariantSelector product={product} />
+                      <AddToCart product={product} />
+                    </div>
+                    <ProductShare />
                   </div>
                 </Suspense>
               </div>

@@ -18,7 +18,6 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
   const { options, variants } = product;
 
   const { state, updateOption } = useProduct();
-  console.log('state', state);
   const updateURL = useUpdateURL();
 
   const hasNoOptionsOrJustOneOption =
@@ -46,7 +45,6 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
             label={option.name}
             onSelectionChange={(value) => {
               const newState = updateOption(option.name.toLowerCase(), value.toString());
-
               updateURL(newState);
             }}
           >

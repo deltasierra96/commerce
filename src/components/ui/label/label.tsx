@@ -1,7 +1,7 @@
 'use client';
 import { clsx } from '@/utils';
-import { Label as RACLabel, type LabelProps as RACLabelProps } from 'react-aria-components';
 import * as RadixLabel from '@radix-ui/react-label';
+import { Label as RACLabel, type LabelProps as RACLabelProps } from 'react-aria-components';
 
 export type LabelProps = RACLabelProps & {
   isRequired?: boolean;
@@ -12,7 +12,7 @@ export const Label = ({ className, children, hidden = false, isRequired, ...rest
     <RadixLabel.Root asChild>
       <RACLabel
         className={clsx(
-          'mb-1.5 flex cursor-default items-center text-sm font-normal group-disabled/field-wrapper:cursor-default group-disabled/field-wrapper:text-neutral-400',
+          'mb-1.5 flex cursor-default items-center text-sm font-medium group-disabled/field-wrapper:cursor-default group-disabled/field-wrapper:text-neutral-400',
           hidden && 'sr-only',
           className
         )}
