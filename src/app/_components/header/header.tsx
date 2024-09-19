@@ -1,9 +1,12 @@
 'use client';
+import { ButtonIcon, ButtonIconLink } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
+import { ACCOUNT_ROUTE } from '@/lib/constants';
 import { clsx } from '@/utils';
 import { forwardRef } from 'react';
-import { Cart } from '../cart';
+import { Cart, useCart } from '../cart';
+import { CartDesktopTrigger } from '../cart/cart';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
 import { Favourites } from './_components/favourites';
@@ -17,6 +20,7 @@ export type HeaderProps = {
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
   ({ className, fullWidth = true, ...rest }, forwardedRef) => {
+    const { setIsCartOpen, cart } = useCart();
     return (
       <>
         <header
@@ -25,24 +29,30 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
           {...rest}
         >
           {/* Mobile nav */}
-          {/* <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
+          <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
             <Container fullWidth={fullWidth}>
               <div className="flex items-center justify-between gap-x-8">
-                <div className="flex justify-start basis-2/12">
+                <div className="flex basis-2/12 justify-start">
                   <MobileNav />
-                  <ButtonIcon icon="search" onPress={() => setOpen(true)} variant={'ghost'} />
+                  <ButtonIcon icon="search" variant={'ghost'} />
                 </div>
-                <div className="flex items-center justify-center basis-2/12">
+                <div className="flex basis-2/12 items-center justify-center">
                   <Logo className="h-8 sm:h-10" />
                 </div>
 
-                <div className="flex justify-end basis-2/12">
+                <div className="flex basis-2/12 justify-end">
                   <ButtonIconLink icon="user" variant={'ghost'} href={ACCOUNT_ROUTE} />
+                  <ButtonIcon
+                    onPress={() => setIsCartOpen(true)}
+                    variant={'ghost'}
+                    counter={cart?.totalQuantity}
+                    icon="shopping-cart"
+                  />
                   <Cart />
                 </div>
               </div>
             </Container>
-          </div> */}
+          </div>
           {/* Desktop nav */}
           <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
             <Container fullWidth={fullWidth}>
@@ -68,6 +78,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                       <Account />
                     </div>
                     <div className="hidden sm:block">
+                      <CartDesktopTrigger />
                       <Cart />
                     </div>
                   </div>

@@ -227,7 +227,7 @@ input[type='search']::-webkit-search-results-decoration {
   --layout-safespace: theme(spacing.8);
 
   /* Icon */
-  --icon-stroke-width: 2;
+  --icon-stroke-width: 1.75;
 
   /* Ring */
   --ring-global-width: 2px;

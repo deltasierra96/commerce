@@ -9,17 +9,12 @@ import {
   Modal as RACModal,
   type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
-import { DialogHeader } from '../dialog';
 import { Overlay } from '../overlay';
 import { popoverStyles } from '../popover';
 
 export type DrawerProps = _DrawerProps;
 
-type _DrawerProps = RACModalOverlayProps &
-  VariantProps<typeof drawerContentStyles> & {
-    title?: string;
-    showCloseButton?: boolean;
-  };
+type _DrawerProps = RACModalOverlayProps & VariantProps<typeof drawerContentStyles>;
 
 const DrawerContext = React.createContext<_DrawerProps>({} as _DrawerProps);
 
@@ -254,9 +249,8 @@ type ContentProps = RACModalOverlayProps & VariantProps<typeof drawerContentStyl
 const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }, ref) => {
   const drawer = useDrawer();
   const contentProps = mergeProps(drawer, props);
-  const { position, size, isDismissable = true, showCloseButton = true, title } = contentProps;
+  const { position, size, isDismissable = true } = contentProps;
 
-  const hasHeader = !!title || showCloseButton;
   return (
     <Overlay
       {...contentProps}
@@ -286,11 +280,8 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }
       >
         <Dialog
           role="dialog"
-          className="scrollbar-thin relative flex h-full w-full flex-col overflow-auto outline-none"
+          className="scrollbar-thin relative flex h-full w-full flex-col overflow-hidden outline-none"
         >
-          {hasHeader ? (
-            <DialogHeader showCloseButton={showCloseButton}>{title}</DialogHeader>
-          ) : null}
           <>{children}</>
         </Dialog>
       </RACModal>

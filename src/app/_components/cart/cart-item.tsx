@@ -16,11 +16,12 @@ type CartItemProps = {
 export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }: CartItemProps) => {
   const { setIsCartOpen } = useCart();
   return (
-    <Group className="flex py-6" {...props}>
+    <Group className="flex px-4 py-4" {...props}>
       <div className="relative inline-flex overflow-hidden">
-        <div className="relative size-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-100 text-neutral-200">
+        <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-md border border-neutral-100 text-neutral-200 sm:size-24">
           <Image
-            fill
+            width={150}
+            height={150}
             alt={
               cartItem.merchandise.product.featuredImage.altText ||
               cartItem.merchandise.product.title

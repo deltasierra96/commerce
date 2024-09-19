@@ -29,12 +29,12 @@ function SubmitButton({
       type={!selectedVariantId ? 'button' : 'submit'}
       block
       isDisabled={!selectedVariantId}
-      aria-label={!selectedVariantId ? 'Please select an option' : 'Add to bag'}
-      leftIcon="shopping-bag"
+      aria-label={!selectedVariantId ? 'Please select an option' : 'Add to cart'}
+      leftIcon="shopping-cart"
       variant={'filled'}
       color={'primary'}
     >
-      {!selectedVariantId ? 'Please select an option' : 'Add to bag'}
+      {!selectedVariantId ? 'Please select an option' : 'Add to cart'}
     </Button>
   );
 }

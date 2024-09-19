@@ -8,7 +8,7 @@ type MobileNavProps = DrawerProps;
 
 export const MobileNav = (props: MobileNavProps) => {
   return (
-    <Drawer title="Store" position="left" size={'full'} {...props}>
+    <Drawer position="left" size={'full'} {...props}>
       <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />
       <Drawer.Content>
         <div className="space-y-4 p-6">

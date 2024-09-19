@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: { params: { handle: string
       />
       <Container className="max-sm:px-0 sm:py-6 lg:py-12">
         <div className="space-y-4">
-          <div className="space-y-4 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 lg:space-y-0 xl:gap-x-6">
+          <div className="space-y-0 max-sm:divide-y max-sm:divide-neutral-100 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 lg:space-y-0 xl:gap-x-6">
             <div className="lg:col-span-4 lg:row-end-1">
               <Suspense
                 fallback={
@@ -128,10 +128,8 @@ export default async function ProductPage({ params }: { params: { handle: string
             </div>
           </div>
 
-          <div className="">
-            <div className="rounded-card bg-white p-6">
-              <ProductDetails product={product} />
-            </div>
+          <div className="bg-white p-6 lg:rounded-card">
+            <ProductDetails product={product} />
           </div>
 
           <RelatedProducts id={product.id} />

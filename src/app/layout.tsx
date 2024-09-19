@@ -23,6 +23,7 @@ import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
 import { Banner } from './_components/header/_components/banner';
+import { Incentives } from './_components/incentives';
 import { rootMetadata } from './meta-data';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
@@ -72,6 +73,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                   <div className="flex-1">
                     <main>{children}</main>
                   </div>
+                  <Incentives />
                   <Footer />
                 </div>
               </div>
