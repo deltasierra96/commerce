@@ -1,11 +1,8 @@
 'use client';
-import { ButtonIcon, ButtonIconLink } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { SearchInput } from '@/components/ui/search-input';
-import { ACCOUNT_ROUTE } from '@/lib/constants';
 import { clsx } from '@/utils';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Cart } from '../cart';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
@@ -19,9 +16,7 @@ export type HeaderProps = {
 };
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, fullWidth = false, ...rest }, forwardedRef) => {
-    const [isOpen, setOpen] = React.useState(false);
-
+  ({ className, fullWidth = true, ...rest }, forwardedRef) => {
     return (
       <>
         <header
@@ -29,25 +24,26 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
           className={clsx('w-full border-b border-neutral-200 bg-white', className)}
           {...rest}
         >
-          <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
+          {/* Mobile nav */}
+          {/* <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
             <Container fullWidth={fullWidth}>
               <div className="flex items-center justify-between gap-x-8">
-                <div className="flex basis-2/12 justify-start">
+                <div className="flex justify-start basis-2/12">
                   <MobileNav />
                   <ButtonIcon icon="search" onPress={() => setOpen(true)} variant={'ghost'} />
                 </div>
-                <div className="flex basis-2/12 items-center justify-center">
+                <div className="flex items-center justify-center basis-2/12">
                   <Logo className="h-8 sm:h-10" />
                 </div>
 
-                <div className="flex basis-2/12 justify-end">
+                <div className="flex justify-end basis-2/12">
                   <ButtonIconLink icon="user" variant={'ghost'} href={ACCOUNT_ROUTE} />
-                  {/* <CartModal /> */}
                   <Cart />
                 </div>
               </div>
             </Container>
-          </div>
+          </div> */}
+          {/* Desktop nav */}
           <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
             <Container fullWidth={fullWidth}>
               <div className="flex items-center justify-between gap-x-8 py-5">
@@ -57,13 +53,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
 
                 <div className="flex basis-8/12 items-center justify-center">
                   <div className="mx-auto w-full max-w-screen-md">
-                    <SearchInput
-                      autoComplete="off"
-                      hideLabel
-                      name="search"
-                      placeholder="What are you looking for today?"
-                      onSelect={() => setOpen(true)}
-                    />
+                    <Search />
                   </div>
                 </div>
                 <div className="flex basis-2/12 justify-end">
@@ -85,14 +75,13 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
               </div>
             </Container>
 
-            <div className="border-t border-neutral-100 py-2">
+            <div className="border-t border-neutral-100 py-1.5">
               <Container fullWidth={fullWidth}>
                 <Navigation />
               </Container>
             </div>
           </div>
         </header>
-        <Search isOpen={isOpen} setOpen={setOpen} />
       </>
     );
   }

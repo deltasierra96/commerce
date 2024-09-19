@@ -16,13 +16,13 @@ const navigation = [
 
 export const Navigation = () => {
   return (
-    <nav className="flex lg:space-x-6" aria-label="Global navigation">
+    <nav className="flex lg:space-x-4" aria-label="Global navigation">
       {navigation.map((item) => (
         <Link
           key={item.name}
           href={item.href}
           className={clsx(
-            'inline-flex items-center rounded-md px-3 py-2 font-heading text-sm font-semibold text-neutral-900 outline-none transition-colors duration-75 hover:bg-neutral-100 hover:text-neutral-700'
+            'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100'
           )}
           aria-current={item.current ? 'page' : undefined}
         >

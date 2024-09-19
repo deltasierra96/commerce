@@ -1,46 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { ButtonIconLink } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { TextInput } from '@/components/ui/text-input';
-
-const footerNavigation = {
-  products: [
-    { name: 'Bags', href: '#' },
-    { name: 'Tees', href: '#' },
-    { name: 'Objects', href: '#' },
-    { name: 'Home Goods', href: '#' },
-    { name: 'Accessories', href: '#' }
-  ],
-  customerService: [
-    { name: 'Contact', href: '#' },
-    { name: 'Shipping', href: '#' },
-    { name: 'Returns', href: '#' },
-    { name: 'Warranty', href: '#' },
-    { name: 'Secure Payments', href: '#' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Find a store', href: '#' }
-  ],
-  company: [
-    { name: 'Who we are', href: '#' },
-    { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Terms & Conditions', href: '#' },
-    { name: 'Privacy', href: '#' }
-  ],
-  legal: [
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Return Policy', href: '#' },
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Shipping Policy', href: '#' }
-  ],
-  bottomLinks: [
-    { name: 'Accessibility', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' }
-  ]
-};
 
 const navigation = {
   solutions: [
@@ -239,16 +202,15 @@ export const Footer = () => {
           </form>
         </div>
         <div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
-          <div className="flex space-x-6 md:order-2">
+          <div className="flex space-x-2 md:order-2">
             {navigation.social.map((item) => (
-              <a
+              <ButtonIconLink
+                rounded
+                size={'sm'}
+                icon="facebook"
                 key={item.name}
                 href={item.href}
-                className="text-neutral-500 hover:text-neutral-950"
-              >
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </a>
+              />
             ))}
           </div>
           <p className="mt-8 text-xs leading-5 text-neutral-500 md:order-1 md:mt-0">
