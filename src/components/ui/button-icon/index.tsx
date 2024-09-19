@@ -1,3 +1,10 @@
-export { ButtonIcon, ButtonIconNode, buttonIconStyles } from './button-icon';
-export type { ButtonIconProps, ButtonIconNodeProps } from './button-icon';
+export {
+  ButtonIcon,
+  ButtonIconCounter,
+  ButtonIconNode,
+  buttonIconCounterStyles,
+  buttonIconNodeSizeStyles,
+  buttonIconStyles
+} from './button-icon';
+export type { ButtonIconNodeProps, ButtonIconProps } from './button-icon';
 export { ButtonIconLink, type ButtonIconLinkProps } from './button-icon-link';
