@@ -11,7 +11,7 @@ import {
   fontSatoshi,
   fontStolzl
 } from '@/fonts/next-fonts';
-import { getCart } from '@/lib/shopify';
+import { getCart, getMenu } from '@/lib/shopify';
 import { AriaProvider } from '@/providers';
 import { clsx } from '@/utils';
 import { Metadata } from 'next';
@@ -30,7 +30,8 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cartId = cookies().get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(cartId);
-
+  const menu = await getMenu('next-js-frontend-header-menu');
+  console.log('menu', menu);
   return (
     <AriaProvider>
       <html
@@ -68,7 +69,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                     <div className="hidden lg:block">
                       <Banner />
                     </div>
-                    <Header />
+                    <Header menu={menu} />
                   </div>
                   <div className="flex-1">
                     <main>{children}</main>

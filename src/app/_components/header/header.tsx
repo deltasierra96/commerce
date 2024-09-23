@@ -3,6 +3,7 @@ import { ButtonIcon, ButtonIconLink } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { ACCOUNT_ROUTE } from '@/lib/constants';
+import { Menu } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import { forwardRef } from 'react';
 import { Cart, useCart } from '../cart';
@@ -16,10 +17,11 @@ import { Search } from './_components/search';
 export type HeaderProps = {
   className?: string;
   fullWidth?: boolean;
+  menu: Menu[];
 };
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, fullWidth = true, ...rest }, forwardedRef) => {
+  ({ className, fullWidth = false, menu, ...rest }, forwardedRef) => {
     const { setIsCartOpen, cart } = useCart();
     return (
       <>
@@ -88,7 +90,7 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
 
             <div className="border-t border-neutral-100 py-1.5">
               <Container fullWidth={fullWidth}>
-                <Navigation />
+                <Navigation menu={menu} />
               </Container>
             </div>
           </div>

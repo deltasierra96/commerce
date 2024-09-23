@@ -1,7 +1,6 @@
-import Grid from '@/app/_components/grid';
-import ProductGridItems from '@/app/_components/layout/product-grid-items';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getProducts } from '@/lib/shopify';
+import { ProductCard } from '../_components/product-card';
 
 export const metadata = {
   title: 'Search',
@@ -30,9 +29,11 @@ export default async function SearchPage({
         </p>
       ) : null}
       {products.length > 0 ? (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems products={products} />
-        </Grid>
+        <div className="grid grid-flow-row grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
+          {products.map((product) => {
+            return <ProductCard product={product} />;
+          })}
+        </div>
       ) : null}
     </>
   );

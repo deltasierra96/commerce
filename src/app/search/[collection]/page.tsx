@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import Grid from '@/app/_components/grid';
-import ProductGridItems from '@/app/_components/layout/product-grid-items';
+import { ProductCard } from '@/app/_components/product-card';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getCollection, getCollectionProducts } from '@/lib/shopify';
 
@@ -38,9 +37,11 @@ export default async function CategoryPage({
       {products.length === 0 ? (
         <p className="py-3 text-lg">{`No products found in this collection`}</p>
       ) : (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems products={products} />
-        </Grid>
+        <div className="grid grid-flow-row grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
+          {products.map((product) => {
+            return <ProductCard product={product} />;
+          })}
+        </div>
       )}
     </section>
   );

@@ -38,7 +38,7 @@ export const CartDesktopTrigger = () => {
               '-left-2 -top-2'
             )}
           >
-            {cartQty}
+            <span className="flex">{cartQty}</span>
           </div>
         </div>
         {cart?.lines.length ? (
