@@ -45,6 +45,7 @@ const productFragment = /* GraphQL */ `
     }
     featuredImage {
       ...image
+      placeholder: url(transform: { maxWidth: 150 })
     }
     images(first: 20) {
       edges {

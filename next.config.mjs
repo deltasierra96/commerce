@@ -1,5 +1,11 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+// @ts-check
+import withPlaiceholder from '@plaiceholder/next';
+
+/**
+ * @type {import('next').NextConfig}
+ */
+const config = {
+  transpilePackages: ['@plaiceholder/next'],
   devIndicators: {
     appIsrStatus: false,
     buildActivity: false
@@ -15,3 +21,5 @@ module.exports = {
     ]
   }
 };
+
+export default withPlaiceholder(config);

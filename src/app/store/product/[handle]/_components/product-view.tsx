@@ -15,7 +15,6 @@ type ProductViewProps = {
 };
 
 export const ProductView = ({ product, ...props }: ProductViewProps) => {
-  console.log('product', product);
   return (
     <Container className="max-w-screen-xl px-0 sm:px-0 sm:py-6 lg:px-6 lg:py-12">
       <div className="space-y-4">

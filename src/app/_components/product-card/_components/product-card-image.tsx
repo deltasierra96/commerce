@@ -9,8 +9,9 @@ export type ProductCardImageProps = {
   product: Product;
 };
 
-export const ProductCardImage = ({ product, ...props }: ProductCardImageProps) => {
+export const ProductCardImage = async ({ product, ...props }: ProductCardImageProps) => {
   const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
+  console.log('product', product);
 
   return (
     <div className="relative flex flex-col items-center justify-end">
@@ -22,8 +23,10 @@ export const ProductCardImage = ({ product, ...props }: ProductCardImageProps) =
         className="relative block aspect-1 w-full overflow-hidden bg-white outline-none"
       >
         <Image
+          placeholder="blur"
           width={280}
           height={280}
+          blurDataURL={product.sham}
           src={product.featuredImage.url}
           alt={product.featuredImage.altText || product.title}
           className="h-full w-full object-cover object-center"

@@ -14,7 +14,6 @@ export type ProductCardProps = {
 };
 
 export const ProductCard = ({ product, showCartActions = false, ...props }: ProductCardProps) => {
-  console.log('product', product);
   return (
     <Group className="group relative w-full rounded-card border border-neutral-100 bg-white transition-colors duration-75 hover:border-neutral-200">
       <div className="absolute right-2 top-2 z-10">
