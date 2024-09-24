@@ -1,16 +1,16 @@
 'use client';
 import { clsx } from '@/utils';
+import { type VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
+import { mergeProps } from 'react-aria';
 import {
   DialogTrigger as RACDialogTrigger,
   Modal as RACModal,
   type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { Dialog, DialogFooter, DialogHeader, type DialogProps } from '../dialog';
 import { Overlay } from '../overlay';
 import { popoverStyles } from '../popover';
-import { Dialog, DialogFooter, DialogHeader, type DialogProps } from '../dialog';
-import { mergeProps } from 'react-aria';
 
 const modalInnerStyles = cva('flex w-full justify-center py-10', {
   variants: {
@@ -23,15 +23,15 @@ const modalInnerStyles = cva('flex w-full justify-center py-10', {
   compoundVariants: [
     {
       position: 'top',
-      class: 'pt-10'
+      class: 'pt-4 sm:pt-10'
     },
     {
       position: 'bottom',
-      class: 'pb-10'
+      class: 'pb-4 sm:pb-10'
     },
     {
       position: 'center',
-      class: 'p-10'
+      class: 'p-4 sm:p-10'
     }
   ],
   defaultVariants: {
@@ -50,9 +50,10 @@ const modalContentStyles = cva(
       },
       size: {
         sm: 'max-w-sm',
-        default: 'max-w-md',
-        lg: 'max-w-lg',
-        xl: 'max-w-xl',
+        default: 'max-w-screen-md',
+        lg: 'max-w-scren-lg',
+        xl: 'max-w-screen-xl',
+        '2xl': 'max-w-screen-2xl',
         full: 'max-w-full'
       },
       isEntering: {

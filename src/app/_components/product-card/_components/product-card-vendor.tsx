@@ -5,21 +5,18 @@ import { Link, LinkProps } from 'react-aria-components';
 
 export type ProductCardVendorProps = LinkProps & {
   product: Product;
-  showCurrencyCode?: boolean;
 };
 
-export const ProductCardVendor = ({
-  product,
-  showCurrencyCode = false,
-  ...props
-}: ProductCardVendorProps) => {
+export const ProductCardVendor = ({ product, ...props }: ProductCardVendorProps) => {
   const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
 
   return (
     <Link
       {...props}
       href={productUrl}
-      className={'line-clamp-1 truncate text-base font-medium outline-none hover:underline'}
+      className={
+        'line-clamp-1 inline-flex truncate text-sm font-light text-neutral-500 outline-none hover:underline'
+      }
     >
       {product.vendor}
     </Link>

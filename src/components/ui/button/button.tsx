@@ -186,7 +186,7 @@ export const sharedButtonStyles = cva(
       }
     ],
     defaultVariants: {
-      variant: 'outline',
+      variant: 'filled',
       color: 'neutral',
       rounded: false,
       borderStyle: 'solid'

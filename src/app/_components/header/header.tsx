@@ -7,7 +7,6 @@ import { Menu } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import { forwardRef } from 'react';
 import { Cart, useCart } from '../cart';
-import { CartDesktopTrigger } from '../cart/cart';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { Account } from './_components/account';
 import { Favourites } from './_components/favourites';
@@ -44,12 +43,6 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
 
                 <div className="flex basis-2/12 justify-end">
                   <ButtonIconLink icon="user" variant={'ghost'} href={ACCOUNT_ROUTE} />
-                  <ButtonIcon
-                    onPress={() => setIsCartOpen(true)}
-                    variant={'ghost'}
-                    counter={cart?.totalQuantity}
-                    icon="shopping-cart"
-                  />
                   <Cart />
                 </div>
               </div>
@@ -80,7 +73,6 @@ export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
                       <Account />
                     </div>
                     <div className="hidden sm:block">
-                      <CartDesktopTrigger />
                       <Cart />
                     </div>
                   </div>

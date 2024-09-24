@@ -19,7 +19,7 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1280px',
+      xl: '1240px',
       '2xl': '1400px'
     },
     extend: {
@@ -125,6 +125,7 @@ module.exports = {
         alert: 'var(--alert-border-radius)',
         input: 'var(--input-border-radius)',
         button: 'var(--button-border-radius)',
+        'button-icon': 'var(--button-icon-border-radius)',
         sm: 'var(--border-radius--sm)',
         DEFAULT: 'var(--border-radius)',
         md: 'var(--border-radius--md)',

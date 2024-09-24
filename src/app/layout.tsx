@@ -65,10 +65,8 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
             <div className="flex h-full min-h-screen flex-col">
               <div className="flex-1">
                 <div className="flex flex-col">
+                  <Banner />
                   <div className="sticky top-0 z-header">
-                    <div className="hidden lg:block">
-                      <Banner />
-                    </div>
                     <Header menu={menu} />
                   </div>
                   <div className="flex-1">

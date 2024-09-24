@@ -1,7 +1,5 @@
 import Collections from '@/app/_components/layout/search/collections';
-import FilterList from '@/app/_components/layout/search/filter';
 import { Container } from '@/components/ui/container';
-import { sorting } from '@/lib/constants';
 import ChildrenWrapper from './children-wrapper';
 
 export default function SearchLayout({ children }: { children: React.ReactNode }) {
@@ -14,9 +12,9 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
         <div className="order-last min-h-screen w-full md:order-none">
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </div>
-        <div className="order-none flex-none md:order-last md:w-[125px]">
+        {/* <div className="order-none flex-none md:order-last md:w-[125px]">
           <FilterList list={sorting} title="Sort by" />
-        </div>
+        </div> */}
       </Container>
     </>
   );

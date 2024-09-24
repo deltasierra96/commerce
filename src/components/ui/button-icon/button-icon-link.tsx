@@ -1,15 +1,15 @@
 'use client';
-import React, { forwardRef } from 'react';
 import { clsx } from '@/utils';
+import { forwardRef } from 'react';
 import { Link, type LinkProps as RACLinkProps } from 'react-aria-components';
+import { sharedButtonStyles } from '../button';
 import { borderStyles, focusRing } from '../focus-ring';
 import {
-  type ButtonIconProps,
+  ButtonIconCounter,
   ButtonIconNode,
   buttonIconStyles,
-  ButtonIconCounter
+  type ButtonIconProps
 } from './button-icon';
-import { sharedButtonStyles } from '../button';
 
 export type ButtonIconLinkProps = ButtonIconProps & RACLinkProps;
 
@@ -33,7 +33,7 @@ export const ButtonIconLink = forwardRef<HTMLAnchorElement, ButtonIconLinkProps>
     <Link
       data-variant={variant}
       className={clsx(
-        buttonIconStyles({ size, compact }),
+        buttonIconStyles({ size, compact, rounded }),
         sharedButtonStyles({ variant, color, rounded, borderStyle }),
         focusRing({ isFocusVisible: true }),
         borderStyles({ isFocusVisible: true }),

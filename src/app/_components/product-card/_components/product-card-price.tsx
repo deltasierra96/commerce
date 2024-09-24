@@ -14,7 +14,7 @@ export const ProductCardPrice = ({
 }: ProductCardPriceProps) => {
   const { maxVariantPrice, minVariantPrice } = product.priceRange;
   const { currencyCode, amount } = maxVariantPrice;
-  const isOnSale = maxVariantPrice.amount !== minVariantPrice.amount;
+  const hasSalePrice = maxVariantPrice.amount !== minVariantPrice.amount;
 
   const formatPrice = new Intl.NumberFormat(undefined, {
     style: 'currency',
@@ -22,21 +22,33 @@ export const ProductCardPrice = ({
     currencyDisplay: 'narrowSymbol'
   });
 
+  const sharedPriceStyles = clsx('flex text-base font-medium');
+
   return (
     <div className="tracking-tight" {...props}>
-      {isOnSale ? <div className="text-sm font-medium text-neutral-950">From</div> : null}
-      <p suppressHydrationWarning={true} className={clsx(isOnSale && 'font-medium line-through')}>
-        {`${formatPrice.format(parseFloat(amount))}`}
-        {showCurrencyCode ? <span>{currencyCode}</span> : null}
-      </p>
-      {/* {isOnSale && variant?.price.amount ? (
-          <div className="flex text-sm text-red-500">
-            <span suppressHydrationWarning={true}>
-              {`Now ${formatPrice.format(parseFloat(variant?.price.amount))}`}
-              {showCurrencyCode ? <CurrencyCode currencyCode={currencyCode} /> : null}
-            </span>
-          </div>
-        ) : null} */}
+      {hasSalePrice ? (
+        <div className="flex flex-nowrap gap-x-2">
+          <p
+            suppressHydrationWarning={true}
+            className={clsx(hasSalePrice && 'line-through', sharedPriceStyles)}
+          >
+            {`${formatPrice.format(parseFloat(maxVariantPrice.amount))}`}
+            {showCurrencyCode ? <span>{maxVariantPrice.currencyCode}</span> : null}
+          </p>
+          <p
+            suppressHydrationWarning={true}
+            className={clsx('flex text-red-700', sharedPriceStyles)}
+          >
+            {`${formatPrice.format(parseFloat(minVariantPrice.amount))}`}
+            {showCurrencyCode ? <span>{minVariantPrice.currencyCode}</span> : null}
+          </p>
+        </div>
+      ) : (
+        <p suppressHydrationWarning={true} className={clsx(sharedPriceStyles)}>
+          {`${formatPrice.format(parseFloat(maxVariantPrice.amount))}`}
+          {showCurrencyCode ? <span>{maxVariantPrice.currencyCode}</span> : null}
+        </p>
+      )}
     </div>
   );
 };

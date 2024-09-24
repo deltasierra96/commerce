@@ -20,6 +20,7 @@ function SubmitButton({ updateType }: SubmitButtonProps) {
       compact
       isLoading={pending}
       isDisabled={pending}
+      rounded={false}
       variant={'ghost'}
       icon={updateType === 'increment' ? 'plus' : 'minus'}
       type="submit"

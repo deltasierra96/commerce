@@ -1,11 +1,11 @@
 'use client';
-import React, { forwardRef } from 'react';
 import { clsx } from '@/utils';
-import { Icon, type IconTypeProps } from '../icon';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { forwardRef } from 'react';
 import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components';
 import { sharedButtonStyles, type ButtonDefaultProps } from '../button';
-import { focusRing, borderStyles } from '../focus-ring';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { borderStyles, focusRing } from '../focus-ring';
+import { Icon, type IconTypeProps } from '../icon';
 
 export const buttonIconStyles = cva('shrink-0', {
   variants: {
@@ -17,6 +17,10 @@ export const buttonIconStyles = cva('shrink-0', {
     compact: {
       true: null,
       false: null
+    },
+    rounded: {
+      true: 'rounded-full',
+      false: 'rounded-button'
     }
   },
   compoundVariants: [
@@ -53,7 +57,8 @@ export const buttonIconStyles = cva('shrink-0', {
   ],
   defaultVariants: {
     size: 'default',
-    compact: false
+    compact: false,
+    rounded: true
   }
 });
 
@@ -139,7 +144,7 @@ export type ButtonIconNodeProps = {
 
 export const ButtonIconNode = ({ isLoading, icon, size, compact }: ButtonIconNodeProps) => {
   return (
-    <div className={clsx('flex items-center justify-center', isLoading && ' animate-spin')}>
+    <div className={clsx('flex items-center justify-center', isLoading && 'animate-spin')}>
       <Icon
         className={clsx(buttonIconNodeSizeStyles({ size, compact }))}
         icon={isLoading ? 'loader' : icon}
@@ -194,7 +199,8 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps & RACBut
         className={clsx(
           buttonIconStyles({
             size,
-            compact
+            compact,
+            rounded
           }),
           sharedButtonStyles({ variant, color, rounded, borderStyle }),
           focusRing({ isFocusVisible: true }),

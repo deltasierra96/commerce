@@ -209,7 +209,7 @@ input[type='search']::-webkit-search-results-decoration {
   --alert-border-radius: theme(borderRadius.md);
 
   /* Card */
-  --card-border-radius: theme(borderRadius.md);
+  --card-border-radius: theme(borderRadius.lg);
 
   /* Typography */
   --font-sans: var(--font-inter);
@@ -249,7 +249,6 @@ input[type='search']::-webkit-search-results-decoration {
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
   --button-border-radius: var(--input-border-radius);
-  /* --button-border-radius: 999px; */
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
@@ -259,6 +258,7 @@ input[type='search']::-webkit-search-results-decoration {
   --button-compact-height-lg: calc(var(--input-height-lg) - theme(spacing.2));
 
   /* Button Icon */
+  --button-icon-border-radius: var(--button-border-radius);
   --button-icon-height-sm: var(--input-height-sm);
   --button-icon-height: var(--input-height);
   --button-icon-height-lg: var(--input-height-lg);
@@ -308,7 +308,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-brands-forest-900);
   --colors-primary-950: var(--colors-brands-forest-950);
 
-  --colors-primary-50: var(--colors-brands-christies-50);
+  /* --colors-primary-50: var(--colors-brands-christies-50);
   --colors-primary-100: var(--colors-brands-christies-100);
   --colors-primary-200: var(--colors-brands-christies-200);
   --colors-primary-300: var(--colors-brands-christies-300);
@@ -318,9 +318,9 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-christies-700);
   --colors-primary-800: var(--colors-brands-christies-800);
   --colors-primary-900: var(--colors-brands-christies-900);
-  --colors-primary-950: var(--colors-brands-christies-950);
+  --colors-primary-950: var(--colors-brands-christies-950); */
 
-  --colors-primary-50: var(--colors-brands-mss-50);
+  /* --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
   --colors-primary-300: var(--colors-brands-mss-300);
@@ -330,7 +330,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950);
+  --colors-primary-950: var(--colors-brands-mss-950); */
 
   --colors-neutral-50: var(--colors-slate-50);
   --colors-neutral-100: var(--colors-slate-100);
@@ -353,13 +353,13 @@ input[type='search']::-webkit-search-results-decoration {
   --border-radius--2xl: 0rem;
   --border-radius--3xl: 0rem;
 
-  --border-radius: 0.25rem;
+  /* --border-radius: 0.25rem;
   --border-radius--sm: 0.125rem;
   --border-radius--md: 0.375rem;
   --border-radius--lg: 0.5rem;
   --border-radius--xl: 0.75rem;
   --border-radius--2xl: 1rem;
-  --border-radius--3xl: 1.5rem;
+  --border-radius--3xl: 1.5rem; */
 
   /* --border-radius: 0.36rem;
   --border-radius--sm: 0.18rem;
