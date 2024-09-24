@@ -3,8 +3,6 @@ import productFragment from '../fragments/product';
 export const getProductQuery = /* GraphQL */ `
   query getProduct($handle: String!) {
     product(handle: $handle) {
-      vendor
-      totalInventory
       ...product
     }
   }
@@ -16,7 +14,6 @@ export const getProductsQuery = /* GraphQL */ `
     products(sortKey: $sortKey, reverse: $reverse, query: $query, first: 100) {
       edges {
         node {
-          vendor
           ...product
         }
       }

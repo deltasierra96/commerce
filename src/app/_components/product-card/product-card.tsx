@@ -1,3 +1,4 @@
+'use client';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Product } from '@/lib/shopify/types';
 import { ProductCardImage } from './_components/product-card-image';
