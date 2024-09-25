@@ -12,6 +12,8 @@ const collectionFragment = /* GraphQL */ `
     image {
       url(transform: { maxWidth: 350 })
       altText
+      width
+      height
     }
     updatedAt
   }

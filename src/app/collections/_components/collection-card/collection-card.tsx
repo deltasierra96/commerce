@@ -11,9 +11,9 @@ export const CollectionCard = ({ collection }: CollectionCardProps) => {
   return (
     <Link
       href={collection.path}
-      className="rounded-card bg-white p-4 shadow-lg transition-all duration-150 data-[hovered=true]:-translate-y-2 data-[hovered=true]:shadow-xl"
+      className="group rounded-card bg-white p-4 shadow-lg transition-all duration-150 will-change-transform data-[hovered=true]:-translate-y-2 data-[hovered=true]:shadow-xl"
     >
-      <div className="aspect-h-1 aspect-w-1 flex items-center justify-center overflow-hidden rounded-card bg-neutral-100 group-hover:opacity-75">
+      <div className="aspect-h-1 aspect-w-1 flex items-center justify-center overflow-hidden rounded-card bg-neutral-100 transition-opacity duration-150 group-hover:opacity-75">
         {collection.image ? (
           <Image
             fill

@@ -106,7 +106,7 @@ const drawerContentStyles = cva('overflow-hidden', {
       full: null
     },
     isEntering: {
-      true: 'duration-200 ease-out animate-in fade-in fill-mode-forwards'
+      true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards'
     },
     isExiting: {
       true: 'duration-150 ease-in animate-out fade-out fill-mode-forwards'

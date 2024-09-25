@@ -1,6 +1,6 @@
 'use client';
 
-import { useProduct, useUpdateURL } from '@/app/store/product/[handle]/_components/product-context';
+import { useProduct, useUpdateURL } from '@/app/product/[handle]/_components/product-context';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { type Image as ShopifyImage, Product } from '@/lib/shopify/types';
 import { clsx } from '@/utils';

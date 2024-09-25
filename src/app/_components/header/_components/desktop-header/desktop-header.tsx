@@ -7,12 +7,13 @@ import { Account, Navigation, Search } from './_components';
 
 type DesktopHeaderProps = {
   menu: Menu[];
+  isFullWidth?: boolean;
 };
 
-export const DesktopHeader = ({ menu }: DesktopHeaderProps) => {
+export const DesktopHeader = ({ menu, isFullWidth = true }: DesktopHeaderProps) => {
   return (
     <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
-      <Container>
+      <Container fullWidth={isFullWidth}>
         <div className="flex items-center justify-between gap-x-8 py-5">
           <div className="flex basis-2/12 justify-start">
             <Logo className="h-10" />
@@ -37,7 +38,7 @@ export const DesktopHeader = ({ menu }: DesktopHeaderProps) => {
       </Container>
 
       <div className="border-t border-neutral-100 py-1.5">
-        <Container>
+        <Container fullWidth={isFullWidth}>
           <Navigation menu={menu} />
         </Container>
       </div>

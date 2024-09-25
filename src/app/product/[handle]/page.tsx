@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { AddToCart } from '@/app/_components/cart/add-to-cart';
 import { GridTileImage } from '@/app/_components/grid/tile';
-import { ProductProvider } from '@/app/store/product/[handle]/_components/product-context';
+import { ProductProvider } from '@/app/product/[handle]/_components/product-context';
 import { Container } from '@/components/ui/container';
 import { HIDDEN_PRODUCT_TAG, STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { getProduct, getProductRecommendations } from '@/lib/shopify';

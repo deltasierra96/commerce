@@ -1,6 +1,6 @@
 'use client';
 
-import { useProduct, useUpdateURL } from '@/app/store/product/[handle]/_components/product-context';
+import { useProduct, useUpdateURL } from '@/app/product/[handle]/_components/product-context';
 import { Select, SelectItem } from '@/components/ui/select';
 import { Product } from '@/lib/shopify/types';
 

@@ -325,7 +325,7 @@ export async function getCollections(): Promise<Collection[]> {
   const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
   const collections = [
     // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the search page.
+    // Collections that start with `hidden-*` need to be hidden on the collection page.
     ...reshapeCollections(shopifyCollections).filter(
       (collection) => !collection.handle.startsWith('hidden')
     )

@@ -1,6 +1,6 @@
 'use client';
 
-import { useProduct } from '@/app/store/product/[handle]/_components/product-context';
+import { useProduct } from '@/app/product/[handle]/_components/product-context';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Product, ProductVariant } from '@/lib/shopify/types';
