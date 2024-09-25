@@ -284,7 +284,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-blue-900);
   --colors-primary-950: var(--colors-blue-950);
 
-  /* --colors-primary-50: var(--colors-violet-50);
+  --colors-primary-50: var(--colors-violet-50);
   --colors-primary-100: var(--colors-violet-100);
   --colors-primary-200: var(--colors-violet-200);
   --colors-primary-300: var(--colors-violet-300);
@@ -294,9 +294,9 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-violet-700);
   --colors-primary-800: var(--colors-violet-800);
   --colors-primary-900: var(--colors-violet-900);
-  --colors-primary-950: var(--colors-violet-950); */
+  --colors-primary-950: var(--colors-violet-950);
 
-  --colors-primary-50: var(--colors-brands-forest-50);
+  /* --colors-primary-50: var(--colors-brands-forest-50);
   --colors-primary-100: var(--colors-brands-forest-100);
   --colors-primary-200: var(--colors-brands-forest-200);
   --colors-primary-300: var(--colors-brands-forest-300);
@@ -306,9 +306,9 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-forest-700);
   --colors-primary-800: var(--colors-brands-forest-800);
   --colors-primary-900: var(--colors-brands-forest-900);
-  --colors-primary-950: var(--colors-brands-forest-950);
+  --colors-primary-950: var(--colors-brands-forest-950); */
 
-  /* --colors-primary-50: var(--colors-brands-christies-50);
+  --colors-primary-50: var(--colors-brands-christies-50);
   --colors-primary-100: var(--colors-brands-christies-100);
   --colors-primary-200: var(--colors-brands-christies-200);
   --colors-primary-300: var(--colors-brands-christies-300);
@@ -318,7 +318,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-christies-700);
   --colors-primary-800: var(--colors-brands-christies-800);
   --colors-primary-900: var(--colors-brands-christies-900);
-  --colors-primary-950: var(--colors-brands-christies-950); */
+  --colors-primary-950: var(--colors-brands-christies-950);
 
   /* --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);

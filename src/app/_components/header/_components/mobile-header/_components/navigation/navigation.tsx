@@ -4,9 +4,9 @@ import { ButtonIcon } from '@/components/ui/button-icon';
 import { Drawer, type DrawerProps } from '@/components/ui/drawer';
 import { STORE_ROUTE_COLLECTION } from '@/lib/constants';
 
-type MobileNavProps = DrawerProps;
+type NavigationProps = DrawerProps;
 
-export const MobileNav = (props: MobileNavProps) => {
+export const Navigation = (props: NavigationProps) => {
   return (
     <Drawer position="left" size={'full'} {...props}>
       <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />

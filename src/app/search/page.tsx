@@ -1,7 +1,6 @@
 import { defaultSort, sorting } from '@/lib/constants';
 import { getProducts } from '@/lib/shopify';
 import { ProductCard } from '../_components/product-card';
-import { getImage } from '../_components/product-card/_components/merp';
 
 export const metadata = {
   title: 'Search',
@@ -32,8 +31,7 @@ export default async function SearchPage({
       {products.length > 0 ? (
         <div className="grid grid-flow-row grid-cols-2 gap-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           {products.map(async (product) => {
-            const { base64, img } = await getImage(product.featuredImage.placeholder);
-            return <ProductCard product={{ sham: base64, ...product }} />;
+            return <ProductCard product={product} />;
           })}
         </div>
       ) : null}

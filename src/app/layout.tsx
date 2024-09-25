@@ -19,10 +19,10 @@ import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import '../styles/main.css';
+import { Banner } from './_components/banner';
 import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
-import { Banner } from './_components/header/_components/banner';
 import { Incentives } from './_components/incentives';
 import { rootMetadata } from './meta-data';
 
@@ -31,7 +31,6 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(cartId);
   const menu = await getMenu('next-js-frontend-header-menu');
-  console.log('menu', menu);
   return (
     <AriaProvider>
       <html

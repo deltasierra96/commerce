@@ -23,10 +23,8 @@ export const ProductCardImage = async ({ product, ...props }: ProductCardImagePr
         className="relative block aspect-1 w-full overflow-hidden bg-white outline-none"
       >
         <Image
-          placeholder="blur"
           width={280}
           height={280}
-          blurDataURL={product.sham}
           src={product.featuredImage.url}
           alt={product.featuredImage.altText || product.title}
           className="h-full w-full object-cover object-center"
