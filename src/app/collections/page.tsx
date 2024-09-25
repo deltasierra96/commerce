@@ -16,14 +16,11 @@ import { CollectionCard } from './_components/collection-card';
 //   };
 // }
 
-const wait = (t: number) => new Promise((resolve, reject) => setTimeout(resolve, t));
-
 const collectionGridStyles = clsx(
   'grid grid-flow-row grid-cols-2 gap-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6'
 );
 
 const Collections = async () => {
-  await wait(3000);
   const collections = await getCollections();
   return (
     <>

@@ -11,7 +11,6 @@ export type ProductCardImageProps = {
 
 export const ProductCardImage = async ({ product, ...props }: ProductCardImageProps) => {
   const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
-  console.log('product', product);
 
   return (
     <div className="relative flex flex-col items-center justify-end">

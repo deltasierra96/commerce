@@ -18,7 +18,7 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
   return (
     <Group className="flex px-4 py-4" {...props}>
       <div className="relative inline-flex overflow-hidden">
-        <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-button border border-neutral-100 text-neutral-200 sm:size-24">
+        <div className="relative size-12 flex-shrink-0 overflow-hidden rounded-card border border-neutral-100 text-neutral-200 sm:size-24">
           <Image
             width={150}
             height={150}

@@ -1,4 +1,6 @@
 'use client';
+import { ButtonIcon } from '@/components/ui/button-icon';
+import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
@@ -23,15 +25,23 @@ export function SearchSkeleton() {
 export const Search = ({ ...props }: SearchProps) => {
   const searchParams = useSearchParams();
   return (
-    <Form action="/search" className="relative w-full lg:w-80 xl:w-full">
-      <SearchInput
-        type="text"
-        name="q"
-        defaultValue={searchParams?.get('q') || ''}
-        autoComplete="off"
-        hideLabel
-        placeholder="What are you looking for today?"
-      />
-    </Form>
+    <Drawer>
+      <ButtonIcon icon="search" variant={'ghost'} />
+      <Drawer.Content>
+        <div className="p-6">
+          <Form action="/search" className="relative w-full">
+            <SearchInput
+              autoFocus
+              type="text"
+              name="q"
+              defaultValue={searchParams?.get('q') || ''}
+              autoComplete="off"
+              hideLabel
+              placeholder="What are you looking for today?"
+            />
+          </Form>
+        </div>
+      </Drawer.Content>
+    </Drawer>
   );
 };

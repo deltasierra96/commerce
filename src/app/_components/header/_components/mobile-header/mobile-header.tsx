@@ -15,7 +15,7 @@ export const MobileHeader = ({ menu }: MobileHeaderProps) => {
       <Container>
         <div className="flex items-center justify-between gap-x-8">
           <div className="flex basis-2/12 justify-start">
-            <Navigation />
+            <Navigation menu={menu} />
             <Search />
           </div>
           <div className="flex basis-2/12 items-center justify-center">

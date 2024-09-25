@@ -238,9 +238,9 @@ input[type='search']::-webkit-search-results-decoration {
   --input-border-radius: theme(borderRadius.md);
   /* --input-border-radius: 999px; */
 
-  --input-height-sm: theme(spacing.9);
-  --input-height: theme(spacing.10);
-  --input-height-lg: theme(spacing.11);
+  --input-height-sm: theme(spacing.10);
+  --input-height: theme(spacing.11);
+  --input-height-lg: theme(spacing.12);
 
   /* Textarea */
   --textarea-height: calc(var(--input-height) * 2);
@@ -249,6 +249,7 @@ input[type='search']::-webkit-search-results-decoration {
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
   --button-border-radius: var(--input-border-radius);
+  --button-border-radius: 999px;
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
