@@ -40,7 +40,7 @@ export default async function CollectionPage({
         <div className="mb-8">
           <h1 className="font-heading text-3xl">{collection?.title}</h1>
         </div>
-        <img src={collection?.image.url} />
+        {collection?.image?.url ? <img src={collection?.image.url} /> : null}
         {products.length === 0 ? (
           <p className="py-3 text-lg">{`No products found in this collection`}</p>
         ) : (

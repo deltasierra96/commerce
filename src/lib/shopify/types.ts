@@ -113,7 +113,7 @@ export type ShopifyCollection = {
   description: string;
   seo: SEO;
   updatedAt: string;
-  image: Image;
+  image?: Image;
 };
 
 export type ShopifyProduct = {
