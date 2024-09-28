@@ -10,7 +10,7 @@ type DesktopHeaderProps = {
   isFullWidth?: boolean;
 };
 
-export const DesktopHeader = ({ menu, isFullWidth = false }: DesktopHeaderProps) => {
+export const DesktopHeader = ({ menu, isFullWidth = true }: DesktopHeaderProps) => {
   return (
     <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
       <Container fullWidth={isFullWidth}>

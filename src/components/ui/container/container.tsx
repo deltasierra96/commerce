@@ -11,7 +11,7 @@ export const Container = ({ className, fullWidth = false, ...props }: ContainerP
   <div
     {...props}
     className={clsx(
-      'mx-auto w-full px-2 sm:px-4 lg:px-12',
+      'mx-auto w-full px-2 sm:px-4 lg:px-6',
       fullWidth ? 'max-w-full' : 'mx-auto max-w-screen-2xl',
       className
     )}

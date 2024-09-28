@@ -10,7 +10,7 @@ const collectionFragment = /* GraphQL */ `
       ...seo
     }
     image {
-      url(transform: { maxWidth: 350 })
+      url
       altText
       width
       height
@@ -21,7 +21,7 @@ const collectionFragment = /* GraphQL */ `
 `;
 
 export const getCollectionQuery = /* GraphQL */ `
-  query getCollection($handle: String!) {
+  query collectionByHandle($handle: String!) {
     collection(handle: $handle) {
       ...collection
     }

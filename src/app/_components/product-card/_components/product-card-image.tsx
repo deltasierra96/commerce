@@ -9,7 +9,7 @@ export type ProductCardImageProps = {
   product: Product;
 };
 
-export const ProductCardImage = async ({ product, ...props }: ProductCardImageProps) => {
+export const ProductCardImage = ({ product, ...props }: ProductCardImageProps) => {
   const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
 
   return (

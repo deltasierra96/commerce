@@ -15,7 +15,7 @@ export const ProductCardQuickView = ({ product, ...props }: ProductCardQuickView
 
   return (
     <Modal size={'xl'}>
-      <Button block variant={'outline'}>
+      <Button block variant={'filled'} color={'primary'}>
         Quick view
       </Button>
       <Modal.Content>
