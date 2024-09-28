@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { Container } from '@/components/ui/container';
 import { defaultSort, sorting } from '@/lib/constants';
 import { getCollection, getCollectionProducts } from '@/lib/shopify';
 import { CollectionEmpty } from './_components/collection-empty';
@@ -37,7 +38,6 @@ export default async function CollectionPage({
   const collection = await getCollection(params.collection);
   const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
 
-  console.log('collection', collection);
   return (
     <section className="lg:py-12">
       {collection ? (
@@ -49,7 +49,14 @@ export default async function CollectionPage({
               {products.length === 0 ? (
                 <CollectionEmpty />
               ) : (
-                <CollectionProducts products={products} />
+                <Container className="px-0 sm:px-0 lg:px-6">
+                  <div className="lg:grid lg:grid-cols-3 lg:gap-x-4 xl:grid-cols-4">
+                    <aside className="rounded-lg bg-white"></aside>
+                    <div className="lg:col-span-2 lg:mt-0 xl:col-span-3">
+                      <CollectionProducts products={products} />
+                    </div>
+                  </div>
+                </Container>
               )}
             </div>
           </div>

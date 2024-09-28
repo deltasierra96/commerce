@@ -17,14 +17,24 @@ export type ProductCardProps = {
 
 export const ProductCard = ({
   product,
-  showCartActions = false,
+  showCartActions = true,
   className,
   ...props
 }: ProductCardProps) => {
   return (
     <Group className={clsx('group relative w-full overflow-hidden', className)}>
-      <div className="absolute right-2 top-2 z-10">
-        <div className="transition-all duration-150 ease-out animate-in fade-in fill-mode-forwards group-[hovered=true]:slide-in-from-right-4">
+      <div className="absolute right-4 top-4 z-10">
+        <div
+          className={clsx(
+            'duration-150 animate-in animate-out fill-mode-forwards',
+            'group-data-[hovered=true]:animate-in',
+            'animate-out',
+            'fade-out-0',
+            'group-data-[hovered=true]:slide-in-from-right-2',
+            'group-data-[hovered=true]:fade-in-100',
+            'slide-out-to-right-2'
+          )}
+        >
           <ProductCardHoverActions product={product} />
         </div>
       </div>
@@ -37,7 +47,11 @@ export const ProductCard = ({
           <ProductCardTitle product={product} />
         </div>
         <ProductCardPrice product={product} />
-        {showCartActions ? <ProductCardCartActions product={product} /> : null}
+        {showCartActions ? (
+          <div className="max-lg:hidden">
+            <ProductCardCartActions product={product} />
+          </div>
+        ) : null}
       </div>
     </Group>
   );

@@ -1,25 +1,48 @@
 'use client';
 import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { Product } from '@/lib/shopify/types';
+import { clsx } from '@/utils';
 import Image from 'next/image';
 import { Link } from 'react-aria-components';
 import { ProductCardQuickView } from './product-card-quick-view';
 
 export type ProductCardImageProps = {
   product: Product;
+  showQuickView?: boolean;
 };
 
-export const ProductCardImage = ({ product, ...props }: ProductCardImageProps) => {
+export const ProductCardImage = ({
+  product,
+  showQuickView = false,
+  ...props
+}: ProductCardImageProps) => {
   const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
 
   return (
     <div className="relative flex flex-col items-center justify-end">
-      <div className="absolute inset-x-0 z-10 w-full px-4 opacity-0 transition-all duration-75 group-data-[hovered]:opacity-100">
-        <ProductCardQuickView product={product} />
-      </div>
+      {showQuickView ? (
+        <div
+          className={clsx(
+            'absolute inset-x-0 z-10 w-full',
+            'transition-all duration-150 animate-in animate-out fill-mode-forwards',
+            'group-data-[hovered=true]:animate-in',
+            'animate-out',
+            'fade-out-0',
+            'group-data-[hovered=true]:slide-in-from-top-2',
+            'group-data-[hovered=true]:fade-in-100',
+            'slide-out-to-top-2'
+          )}
+        >
+          <ProductCardQuickView product={product} />
+        </div>
+      ) : null}
       <Link
         href={productUrl}
-        className="relative block aspect-1 w-full overflow-hidden bg-white outline-none"
+        className={clsx(
+          'relative block aspect-1 w-full overflow-hidden bg-white outline-none transition-all',
+          'duration-150 fill-mode-forwards',
+          'group-data-[hovered=true]:opacity-70'
+        )}
       >
         <Image
           width={280}

@@ -1,4 +1,5 @@
 'use client';
+import { ButtonIcon } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
 import { Select, SelectItem } from '@/components/ui/select';
@@ -14,22 +15,27 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
   return (
     <div>
       <div className="lg:hidden">
-        <Container>
-          <Button
-            className={clsx(
-              'flex w-full items-center justify-center gap-x-2 bg-white px-4 py-4 font-button outline-none transition-all duration-75 pressed:bg-neutral-100'
-            )}
-          >
-            <Icon icon="filter" className="h-4 w-4" />
-            <span>Filter</span>
-          </Button>
-        </Container>
+        <Button
+          className={clsx(
+            'flex w-full items-center justify-center gap-x-2 bg-white px-4 py-4 font-button outline-none transition-all duration-75 pressed:bg-neutral-100'
+          )}
+        >
+          <Icon icon="filter" className="h-4 w-4" />
+          <span>Filter</span>
+        </Button>
       </div>
       <div className="hidden lg:flex">
         <Container>
-          <div className="rounded-lg bg-white p-8">
-            <span>
-              <Select label="Sort by" defaultSelectedKey={0} placeholder="Sort by">
+          <div className="rounded-lg bg-white p-3">
+            <div className="flex items-center justify-end gap-x-4">
+              <ButtonIcon icon="grid" variant={'outline'} />
+              <Select
+                className={'w-56'}
+                hideLabel
+                label="Sort by"
+                defaultSelectedKey={0}
+                placeholder="Sort by"
+              >
                 <SelectItem href="/collections/accessories?sort_by=manual">Featured</SelectItem>
                 <SelectItem href="/collections/accessories?sort_by=title-ascending">
                   Alphabetically, A-Z
@@ -50,7 +56,7 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
                   Date, new to old
                 </SelectItem>
               </Select>
-            </span>
+            </div>
           </div>
         </Container>
       </div>

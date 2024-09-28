@@ -115,7 +115,7 @@ export const sharedButtonStyles = cva(
         variant: 'outline',
         className: clsx([
           'bg-white',
-          'border-neutral-200',
+          'border-neutral-100',
           'text-neutral-600',
           'hover:border-neutral-100',
           'hover:bg-neutral-100',

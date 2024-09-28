@@ -7,5 +7,10 @@ export type ProductCardHoverActionsProps = {
 };
 
 export const ProductCardHoverActions = ({ product, ...props }: ProductCardHoverActionsProps) => {
-  return <ButtonIcon icon="heart" />;
+  return (
+    <div className="flex flex-col items-center gap-y-2">
+      <ButtonIcon icon="heart" />
+      <ButtonIcon icon="share" />
+    </div>
+  );
 };
