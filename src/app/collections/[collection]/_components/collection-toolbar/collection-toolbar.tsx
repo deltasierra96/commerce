@@ -4,19 +4,14 @@ import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
 import { Collection } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { Button } from 'react-aria-components';
-import { useCollection } from '../../collection-context';
 import { CollectionSort } from './_components/collection-sort';
 
 type CollectionToolbarProps = {
   collection: Collection;
 };
 
-export const CollectionToolbar = ({ ...props }: CollectionToolbarProps) => {
-  const collection = useCollection();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarProps) => {
   return (
     <div>
       <div className="lg:hidden">

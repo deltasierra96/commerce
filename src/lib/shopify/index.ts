@@ -144,8 +144,10 @@ const reshapeCollection = (collection: ShopifyCollection): Collection | undefine
     return undefined;
   }
 
+  const products = reshapeProducts(removeEdgesAndNodes(collection.products));
   return {
     ...collection,
+    products,
     path: `${STORE_ROUTE_COLLECTION}/${collection.handle}`
   };
 };
@@ -311,7 +313,9 @@ export async function getCollectionDerp({
     }
   });
 
-  return reshapeCollection(res.body.data.collection.products);
+  console.log('res', res.body.data.collection);
+
+  return reshapeCollection(res.body.data.collection);
 }
 
 export async function getCollectionProducts({

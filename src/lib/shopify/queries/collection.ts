@@ -40,7 +40,6 @@ export const getCollectionDerpQuery = /* GraphQL */ `
             ...product
           }
         }
-
         pageInfo {
           hasPreviousPage
           hasNextPage

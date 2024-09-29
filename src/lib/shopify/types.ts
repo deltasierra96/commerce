@@ -36,8 +36,9 @@ export type CartItem = {
   };
 };
 
-export type Collection = ShopifyCollection & {
+export type Collection = Omit<ShopifyCollection, 'products'> & {
   path: string;
+  products: Product[];
 };
 
 export type Image = {
@@ -121,6 +122,7 @@ export type ShopifyCollection = {
     startCursor: string;
     endCursor: string;
   };
+  products: Connection<ShopifyProduct>;
 };
 
 export type ShopifyProduct = {
@@ -225,9 +227,7 @@ export type ShopifyCollectionProductsOperation = {
 
 export type ShopifyCollectionDerpOperation = {
   data: {
-    collection: {
-      products: ShopifyCollection;
-    };
+    collection: ShopifyCollection;
   };
   variables: {
     handle: string;

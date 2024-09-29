@@ -1,18 +1,24 @@
-'use client';
 import { ProductCard } from '@/app/_components/product-card';
 import { Product } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
-import { useCollection } from '../../collection-context';
 
 type CollectionProductsProps = {
+  params: { collection: string };
+  reverse?: boolean;
+  sortKey?: string;
   products: Product[];
 };
 
-export const CollectionProducts = ({ ...props }: CollectionProductsProps) => {
-  const collection = useCollection();
+export const CollectionProducts = async ({
+  products,
+  params,
+  sortKey,
+  reverse,
+  ...props
+}: CollectionProductsProps) => {
   return (
     <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4">
-      {collection.products?.map((product) => {
+      {products?.map((product) => {
         return (
           <ProductCard
             key={product.id}

@@ -2,22 +2,20 @@
 import { Select, SelectItem } from '@/components/ui/select';
 import { sorting } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCollection } from '../../../collection-context';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export const CollectionSort = () => {
-  const collection = useCollection();
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
-
+  const activeKey = sorting.find((sort) => searchParams.get('sort') === sort.slug);
+  console.log('activeKey', activeKey);
   return (
     <Select
       className={'w-56'}
       hideLabel
       label="Sort by"
-      defaultSelectedKey={0}
-      placeholder="Sort by"
+      selectedKey={activeKey?.slug}
+      // placeholder="Sort by"
     >
       {sorting.map((item) => {
         const active = searchParams.get('sort') === item.slug;
@@ -30,7 +28,13 @@ export const CollectionSort = () => {
           })
         );
         return (
-          <SelectItem key={item.sortKey} href={href}>
+          <SelectItem
+            isSelected={active}
+            key={item.slug}
+            id={item.slug!}
+            textValue={item.title}
+            href={href}
+          >
             {item.title}
           </SelectItem>
         );

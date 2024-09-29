@@ -23,8 +23,8 @@ export const ProductCard = ({
   ...props
 }: ProductCardProps) => {
   return (
-    <Group className={clsx('group relative w-full overflow-hidden', className)}>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <Group className={clsx('group relative w-full overflow-hidden', className)}>
         <div className="absolute right-4 top-4 z-10">
           <div
             className={clsx(
@@ -55,7 +55,7 @@ export const ProductCard = ({
             </div>
           ) : null}
         </div>
-      </motion.div>
-    </Group>
+      </Group>
+    </motion.div>
   );
 };
