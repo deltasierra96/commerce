@@ -14,13 +14,13 @@ export const CollectionSort = () => {
       hideLabel
       label="Sort by"
       selectedKey={activeKey?.slug}
-      // placeholder="Sort by"
+      placeholder="Sort by"
     >
       {sorting.map((item) => {
         const q = searchParams.get('q');
         const sort = searchParams.get('sort');
         const limit = searchParams.get('limit');
-        const active = limit === item.slug;
+        const active = sort === item.slug;
         const href = createUrl(
           pathname,
           new URLSearchParams({

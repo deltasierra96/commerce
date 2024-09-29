@@ -1,5 +1,4 @@
 import productFragment from '../fragments/product';
-import seoFragment from '../fragments/seo';
 
 const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
@@ -18,7 +17,6 @@ const collectionFragment = /* GraphQL */ `
     }
     updatedAt
   }
-  ${seoFragment}
 `;
 
 export const getCollectionQuery = /* GraphQL */ `
