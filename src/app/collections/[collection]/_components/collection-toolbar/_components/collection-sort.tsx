@@ -17,15 +17,19 @@ export const CollectionSort = () => {
       // placeholder="Sort by"
     >
       {sorting.map((item) => {
-        const active = searchParams.get('sort') === item.slug;
         const q = searchParams.get('q');
+        const sort = searchParams.get('sort');
+        const limit = searchParams.get('limit');
+        const active = limit === item.slug;
         const href = createUrl(
           pathname,
           new URLSearchParams({
             ...(q && { q }),
+            ...(limit && { limit }),
             ...(item.slug && item.slug.length && { sort: item.slug })
           })
         );
+
         return (
           <SelectItem
             isSelected={active}

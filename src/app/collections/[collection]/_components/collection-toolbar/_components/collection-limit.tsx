@@ -17,10 +17,10 @@ export const CollectionLimit = () => {
       placeholder="Limit by"
     >
       {limit.map((item) => {
-        const limit = searchParams.get('limit');
-        const active = limit === item.amount;
         const q = searchParams.get('q');
         const sort = searchParams.get('sort');
+        const limit = searchParams.get('limit');
+        const active = limit === item.amount;
         const href = createUrl(
           pathname,
           new URLSearchParams({
