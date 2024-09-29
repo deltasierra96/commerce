@@ -17,7 +17,6 @@ import {
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
 import {
-  getCollectionDerpQuery,
   getCollectionProductsQuery,
   getCollectionQuery,
   getCollectionsQuery
@@ -42,7 +41,6 @@ import {
   ShopifyCartOperation,
   ShopifyCollection,
   ShopifyCollectionDerpOperation,
-  ShopifyCollectionOperation,
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
@@ -282,38 +280,27 @@ export async function getCart(cartId: string | undefined): Promise<Cart | undefi
   return reshapeCart(res.body.data.cart);
 }
 
-export async function getCollection(handle: string): Promise<Collection | undefined> {
-  const res = await shopifyFetch<ShopifyCollectionOperation>({
-    query: getCollectionQuery,
-    tags: [TAGS.collections],
-    variables: {
-      handle
-    }
-  });
-
-  return reshapeCollection(res.body.data.collection);
-}
-
-export async function getCollectionDerp({
+export async function getCollection({
   handle,
   reverse,
-  sortKey
+  sortKey,
+  limit = '5'
 }: {
   handle: string;
+  limit?: string;
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Collection | undefined> {
   const res = await shopifyFetch<ShopifyCollectionDerpOperation>({
-    query: getCollectionDerpQuery,
+    query: getCollectionQuery,
     tags: [TAGS.collections],
     variables: {
+      limit: parseInt(limit),
       handle,
       reverse,
       sortKey
     }
   });
-
-  console.log('res', res.body.data.collection);
 
   return reshapeCollection(res.body.data.collection);
 }

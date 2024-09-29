@@ -1,40 +1,43 @@
 'use client';
 import { Select, SelectItem } from '@/components/ui/select';
-import { sorting } from '@/lib/constants';
+import { limit } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export const CollectionSort = () => {
+export const CollectionLimit = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeKey = sorting.find((sort) => searchParams.get('sort') === sort.slug);
+  const activeKey = limit.find((limit) => searchParams.get('limit') === limit.amount);
   return (
     <Select
       className={'w-56'}
       hideLabel
-      label="Sort by"
-      selectedKey={activeKey?.slug}
-      // placeholder="Sort by"
+      label="Limit by"
+      selectedKey={activeKey?.amount}
+      placeholder="Limit by"
     >
-      {sorting.map((item) => {
-        const active = searchParams.get('sort') === item.slug;
+      {limit.map((item) => {
+        const limit = searchParams.get('limit');
+        const active = limit === item.amount;
         const q = searchParams.get('q');
+        const sort = searchParams.get('sort');
         const href = createUrl(
           pathname,
           new URLSearchParams({
             ...(q && { q }),
-            ...(item.slug && item.slug.length && { sort: item.slug })
+            ...(sort && { sort }),
+            ...(item.amount && item.amount.length && { limit: item.amount })
           })
         );
         return (
           <SelectItem
             isSelected={active}
-            key={item.slug}
-            id={item.slug!}
-            textValue={item.title}
+            key={item.amount}
+            id={item.amount!}
+            textValue={item.amount}
             href={href}
           >
-            {item.title}
+            {item.amount}
           </SelectItem>
         );
       })}

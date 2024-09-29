@@ -5,6 +5,7 @@ import { Icon } from '@/components/ui/icon';
 import { Collection } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import { Button } from 'react-aria-components';
+import { CollectionLimit } from './_components/collection-limit';
 import { CollectionSort } from './_components/collection-sort';
 
 type CollectionToolbarProps = {
@@ -29,6 +30,7 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
           <div className="rounded-lg bg-white p-3">
             <div className="flex items-center justify-end gap-x-4">
               <ButtonIcon icon="grid" variant={'outline'} />
+              <CollectionLimit />
               <CollectionSort />
             </div>
           </div>

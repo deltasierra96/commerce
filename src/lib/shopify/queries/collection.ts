@@ -22,19 +22,15 @@ const collectionFragment = /* GraphQL */ `
 `;
 
 export const getCollectionQuery = /* GraphQL */ `
-  query collection($handle: String!) {
+  query collection(
+    $handle: String!
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
+    $limit: Int!
+  ) {
     collection(handle: $handle) {
       ...collection
-    }
-  }
-  ${collectionFragment}
-`;
-
-export const getCollectionDerpQuery = /* GraphQL */ `
-  query collection($handle: String!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean) {
-    collection(handle: $handle) {
-      ...collection
-      products(sortKey: $sortKey, reverse: $reverse, first: 10) {
+      products(sortKey: $sortKey, reverse: $reverse, first: $limit) {
         edges {
           node {
             ...product

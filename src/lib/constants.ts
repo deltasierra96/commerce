@@ -5,6 +5,10 @@ export type SortFilterItem = {
   reverse: boolean;
 };
 
+export type LimitItem = {
+  amount: string;
+};
+
 export const defaultSort: SortFilterItem = {
   title: 'Relevance',
   slug: null,
@@ -18,6 +22,13 @@ export const sorting: SortFilterItem[] = [
   { title: 'Latest arrivals', slug: 'latest-desc', sortKey: 'CREATED', reverse: true },
   { title: 'Price: Low to high', slug: 'price-asc', sortKey: 'PRICE', reverse: false }, // asc
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
+];
+
+export const limit: LimitItem[] = [
+  { amount: '5' }, // asc
+  { amount: '10' }, // asc
+  { amount: '15' }, // asc
+  { amount: '20' } // asc
 ];
 
 export const TAGS = {

@@ -231,6 +231,7 @@ export type ShopifyCollectionDerpOperation = {
   };
   variables: {
     handle: string;
+    limit: number;
     reverse?: boolean;
     sortKey?: string;
   };
