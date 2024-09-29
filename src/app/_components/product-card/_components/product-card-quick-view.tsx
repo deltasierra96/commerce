@@ -12,7 +12,7 @@ export type ProductCardQuickViewProps = LinkProps & {
 export const ProductCardQuickView = ({ product, ...props }: ProductCardQuickViewProps) => {
   return (
     <Modal size={'xl'}>
-      <Button block variant={'outline'} color={'neutral'}>
+      <Button block variant={'outline'} leftIcon="eye" color={'neutral'}>
         Quick view
       </Button>
       <Modal.Content>

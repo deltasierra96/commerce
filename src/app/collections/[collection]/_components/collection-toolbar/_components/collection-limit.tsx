@@ -9,13 +9,7 @@ export const CollectionLimit = () => {
   const searchParams = useSearchParams();
   const activeKey = limit.find((limit) => searchParams.get('limit') === limit.amount);
   return (
-    <Select
-      className={'w-56'}
-      hideLabel
-      label="Limit by"
-      selectedKey={activeKey?.amount}
-      placeholder="Limit by"
-    >
+    <Select hideLabel label="Limit by" selectedKey={activeKey?.amount} placeholder="Limit by">
       {limit.map((item) => {
         const q = searchParams.get('q');
         const sort = searchParams.get('sort');

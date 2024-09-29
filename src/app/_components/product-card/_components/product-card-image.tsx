@@ -39,7 +39,7 @@ export const ProductCardImage = ({
       <Link
         href={productUrl}
         className={clsx(
-          'relative block aspect-1 w-full overflow-hidden bg-white outline-none transition-all',
+          'relative block aspect-1 w-full overflow-hidden rounded-lg bg-white outline-none transition-all',
           'duration-150 fill-mode-forwards',
           'group-data-[hovered=true]:opacity-70'
         )}

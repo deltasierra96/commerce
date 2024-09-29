@@ -40,10 +40,10 @@ export const ProductCard = ({
             <ProductCardHoverActions product={product} />
           </div>
         </div>
-        <div className="overflow-hidden rounded-card bg-white">
+        <div className="overflow-hidden rounded-card bg-white py-4">
           <ProductCardImage product={product} />
         </div>
-        <div className="space-y-3 py-4">
+        <div className="space-y-3 pb-4">
           <div className="flex flex-col gap-y-1">
             <ProductCardVendor product={product} />
             <ProductCardTitle product={product} />

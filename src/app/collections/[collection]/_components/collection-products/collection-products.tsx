@@ -25,7 +25,8 @@ export const CollectionProducts = async ({
             product={product}
             className={clsx(
               'max-lg:border-b',
-              'border-neutral-100 bg-white px-4 transition-all duration-75 lg:mx-0 lg:rounded-lg lg:data-[hovered=true]:shadow-lg',
+              'lg:rounded-lg',
+              'border-neutral-100 bg-white px-4 transition-all duration-75 lg:mx-0 lg:data-[hovered=true]:shadow-lg',
               'lg:data-[hovered=true]:shadow-neutral-950/5',
               'max-lg:border-b',
               'max-md:odd:border-r',

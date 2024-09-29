@@ -1,5 +1,6 @@
 'use client';
 import { ButtonIcon } from '@/components/ui/button-icon';
+import { DialogHeader } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
@@ -27,7 +28,9 @@ export const Search = ({ ...props }: SearchProps) => {
   return (
     <Drawer>
       <ButtonIcon icon="search" variant={'ghost'} />
+
       <Drawer.Content>
+        <DialogHeader>Search</DialogHeader>
         <div className="p-6">
           <Form action="/search" className="relative w-full">
             <SearchInput

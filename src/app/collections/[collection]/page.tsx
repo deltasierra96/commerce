@@ -55,7 +55,7 @@ export default async function CollectionPage({
           {collection.products.length === 0 ? (
             <CollectionEmpty />
           ) : (
-            <Container>
+            <Container className="px-0 sm:px-0">
               <div className="pb-24 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-12">
                 <div className="hidden lg:col-span-3 xl:block">
                   <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 sticky top-40 -mx-3 h-[calc(100vh-12rem)] shrink-0 self-start overflow-y-scroll px-3">
