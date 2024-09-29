@@ -3,6 +3,7 @@ import seoFragment from '../fragments/seo';
 
 const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
+    id
     handle
     title
     description
@@ -21,11 +22,35 @@ const collectionFragment = /* GraphQL */ `
 `;
 
 export const getCollectionQuery = /* GraphQL */ `
-  query collectionByHandle($handle: String!) {
+  query collection($handle: String!) {
     collection(handle: $handle) {
       ...collection
     }
   }
+  ${collectionFragment}
+`;
+
+export const getCollectionDerpQuery = /* GraphQL */ `
+  query collection($handle: String!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean) {
+    collection(handle: $handle) {
+      ...collection
+      products(sortKey: $sortKey, reverse: $reverse, first: 10) {
+        edges {
+          node {
+            ...product
+          }
+        }
+
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          endCursor
+          startCursor
+        }
+      }
+    }
+  }
+  ${productFragment}
   ${collectionFragment}
 `;
 
@@ -49,11 +74,18 @@ export const getCollectionProductsQuery = /* GraphQL */ `
     $reverse: Boolean
   ) {
     collection(handle: $handle) {
-      products(sortKey: $sortKey, reverse: $reverse, first: 100) {
+      products(sortKey: $sortKey, reverse: $reverse, first: 10) {
         edges {
           node {
             ...product
           }
+        }
+
+        pageInfo {
+          hasPreviousPage
+          hasNextPage
+          endCursor
+          startCursor
         }
       }
     }

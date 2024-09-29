@@ -2,16 +2,21 @@
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
-import { Select, SelectItem } from '@/components/ui/select';
 import { Collection } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { Button } from 'react-aria-components';
+import { useCollection } from '../../collection-context';
+import { CollectionSort } from './_components/collection-sort';
 
 type CollectionToolbarProps = {
   collection: Collection;
 };
 
-export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarProps) => {
+export const CollectionToolbar = ({ ...props }: CollectionToolbarProps) => {
+  const collection = useCollection();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   return (
     <div>
       <div className="lg:hidden">
@@ -29,33 +34,7 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
           <div className="rounded-lg bg-white p-3">
             <div className="flex items-center justify-end gap-x-4">
               <ButtonIcon icon="grid" variant={'outline'} />
-              <Select
-                className={'w-56'}
-                hideLabel
-                label="Sort by"
-                defaultSelectedKey={0}
-                placeholder="Sort by"
-              >
-                <SelectItem href="/collections/accessories?sort_by=manual">Featured</SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=title-ascending">
-                  Alphabetically, A-Z
-                </SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=title-descending">
-                  Alphabetically, Z-A
-                </SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=price-ascending">
-                  Price, low to high
-                </SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=price-descending">
-                  Price, high to low
-                </SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=created-ascending">
-                  Date, old to new
-                </SelectItem>
-                <SelectItem href="/collections/accessories?sort_by=created-descending">
-                  Date, new to old
-                </SelectItem>
-              </Select>
+              <CollectionSort />
             </div>
           </div>
         </Container>

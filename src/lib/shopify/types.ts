@@ -108,12 +108,19 @@ export type ShopifyCart = {
 };
 
 export type ShopifyCollection = {
+  id: string;
   handle: string;
   title: string;
   description: string;
   seo: SEO;
   updatedAt: string;
   image?: Image;
+  pageInfo: {
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+    startCursor: string;
+    endCursor: string;
+  };
 };
 
 export type ShopifyProduct = {
@@ -207,6 +214,19 @@ export type ShopifyCollectionProductsOperation = {
   data: {
     collection: {
       products: Connection<ShopifyProduct>;
+    };
+  };
+  variables: {
+    handle: string;
+    reverse?: boolean;
+    sortKey?: string;
+  };
+};
+
+export type ShopifyCollectionDerpOperation = {
+  data: {
+    collection: {
+      products: ShopifyCollection;
     };
   };
   variables: {

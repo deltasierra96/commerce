@@ -1,5 +1,4 @@
 import imageFragment from './image';
-import seoFragment from './seo';
 
 const productFragment = /* GraphQL */ `
   fragment product on Product {
@@ -54,14 +53,11 @@ const productFragment = /* GraphQL */ `
         }
       }
     }
-    seo {
-      ...seo
-    }
+
     tags
     updatedAt
   }
   ${imageFragment}
-  ${seoFragment}
 `;
 
 export default productFragment;

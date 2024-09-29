@@ -15,7 +15,7 @@ export const CollectionHeader = ({ collection, ...props }: CollectionHeaderProps
   return (
     <div className="bg-white py-2 lg:bg-transparent">
       <Container>
-        <div className="relative flex flex-col justify-center md:h-[18rem] lg:h-[26rem] xl:h-[30rem]">
+        <div className="relative flex flex-col justify-center md:h-[18rem] lg:h-[15rem] xl:h-[17rem]">
           <div className="overflow-hidden rounded-card md:absolute md:inset-0">
             {collection.image ? (
               <Image

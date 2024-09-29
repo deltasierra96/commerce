@@ -17,6 +17,7 @@ import {
 } from './mutations/cart';
 import { getCartQuery } from './queries/cart';
 import {
+  getCollectionDerpQuery,
   getCollectionProductsQuery,
   getCollectionQuery,
   getCollectionsQuery
@@ -40,6 +41,7 @@ import {
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCollection,
+  ShopifyCollectionDerpOperation,
   ShopifyCollectionOperation,
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
@@ -288,6 +290,28 @@ export async function getCollection(handle: string): Promise<Collection | undefi
   });
 
   return reshapeCollection(res.body.data.collection);
+}
+
+export async function getCollectionDerp({
+  handle,
+  reverse,
+  sortKey
+}: {
+  handle: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Collection | undefined> {
+  const res = await shopifyFetch<ShopifyCollectionDerpOperation>({
+    query: getCollectionDerpQuery,
+    tags: [TAGS.collections],
+    variables: {
+      handle,
+      reverse,
+      sortKey
+    }
+  });
+
+  return reshapeCollection(res.body.data.collection.products);
 }
 
 export async function getCollectionProducts({

@@ -249,7 +249,7 @@ input[type='search']::-webkit-search-results-decoration {
   --button-font: var(--font-sans);
   --button-font-weight: theme(fontWeight.semibold);
   --button-border-radius: var(--input-border-radius);
-  --button-border-radius: 999px;
+  /* --button-border-radius: 999px; */
   --button-border-width: var(--input-border-width);
   --button-height-sm: var(--input-height-sm);
   --button-height: var(--input-height);
@@ -321,7 +321,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-brands-christies-900);
   --colors-primary-950: var(--colors-brands-christies-950); */
 
-  /* --colors-primary-50: var(--colors-brands-mss-50);
+  --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
   --colors-primary-300: var(--colors-brands-mss-300);
@@ -331,7 +331,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950); */
+  --colors-primary-950: var(--colors-brands-mss-950);
 
   --colors-neutral-50: var(--colors-slate-50);
   --colors-neutral-100: var(--colors-slate-100);
@@ -370,11 +370,11 @@ input[type='search']::-webkit-search-results-decoration {
   --border-radius--2xl: 1.44rem;
   --border-radius--3xl: 2.16rem; */
 
-  --border-radius--sm: 0.2692rem;
+  /* --border-radius--sm: 0.2692rem;
   --border-radius: 0.4595rem;
   --border-radius--md: 0.648rem;
   --border-radius--lg: 1.0368rem;
   --border-radius--xl: 1.5552rem;
   --border-radius--2xl: 2.0736rem;
-  --border-radius--3xl: 3.1104rem;
+  --border-radius--3xl: 3.1104rem; */
 }

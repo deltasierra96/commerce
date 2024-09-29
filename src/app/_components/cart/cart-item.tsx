@@ -36,7 +36,7 @@ export const CartItem = ({ cartItem, merchandiseUrl, updateCartItem, ...props }:
         <div className="flex justify-between">
           <h3 className="flex flex-col">
             <Link
-              className={'text-sm font-medium hover:text-neutral-700 hover:underline'}
+              className={'text-sm font-medium outline-none hover:text-neutral-700 hover:underline'}
               onPress={() => setIsCartOpen(false)}
               href={merchandiseUrl}
             >
