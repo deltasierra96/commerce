@@ -2,7 +2,7 @@ import {
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
-  STORE_ROUTE_COLLECTION,
+  STORE_ROUTE_COLLECTIONS,
   TAGS
 } from '@/lib/constants';
 import { isShopifyError } from '@/lib/type-guards';
@@ -145,7 +145,7 @@ const reshapeCollection = (collection: ShopifyCollection): Collection | undefine
 
   return {
     ...collection,
-    path: `${STORE_ROUTE_COLLECTION}/${collection.handle}`
+    path: `${STORE_ROUTE_COLLECTIONS}/${collection.handle}`
   };
 };
 
@@ -328,17 +328,17 @@ export async function getCollections(): Promise<Collection[]> {
   });
   const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
   const collections = [
-    // {
-    //   handle: '',
-    //   title: 'All',
-    //   description: 'All products',
-    //   seo: {
-    //     title: 'All',
-    //     description: 'All products'
-    //   },
-    //   path: '/search',
-    //   updatedAt: new Date().toISOString()
-    // },
+    {
+      handle: '',
+      title: 'All',
+      description: 'All products',
+      seo: {
+        title: 'All',
+        description: 'All products'
+      },
+      path: '/search',
+      updatedAt: new Date().toISOString()
+    },
     // Filter out the `hidden` collections.
     // Collections that start with `hidden-*` need to be hidden on the search page.
     ...reshapeCollections(shopifyCollections).filter(

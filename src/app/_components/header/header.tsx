@@ -7,12 +7,11 @@ import { MobileHeader } from './_components/mobile-header';
 
 export type HeaderProps = {
   className?: string;
-  fullWidth?: boolean;
   menu: Menu[];
 };
 
 export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, fullWidth = false, menu, ...rest }, forwardedRef) => {
+  ({ className, menu, ...rest }, forwardedRef) => {
     return (
       <>
         <header

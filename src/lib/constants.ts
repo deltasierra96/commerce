@@ -1,7 +1,7 @@
 export type SortFilterItem = {
   title: string;
   slug: string | null;
-  sortKey: 'TITLE' | 'BEST_SELLING' | 'CREATED' | 'PRICE' | 'CREATED';
+  sortKey: 'TITLE' | 'BEST_SELLING' | 'CREATED' | 'PRICE' | 'CREATED' | 'MANUAL';
   reverse: boolean;
 };
 
@@ -22,6 +22,7 @@ export const COLLECTION_PRODUCTS_DEFAULT_SORTING: SortFilterItem = {
 
 export const COLLECTION_PRODUCTS_SORTING: SortFilterItem[] = [
   COLLECTION_PRODUCTS_DEFAULT_SORTING,
+  { title: 'Featured', slug: 'featured', sortKey: 'MANUAL', reverse: true },
   { title: 'Latest arrivals', slug: 'latest-desc', sortKey: 'CREATED', reverse: true },
   { title: 'Alphabetically, A-Z', slug: 'title-asc', sortKey: 'TITLE', reverse: false }, //asc
   { title: 'Alphabetically, Z-A', slug: 'title-desc', sortKey: 'TITLE', reverse: true },
@@ -52,7 +53,7 @@ export const DEFAULT_OPTION = 'Default Title';
 export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2024-07/graphql.json';
 
 export const STORE_ROUTE = '';
-export const STORE_ROUTE_COLLECTION = `${STORE_ROUTE}/collections`;
+export const STORE_ROUTE_COLLECTIONS = `${STORE_ROUTE}/collections`;
 export const STORE_ROUTE_PRODUCT = `${STORE_ROUTE}/product`;
 
 export const ACCOUNT_ROUTE = '/account';

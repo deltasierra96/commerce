@@ -21,27 +21,29 @@ export const CollectionLimit = () => {
 
   return (
     <Select hideLabel label="Limit by" selectedKey={activeKey?.limitAmount} placeholder="Limit by">
-      {COLLECTION_PRODUCTS_LIMIT.map((item) => {
-        const active = limit === item.limitAmount;
-        const href = createUrl(
-          pathname,
-          new URLSearchParams({
-            ...(sort && { sort }),
-            ...(item.limitAmount && item.limitAmount.length && { limit: item.limitAmount })
-          })
-        );
-        return (
-          <SelectItem
-            isSelected={active}
-            key={item.limitAmount}
-            id={item.limitAmount!}
-            textValue={item.limitAmount!}
-            href={href}
-          >
-            {item.limitAmount}
-          </SelectItem>
-        );
-      })}
+      {COLLECTION_PRODUCTS_LIMIT.sort((a, b) => a.limitAmount.localeCompare(b.limitAmount)).map(
+        (item) => {
+          const active = limit === item.limitAmount;
+          const href = createUrl(
+            pathname,
+            new URLSearchParams({
+              ...(sort && { sort }),
+              ...(item.limitAmount && item.limitAmount.length && { limit: item.limitAmount })
+            })
+          );
+          return (
+            <SelectItem
+              isSelected={active}
+              key={item.limitAmount}
+              id={item.limitAmount!}
+              textValue={item.limitAmount!}
+              href={href}
+            >
+              {item.limitAmount}
+            </SelectItem>
+          );
+        }
+      )}
     </Select>
   );
 };

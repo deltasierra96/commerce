@@ -28,7 +28,7 @@ export const CollectionSort = () => {
       selectedKey={activeKey?.slug!}
       placeholder="Sort by"
     >
-      {COLLECTION_PRODUCTS_SORTING.map((item) => {
+      {COLLECTION_PRODUCTS_SORTING.sort((a, b) => a.title.localeCompare(b.title)).map((item) => {
         const active = sort === item.slug;
         const href = createUrl(
           pathname,
