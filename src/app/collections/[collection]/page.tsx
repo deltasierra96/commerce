@@ -54,6 +54,7 @@ export default async function CollectionPage({
   const collectionProducts = await getCollectionProducts({
     sortKey,
     limit: limitAmount,
+    reverse,
     collection: params.collection
   });
 
