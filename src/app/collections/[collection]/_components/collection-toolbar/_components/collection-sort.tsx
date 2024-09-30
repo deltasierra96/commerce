@@ -1,27 +1,40 @@
 'use client';
 import { Select, SelectItem } from '@/components/ui/select';
-import { COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import {
+  COLLECTION_PRODUCTS_DEFAULT_SORTING,
+  COLLECTION_PRODUCTS_LIMIT_URL_PARAM,
+  COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM,
+  COLLECTION_PRODUCTS_SORT_URL_PARAM,
+  COLLECTION_PRODUCTS_SORTING
+} from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export const CollectionSort = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeKey = COLLECTION_PRODUCTS_SORTING.find(
-    (sort) => searchParams.get('sort') === sort.slug
-  );
+  const q = searchParams.get(COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM);
+  const sort = searchParams.get(COLLECTION_PRODUCTS_SORT_URL_PARAM);
+  const limit = searchParams.get(COLLECTION_PRODUCTS_LIMIT_URL_PARAM);
+
+  console.log('sort', sort);
+
+  const activeKey =
+    COLLECTION_PRODUCTS_SORTING.find(
+      (sort) => searchParams.get(COLLECTION_PRODUCTS_SORT_URL_PARAM) === sort.slug
+    ) || COLLECTION_PRODUCTS_DEFAULT_SORTING;
+
+  console.log('activeKey', activeKey);
+
   return (
     <Select
       className={'w-56'}
       hideLabel
       label="Sort by"
-      selectedKey={activeKey?.slug}
+      defaultSelectedKey={activeKey?.slug!}
       placeholder="Sort by"
     >
       {COLLECTION_PRODUCTS_SORTING.map((item) => {
-        const q = searchParams.get('q');
-        const sort = searchParams.get('sort');
-        const limit = searchParams.get('limit');
         const active = sort === item.slug;
         const href = createUrl(
           pathname,
@@ -31,6 +44,8 @@ export const CollectionSort = () => {
             ...(item.slug && item.slug.length && { sort: item.slug })
           })
         );
+
+        console.log('href', href);
 
         return (
           <SelectItem

@@ -1,5 +1,10 @@
 import { Container } from '@/components/ui/container';
-import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import {
+  COLLECTION_PRODUCTS_DEFAULT_LIMIT,
+  COLLECTION_PRODUCTS_DEFAULT_SORTING,
+  COLLECTION_PRODUCTS_LIMIT,
+  COLLECTION_PRODUCTS_SORTING
+} from '@/lib/constants';
 import { getCollection, getCollectionProducts } from '@/lib/shopify';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -38,9 +43,9 @@ export default async function CollectionPage({
     COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
     COLLECTION_PRODUCTS_DEFAULT_SORTING;
 
-  // const { limitAmount } =
-  //   COLLECTION_PRODUCTS_LIMIT.find((item) => item.limitAmount === limit) ||
-  //   COLLECTION_PRODUCTS_DEFAULT_LIMIT;
+  const { limitAmount } =
+    COLLECTION_PRODUCTS_LIMIT.find((item) => item.limitAmount === limit) ||
+    COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
   const collection = await getCollection(params.collection);
 
@@ -48,7 +53,7 @@ export default async function CollectionPage({
 
   const collectionProducts = await getCollectionProducts({
     sortKey,
-    // limit: limitAmount,
+    limit: limitAmount,
     collection: params.collection
   });
 

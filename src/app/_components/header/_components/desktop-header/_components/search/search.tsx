@@ -1,6 +1,7 @@
 'use client';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/lib/constants';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 
@@ -27,7 +28,7 @@ export const Search = ({ ...props }: SearchProps) => {
       <SearchInput
         type="text"
         name="q"
-        defaultValue={searchParams?.get('q') || ''}
+        defaultValue={searchParams?.get(COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM) || ''}
         autoComplete="off"
         hideLabel
         placeholder="What are you looking for today?"

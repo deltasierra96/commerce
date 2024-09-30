@@ -1,6 +1,6 @@
 'use client';
 
-import { type SortFilterItem } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM, type SortFilterItem } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   const newParams = new URLSearchParams(searchParams.toString());
   const DynamicTag = active ? 'p' : Link;
 
-  newParams.delete('q');
+  newParams.delete(COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM);
 
   return (
     <li className="mt-2 flex text-black dark:text-white" key={item.title}>
@@ -37,7 +37,7 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const active = searchParams.get('sort') === item.slug;
-  const q = searchParams.get('q');
+  const q = searchParams.get(COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM);
   const href = createUrl(
     pathname,
     new URLSearchParams({
