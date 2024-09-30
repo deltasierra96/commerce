@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui/container';
-import { defaultSort, sorting } from '@/lib/constants';
-import { getCollection } from '@/lib/shopify';
+import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import { getCollection, getCollectionProducts } from '@/lib/shopify';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -15,9 +15,7 @@ export async function generateMetadata({
 }: {
   params: { collection: string };
 }): Promise<Metadata> {
-  const collection = await getCollection({
-    handle: params.collection
-  });
+  const collection = await getCollection(params.collection);
   if (!collection) return notFound();
 
   return {
@@ -35,16 +33,24 @@ export default async function CollectionPage({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const { sort, limit } = searchParams as { [key: string]: string };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const collection = await getCollection({
-    limit,
-    handle: params.collection,
-    sortKey,
-    reverse
-  });
+  const { sortKey, reverse } =
+    COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
+    COLLECTION_PRODUCTS_DEFAULT_SORTING;
+
+  // const { limitAmount } =
+  //   COLLECTION_PRODUCTS_LIMIT.find((item) => item.limitAmount === limit) ||
+  //   COLLECTION_PRODUCTS_DEFAULT_LIMIT;
+
+  const collection = await getCollection(params.collection);
 
   if (!collection) notFound();
+
+  const collectionProducts = await getCollectionProducts({
+    sortKey,
+    // limit: limitAmount,
+    collection: params.collection
+  });
 
   return (
     <section className="lg:py-12">
@@ -52,7 +58,7 @@ export default async function CollectionPage({
         <CollectionHeader collection={collection} />
         <CollectionToolbar collection={collection} />
         <div>
-          {collection.products.length === 0 ? (
+          {collectionProducts.length === 0 ? (
             <CollectionEmpty />
           ) : (
             <Container className="px-0 sm:px-0">
@@ -69,7 +75,7 @@ export default async function CollectionPage({
                   <Suspense fallback={<p>loading</p>}>
                     <CollectionProducts
                       params={params}
-                      products={collection.products}
+                      products={collectionProducts}
                       reverse={reverse}
                       sortKey={sortKey}
                     />

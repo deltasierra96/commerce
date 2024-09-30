@@ -1,8 +1,8 @@
 import productFragment from '../fragments/product';
+import seoFragment from '../fragments/seo';
 
 const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
-    id
     handle
     title
     description
@@ -17,33 +17,15 @@ const collectionFragment = /* GraphQL */ `
     }
     updatedAt
   }
+  ${seoFragment}
 `;
 
 export const getCollectionQuery = /* GraphQL */ `
-  query collection(
-    $handle: String!
-    $sortKey: ProductCollectionSortKeys
-    $reverse: Boolean
-    $limit: Int!
-  ) {
+  query getCollection($handle: String!) {
     collection(handle: $handle) {
       ...collection
-      products(sortKey: $sortKey, reverse: $reverse, first: $limit) {
-        edges {
-          node {
-            ...product
-          }
-        }
-        pageInfo {
-          hasPreviousPage
-          hasNextPage
-          endCursor
-          startCursor
-        }
-      }
     }
   }
-  ${productFragment}
   ${collectionFragment}
 `;
 
@@ -63,17 +45,17 @@ export const getCollectionsQuery = /* GraphQL */ `
 export const getCollectionProductsQuery = /* GraphQL */ `
   query getCollectionProducts(
     $handle: String!
+    $limit: Int!
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
   ) {
     collection(handle: $handle) {
-      products(sortKey: $sortKey, reverse: $reverse, first: 10) {
+      products(sortKey: $sortKey, reverse: $reverse, first: $limit) {
         edges {
           node {
             ...product
           }
         }
-
         pageInfo {
           hasPreviousPage
           hasNextPage

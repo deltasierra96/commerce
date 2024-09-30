@@ -9,8 +9,6 @@ const productFragment = /* GraphQL */ `
     title
     description
     descriptionHtml
-    vendor
-    totalInventory
     options {
       id
       name
@@ -45,7 +43,6 @@ const productFragment = /* GraphQL */ `
     }
     featuredImage {
       ...image
-      placeholder: url(transform: { maxWidth: 150 })
     }
     images(first: 20) {
       edges {
@@ -60,8 +57,8 @@ const productFragment = /* GraphQL */ `
     tags
     updatedAt
   }
-  ${seoFragment}
   ${imageFragment}
+  ${seoFragment}
 `;
 
 export default productFragment;

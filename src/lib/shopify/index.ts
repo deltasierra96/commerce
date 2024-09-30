@@ -1,14 +1,15 @@
-import { revalidateTag } from 'next/cache';
-import { headers } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
 import {
+  COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
   STORE_ROUTE_COLLECTION,
   TAGS
-} from '../constants';
-import { isShopifyError } from '../type-guards';
-import { ensureStartsWith } from '../utils';
+} from '@/lib/constants';
+import { isShopifyError } from '@/lib/type-guards';
+import { ensureStartsWith } from '@/lib/utils';
+import { revalidateTag } from 'next/cache';
+import { headers } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
 import {
   addToCartMutation,
   createCartMutation,
@@ -40,7 +41,7 @@ import {
   ShopifyCart,
   ShopifyCartOperation,
   ShopifyCollection,
-  ShopifyCollectionDerpOperation,
+  ShopifyCollectionOperation,
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
@@ -142,10 +143,8 @@ const reshapeCollection = (collection: ShopifyCollection): Collection | undefine
     return undefined;
   }
 
-  const products = reshapeProducts(removeEdgesAndNodes(collection.products));
   return {
     ...collection,
-    products,
     path: `${STORE_ROUTE_COLLECTION}/${collection.handle}`
   };
 };
@@ -280,25 +279,12 @@ export async function getCart(cartId: string | undefined): Promise<Cart | undefi
   return reshapeCart(res.body.data.cart);
 }
 
-export async function getCollection({
-  handle,
-  reverse,
-  sortKey,
-  limit = '5'
-}: {
-  handle: string;
-  limit?: string;
-  reverse?: boolean;
-  sortKey?: string;
-}): Promise<Collection | undefined> {
-  const res = await shopifyFetch<ShopifyCollectionDerpOperation>({
+export async function getCollection(handle: string): Promise<Collection | undefined> {
+  const res = await shopifyFetch<ShopifyCollectionOperation>({
     query: getCollectionQuery,
     tags: [TAGS.collections],
     variables: {
-      limit: parseInt(limit),
-      handle,
-      reverse,
-      sortKey
+      handle
     }
   });
 
@@ -308,9 +294,11 @@ export async function getCollection({
 export async function getCollectionProducts({
   collection,
   reverse,
+  limit = COLLECTION_PRODUCTS_DEFAULT_LIMIT.limitAmount,
   sortKey
 }: {
   collection: string;
+  limit?: string;
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
@@ -320,6 +308,7 @@ export async function getCollectionProducts({
     variables: {
       handle: collection,
       reverse,
+      limit: parseInt(limit),
       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
     }
   });
@@ -339,8 +328,19 @@ export async function getCollections(): Promise<Collection[]> {
   });
   const shopifyCollections = removeEdgesAndNodes(res.body?.data?.collections);
   const collections = [
+    // {
+    //   handle: '',
+    //   title: 'All',
+    //   description: 'All products',
+    //   seo: {
+    //     title: 'All',
+    //     description: 'All products'
+    //   },
+    //   path: '/search',
+    //   updatedAt: new Date().toISOString()
+    // },
     // Filter out the `hidden` collections.
-    // Collections that start with `hidden-*` need to be hidden on the collection page.
+    // Collections that start with `hidden-*` need to be hidden on the search page.
     ...reshapeCollections(shopifyCollections).filter(
       (collection) => !collection.handle.startsWith('hidden')
     )
@@ -364,12 +364,6 @@ export async function getMenu(handle: string): Promise<Menu[]> {
       path: item.url.replace(domain, '')
     })) || []
   );
-  // return (
-  //   res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
-  //     title: item.title,
-  //     path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', '')
-  //   })) || []
-  // );
 }
 
 export async function getPage(handle: string): Promise<Page> {
@@ -399,8 +393,6 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
       handle
     }
   });
-
-  console.log('res', res);
 
   return reshapeProduct(res.body.data.product, false);
 }

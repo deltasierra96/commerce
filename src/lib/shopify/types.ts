@@ -36,9 +36,8 @@ export type CartItem = {
   };
 };
 
-export type Collection = Omit<ShopifyCollection, 'products'> & {
+export type Collection = ShopifyCollection & {
   path: string;
-  products: Product[];
 };
 
 export type Image = {
@@ -109,20 +108,12 @@ export type ShopifyCart = {
 };
 
 export type ShopifyCollection = {
-  id: string;
   handle: string;
   title: string;
   description: string;
   seo: SEO;
   updatedAt: string;
   image?: Image;
-  pageInfo: {
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-    startCursor: string;
-    endCursor: string;
-  };
-  products: Connection<ShopifyProduct>;
 };
 
 export type ShopifyProduct = {
@@ -220,18 +211,7 @@ export type ShopifyCollectionProductsOperation = {
   };
   variables: {
     handle: string;
-    reverse?: boolean;
-    sortKey?: string;
-  };
-};
-
-export type ShopifyCollectionDerpOperation = {
-  data: {
-    collection: ShopifyCollection;
-  };
-  variables: {
-    handle: string;
-    limit: number;
+    limit?: number;
     reverse?: boolean;
     sortKey?: string;
   };

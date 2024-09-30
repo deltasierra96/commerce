@@ -17,7 +17,7 @@ export const CollectionProducts = async ({
   ...props
 }: CollectionProductsProps) => {
   return (
-    <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-4">
+    <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4">
       {products?.map((product) => {
         return (
           <ProductCard

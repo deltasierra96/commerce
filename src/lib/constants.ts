@@ -6,29 +6,34 @@ export type SortFilterItem = {
 };
 
 export type LimitItem = {
-  amount: string;
+  limitAmount: string;
 };
 
-export const defaultSort: SortFilterItem = {
+export const COLLECTION_PRODUCTS_DEFAULT_SORTING: SortFilterItem = {
   title: 'Relevance',
   slug: null,
   sortKey: 'RELEVANCE',
   reverse: false
 };
 
-export const sorting: SortFilterItem[] = [
-  defaultSort,
+export const COLLECTION_PRODUCTS_SORTING: SortFilterItem[] = [
+  COLLECTION_PRODUCTS_DEFAULT_SORTING,
   { title: 'Trending', slug: 'trending-desc', sortKey: 'BEST_SELLING', reverse: false }, // asc
   { title: 'Latest arrivals', slug: 'latest-desc', sortKey: 'CREATED', reverse: true },
   { title: 'Price: Low to high', slug: 'price-asc', sortKey: 'PRICE', reverse: false }, // asc
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
 ];
 
-export const limit: LimitItem[] = [
-  { amount: '5' }, // asc
-  { amount: '10' }, // asc
-  { amount: '15' }, // asc
-  { amount: '20' } // asc
+export const COLLECTION_PRODUCTS_DEFAULT_LIMIT: LimitItem = {
+  limitAmount: '30'
+};
+
+export const COLLECTION_PRODUCTS_LIMIT: LimitItem[] = [
+  COLLECTION_PRODUCTS_DEFAULT_LIMIT,
+  { limitAmount: '5' }, // asc
+  { limitAmount: '10' }, // asc
+  { limitAmount: '15' }, // asc
+  { limitAmount: '20' } // asc
 ];
 
 export const TAGS = {

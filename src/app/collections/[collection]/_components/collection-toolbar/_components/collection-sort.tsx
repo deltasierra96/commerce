@@ -1,13 +1,15 @@
 'use client';
 import { Select, SelectItem } from '@/components/ui/select';
-import { sorting } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export const CollectionSort = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeKey = sorting.find((sort) => searchParams.get('sort') === sort.slug);
+  const activeKey = COLLECTION_PRODUCTS_SORTING.find(
+    (sort) => searchParams.get('sort') === sort.slug
+  );
   return (
     <Select
       className={'w-56'}
@@ -16,7 +18,7 @@ export const CollectionSort = () => {
       selectedKey={activeKey?.slug}
       placeholder="Sort by"
     >
-      {sorting.map((item) => {
+      {COLLECTION_PRODUCTS_SORTING.map((item) => {
         const q = searchParams.get('q');
         const sort = searchParams.get('sort');
         const limit = searchParams.get('limit');

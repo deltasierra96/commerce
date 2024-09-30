@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { ProductCard } from '@/app/_components/product-card';
-import { defaultSort, sorting } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
 import { getCollection, getCollectionProducts } from '@/lib/shopify';
 
 export async function generateMetadata({
@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
   params: { collection: string };
 }): Promise<Metadata> {
-  const collection = await getCollection({ handle: params.collection });
+  const collection = await getCollection(params.collection);
 
   if (!collection) return notFound();
 
@@ -29,7 +29,9 @@ export default async function CollectionPage({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const { sort } = searchParams as { [key: string]: string };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+  const { sortKey, reverse } =
+    COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
+    COLLECTION_PRODUCTS_DEFAULT_SORTING;
   const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
 
   return (
