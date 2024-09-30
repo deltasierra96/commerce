@@ -20,7 +20,13 @@ export const CollectionLimit = () => {
     ) || COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
   return (
-    <Select hideLabel label="Limit by" selectedKey={activeKey?.limitAmount} placeholder="Limit by">
+    <Select
+      hideLabel
+      className={'min-w-40'}
+      label="Limit by"
+      selectedKey={activeKey?.limitAmount}
+      placeholder="Limit by"
+    >
       {COLLECTION_PRODUCTS_LIMIT.sort((a, b) => a.limitAmount.localeCompare(b.limitAmount)).map(
         (item) => {
           const active = limit === item.limitAmount;
@@ -39,7 +45,7 @@ export const CollectionLimit = () => {
               textValue={item.limitAmount!}
               href={href}
             >
-              {item.limitAmount}
+              {`${item.limitAmount} per page`}
             </SelectItem>
           );
         }

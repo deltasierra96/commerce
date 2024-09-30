@@ -22,7 +22,7 @@ export const CollectionSort = () => {
 
   return (
     <Select
-      className={'w-56'}
+      className={'min-w-48'}
       hideLabel
       label="Sort by"
       selectedKey={activeKey?.slug!}
