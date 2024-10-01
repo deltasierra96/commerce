@@ -30,16 +30,14 @@ export const COLLECTION_PRODUCTS_SORTING: SortFilterItem[] = [
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
 ];
 
-export const COLLECTION_PRODUCTS_DEFAULT_LIMIT: LimitItem = {
-  limitAmount: '30'
-};
+export const COLLECTION_PRODUCTS_DEFAULT_LIMIT: number = 30;
 
-export const COLLECTION_PRODUCTS_LIMIT: LimitItem[] = [
+export const COLLECTION_PRODUCTS_LIMIT: number[] = [
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
-  { limitAmount: '5' }, // asc
-  { limitAmount: '10' }, // asc
-  { limitAmount: '15' }, // asc
-  { limitAmount: '20' } // asc
+  5,
+  10,
+  15,
+  20
 ];
 
 export const TAGS = {

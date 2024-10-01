@@ -14,7 +14,7 @@ type CollectionToolbarProps = {
 
 export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarProps) => {
   return (
-    <div className="p-4">
+    <>
       <div className="lg:hidden">
         <Drawer>
           <Button rounded block variant={'outline'} leftIcon="filter">
@@ -46,6 +46,6 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
           </div>
         </Container>
       </div>
-    </div>
+    </>
   );
 };

@@ -294,11 +294,11 @@ export async function getCollection(handle: string): Promise<Collection | undefi
 export async function getCollectionProducts({
   collection,
   reverse,
-  limit = COLLECTION_PRODUCTS_DEFAULT_LIMIT.limitAmount,
+  limit = COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   sortKey
 }: {
   collection: string;
-  limit?: string;
+  limit?: number;
   reverse?: boolean;
   sortKey?: string;
 }): Promise<Product[]> {
@@ -308,7 +308,7 @@ export async function getCollectionProducts({
     variables: {
       handle: collection,
       reverse,
-      limit: parseInt(limit),
+      limit: limit,
       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
     }
   });

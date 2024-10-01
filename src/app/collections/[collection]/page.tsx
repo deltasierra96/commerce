@@ -43,8 +43,8 @@ export default async function CollectionPage({
     COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
     COLLECTION_PRODUCTS_DEFAULT_SORTING;
 
-  const { limitAmount } =
-    COLLECTION_PRODUCTS_LIMIT.find((item) => item.limitAmount === limit) ||
+  const limitAmount =
+    COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
     COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
   const collection = await getCollection(params.collection);
