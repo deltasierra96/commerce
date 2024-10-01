@@ -1,12 +1,12 @@
 'use client';
+import { ProductFragment } from '@/__generated__/graphql';
 import { Button } from '@/components/ui/button';
 import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
-import { Product } from '@/lib/shopify/types';
 import { LinkProps } from 'react-aria-components';
 import { ProductCardQuickView } from './product-card-quick-view';
 
 export type ProductCardCartActionsProps = LinkProps & {
-  product: Product;
+  product: ProductFragment;
 };
 
 export const ProductCardCartActions = ({ product, ...props }: ProductCardCartActionsProps) => {

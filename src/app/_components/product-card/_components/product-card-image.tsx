@@ -1,13 +1,13 @@
 'use client';
+import { ProductFragment } from '@/__generated__/graphql';
 import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
-import { Product } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import Image from 'next/image';
 import { Link } from 'react-aria-components';
 import { ProductCardQuickView } from './product-card-quick-view';
 
 export type ProductCardImageProps = {
-  product: Product;
+  product: ProductFragment;
   showQuickView?: boolean;
 };
 
@@ -47,8 +47,8 @@ export const ProductCardImage = ({
         <Image
           width={280}
           height={280}
-          src={product.featuredImage.url}
-          alt={product.featuredImage.altText || product.title}
+          src={product.featuredImage?.url}
+          alt={product.featuredImage?.altText || product.title}
           className="h-full w-full object-cover object-center"
         />
       </Link>

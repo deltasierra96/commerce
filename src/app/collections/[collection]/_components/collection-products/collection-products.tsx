@@ -1,4 +1,12 @@
+import { useFragment } from '@/__generated__';
+import {
+  GetCollectionProductsQuery,
+  GetCollectionProductsQueryVariables,
+  ProductFragmentDoc
+} from '@/__generated__/graphql';
 import { ProductCard } from '@/app/_components/product-card';
+import { GET_COLLECTION_PRODUCTS } from '@/graphql/queries.graphql';
+import { query } from '@/lib/apollo-client';
 import {
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   COLLECTION_PRODUCTS_DEFAULT_SORTING,
@@ -24,6 +32,14 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
     COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
     COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
+  const { data, loading } = await query<
+    GetCollectionProductsQuery,
+    GetCollectionProductsQueryVariables
+  >({
+    query: GET_COLLECTION_PRODUCTS,
+    variables: { handle: params.collection, limit: 2, reverse }
+  });
+
   const collectionProducts = await getCollectionProducts({
     sortKey,
     limit: limitAmount,
@@ -33,7 +49,9 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
 
   return (
     <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4">
-      {collectionProducts?.map((product) => {
+      {loading ? 'loading' : 'complete'}
+      {data.collection?.products.edges?.map((p) => {
+        const product = useFragment(ProductFragmentDoc, p.node);
         return (
           <ProductCard
             key={product.id}
