@@ -30,15 +30,9 @@ export const COLLECTION_PRODUCTS_SORTING: SortFilterItem[] = [
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
 ];
 
-export const COLLECTION_PRODUCTS_DEFAULT_LIMIT: number = 30;
+export const COLLECTION_PRODUCTS_DEFAULT_LIMIT: number = 36;
 
-export const COLLECTION_PRODUCTS_LIMIT: number[] = [
-  COLLECTION_PRODUCTS_DEFAULT_LIMIT,
-  5,
-  10,
-  15,
-  20
-];
+export const COLLECTION_PRODUCTS_LIMIT: number[] = [COLLECTION_PRODUCTS_DEFAULT_LIMIT, 12, 24, 48];
 
 export const TAGS = {
   collections: 'collections',

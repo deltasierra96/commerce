@@ -1,24 +1,45 @@
 import { ProductCard } from '@/app/_components/product-card';
-import { Product } from '@/lib/shopify/types';
+import { COLLECTION_PRODUCTS_DEFAULT_LIMIT, COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_LIMIT, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import { getCollectionProducts } from '@/lib/shopify';
 import { clsx } from '@/utils';
+import { wait } from '@/utils/wait';
 
 type CollectionProductsProps = {
   params: { collection: string };
-  reverse?: boolean;
-  sortKey?: string;
-  products: Product[];
+  searchParams?: { [key: string]: string | string[] | undefined }
 };
 
+
+
 export const CollectionProducts = async ({
-  products,
   params,
-  sortKey,
-  reverse,
-  ...props
+  searchParams
 }: CollectionProductsProps) => {
+
+ await wait(3000)
+
+    const { sort, limit } = searchParams as { [key: string]: string };
+
+  const { sortKey, reverse } =
+    COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
+    COLLECTION_PRODUCTS_DEFAULT_SORTING;
+
+  const limitAmount =
+    COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
+    COLLECTION_PRODUCTS_DEFAULT_LIMIT;
+
+
+
+  const collectionProducts = await getCollectionProducts({
+    sortKey,
+    limit: limitAmount,
+    reverse,
+    collection: params.collection
+  });
+
   return (
     <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4">
-      {products?.map((product) => {
+      {collectionProducts?.map((product) => {
         return (
           <ProductCard
             key={product.id}

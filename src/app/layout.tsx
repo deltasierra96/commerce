@@ -12,7 +12,7 @@ import {
   fontStolzl
 } from '@/fonts/next-fonts';
 import { getCart, getMenu } from '@/lib/shopify';
-import { AriaProvider } from '@/providers';
+import Providers from '@/providers/providers';
 import { clsx } from '@/utils';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -32,7 +32,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cart = getCart(cartId);
   const menu = await getMenu('next-js-frontend-header-menu');
   return (
-    <AriaProvider>
+    <Providers>
       <html
         lang="en"
         className={clsx(
@@ -79,7 +79,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           </CartProvider>
         </body>
       </html>
-    </AriaProvider>
+    </Providers>
   );
 };
 
