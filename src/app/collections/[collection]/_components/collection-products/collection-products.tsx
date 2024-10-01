@@ -1,24 +1,20 @@
 import { ProductCard } from '@/app/_components/product-card';
-import { COLLECTION_PRODUCTS_DEFAULT_LIMIT, COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_LIMIT, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import {
+  COLLECTION_PRODUCTS_DEFAULT_LIMIT,
+  COLLECTION_PRODUCTS_DEFAULT_SORTING,
+  COLLECTION_PRODUCTS_LIMIT,
+  COLLECTION_PRODUCTS_SORTING
+} from '@/lib/constants';
 import { getCollectionProducts } from '@/lib/shopify';
 import { clsx } from '@/utils';
-import { wait } from '@/utils/wait';
 
 type CollectionProductsProps = {
   params: { collection: string };
-  searchParams?: { [key: string]: string | string[] | undefined }
+  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-
-
-export const CollectionProducts = async ({
-  params,
-  searchParams
-}: CollectionProductsProps) => {
-
- await wait(3000)
-
-    const { sort, limit } = searchParams as { [key: string]: string };
+export const CollectionProducts = async ({ params, searchParams }: CollectionProductsProps) => {
+  const { sort, limit } = searchParams as { [key: string]: string };
 
   const { sortKey, reverse } =
     COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
@@ -27,8 +23,6 @@ export const CollectionProducts = async ({
   const limitAmount =
     COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
     COLLECTION_PRODUCTS_DEFAULT_LIMIT;
-
-
 
   const collectionProducts = await getCollectionProducts({
     sortKey,
