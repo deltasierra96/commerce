@@ -1,6 +1,6 @@
+import { BaseCartLine } from '@/__generated__/graphql';
 import Price from '@/app/_components/price';
 import { DEFAULT_OPTION } from '@/lib/constants';
-import { CartItem as ShopifyCartItemProps } from '@/lib/shopify/types';
 import Image from 'next/image';
 import { Group, Link } from 'react-aria-components';
 import { UpdateCartItemProps, useCart } from './cart-context';
@@ -8,7 +8,7 @@ import { DeleteCartItemButton } from './delete-cart-item-button';
 import { EditCartItemQuantity } from './edit-cart-item-quantity';
 
 type CartItemProps = {
-  cartItem: ShopifyCartItemProps;
+  cartItem: BaseCartLine;
   merchandiseUrl: string;
   updateCartItem: UpdateCartItemProps;
 };

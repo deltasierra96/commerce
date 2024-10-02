@@ -2,6 +2,7 @@ import { useFragment } from '@/__generated__';
 import {
   GetCollectionProductsQuery,
   GetCollectionProductsQueryVariables,
+  ImageFragmentDoc,
   ProductFragmentDoc
 } from '@/__generated__/graphql';
 import { GET_COLLECTION_PRODUCTS } from '@/graphql/queries.graphql';
@@ -11,12 +12,11 @@ import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
 export async function Carousel() {
-  // Collections that start with `hidden-*` are hidden from the search page.
-  // const products = await getCollectionProducts({ collection: 'hidden-homepage-carousel' });
   const products = await query<GetCollectionProductsQuery, GetCollectionProductsQueryVariables>({
     query: GET_COLLECTION_PRODUCTS,
     variables: { handle: 'hidden-homepage-carousel', limit: 10 }
   });
+
   if (!products?.data) return null;
 
   return (
@@ -24,6 +24,7 @@ export async function Carousel() {
       <ul className="animate-carousel flex gap-4">
         {products.data.collection?.products.edges.map((productFragment, i) => {
           const product = useFragment(ProductFragmentDoc, productFragment.node);
+          const featuredImage = useFragment(ImageFragmentDoc, product.featuredImage);
           return (
             <li
               key={`${product.handle}${i}`}
@@ -40,7 +41,7 @@ export async function Carousel() {
                     amount: product.priceRange.maxVariantPrice.amount,
                     currencyCode: product.priceRange.maxVariantPrice.currencyCode
                   }}
-                  src={product.featuredImage?.url}
+                  src={featuredImage?.url}
                   fill
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                 />

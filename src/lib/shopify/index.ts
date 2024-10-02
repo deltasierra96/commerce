@@ -25,7 +25,7 @@ import {
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
-  getProductQuery,
+  GET_PRODUCT_QUERY,
   getProductRecommendationsQuery,
   getProductsQuery
 } from './queries/product';
@@ -386,7 +386,7 @@ export async function getPages(): Promise<Page[]> {
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
   const res = await shopifyFetch<ShopifyProductOperation>({
-    query: getProductQuery,
+    query: GET_PRODUCT_QUERY,
     tags: [TAGS.products],
     variables: {
       handle

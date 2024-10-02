@@ -38,6 +38,7 @@ export const PRODUCT_FRAGMENT = gql`
       name
       values
     }
+    totalInventory
     priceRange {
       maxVariantPrice {
         amount
@@ -66,12 +67,18 @@ export const PRODUCT_FRAGMENT = gql`
       }
     }
     featuredImage {
-      ...image
+      url
+      altText
+      width
+      height
     }
     images(first: 20) {
       edges {
         node {
-          ...image
+          url
+          altText
+          width
+          height
         }
       }
     }

@@ -1,22 +1,34 @@
 'use client';
 
-import { Cart, CartItem, Product, ProductVariant } from '@/lib/shopify/types';
+import { useFragment } from '@/__generated__';
+import {
+  BaseCartLine,
+  Cart,
+  CartFragment,
+  CartFragmentDoc,
+  CartLine,
+  GetCartQuery,
+  Product,
+  ProductFragment,
+  ProductVariant
+} from '@/__generated__/graphql';
+import { ApolloQueryResult } from '@apollo/client';
 import React, { createContext, use, useContext, useMemo, useOptimistic, useState } from 'react';
 
 export type CartUpdateType = 'increment' | 'decrement' | 'delete';
 
 type CartAction =
   | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: CartUpdateType } }
-  | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } };
+  | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: ProductFragment } };
 
 export type UpdateCartItemProps = (merchandiseId: string, updateType: CartUpdateType) => void;
 
 type CartContextType = {
-  cart: Cart | undefined;
+  cart: CartFragment;
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
   updateCartItem: UpdateCartItemProps;
-  addCartItem: (variant: ProductVariant, product: Product) => void;
+  addCartItem: (variant: ProductVariant, product: ProductFragment) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -25,7 +37,7 @@ function calculateItemCost(quantity: number, price: string): string {
   return (Number(price) * quantity).toString();
 }
 
-function updateCartItem(item: CartItem, updateType: CartUpdateType): CartItem | null {
+function updateCartItem(item: CartLine, updateType: CartUpdateType): CartLine | null {
   if (updateType === 'delete') return null;
 
   const newQuantity = updateType === 'increment' ? item.quantity + 1 : item.quantity - 1;
@@ -48,19 +60,27 @@ function updateCartItem(item: CartItem, updateType: CartUpdateType): CartItem | 
 }
 
 function createOrUpdateCartItem(
-  existingItem: CartItem | undefined,
+  existingItem: CartLine,
   variant: ProductVariant,
   product: Product
-): CartItem {
+): CartLine {
   const quantity = existingItem ? existingItem.quantity + 1 : 1;
   const totalAmount = calculateItemCost(quantity, variant.price.amount);
 
   return {
-    id: existingItem?.id,
+    id: existingItem.id,
     quantity,
     cost: {
+      amountPerQuantity: {
+        amount: variant.price.amount,
+        currencyCode: variant.price.currencyCode
+      },
       totalAmount: {
         amount: totalAmount,
+        currencyCode: variant.price.currencyCode
+      },
+      subtotalAmount: {
+        amount: variant.price.amount,
         currencyCode: variant.price.currencyCode
       }
     },
@@ -69,16 +89,17 @@ function createOrUpdateCartItem(
       title: variant.title,
       selectedOptions: variant.selectedOptions,
       product: {
+        metafields: product.metafields,
         id: product.id,
         handle: product.handle,
         title: product.title,
-        featuredImage: product.featuredImage
+        featuredImage: product.featuredImage?.url
       }
     }
   };
 }
 
-function updateCartTotals(lines: CartItem[]): Pick<Cart, 'totalQuantity' | 'cost'> {
+function updateCartTotals(lines: BaseCartLine[]): Pick<Cart, 'totalQuantity' | 'cost'> {
   const totalQuantity = lines.reduce((sum, item) => sum + item.quantity, 0);
   const totalAmount = lines.reduce((sum, item) => sum + Number(item.cost.totalAmount.amount), 0);
   const currencyCode = lines[0]?.cost.totalAmount.currencyCode ?? 'USD';
@@ -107,22 +128,23 @@ function createEmptyCart(): Cart {
   };
 }
 
-function cartReducer(state: Cart | undefined, action: CartAction): Cart {
+function cartReducer(state: CartFragment | null | undefined, action: CartAction): Cart {
   const currentCart = state || createEmptyCart();
 
   switch (action.type) {
     case 'UPDATE_ITEM': {
       const { merchandiseId, updateType } = action.payload;
-      const updatedLines = currentCart.lines
+
+      const updatedLines = currentCart.lines.edges
         .map((item) =>
-          item.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
+          item.node.id === merchandiseId ? updateCartItem(item.node, updateType) : item
         )
-        .filter(Boolean) as CartItem[];
+        .filter(Boolean);
 
       if (updatedLines.length === 0) {
         return {
           ...currentCart,
-          lines: [],
+          // lines: undefined,
           totalQuantity: 0,
           cost: {
             ...currentCart.cost,
@@ -133,9 +155,12 @@ function cartReducer(state: Cart | undefined, action: CartAction): Cart {
 
       return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
     }
+
     case 'ADD_ITEM': {
       const { variant, product } = action.payload;
-      const existingItem = currentCart.lines.find((item) => item.merchandise.id === variant.id);
+      const existingItem = currentCart.lines.nodes.find(
+        (item) => item.merchandise.id === variant.id
+      );
       const updatedItem = createOrUpdateCartItem(existingItem, variant, product);
 
       const updatedLines = existingItem
@@ -154,17 +179,20 @@ export function CartProvider({
   cartPromise
 }: {
   children: React.ReactNode;
-  cartPromise: Promise<Cart | undefined>;
+  cartPromise: Promise<ApolloQueryResult<GetCartQuery>>;
 }) {
   const initialCart = use(cartPromise);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [optimisticCart, updateOptimisticCart] = useOptimistic(initialCart, cartReducer);
+  const cart = useFragment(CartFragmentDoc, initialCart.data.cart);
+
+  console.log('cart', cart);
+  const [optimisticCart, updateOptimisticCart] = useOptimistic(cart, cartReducer);
 
   const updateCartItem = (merchandiseId: string, updateType: CartUpdateType) => {
     updateOptimisticCart({ type: 'UPDATE_ITEM', payload: { merchandiseId, updateType } });
   };
 
-  const addCartItem = (variant: ProductVariant, product: Product) => {
+  const addCartItem = (variant: ProductVariant, product: ProductFragment) => {
     updateOptimisticCart({ type: 'ADD_ITEM', payload: { variant, product } });
   };
 

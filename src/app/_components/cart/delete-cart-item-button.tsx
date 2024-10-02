@@ -1,7 +1,7 @@
 'use client';
 
+import { BaseCartLine } from '@/__generated__/graphql';
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { CartItem } from '@/lib/shopify/types';
 import { useActionState } from 'react';
 import { removeItem } from './actions';
 
@@ -9,7 +9,7 @@ export function DeleteCartItemButton({
   item,
   optimisticUpdate
 }: {
-  item: CartItem;
+  item: BaseCartLine;
   optimisticUpdate: any;
 }) {
   const [message, formAction] = useActionState(removeItem, null);

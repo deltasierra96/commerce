@@ -1,4 +1,3 @@
-import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { Menu } from '@/lib/shopify/types';
@@ -29,9 +28,7 @@ export const DesktopHeader = ({ menu, isFullWidth = false }: DesktopHeaderProps)
               <div className="hidden sm:block">
                 <Account />
               </div>
-              <div className="hidden sm:block">
-                <Cart />
-              </div>
+              <div className="hidden sm:block">{/* <Cart /> */}</div>
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 'use client';
 
+import { ProductFragment } from '@/__generated__/graphql';
 import { useProduct, useUpdateURL } from '@/app/product/[handle]/_components/product-context';
 import { Select, SelectItem } from '@/components/ui/select';
-import { Product } from '@/lib/shopify/types';
 
 type Combination = {
   id: string;
@@ -11,7 +11,7 @@ type Combination = {
 };
 
 export type ProductVariantSelectorProps = {
-  product: Product;
+  product: ProductFragment;
 };
 
 export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps) => {
@@ -27,10 +27,10 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
     return null;
   }
 
-  const combinations: Combination[] = variants.map((variant) => ({
-    id: variant.id,
-    availableForSale: variant.availableForSale,
-    ...variant.selectedOptions.reduce(
+  const combinations: Combination[] = variants.edges.map((variant) => ({
+    id: variant.node.id,
+    availableForSale: variant.node.availableForSale,
+    ...variant.node.selectedOptions.reduce(
       (accumulator, option) => ({ ...accumulator, [option.name.toLowerCase()]: option.value }),
       {}
     )

@@ -1,14 +1,15 @@
 'use client';
 
+import { useFragment } from '@/__generated__';
+import { ImageFragmentDoc, ProductFragment } from '@/__generated__/graphql';
 import { useProduct, useUpdateURL } from '@/app/product/[handle]/_components/product-context';
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { type Image as ShopifyImage, Product } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 
 type ProductImagesProps = {
-  product: Product;
+  product: ProductFragment;
   thumbnailDirection?: 'vertical' | 'horizontal';
 };
 
@@ -17,12 +18,13 @@ export const ProductImages = ({
   thumbnailDirection = 'vertical',
   ...props
 }: ProductImagesProps) => {
-  const { images: productImages } = product;
-
-  const images = productImages.slice(0, 5).map((image: ShopifyImage) => ({
-    src: image.url,
-    altText: image.altText
-  }));
+  const images = product.images.edges.slice(0, 5).map((image) => {
+    const derp = useFragment(ImageFragmentDoc, image.node);
+    return {
+      src: derp.url,
+      altText: derp.altText
+    };
+  });
 
   const { state, updateImage } = useProduct();
   const updateURL = useUpdateURL();
@@ -47,7 +49,7 @@ export const ProductImages = ({
             width={900}
             height={900}
             sizes="(min-width: 1024px) 66vw, 100vw"
-            alt={images[imageIndex]?.altText as string}
+            alt={images[imageIndex]?.altText || product.title}
             src={images[imageIndex]?.src as string}
             priority={true}
           />
@@ -105,7 +107,12 @@ export const ProductImages = ({
                     aria-label="Select product image"
                     className="flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
                   >
-                    <Image alt={image.altText} src={image.src} width={80} height={80} />
+                    <Image
+                      alt={image.altText || product.title}
+                      src={image.src}
+                      width={80}
+                      height={80}
+                    />
                   </button>
                 </li>
               );

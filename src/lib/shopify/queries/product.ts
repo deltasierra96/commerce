@@ -1,15 +1,16 @@
-import productFragment from '../fragments/product';
+import { PRODUCT_FRAGMENT } from '@/graphql/queries.graphql';
+import { gql } from '@apollo/client';
 
-export const getProductQuery = /* GraphQL */ `
+export const GET_PRODUCT_QUERY = gql`
   query getProduct($handle: String!) {
     product(handle: $handle) {
       ...product
     }
   }
-  ${productFragment}
+  ${PRODUCT_FRAGMENT}
 `;
 
-export const getProductsQuery = /* GraphQL */ `
+export const getProductsQuery = gql`
   query getProducts($sortKey: ProductSortKeys, $reverse: Boolean, $query: String) {
     products(sortKey: $sortKey, reverse: $reverse, query: $query, first: 100) {
       edges {
@@ -19,14 +20,14 @@ export const getProductsQuery = /* GraphQL */ `
       }
     }
   }
-  ${productFragment}
+  ${PRODUCT_FRAGMENT}
 `;
 
-export const getProductRecommendationsQuery = /* GraphQL */ `
+export const getProductRecommendationsQuery = gql`
   query getProductRecommendations($productId: ID!) {
     productRecommendations(productId: $productId) {
       ...product
     }
   }
-  ${productFragment}
+  ${PRODUCT_FRAGMENT}
 `;

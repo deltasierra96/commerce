@@ -1,15 +1,22 @@
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { useFragment } from '@/__generated__';
+import {
+  GetProductQuery,
+  GetProductQueryVariables,
+  ImageFragmentDoc,
+  ProductFragmentDoc
+} from '@/__generated__/graphql';
 import { AddToCart } from '@/app/_components/cart/add-to-cart';
 import { GridTileImage } from '@/app/_components/grid/tile';
 import { ProductProvider } from '@/app/product/[handle]/_components/product-context';
 import { Container } from '@/components/ui/container';
-import { HIDDEN_PRODUCT_TAG, STORE_ROUTE_PRODUCT } from '@/lib/constants';
-import { getProduct, getProductRecommendations } from '@/lib/shopify';
+import { query } from '@/lib/apollo-client';
+import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { getProductRecommendations } from '@/lib/shopify';
+import { GET_PRODUCT_QUERY } from '@/lib/shopify/queries/product';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { ProductDetails } from './_components/product-details';
 import { ProductImages } from './_components/product-images';
 import { ProductPrice } from './_components/product-price';
 import { ProductRating } from './_components/product-rating';
@@ -19,55 +26,71 @@ import { ProductTitle } from './_components/product-title';
 import { ProductVariantSelector } from './_components/product-variant-selector';
 import { ProductVendor } from './_components/product-vendor';
 
-export async function generateMetadata({
-  params
-}: {
-  params: { handle: string };
-}): Promise<Metadata> {
-  const product = await getProduct(params.handle);
+// export async function generateMetadata({
+//   params
+// }: {
+//   params: { handle: string };
+// }): Promise<Metadata> {
 
-  if (!product) return notFound();
+//   const { data, loading } = await query<GetProductQuery, GetProductQueryVariables>({
+//     query: GET_PRODUCT_QUERY,
+//     variables: { handle: params.handle }
+//   });
+//   const product = useFragment(ProductFragmentDoc, data.product);
+//   const featuredImage = useFragment(ImageFragmentDoc, product?.featuredImage)
+//   const seo = useFragment(SeoFragmentDoc, product?.seo)
 
-  const { url, width, height, altText: alt } = product.featuredImage || {};
-  const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
+//   if (!product) return notFound();
 
-  return {
-    title: product.seo.title || product.title,
-    description: product.seo.description || product.description,
-    robots: {
-      index: indexable,
-      follow: indexable,
-      googleBot: {
-        index: indexable,
-        follow: indexable
-      }
-    },
-    openGraph: url
-      ? {
-          images: [
-            {
-              url,
-              width,
-              height,
-              alt
-            }
-          ]
-        }
-      : null
-  };
-}
+//   const { url, width, height, altText: alt } = featuredImage || {};
+//   const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
+
+//   return {
+//     title: seo?.title || product.title,
+//     description: seo?.description || product.description,
+//     robots: {
+//       index: indexable,
+//       follow: indexable,
+//       googleBot: {
+//         index: indexable,
+//         follow: indexable
+//       }
+//     },
+//     openGraph: url
+//       ? {
+//           images: [
+//             {
+//               url,
+//               width,
+//               height,
+//               alt
+//             }
+//           ]
+//         }
+//       : null
+//   };
+// }
 
 export default async function ProductPage({ params }: { params: { handle: string } }) {
-  const product = await getProduct(params.handle);
+  const { data, loading } = await query<GetProductQuery, GetProductQueryVariables>({
+    query: GET_PRODUCT_QUERY,
+    variables: { handle: params.handle }
+  });
+
+  const product = useFragment(ProductFragmentDoc, data.product);
+
+  console.log('product', product);
 
   if (!product) return notFound();
+
+  const featuredImage = useFragment(ImageFragmentDoc, product?.featuredImage);
 
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
     description: product.description,
-    image: product.featuredImage.url,
+    image: featuredImage?.url,
     offers: {
       '@type': 'AggregateOffer',
       availability: product.availableForSale
@@ -128,11 +151,11 @@ export default async function ProductPage({ params }: { params: { handle: string
             </div>
           </div>
 
-          <div className="bg-white p-6 lg:rounded-card">
+          {/* <div className="p-6 bg-white lg:rounded-card">
             <ProductDetails product={product} />
-          </div>
+          </div> */}
 
-          <RelatedProducts id={product.id} />
+          {/* <RelatedProducts id={product.id} /> */}
         </div>
       </Container>
     </ProductProvider>

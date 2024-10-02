@@ -1,7 +1,7 @@
-import { Product } from '@/lib/shopify/types';
+import { ProductFragment } from '@/__generated__/graphql';
 
 export type ProductTitleProps = {
-  product: Product;
+  product: ProductFragment;
 };
 
 export const ProductTitle = ({ product, ...props }: ProductTitleProps) => {

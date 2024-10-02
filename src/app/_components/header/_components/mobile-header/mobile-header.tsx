@@ -1,4 +1,3 @@
-import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { Menu } from '@/lib/shopify/types';
@@ -24,7 +23,7 @@ export const MobileHeader = ({ menu }: MobileHeaderProps) => {
 
           <div className="flex basis-2/12 justify-end">
             <Account />
-            <Cart />
+            {/* <Cart /> */}
           </div>
         </div>
       </Container>

@@ -1,10 +1,11 @@
-import cartFragment from '../fragments/cart';
+import { gql } from '@apollo/client';
+import CART_FRAGMENT from '../fragments/cart';
 
-export const getCartQuery = /* GraphQL */ `
+export const GET_CART_QUERY = gql`
   query getCart($cartId: ID!) {
     cart(id: $cartId) {
       ...cart
     }
   }
-  ${cartFragment}
+  ${CART_FRAGMENT}
 `;
