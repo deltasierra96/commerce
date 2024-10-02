@@ -13,7 +13,6 @@ import {
   COLLECTION_PRODUCTS_LIMIT,
   COLLECTION_PRODUCTS_SORTING
 } from '@/lib/constants';
-import { getCollectionProducts } from '@/lib/shopify';
 import { clsx } from '@/utils';
 
 type CollectionProductsProps = {
@@ -37,14 +36,7 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
     GetCollectionProductsQueryVariables
   >({
     query: GET_COLLECTION_PRODUCTS,
-    variables: { handle: params.collection, limit: 2, reverse }
-  });
-
-  const collectionProducts = await getCollectionProducts({
-    sortKey,
-    limit: limitAmount,
-    reverse,
-    collection: params.collection
+    variables: { handle: params.collection, limit: limitAmount, reverse }
   });
 
   return (

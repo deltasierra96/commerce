@@ -11,7 +11,7 @@ import {
   fontSatoshi,
   fontStolzl
 } from '@/fonts/next-fonts';
-import { getCart, getMenu } from '@/lib/shopify';
+import { getMenu } from '@/lib/shopify';
 import Providers from '@/providers/providers';
 import { clsx } from '@/utils';
 import { Metadata } from 'next';
@@ -20,16 +20,14 @@ import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import '../styles/main.css';
 import { Banner } from './_components/banner';
-import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
-import { Header } from './_components/header';
 import { Incentives } from './_components/incentives';
 import { rootMetadata } from './meta-data';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cartId = cookies().get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
-  const cart = getCart(cartId);
+  // const cart = getCart(cartId);
   const menu = await getMenu('next-js-frontend-header-menu');
   return (
     <Providers>
@@ -59,24 +57,22 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
             easing="ease"
             speed={750}
           />
-          <CartProvider cartPromise={cart}>
-            {/* <Navbar /> */}
-            <div className="flex h-full min-h-screen flex-col">
-              <div className="flex-1">
-                <div className="flex flex-col">
-                  <Banner />
-                  <div className="sticky top-0 z-header">
-                    <Header menu={menu} />
-                  </div>
-                  <div className="flex-1">
-                    <main>{children}</main>
-                  </div>
-                  <Incentives />
-                  <Footer />
+          {/* <CartProvider cartPromise={cart}> */}
+          {/* <Navbar /> */}
+          <div className="flex h-full min-h-screen flex-col">
+            <div className="flex-1">
+              <div className="flex flex-col">
+                <Banner />
+                <div className="sticky top-0 z-header">{/* <Header menu={menu} /> */}</div>
+                <div className="flex-1">
+                  <main>{children}</main>
                 </div>
+                <Incentives />
+                <Footer />
               </div>
             </div>
-          </CartProvider>
+          </div>
+          {/* </CartProvider> */}
         </body>
       </html>
     </Providers>
