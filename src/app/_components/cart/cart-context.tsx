@@ -1,9 +1,14 @@
 'use client';
 
 import { useFragment } from '@/__generated__';
-import { CartFragment, CartFragmentDoc, GetCartQuery } from '@/__generated__/graphql';
-import type { Cart, CartItem, Product, ProductVariant } from '@/lib/shopify/types';
-import { ApolloQueryResult } from '@apollo/client';
+import {
+  BaseCartLine,
+  CartFragment,
+  CartFragmentDoc,
+  CartLine,
+  ProductVariant
+} from '@/__generated__/graphql';
+import type { Cart, CartItem, Product } from '@/lib/shopify/types';
 import React, { createContext, use, useContext, useMemo, useOptimistic, useState } from 'react';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
@@ -11,8 +16,6 @@ type UpdateType = 'plus' | 'minus' | 'delete';
 type CartAction =
   | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: UpdateType } }
   | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } };
-
-type ApolloCart = ApolloQueryResult<GetCartQuery>;
 
 type CartContextType = {
   cart: CartFragment | null | undefined;
@@ -28,7 +31,7 @@ function calculateItemCost(quantity: number, price: string): string {
   return (Number(price) * quantity).toString();
 }
 
-function updateCartItem(item: CartItem, updateType: UpdateType): CartItem | null {
+function updateCartItem(item: CartLine, updateType: UpdateType): BaseCartLine | null {
   if (updateType === 'delete') return null;
 
   const newQuantity = updateType === 'plus' ? item.quantity + 1 : item.quantity - 1;
@@ -111,18 +114,19 @@ function createEmptyCart(): Cart {
 }
 
 function cartReducer(state: CartFragment | null | undefined, action: CartAction): CartFragment {
-  const currentCart = state || createEmptyCart();
+  // const currentCart = state || createEmptyCart();
+  const currentCart = state;
 
   switch (action.type) {
     case 'UPDATE_ITEM': {
       const { merchandiseId, updateType } = action.payload;
-      const updatedLines = currentCart.lines
+      const updatedLines = currentCart?.lines.edges
         .map((item) =>
-          item.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
+          item.node.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
         )
         .filter(Boolean);
 
-      if (updatedLines.length === 0) {
+      if (updatedLines?.length === 0) {
         return {
           ...currentCart,
           lines: [],
@@ -138,7 +142,9 @@ function cartReducer(state: CartFragment | null | undefined, action: CartAction)
     }
     case 'ADD_ITEM': {
       const { variant, product } = action.payload;
-      const existingItem = currentCart.lines.find((item) => item.merchandise.id === variant.id);
+      const existingItem = currentCart?.lines.edges.find(
+        (item) => item.node.merchandise.id === variant.id
+      );
       const updatedItem = createOrUpdateCartItem(existingItem, variant, product);
 
       const updatedLines = existingItem
@@ -157,7 +163,7 @@ export function CartProvider({
   cartPromise
 }: {
   children: React.ReactNode;
-  cartPromise: Promise<ApolloCart>;
+  cartPromise: Promise<ApolloCart | undefined>;
 }) {
   const initialCart = use(cartPromise);
   const cart = useFragment(CartFragmentDoc, initialCart.data.cart);

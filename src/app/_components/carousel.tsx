@@ -5,15 +5,15 @@ import {
   ImageFragmentDoc,
   ProductFragmentDoc
 } from '@/__generated__/graphql';
-import { GET_COLLECTION_PRODUCTS } from '@/graphql/queries.graphql';
 import { query } from '@/lib/apollo-client';
 import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { GET_COLLECTION_PRODUCTS_QUERY } from '@/shopify';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
 export async function Carousel() {
   const products = await query<GetCollectionProductsQuery, GetCollectionProductsQueryVariables>({
-    query: GET_COLLECTION_PRODUCTS,
+    query: GET_COLLECTION_PRODUCTS_QUERY,
     variables: { handle: 'hidden-homepage-carousel', limit: 10 }
   });
 

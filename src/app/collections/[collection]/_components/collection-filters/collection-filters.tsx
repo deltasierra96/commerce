@@ -1,11 +1,8 @@
 'use client';
-import { GetStoreInformationQuery } from '@/__generated__/graphql';
 import { Checkbox } from '@/components/ui/checkbox';
 import { focusRing } from '@/components/ui/focus-ring';
 import { Icon } from '@/components/ui/icon';
-import { GET_STORE_INFORMATION } from '@/graphql/queries.graphql';
 import { clsx } from '@/utils';
-import { useQuery } from '@apollo/client';
 import { GridList, GridListItem } from 'react-aria-components';
 
 const filters = [
@@ -51,12 +48,8 @@ type CollectionFilterProps = {
 };
 
 export const CollectionFilters = (props: CollectionFilterProps) => {
-  const { data, networkStatus } = useQuery<GetStoreInformationQuery>(GET_STORE_INFORMATION);
-  console.log('data', data?.shop.name);
-  console.log('networkStatus', networkStatus);
   return (
     <aside {...props}>
-      {data?.shop.name}
       <div className="divide-y divide-neutral-100">
         {filters.map((section, sectionIdx) => (
           <details className="group" key={section.id} open={sectionIdx === 0}>

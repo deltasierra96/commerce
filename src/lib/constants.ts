@@ -1,7 +1,9 @@
+export type SortKey = 'TITLE' | 'BEST_SELLING' | 'CREATED' | 'PRICE' | 'CREATED' | 'MANUAL';
+
 export type SortFilterItem = {
   title: string;
   slug: string | null;
-  sortKey: 'TITLE' | 'BEST_SELLING' | 'CREATED' | 'PRICE' | 'CREATED' | 'MANUAL';
+  sortKey: SortKey;
   reverse: boolean;
 };
 
@@ -47,5 +49,6 @@ export const SHOPIFY_GRAPHQL_API_ENDPOINT = '/api/2024-07/graphql.json';
 export const STORE_ROUTE = '';
 export const STORE_ROUTE_COLLECTIONS = `${STORE_ROUTE}/collections`;
 export const STORE_ROUTE_PRODUCT = `${STORE_ROUTE}/product`;
+export const STORE_ROUTE_PAGE = `${STORE_ROUTE}/page`;
 
 export const ACCOUNT_ROUTE = '/account';

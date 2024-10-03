@@ -1,5 +1,5 @@
-import { PRODUCT_FRAGMENT } from '@/graphql/queries.graphql';
 import { gql } from '@apollo/client';
+import { PRODUCT_FRAGMENT } from '../fragments/product';
 
 export const GET_PRODUCT_QUERY = gql`
   query getProduct($handle: String!) {
@@ -10,7 +10,7 @@ export const GET_PRODUCT_QUERY = gql`
   ${PRODUCT_FRAGMENT}
 `;
 
-export const getProductsQuery = gql`
+export const GET_PRODUCTS_QUERY = gql`
   query getProducts($sortKey: ProductSortKeys, $reverse: Boolean, $query: String) {
     products(sortKey: $sortKey, reverse: $reverse, query: $query, first: 100) {
       edges {
@@ -23,7 +23,7 @@ export const getProductsQuery = gql`
   ${PRODUCT_FRAGMENT}
 `;
 
-export const getProductRecommendationsQuery = gql`
+export const GET_PRODUCT_RECOMMENDATIONS_QUERY = gql`
   query getProductRecommendations($productId: ID!) {
     productRecommendations(productId: $productId) {
       ...product

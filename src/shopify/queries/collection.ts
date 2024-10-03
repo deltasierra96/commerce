@@ -1,35 +1,17 @@
-import { PRODUCT_FRAGMENT } from '@/graphql/queries.graphql';
-import seoFragment from '../fragments/seo';
+import { gql } from '@apollo/client';
+import { COLLECTION_FRAGMENT } from '../fragments/collection';
+import { PRODUCT_FRAGMENT } from '../fragments/product';
 
-const collectionFragment = /* GraphQL */ `
-  fragment collection on Collection {
-    handle
-    title
-    description
-    seo {
-      ...seo
-    }
-    image {
-      url
-      altText
-      width
-      height
-    }
-    updatedAt
-  }
-  ${seoFragment}
-`;
-
-export const getCollectionQuery = /* GraphQL */ `
+export const GET_COLLECTION_QUERY = gql`
   query getCollection($handle: String!) {
     collection(handle: $handle) {
       ...collection
     }
   }
-  ${collectionFragment}
+  ${COLLECTION_FRAGMENT}
 `;
 
-export const getCollectionsQuery = /* GraphQL */ `
+export const GET_COLLECTIONS_QUERY = gql`
   query getCollections {
     collections(first: 100, sortKey: TITLE) {
       edges {
@@ -39,10 +21,10 @@ export const getCollectionsQuery = /* GraphQL */ `
       }
     }
   }
-  ${collectionFragment}
+  ${COLLECTION_FRAGMENT}
 `;
 
-export const getCollectionProductsQuery = /* GraphQL */ `
+export const GET_COLLECTION_PRODUCTS_QUERY = gql`
   query getCollectionProducts(
     $handle: String!
     $limit: Int!

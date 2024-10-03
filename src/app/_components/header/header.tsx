@@ -1,28 +1,19 @@
 'use client';
-import { Menu } from '@/lib/shopify/types';
+import { MenuItem } from '@/shopify';
 import { clsx } from '@/utils';
-import { forwardRef } from 'react';
 import { DesktopHeader } from './_components/desktop-header';
 import { MobileHeader } from './_components/mobile-header';
 
 export type HeaderProps = {
   className?: string;
-  menu: Menu[];
+  menu: MenuItem[];
 };
 
-export const Header = forwardRef<HTMLHtmlElement, HeaderProps>(
-  ({ className, menu, ...rest }, forwardedRef) => {
-    return (
-      <>
-        <header
-          ref={forwardedRef}
-          className={clsx('w-full border-b border-neutral-200 bg-white', className)}
-          {...rest}
-        >
-          <MobileHeader menu={menu} />
-          <DesktopHeader menu={menu} />
-        </header>
-      </>
-    );
-  }
-);
+export const Header = async ({ className, menu, ...rest }: HeaderProps) => {
+  return (
+    <header className={clsx('w-full border-b border-neutral-200 bg-white', className)} {...rest}>
+      <MobileHeader menu={menu} />
+      <DesktopHeader menu={menu} />
+    </header>
+  );
+};

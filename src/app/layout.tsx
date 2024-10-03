@@ -13,10 +13,10 @@ import {
   fontStolzl
 } from '@/fonts/next-fonts';
 import { query } from '@/lib/apollo-client';
-import { getMenu } from '@/lib/shopify';
-import { GET_CART_QUERY } from '@/lib/shopify/queries/cart';
 import Providers from '@/providers/providers';
+import { GET_CART_QUERY, getMenu } from '@/shopify';
 import { clsx } from '@/utils';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
@@ -32,13 +32,20 @@ import { rootMetadata } from './meta-data';
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cartId = cookies().get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
-  // const cart = getCart(cartId);
+
   const cart = query<GetCartQuery, GetCartQueryVariables>({
     query: GET_CART_QUERY,
-    variables: { cartId: cartId!! }
+    variables: { cartId: cartId! }
   });
 
   const menu = await getMenu('next-js-frontend-header-menu');
+
+  if (process.env.NODE_ENV !== 'production') {
+    // Adds messages only in a dev environment
+    loadDevMessages();
+    loadErrorMessages();
+  }
+
   return (
     <Providers>
       <html

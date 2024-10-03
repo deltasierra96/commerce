@@ -1,17 +1,18 @@
 'use client';
+import { CollectionFragment } from '@/__generated__/graphql';
 import { Container } from '@/components/ui/container';
-import { Collection } from '@/lib/shopify/types';
 import { clsx } from '@/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from 'react-aria-components';
 
 type CollectionHeaderProps = {
-  collection: Collection;
+  collection: CollectionFragment;
 };
 
 export const CollectionHeader = ({ collection, ...props }: CollectionHeaderProps) => {
   const [isVisible, setVisible] = useState(false);
+
   return (
     <div className="bg-white lg:bg-transparent">
       {/* <Container> */}

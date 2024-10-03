@@ -53,7 +53,7 @@ export function AddToCart({ product }: { product: ProductFragment }) {
   const defaultVariantId = variants.edges.length === 1 ? variants.edges[0]?.node.id : undefined;
   const selectedVariantId = variant?.node.id || defaultVariantId;
   const actionWithVariant = formAction.bind(null, selectedVariantId);
-  const finalVariant = variants.edges.find((variant) => variant.node.id === selectedVariantId);
+  const finalVariant = variants.edges.find((variant) => variant.node.id === selectedVariantId)!;
 
   return (
     <div className="flex w-full flex-col gap-x-2 gap-y-4 lg:flex-row lg:gap-y-0">

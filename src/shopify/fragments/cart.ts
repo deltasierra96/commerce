@@ -1,7 +1,7 @@
-import { PRODUCT_FRAGMENT } from '@/graphql/queries.graphql';
 import { gql } from '@apollo/client';
+import { PRODUCT_FRAGMENT } from './product';
 
-const CART_FRAGMENT = gql`
+export const CART_FRAGMENT = gql`
   fragment cart on Cart {
     id
     checkoutUrl
@@ -50,5 +50,3 @@ const CART_FRAGMENT = gql`
   }
   ${PRODUCT_FRAGMENT}
 `;
-
-export default CART_FRAGMENT;

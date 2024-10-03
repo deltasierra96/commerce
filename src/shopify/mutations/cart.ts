@@ -1,6 +1,7 @@
-import cartFragment from '../fragments/cart';
+import { gql } from '@apollo/client';
+import { CART_FRAGMENT } from '../fragments/cart';
 
-export const addToCartMutation = /* GraphQL */ `
+export const ADD_TO_CART_MUTATION = gql`
   mutation addToCart($cartId: ID!, $lines: [CartLineInput!]!) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
@@ -8,10 +9,10 @@ export const addToCartMutation = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${CART_FRAGMENT}
 `;
 
-export const createCartMutation = /* GraphQL */ `
+export const CREATE_CART_MUTATION = gql`
   mutation createCart($lineItems: [CartLineInput!]) {
     cartCreate(input: { lines: $lineItems }) {
       cart {
@@ -19,10 +20,10 @@ export const createCartMutation = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${CART_FRAGMENT}
 `;
 
-export const editCartItemsMutation = /* GraphQL */ `
+export const EDIT_CART_ITEMS_MUTATION = gql`
   mutation editCartItems($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
@@ -30,10 +31,10 @@ export const editCartItemsMutation = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${CART_FRAGMENT}
 `;
 
-export const removeFromCartMutation = /* GraphQL */ `
+export const REMOVE_FROM_CART_MUTATION = gql`
   mutation removeFromCart($cartId: ID!, $lineIds: [ID!]!) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart {
@@ -41,5 +42,5 @@ export const removeFromCartMutation = /* GraphQL */ `
       }
     }
   }
-  ${cartFragment}
+  ${CART_FRAGMENT}
 `;

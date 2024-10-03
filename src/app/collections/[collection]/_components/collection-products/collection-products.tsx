@@ -1,18 +1,13 @@
 import { useFragment } from '@/__generated__';
-import {
-  GetCollectionProductsQuery,
-  GetCollectionProductsQueryVariables,
-  ProductFragmentDoc
-} from '@/__generated__/graphql';
+import { ProductCollectionSortKeys, ProductFragmentDoc } from '@/__generated__/graphql';
 import { ProductCard } from '@/app/_components/product-card';
-import { GET_COLLECTION_PRODUCTS } from '@/graphql/queries.graphql';
-import { query } from '@/lib/apollo-client';
 import {
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   COLLECTION_PRODUCTS_DEFAULT_SORTING,
   COLLECTION_PRODUCTS_LIMIT,
   COLLECTION_PRODUCTS_SORTING
 } from '@/lib/constants';
+import { getCollectionProducts } from '@/shopify';
 import { clsx } from '@/utils';
 
 type CollectionProductsProps = {
@@ -31,12 +26,11 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
     COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
     COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
-  const { data, loading } = await query<
-    GetCollectionProductsQuery,
-    GetCollectionProductsQueryVariables
-  >({
-    query: GET_COLLECTION_PRODUCTS,
-    variables: { handle: params.collection, limit: limitAmount, reverse }
+  const { data, loading } = await getCollectionProducts({
+    handle: params.collection,
+    limit: limitAmount,
+    reverse,
+    sortKey: sortKey as ProductCollectionSortKeys
   });
 
   return (

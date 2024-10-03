@@ -1,11 +1,11 @@
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { Menu } from '@/lib/shopify/types';
+import { MenuItem } from '@/shopify';
 import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
 type MobileHeaderProps = {
-  menu: Menu[];
+  menu: MenuItem[];
 };
 
 export const MobileHeader = ({ menu }: MobileHeaderProps) => {

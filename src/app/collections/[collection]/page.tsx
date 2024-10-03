@@ -1,5 +1,13 @@
+import { useFragment } from '@/__generated__';
+import {
+  CollectionFragmentDoc,
+  GetCollectionQuery,
+  GetCollectionQueryVariables,
+  SeoFragmentDoc
+} from '@/__generated__/graphql';
 import { Container } from '@/components/ui/container';
-import { getCollection } from '@/lib/shopify';
+import { query } from '@/lib/apollo-client';
+import { GET_COLLECTION_QUERY } from '@/shopify';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -13,13 +21,20 @@ export async function generateMetadata({
 }: {
   params: { collection: string };
 }): Promise<Metadata> {
-  const collection = await getCollection(params.collection);
+  const collectionQuery = await query<GetCollectionQuery, GetCollectionQueryVariables>({
+    query: GET_COLLECTION_QUERY,
+    variables: { handle: params.collection }
+  });
+
+  const collection = useFragment(CollectionFragmentDoc, collectionQuery.data.collection);
+
   if (!collection) return notFound();
 
+  const collectionSeo = useFragment(SeoFragmentDoc, collection.seo);
+
   return {
-    title: collection.seo?.title || collection.title,
-    description:
-      collection.seo?.description || collection.description || `${collection.title} products`
+    title: collectionSeo.title || collection.title,
+    description: collection.description || collection.description || `${collection.title} products`
   };
 }
 
@@ -32,7 +47,13 @@ export default async function CollectionPage({
   params: { collection: string };
   searchParams?: SearchParams;
 }) {
-  const collection = await getCollection(params.collection);
+  const collectionQuery = await query<GetCollectionQuery, GetCollectionQueryVariables>({
+    query: GET_COLLECTION_QUERY,
+    variables: { handle: params.collection }
+  });
+
+  const collection = useFragment(CollectionFragmentDoc, collectionQuery.data.collection);
+
   if (!collection) notFound();
 
   return (

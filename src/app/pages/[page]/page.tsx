@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
 
+import { useFragment } from '@/__generated__';
+import {
+  GetPageQuery,
+  GetPageQueryVariables,
+  PageFragmentDoc,
+  SeoFragmentDoc
+} from '@/__generated__/graphql';
 import Prose from '@/app/_components/prose';
-import { getPage } from '@/lib/shopify';
+import { query } from '@/lib/apollo-client';
+import { GET_PAGE_QUERY } from '@/shopify';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
@@ -9,13 +17,19 @@ export async function generateMetadata({
 }: {
   params: { page: string };
 }): Promise<Metadata> {
-  const page = await getPage(params.page);
+  const pageQuery = await query<GetPageQuery, GetPageQueryVariables>({
+    query: GET_PAGE_QUERY,
+    variables: { handle: params.page }
+  });
+
+  const page = useFragment(PageFragmentDoc, pageQuery.data.pageByHandle);
+  const pageSeo = useFragment(SeoFragmentDoc, page?.seo);
 
   if (!page) return notFound();
 
   return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.description || page.bodySummary,
+    title: pageSeo?.title || page.title,
+    description: pageSeo?.description || page.bodySummary,
     openGraph: {
       publishedTime: page.createdAt,
       modifiedTime: page.updatedAt,
@@ -25,7 +39,13 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { page: string } }) {
-  const page = await getPage(params.page);
+  const pageQuery = await query<GetPageQuery, GetPageQueryVariables>({
+    query: GET_PAGE_QUERY,
+    variables: { handle: params.page },
+    fetchPolicy: 'no-cache'
+  });
+
+  const page = useFragment(PageFragmentDoc, pageQuery.data.pageByHandle);
 
   if (!page) return notFound();
 
