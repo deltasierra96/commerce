@@ -1,6 +1,7 @@
 export { GET_CART_QUERY } from './cart';
 export {
   GET_COLLECTIONS_QUERY,
+  GET_COLLECTION_HEADER_QUERY,
   GET_COLLECTION_PRODUCTS_QUERY,
   GET_COLLECTION_QUERY
 } from './collection';

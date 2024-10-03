@@ -2,12 +2,11 @@ import { useFragment } from '@/__generated__';
 import {
   CollectionFragmentDoc,
   GetCollectionQuery,
-  GetCollectionQueryVariables,
-  SeoFragmentDoc
+  GetCollectionQueryVariables
 } from '@/__generated__/graphql';
 import { Container } from '@/components/ui/container';
 import { query } from '@/lib/apollo-client';
-import { GET_COLLECTION_QUERY } from '@/shopify';
+import { GET_COLLECTION_QUERY, getCollectionMetaData } from '@/shopify';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -21,20 +20,16 @@ export async function generateMetadata({
 }: {
   params: { collection: string };
 }): Promise<Metadata> {
-  const collectionQuery = await query<GetCollectionQuery, GetCollectionQueryVariables>({
-    query: GET_COLLECTION_QUERY,
-    variables: { handle: params.collection }
-  });
+  const metaData = await getCollectionMetaData(params.collection);
 
-  const collection = useFragment(CollectionFragmentDoc, collectionQuery.data.collection);
-
-  if (!collection) return notFound();
-
-  const collectionSeo = useFragment(SeoFragmentDoc, collection.seo);
+  if (!metaData) return notFound();
 
   return {
-    title: collectionSeo.title || collection.title,
-    description: collection.description || collection.description || `${collection.title} products`
+    title: metaData.data.collection?.seo.title || metaData.data?.collection?.title,
+    description:
+      metaData.data.collection?.seo.description ||
+      metaData.data.collection?.description ||
+      `${metaData.data.collection?.title} products`
   };
 }
 
@@ -57,8 +52,26 @@ export default async function CollectionPage({
   if (!collection) notFound();
 
   return (
-    <section>
-      <CollectionHeader collection={collection} />
+    <section className="py-12">
+      <Suspense
+        fallback={
+          <Container>
+            <div className="rounded-lg bg-white md:h-[18rem] lg:h-[15rem] xl:h-[22rem]">
+              <Container>
+                <div className="py-4">
+                  <div className="space-y-2">
+                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
+                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
+                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
+                  </div>
+                </div>
+              </Container>
+            </div>
+          </Container>
+        }
+      >
+        <CollectionHeader params={params} />
+      </Suspense>
       <div className="divide-y divide-neutral-100 lg:space-y-8">
         <CollectionToolbar collection={collection} />
         <div>

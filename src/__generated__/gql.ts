@@ -25,6 +25,8 @@ const documents = {
     "\n  mutation removeFromCart($cartId: ID!, $lineIds: [ID!]!) {\n    cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {\n      cart {\n        ...cart\n      }\n    }\n  }\n  \n": types.RemoveFromCartDocument,
     "\n  query getCart($cartId: ID!) {\n    cart(id: $cartId) {\n      ...cart\n    }\n  }\n  \n": types.GetCartDocument,
     "\n  query getCollection($handle: String!) {\n    collection(handle: $handle) {\n      ...collection\n    }\n  }\n  \n": types.GetCollectionDocument,
+    "\n  query getCollectionMetaData($handle: String!) {\n    collection(handle: $handle) {\n      description\n      title\n      seo {\n        title\n        description\n      }\n    }\n  }\n": types.GetCollectionMetaDataDocument,
+    "\n  query getCollectionHeader($handle: String!) {\n    collection(handle: $handle) {\n      title\n      description\n      image {\n        url(transform: { maxWidth: 1200 })\n        width\n        height\n        id\n        altText\n      }\n    }\n  }\n": types.GetCollectionHeaderDocument,
     "\n  query getCollections {\n    collections(first: 100, sortKey: TITLE) {\n      edges {\n        node {\n          ...collection\n        }\n      }\n    }\n  }\n  \n": types.GetCollectionsDocument,
     "\n  query getCollectionProducts(\n    $handle: String!\n    $limit: Int!\n    $sortKey: ProductCollectionSortKeys\n    $reverse: Boolean\n  ) {\n    collection(handle: $handle) {\n      products(sortKey: $sortKey, reverse: $reverse, first: $limit) {\n        edges {\n          node {\n            ...product\n          }\n        }\n        pageInfo {\n          hasPreviousPage\n          hasNextPage\n          endCursor\n          startCursor\n        }\n      }\n    }\n  }\n  \n": types.GetCollectionProductsDocument,
     "\n  query getMenu($handle: String!) {\n    menu(handle: $handle) {\n      items {\n        title\n        url\n      }\n    }\n  }\n": types.GetMenuDocument,
@@ -98,6 +100,14 @@ export function gql(source: "\n  query getCart($cartId: ID!) {\n    cart(id: $ca
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query getCollection($handle: String!) {\n    collection(handle: $handle) {\n      ...collection\n    }\n  }\n  \n"): (typeof documents)["\n  query getCollection($handle: String!) {\n    collection(handle: $handle) {\n      ...collection\n    }\n  }\n  \n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCollectionMetaData($handle: String!) {\n    collection(handle: $handle) {\n      description\n      title\n      seo {\n        title\n        description\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCollectionMetaData($handle: String!) {\n    collection(handle: $handle) {\n      description\n      title\n      seo {\n        title\n        description\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query getCollectionHeader($handle: String!) {\n    collection(handle: $handle) {\n      title\n      description\n      image {\n        url(transform: { maxWidth: 1200 })\n        width\n        height\n        id\n        altText\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCollectionHeader($handle: String!) {\n    collection(handle: $handle) {\n      title\n      description\n      image {\n        url(transform: { maxWidth: 1200 })\n        width\n        height\n        id\n        altText\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

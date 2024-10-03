@@ -35,7 +35,6 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
 
   return (
     <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4">
-      {loading ? 'loading' : 'complete'}
       {data.collection?.products.edges?.map((p) => {
         const product = useFragment(ProductFragmentDoc, p.node);
         return (
