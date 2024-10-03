@@ -67,18 +67,12 @@ export const PRODUCT_FRAGMENT = gql`
       }
     }
     featuredImage {
-      url
-      altText
-      width
-      height
+      ...image
     }
     images(first: 20) {
       edges {
         node {
-          url
-          altText
-          width
-          height
+          ...image
         }
       }
     }

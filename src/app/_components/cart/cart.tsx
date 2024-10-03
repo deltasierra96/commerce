@@ -41,7 +41,7 @@ export const CartDesktopTrigger = () => {
             <span className="flex">{cartQty}</span>
           </div>
         </div>
-        {cart?.lines.nodes.length ? (
+        {cart?.lines.edges.length ? (
           <>
             {/* <span>{hasCartItems ? `${cartQty} items` : `${cartQty} item`}</span> */}
             <span>{`${new Intl.NumberFormat(undefined, {
@@ -96,7 +96,7 @@ export const Cart = () => {
         <Drawer.Content>
           <div className="flex h-full flex-col">
             <DialogHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DialogHeader>
-            {!cart || cart.lines.nodes.length === 0 ? (
+            {!cart || cart.lines.edges.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center self-center p-8 text-center">
                 <Icon icon="shopping-cart" className="h-12 w-12 text-neutral-400" />
                 <h3 className="mt-2 text-base font-medium text-neutral-900">Your cart is empty</h3>
@@ -113,7 +113,7 @@ export const Cart = () => {
               <>
                 <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
                   <ul className="divide-y divide-neutral-100">
-                    {cart.lines.nodes
+                    {cart.lines.edges
                       .sort((a, b) =>
                         a.merchandise.product.title.localeCompare(b.merchandise.product.title)
                       )

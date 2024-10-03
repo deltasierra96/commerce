@@ -1,34 +1,25 @@
 'use client';
 
 import { useFragment } from '@/__generated__';
-import {
-  BaseCartLine,
-  Cart,
-  CartFragment,
-  CartFragmentDoc,
-  CartLine,
-  GetCartQuery,
-  Product,
-  ProductFragment,
-  ProductVariant
-} from '@/__generated__/graphql';
+import { CartFragment, CartFragmentDoc, GetCartQuery } from '@/__generated__/graphql';
+import type { Cart, CartItem, Product, ProductVariant } from '@/lib/shopify/types';
 import { ApolloQueryResult } from '@apollo/client';
 import React, { createContext, use, useContext, useMemo, useOptimistic, useState } from 'react';
 
-export type CartUpdateType = 'increment' | 'decrement' | 'delete';
+type UpdateType = 'plus' | 'minus' | 'delete';
 
 type CartAction =
-  | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: CartUpdateType } }
-  | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: ProductFragment } };
+  | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: UpdateType } }
+  | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } };
 
-export type UpdateCartItemProps = (merchandiseId: string, updateType: CartUpdateType) => void;
+type ApolloCart = ApolloQueryResult<GetCartQuery>;
 
 type CartContextType = {
-  cart: CartFragment;
+  cart: CartFragment | null | undefined;
+  updateCartItem: (merchandiseId: string, updateType: UpdateType) => void;
+  addCartItem: (variant: ProductVariant, product: Product) => void;
   isCartOpen: boolean;
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  updateCartItem: UpdateCartItemProps;
-  addCartItem: (variant: ProductVariant, product: ProductFragment) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -37,10 +28,10 @@ function calculateItemCost(quantity: number, price: string): string {
   return (Number(price) * quantity).toString();
 }
 
-function updateCartItem(item: CartLine, updateType: CartUpdateType): CartLine | null {
+function updateCartItem(item: CartItem, updateType: UpdateType): CartItem | null {
   if (updateType === 'delete') return null;
 
-  const newQuantity = updateType === 'increment' ? item.quantity + 1 : item.quantity - 1;
+  const newQuantity = updateType === 'plus' ? item.quantity + 1 : item.quantity - 1;
   if (newQuantity === 0) return null;
 
   const singleItemAmount = Number(item.cost.totalAmount.amount) / item.quantity;
@@ -60,27 +51,19 @@ function updateCartItem(item: CartLine, updateType: CartUpdateType): CartLine | 
 }
 
 function createOrUpdateCartItem(
-  existingItem: CartLine,
+  existingItem: CartItem | undefined,
   variant: ProductVariant,
   product: Product
-): CartLine {
+): CartItem {
   const quantity = existingItem ? existingItem.quantity + 1 : 1;
   const totalAmount = calculateItemCost(quantity, variant.price.amount);
 
   return {
-    id: existingItem.id,
+    id: existingItem?.id,
     quantity,
     cost: {
-      amountPerQuantity: {
-        amount: variant.price.amount,
-        currencyCode: variant.price.currencyCode
-      },
       totalAmount: {
         amount: totalAmount,
-        currencyCode: variant.price.currencyCode
-      },
-      subtotalAmount: {
-        amount: variant.price.amount,
         currencyCode: variant.price.currencyCode
       }
     },
@@ -89,17 +72,16 @@ function createOrUpdateCartItem(
       title: variant.title,
       selectedOptions: variant.selectedOptions,
       product: {
-        metafields: product.metafields,
         id: product.id,
         handle: product.handle,
         title: product.title,
-        featuredImage: product.featuredImage?.url
+        featuredImage: product.featuredImage
       }
     }
   };
 }
 
-function updateCartTotals(lines: BaseCartLine[]): Pick<Cart, 'totalQuantity' | 'cost'> {
+function updateCartTotals(lines: CartItem[]): Pick<Cart, 'totalQuantity' | 'cost'> {
   const totalQuantity = lines.reduce((sum, item) => sum + item.quantity, 0);
   const totalAmount = lines.reduce((sum, item) => sum + Number(item.cost.totalAmount.amount), 0);
   const currencyCode = lines[0]?.cost.totalAmount.currencyCode ?? 'USD';
@@ -128,23 +110,22 @@ function createEmptyCart(): Cart {
   };
 }
 
-function cartReducer(state: CartFragment | null | undefined, action: CartAction): Cart {
+function cartReducer(state: CartFragment | null | undefined, action: CartAction): CartFragment {
   const currentCart = state || createEmptyCart();
 
   switch (action.type) {
     case 'UPDATE_ITEM': {
       const { merchandiseId, updateType } = action.payload;
-
-      const updatedLines = currentCart.lines.edges
+      const updatedLines = currentCart.lines
         .map((item) =>
-          item.node.id === merchandiseId ? updateCartItem(item.node, updateType) : item
+          item.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
         )
         .filter(Boolean);
 
       if (updatedLines.length === 0) {
         return {
           ...currentCart,
-          // lines: undefined,
+          lines: [],
           totalQuantity: 0,
           cost: {
             ...currentCart.cost,
@@ -155,12 +136,9 @@ function cartReducer(state: CartFragment | null | undefined, action: CartAction)
 
       return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
     }
-
     case 'ADD_ITEM': {
       const { variant, product } = action.payload;
-      const existingItem = currentCart.lines.nodes.find(
-        (item) => item.merchandise.id === variant.id
-      );
+      const existingItem = currentCart.lines.find((item) => item.merchandise.id === variant.id);
       const updatedItem = createOrUpdateCartItem(existingItem, variant, product);
 
       const updatedLines = existingItem
@@ -179,20 +157,19 @@ export function CartProvider({
   cartPromise
 }: {
   children: React.ReactNode;
-  cartPromise: Promise<ApolloQueryResult<GetCartQuery>>;
+  cartPromise: Promise<ApolloCart>;
 }) {
   const initialCart = use(cartPromise);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const cart = useFragment(CartFragmentDoc, initialCart.data.cart);
-
   console.log('cart', cart);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(cart, cartReducer);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const updateCartItem = (merchandiseId: string, updateType: CartUpdateType) => {
+  const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
     updateOptimisticCart({ type: 'UPDATE_ITEM', payload: { merchandiseId, updateType } });
   };
 
-  const addCartItem = (variant: ProductVariant, product: ProductFragment) => {
+  const addCartItem = (variant: ProductVariant, product: Product) => {
     updateOptimisticCart({ type: 'ADD_ITEM', payload: { variant, product } });
   };
 
@@ -204,7 +181,7 @@ export function CartProvider({
       isCartOpen,
       setIsCartOpen
     }),
-    [optimisticCart, isCartOpen, setIsCartOpen]
+    [optimisticCart]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

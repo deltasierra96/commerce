@@ -79,8 +79,6 @@ export default async function ProductPage({ params }: { params: { handle: string
 
   const product = useFragment(ProductFragmentDoc, data.product);
 
-  console.log('product', product);
-
   if (!product) return notFound();
 
   const featuredImage = useFragment(ImageFragmentDoc, product?.featuredImage);
