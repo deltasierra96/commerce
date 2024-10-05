@@ -6,9 +6,12 @@ import {
   CartFragment,
   CartFragmentDoc,
   CartLine,
+  GetCartQuery,
+  Product,
   ProductVariant
 } from '@/__generated__/graphql';
-import type { Cart, CartItem, Product } from '@/lib/shopify/types';
+import type { Cart, CartItem } from '@/lib/shopify/types';
+import { ApolloQueryResult } from '@apollo/client';
 import React, { createContext, use, useContext, useMemo, useOptimistic, useState } from 'react';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
@@ -54,7 +57,7 @@ function updateCartItem(item: CartLine, updateType: UpdateType): BaseCartLine | 
 }
 
 function createOrUpdateCartItem(
-  existingItem: CartItem | undefined,
+  existingItem: CartLine,
   variant: ProductVariant,
   product: Product
 ): CartItem {
@@ -113,45 +116,60 @@ function createEmptyCart(): Cart {
   };
 }
 
-function cartReducer(state: CartFragment | null | undefined, action: CartAction): CartFragment {
+function cartReducer(
+  state: CartFragment | null | undefined,
+  action: CartAction
+): CartFragment | null | undefined {
   // const currentCart = state || createEmptyCart();
   const currentCart = state;
 
   switch (action.type) {
-    case 'UPDATE_ITEM': {
-      const { merchandiseId, updateType } = action.payload;
-      const updatedLines = currentCart?.lines.edges
-        .map((item) =>
-          item.node.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
-        )
-        .filter(Boolean);
+    // case 'UPDATE_ITEM': {
+    //   const { merchandiseId, updateType } = action.payload;
+    //   const updatedLines = currentCart?.lines.edges
+    //     .map((item) =>
+    //       item.node.merchandise.id === merchandiseId ? updateCartItem(item, updateType) : item
+    //     )
+    //     .filter(Boolean);
 
-      if (updatedLines?.length === 0) {
-        return {
-          ...currentCart,
-          lines: [],
-          totalQuantity: 0,
-          cost: {
-            ...currentCart.cost,
-            totalAmount: { ...currentCart.cost.totalAmount, amount: '0' }
-          }
-        };
-      }
+    //   if (updatedLines?.length === 0) {
+    //     return {
+    //       ...currentCart,
+    //       lines: [],
+    //       totalQuantity: 0,
+    //       cost: {
+    //         ...currentCart.cost,
+    //         totalAmount: { ...currentCart.cost.totalAmount, amount: '0' }
+    //       }
+    //     };
+    //   }
 
-      return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
-    }
+    //   return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
+    // }
     case 'ADD_ITEM': {
       const { variant, product } = action.payload;
+
+      console.log('product', product);
+      console.log('variant', variant);
+
       const existingItem = currentCart?.lines.edges.find(
         (item) => item.node.merchandise.id === variant.id
       );
-      const updatedItem = createOrUpdateCartItem(existingItem, variant, product);
 
-      const updatedLines = existingItem
-        ? currentCart.lines.map((item) => (item.merchandise.id === variant.id ? updatedItem : item))
-        : [...currentCart.lines, updatedItem];
+      const updatedItem = createOrUpdateCartItem(existingItem?.node, variant, product);
 
-      return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
+      console.log('updatedItem', updatedItem);
+
+      // const updatedLines = existingItem
+      //   ? currentCart?.lines.edges.map((item) =>
+      //       item.node.merchandise.id === variant.id ? updatedItem : item
+      //     )
+      //   : [...currentCart?.lines, updatedItem];
+
+      // console.log('updatedLines', updatedLines);
+
+      // return { ...currentCart, ...updateCartTotals(updatedLines), lines: updatedLines };
+      return { ...currentCart, lines: [updatedItem] };
     }
     default:
       return currentCart;
@@ -163,12 +181,13 @@ export function CartProvider({
   cartPromise
 }: {
   children: React.ReactNode;
-  cartPromise: Promise<ApolloCart | undefined>;
+  cartPromise: Promise<ApolloQueryResult<GetCartQuery>>;
 }) {
-  const initialCart = use(cartPromise);
-  const cart = useFragment(CartFragmentDoc, initialCart.data.cart);
-  console.log('cart', cart);
-  const [optimisticCart, updateOptimisticCart] = useOptimistic(cart, cartReducer);
+  const cart = use(cartPromise);
+
+  const initialCart = useFragment(CartFragmentDoc, cart.data.cart);
+
+  const [optimisticCart, updateOptimisticCart] = useOptimistic(initialCart, cartReducer);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
@@ -178,6 +197,8 @@ export function CartProvider({
   const addCartItem = (variant: ProductVariant, product: Product) => {
     updateOptimisticCart({ type: 'ADD_ITEM', payload: { variant, product } });
   };
+
+  console.log('optimisticCart', optimisticCart);
 
   const value = useMemo(
     () => ({

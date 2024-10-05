@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { CollectionFilters } from './_components/collection-filters';
 import { CollectionHeader } from './_components/collection-header';
+import { CollectionHeaderSkeleton } from './_components/collection-header/collection-header.skeleton';
 import { CollectionProducts } from './_components/collection-products';
 import { CollectionToolbar } from './_components/collection-toolbar';
 
@@ -53,23 +54,7 @@ export default async function CollectionPage({
 
   return (
     <section className="py-12">
-      <Suspense
-        fallback={
-          <Container>
-            <div className="rounded-lg bg-white md:h-[18rem] lg:h-[15rem] xl:h-[22rem]">
-              <Container>
-                <div className="py-4">
-                  <div className="space-y-2">
-                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
-                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
-                    <div className="h-4 animate-pulse rounded-md bg-neutral-200" />
-                  </div>
-                </div>
-              </Container>
-            </div>
-          </Container>
-        }
-      >
+      <Suspense fallback={<CollectionHeaderSkeleton />}>
         <CollectionHeader params={params} />
       </Suspense>
       <div className="divide-y divide-neutral-100 lg:space-y-8">

@@ -1,4 +1,3 @@
-import { GetCartQuery, GetCartQueryVariables } from '@/__generated__/graphql';
 import {
   fontBasierCircle,
   fontFutura,
@@ -12,9 +11,8 @@ import {
   fontSatoshi,
   fontStolzl
 } from '@/fonts/next-fonts';
-import { query } from '@/lib/apollo-client';
 import Providers from '@/providers/providers';
-import { GET_CART_QUERY, getMenu } from '@/shopify';
+import { getCart, getMenu } from '@/shopify';
 import { clsx } from '@/utils';
 import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 import { Metadata } from 'next';
@@ -33,10 +31,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cartId = cookies().get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
 
-  const cart = query<GetCartQuery, GetCartQueryVariables>({
-    query: GET_CART_QUERY,
-    variables: { cartId: cartId! }
-  });
+  const cart = getCart(cartId);
 
   const menu = await getMenu('next-js-frontend-header-menu');
 

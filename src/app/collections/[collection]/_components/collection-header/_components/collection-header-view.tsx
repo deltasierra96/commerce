@@ -1,7 +1,11 @@
+'use client';
 import { GetCollectionHeaderQuery } from '@/__generated__/graphql';
 import { Container } from '@/components/ui/container';
+import { clsx } from '@/utils';
 import { ApolloQueryResult } from '@apollo/client';
 import Image from 'next/image';
+import { useState } from 'react';
+import { Button } from 'react-aria-components';
 
 type CollectionHeaderViewProps = {
   collectionHeader: ApolloQueryResult<GetCollectionHeaderQuery>;
@@ -15,6 +19,8 @@ export const CollectionHeaderView = ({ collectionHeader }: CollectionHeaderViewP
   if (!collection) {
     return;
   }
+
+  const [isVisible, setVisible] = useState(false);
 
   return (
     <Container>
@@ -40,23 +46,23 @@ export const CollectionHeaderView = ({ collectionHeader }: CollectionHeaderViewP
             <h1 className="font-heading text-xl uppercase tracking-tight md:text-2xl md:text-white lg:text-4xl">
               {collection.title}
             </h1>
-            {/* <p
-            className={clsx(
-              'mt-2 max-w-4xl text-sm tracking-wide md:mt-6 md:text-white',
-              isVisible && 'line-clamp-none',
-              !isVisible && 'line-clamp-2'
-            )}
-          >
-            {collection.description}
-          </p>
-          <div className="mt-4">
-            <Button
-              className={'text-sm font-medium underline hover:opacity-80'}
-              onPress={() => setVisible(!isVisible)}
+            <p
+              className={clsx(
+                'mt-2 max-w-4xl text-sm tracking-wide md:mt-6 md:text-white',
+                isVisible && 'line-clamp-none',
+                !isVisible && 'line-clamp-2'
+              )}
             >
-              Shore {`${isVisible ? 'less' : 'more'}`}
-            </Button>
-          </div> */}
+              {collection.description}
+            </p>
+            <div className="mt-4">
+              <Button
+                className={'text-sm font-medium underline hover:opacity-80'}
+                onPress={() => setVisible(!isVisible)}
+              >
+                Shore {`${isVisible ? 'less' : 'more'}`}
+              </Button>
+            </div>
           </Container>
         </div>
       </div>
