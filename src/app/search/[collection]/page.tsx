@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { ProductCard } from '@/app/_components/product-card';
 import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
-import { getCollection, getCollectionProducts } from '@/lib/shopify';
+import { getCollection } from '@/shopify/getCollection';
+import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 
 export async function generateMetadata({
   params

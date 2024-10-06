@@ -1,10 +1,8 @@
-import { gql } from '@apollo/client';
-import { PRODUCT_FRAGMENT } from './product';
-
-export const CART_FRAGMENT = gql`
+export const CART_FRAGMENT = /* GraphQL */ `
   fragment cart on Cart {
     id
     checkoutUrl
+    totalQuantity
     cost {
       subtotalAmount {
         amount
@@ -39,14 +37,35 @@ export const CART_FRAGMENT = gql`
                 value
               }
               product {
-                ...product
+                id
+                vendor
+                handle
+                availableForSale
+                title
+                options {
+                  id
+                  name
+                  values
+                }
+                totalInventory
+                priceRange {
+                  maxVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                featuredImage {
+                  url(transform: { maxWidth: 200 })
+                }
               }
             }
           }
         }
       }
     }
-    totalQuantity
   }
-  ${PRODUCT_FRAGMENT}
 `;

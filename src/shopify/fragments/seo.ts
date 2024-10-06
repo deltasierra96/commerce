@@ -1,6 +1,4 @@
-import { gql } from '@apollo/client';
-
-export const SEO_FRAGMENT = gql`
+export const SEO_FRAGMENT = /* GraphQL */ `
   fragment seo on SEO {
     description
     title

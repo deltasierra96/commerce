@@ -1,5 +1,5 @@
 'use client';
-import { Collection } from '@/lib/shopify/types';
+import { Collection } from '@/shopify/types';
 import Image from 'next/image';
 import { Link } from 'react-aria-components';
 

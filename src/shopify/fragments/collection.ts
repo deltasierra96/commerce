@@ -1,7 +1,6 @@
-import { gql } from '@apollo/client';
 import SEO_FRAGMENT from './seo';
 
-export const COLLECTION_FRAGMENT = gql`
+export const COLLECTION_FRAGMENT = /* GraphQL */ `
   fragment collection on Collection {
     handle
     title

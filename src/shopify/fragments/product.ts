@@ -1,14 +1,14 @@
-import { gql } from '@apollo/client';
 import IMAGE_FRAGMENT from './image';
 import SEO_FRAGMENT from './seo';
 
-export const PRODUCT_FRAGMENT = gql`
+export const PRODUCT_FRAGMENT = /* GraphQL */ `
   fragment product on Product {
     id
-    vendor
     handle
     availableForSale
     title
+    vendor
+    totalInventory
     description
     descriptionHtml
     options {
@@ -16,7 +16,6 @@ export const PRODUCT_FRAGMENT = gql`
       name
       values
     }
-    totalInventory
     priceRange {
       maxVariantPrice {
         amount

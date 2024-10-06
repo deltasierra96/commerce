@@ -12,9 +12,9 @@ import {
   fontStolzl
 } from '@/fonts/next-fonts';
 import Providers from '@/providers/providers';
-import { getCart, getMenu } from '@/shopify';
+import { getCart } from '@/shopify/getCart';
+import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
-import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
@@ -34,12 +34,6 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cart = getCart(cartId);
 
   const menu = await getMenu('next-js-frontend-header-menu');
-
-  if (process.env.NODE_ENV !== 'production') {
-    // Adds messages only in a dev environment
-    loadDevMessages();
-    loadErrorMessages();
-  }
 
   return (
     <Providers>

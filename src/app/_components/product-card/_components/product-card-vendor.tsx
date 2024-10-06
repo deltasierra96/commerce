@@ -1,10 +1,10 @@
 'use client';
-import { ProductFragment } from '@/__generated__/graphql';
 import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { Product } from '@/shopify/types';
 import { Link, LinkProps } from 'react-aria-components';
 
 export type ProductCardVendorProps = LinkProps & {
-  product: ProductFragment;
+  product: Product;
 };
 
 export const ProductCardVendor = ({ product, ...props }: ProductCardVendorProps) => {

@@ -1,7 +1,11 @@
 'use server';
 
 import { TAGS } from '@/lib/constants';
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from '@/lib/shopify';
+import { addToCart } from '@/shopify/addToCart';
+import { createCart } from '@/shopify/createCart';
+import { getCart } from '@/shopify/getCart';
+import { removeFromCart } from '@/shopify/removeFromCart';
+import { updateCart } from '@/shopify/updateCart';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

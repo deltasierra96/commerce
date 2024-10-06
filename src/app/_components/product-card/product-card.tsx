@@ -1,5 +1,5 @@
 'use client';
-import { ProductFragment } from '@/__generated__/graphql';
+import { Product } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { motion } from 'framer-motion';
 import { Group } from 'react-aria-components';
@@ -11,7 +11,7 @@ import { ProductCardTitle } from './_components/product-card-title';
 import { ProductCardVendor } from './_components/product-card-vendor';
 
 export type ProductCardProps = {
-  product: ProductFragment;
+  product: Product;
   showCartActions?: boolean;
   className?: string;
 };

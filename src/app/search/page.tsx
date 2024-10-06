@@ -1,5 +1,5 @@
 import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
-import { getProducts } from '@/lib/shopify';
+import { getProducts } from '@/shopify/getProducts';
 import { ProductCard } from '../_components/product-card';
 
 export const metadata = {

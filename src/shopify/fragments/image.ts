@@ -1,11 +1,10 @@
-import { gql } from '@apollo/client';
-
-export const IMAGE_FRAGMENT = gql`
+export const IMAGE_FRAGMENT = /* GraphQL */ `
   fragment image on Image {
-    url
-    altText
+    id
+    url(transform: { maxWidth: 1200 })
     width
     height
+    altText
   }
 `;
 

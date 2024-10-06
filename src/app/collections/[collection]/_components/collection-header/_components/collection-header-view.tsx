@@ -1,21 +1,16 @@
 'use client';
-import { GetCollectionHeaderQuery } from '@/__generated__/graphql';
 import { Container } from '@/components/ui/container';
+import { Collection } from '@/shopify/types';
 import { clsx } from '@/utils';
-import { ApolloQueryResult } from '@apollo/client';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from 'react-aria-components';
 
 type CollectionHeaderViewProps = {
-  collectionHeader: ApolloQueryResult<GetCollectionHeaderQuery>;
+  collection: Collection;
 };
 
-export const CollectionHeaderView = ({ collectionHeader }: CollectionHeaderViewProps) => {
-  const {
-    data: { collection }
-  } = collectionHeader;
-
+export const CollectionHeaderView = ({ collection }: CollectionHeaderViewProps) => {
   if (!collection) {
     return;
   }

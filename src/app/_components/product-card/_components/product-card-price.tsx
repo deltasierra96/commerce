@@ -1,9 +1,9 @@
 'use client';
-import { ProductFragment } from '@/__generated__/graphql';
+import { Product } from '@/shopify/types';
 import { clsx } from '@/utils';
 
 export type ProductCardPriceProps = {
-  product: ProductFragment;
+  product: Product;
   showCurrencyCode?: boolean;
 };
 

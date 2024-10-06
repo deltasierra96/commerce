@@ -1,9 +1,9 @@
 'use client';
-import { ProductFragment } from '@/__generated__/graphql';
 import { ButtonIcon } from '@/components/ui/button-icon';
+import { Product } from '@/shopify/types';
 
 export type ProductCardHoverActionsProps = {
-  product: ProductFragment;
+  product: Product;
 };
 
 export const ProductCardHoverActions = ({ product, ...props }: ProductCardHoverActionsProps) => {

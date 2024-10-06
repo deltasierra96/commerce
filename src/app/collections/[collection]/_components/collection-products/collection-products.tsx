@@ -1,5 +1,3 @@
-import { useFragment } from '@/__generated__';
-import { ProductCollectionSortKeys, ProductFragmentDoc } from '@/__generated__/graphql';
 import { ProductCard } from '@/app/_components/product-card';
 import {
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
@@ -7,7 +5,7 @@ import {
   COLLECTION_PRODUCTS_LIMIT,
   COLLECTION_PRODUCTS_SORTING
 } from '@/lib/constants';
-import { getCollectionProducts } from '@/shopify';
+import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 import { clsx } from '@/utils';
 
 type CollectionProductsProps = {
@@ -26,17 +24,16 @@ export const CollectionProducts = async ({ params, searchParams }: CollectionPro
     COLLECTION_PRODUCTS_LIMIT.find((item) => item.toString() === limit) ||
     COLLECTION_PRODUCTS_DEFAULT_LIMIT;
 
-  const { data, loading } = await getCollectionProducts({
-    handle: params.collection,
+  const products = await getCollectionProducts({
+    collection: params.collection,
     limit: limitAmount,
     reverse,
-    sortKey: sortKey as ProductCollectionSortKeys
+    sortKey: sortKey
   });
 
   return (
     <div className="grid grid-flow-row grid-cols-2 border-l border-neutral-100 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-4">
-      {data.collection?.products.edges?.map((p) => {
-        const product = useFragment(ProductFragmentDoc, p.node);
+      {products?.map((product) => {
         return (
           <ProductCard
             key={product.id}

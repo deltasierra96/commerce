@@ -1,21 +1,24 @@
-import { GetCartQuery, GetCartQueryVariables } from '@/__generated__/graphql';
-import { query } from '@/lib/apollo-client';
 import { TAGS } from '@/lib/constants';
-import { ApolloQueryResult } from '@apollo/client';
+import { shopifyFetch } from './fetch';
+import { reshapeCart } from './helpers';
 import { GET_CART_QUERY } from './queries';
+import { Cart, ShopifyCartOperation } from './types';
 
-export const getCart = async (
-  cartId: string | undefined
-): Promise<ApolloQueryResult<GetCartQuery>> => {
-  const cartQuery = await query<GetCartQuery, GetCartQueryVariables>({
+export async function getCart(cartId: string | undefined): Promise<Cart | undefined> {
+  if (!cartId) {
+    return undefined;
+  }
+
+  const res = await shopifyFetch<ShopifyCartOperation>({
     query: GET_CART_QUERY,
-    variables: { cartId: cartId! },
-    context: {
-      next: {
-        tags: TAGS.cart
-      }
-    }
+    variables: { cartId },
+    tags: [TAGS.cart]
   });
 
-  return cartQuery;
-};
+  // Old carts becomes `null` when you checkout.
+  if (!res.body.data.cart) {
+    return undefined;
+  }
+
+  return reshapeCart(res.body.data.cart);
+}

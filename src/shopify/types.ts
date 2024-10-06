@@ -119,6 +119,8 @@ export type ShopifyCollection = {
 export type ShopifyProduct = {
   id: string;
   handle: string;
+  vendor: string;
+  totalInventory: number;
   availableForSale: boolean;
   title: string;
   description: string;
@@ -134,8 +136,6 @@ export type ShopifyProduct = {
   seo: SEO;
   tags: string[];
   updatedAt: string;
-  vendor: string;
-  totalInventory: number;
 };
 
 export type ShopifyCartOperation = {
@@ -211,9 +211,9 @@ export type ShopifyCollectionProductsOperation = {
   };
   variables: {
     handle: string;
-    limit?: number;
     reverse?: boolean;
     sortKey?: string;
+    limit?: number;
   };
 };
 

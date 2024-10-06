@@ -1,10 +1,10 @@
 'use client';
-import { ProductFragment } from '@/__generated__/graphql';
+import { Product } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { useProduct } from './product-context';
 
 export type ProductPriceProps = {
-  product: ProductFragment;
+  product: Product;
   showCurrencyCode?: boolean;
 };
 
@@ -26,10 +26,8 @@ export const ProductPrice = ({
 }: ProductPriceProps) => {
   const { state } = useProduct();
 
-  const variant = product.variants.edges.find((variant) =>
-    variant.node.selectedOptions.every(
-      (option) => option.value === state[option.name.toLowerCase()]
-    )
+  const variant = product.variants.find((variant) =>
+    variant.selectedOptions.every((option) => option.value === state[option.name.toLowerCase()])
   );
 
   const { maxVariantPrice, minVariantPrice } = product.priceRange;
@@ -52,10 +50,10 @@ export const ProductPrice = ({
         {`${formatPrice.format(parseFloat(amount))}`}
         {showCurrencyCode ? <CurrencyCode currencyCode={currencyCode} /> : null}
       </p>
-      {hasSalePrice && variant?.node.price.amount ? (
+      {hasSalePrice && variant?.price.amount ? (
         <div className="flex text-sm text-red-500">
           <span suppressHydrationWarning={true}>
-            {`Now ${formatPrice.format(parseFloat(variant?.node.price.amount))}`}
+            {`Now ${formatPrice.format(parseFloat(variant?.price.amount))}`}
             {showCurrencyCode ? <CurrencyCode currencyCode={currencyCode} /> : null}
           </span>
         </div>

@@ -1,15 +1,14 @@
 'use client';
 
-import { useFragment } from '@/__generated__';
-import { ImageFragmentDoc, ProductFragment } from '@/__generated__/graphql';
 import { useProduct, useUpdateURL } from '@/app/product/[handle]/_components/product-context';
 import { ButtonIcon } from '@/components/ui/button-icon';
+import { Product, Image as ShopifyImage } from '@/shopify/types';
 import { clsx } from '@/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 
 type ProductImagesProps = {
-  product: ProductFragment;
+  product: Product;
   thumbnailDirection?: 'vertical' | 'horizontal';
 };
 
@@ -18,13 +17,10 @@ export const ProductImages = ({
   thumbnailDirection = 'vertical',
   ...props
 }: ProductImagesProps) => {
-  const images = product.images.edges.slice(0, 5).map((image) => {
-    const derp = useFragment(ImageFragmentDoc, image.node);
-    return {
-      src: derp.url,
-      altText: derp.altText
-    };
-  });
+  const images = product.images.slice(0, 5).map((image: ShopifyImage) => ({
+    src: image.url,
+    altText: image.altText
+  }));
 
   const { state, updateImage } = useProduct();
   const updateURL = useUpdateURL();

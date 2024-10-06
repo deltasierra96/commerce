@@ -1,11 +1,12 @@
+import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { MenuItem } from '@/shopify';
+import { Menu } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
 type DesktopHeaderProps = {
-  menu: MenuItem[];
+  menu: Menu[];
   isFullWidth?: boolean;
 };
 
@@ -28,7 +29,9 @@ export const DesktopHeader = ({ menu, isFullWidth = false }: DesktopHeaderProps)
               <div className="hidden sm:block">
                 <Account />
               </div>
-              <div className="hidden sm:block">{/* <Cart /> */}</div>
+              <div className="hidden sm:block">
+                <Cart />
+              </div>
             </div>
           </div>
         </div>

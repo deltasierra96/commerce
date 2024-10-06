@@ -1,32 +1,56 @@
-import {
-  GetCollectionProductsQuery,
-  GetCollectionProductsQueryVariables,
-  ProductCollectionSortKeys
-} from '@/__generated__/graphql';
-import { query } from '@/lib/apollo-client';
 import { TAGS } from '@/lib/constants';
-import { ApolloQueryResult } from '@apollo/client';
+import { shopifyFetch } from './fetch';
+import { removeEdgesAndNodes, reshapeProducts } from './helpers';
 import { GET_COLLECTION_PRODUCTS_QUERY } from './queries';
+import { Connection, Product, ShopifyProduct } from './types';
+
+export type ShopifyCollectionProductsOperation = {
+  data: {
+    collection: {
+      products: Connection<ShopifyProduct>;
+    };
+  };
+  variables: {
+    handle: string;
+    reverse?: boolean;
+    sortKey?: string;
+    limit?: number;
+  };
+};
 
 export type GetCollectionProductsProps = {
   handle: string;
   limit?: number;
   reverse: boolean;
-  sortKey?: ProductCollectionSortKeys;
+  sortKey?: string;
 };
 
-export const getCollectionProducts = async ({
-  handle,
-  limit = 100,
+export async function getCollectionProducts({
+  collection,
   reverse,
-  sortKey
-}: GetCollectionProductsProps): Promise<ApolloQueryResult<GetCollectionProductsQuery>> =>
-  await query<GetCollectionProductsQuery, GetCollectionProductsQueryVariables>({
+  sortKey,
+  limit = 100
+}: {
+  collection: string;
+  reverse?: boolean;
+  sortKey?: string;
+  limit?: number;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
     query: GET_COLLECTION_PRODUCTS_QUERY,
-    variables: { handle: handle, limit, reverse, sortKey },
-    context: {
-      next: {
-        tags: TAGS.products
-      }
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      limit,
+      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey
     }
   });
+
+  if (!res.body.data.collection) {
+    console.log(`No collection found for \`${collection}\``);
+    return [];
+  }
+
+  return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+}

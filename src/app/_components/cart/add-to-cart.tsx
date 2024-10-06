@@ -1,10 +1,9 @@
 'use client';
-
-import { ProductFragment } from '@/__generated__/graphql';
 import { useProduct } from '@/app/product/[handle]/_components/product-context';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { useActionState } from 'react';
+import { Product, ProductVariant } from '@/shopify/types';
+import { useFormState } from 'react-dom';
 import { addItem } from './actions';
 import { useCart } from './cart-context';
 
@@ -39,31 +38,30 @@ function SubmitButton({
   );
 }
 
-export function AddToCart({ product }: { product: ProductFragment }) {
+export function AddToCart({ product }: { product: Product }) {
   const { variants, availableForSale } = product;
   const { addCartItem } = useCart();
   const { state } = useProduct();
-  const [message, formAction] = useActionState(addItem, null);
+  const [message, formAction] = useFormState(addItem, null);
 
-  const variant = variants.edges.find((variant) =>
-    variant.node.selectedOptions.every(
-      (option) => option.value === state[option.name.toLowerCase()]
-    )
+  const variant = variants.find((variant: ProductVariant) =>
+    variant.selectedOptions.every((option) => option.value === state[option.name.toLowerCase()])
   );
-  const defaultVariantId = variants.edges.length === 1 ? variants.edges[0]?.node.id : undefined;
-  const selectedVariantId = variant?.node.id || defaultVariantId;
+  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
+  const selectedVariantId = variant?.id || defaultVariantId;
   const actionWithVariant = formAction.bind(null, selectedVariantId);
-  const finalVariant = variants.edges.find((variant) => variant.node.id === selectedVariantId)!;
+  const finalVariant = variants.find((variant) => variant.id === selectedVariantId)!;
 
   return (
     <div className="flex w-full flex-col gap-x-2 gap-y-4 lg:flex-row lg:gap-y-0">
       <form
         className="w-full"
         action={async () => {
-          addCartItem(finalVariant?.node, product);
+          addCartItem(finalVariant, product);
           actionWithVariant();
         }}
       >
+        <button type="submit">Add</button>
         <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} />
         <p aria-live="polite" className="sr-only" role="status">
           {message}

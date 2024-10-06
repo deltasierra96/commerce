@@ -1,7 +1,7 @@
 'use client';
 
-import { BaseCartLine } from '@/__generated__/graphql';
 import { ButtonIcon } from '@/components/ui/button-icon';
+import { CartItem } from '@/shopify/types';
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { updateItemQuantity } from './actions';
@@ -30,7 +30,7 @@ function SubmitButton({ updateType }: SubmitButtonProps) {
 }
 
 type EditCartItemQuantityButtonProps = {
-  item: BaseCartLine;
+  item: CartItem;
   optimisticUpdate: any;
   updateType: CartUpdateType;
 };
@@ -65,7 +65,7 @@ const EditCartItemQuantityButton = ({
 };
 
 type EditCartItemQuantityProps = {
-  item: BaseCartLine;
+  item: CartItem;
   updateCartItem: any;
 };
 

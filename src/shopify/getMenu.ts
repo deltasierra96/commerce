@@ -1,29 +1,21 @@
-import {
-  GetMenuQuery,
-  GetMenuQueryVariables,
-  MenuItem as MenuItemCodeGen
-} from '@/__generated__/graphql';
-import { query } from '@/lib/apollo-client';
-import { ensureStartsWith } from '@/lib/utils';
+import { TAGS } from '@/lib/constants';
+import { SHOPIFY_STORE_DOMAIN, shopifyFetch } from './fetch';
 import { GET_MENU_QUERY } from './queries/menu';
+import { Menu, ShopifyMenuOperation } from './types';
 
-export type MenuItem = Pick<MenuItemCodeGen, 'title' | 'url'>;
-
-const domain = process.env.SHOPIFY_STORE_DOMAIN
-  ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
-  : '';
-
-export const getMenu = async (handle: string): Promise<MenuItem[]> => {
-  const menu = await query<GetMenuQuery, GetMenuQueryVariables>({
+export async function getMenu(handle: string): Promise<Menu[]> {
+  const res = await shopifyFetch<ShopifyMenuOperation>({
     query: GET_MENU_QUERY,
-    variables: { handle }
+    tags: [TAGS.collections],
+    variables: {
+      handle
+    }
   });
+
   return (
-    menu.data.menu?.items.map((item) => {
-      return {
-        title: item.title,
-        url: item.url.replace(domain, '')
-      };
-    }) || []
+    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
+      title: item.title,
+      path: item.url.replace(SHOPIFY_STORE_DOMAIN, '')
+    })) || []
   );
-};
+}

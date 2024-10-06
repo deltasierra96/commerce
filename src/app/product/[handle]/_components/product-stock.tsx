@@ -1,8 +1,8 @@
-import { ProductFragment } from '@/__generated__/graphql';
+import { Product } from '@/shopify/types';
 import { clsx } from '@/utils';
 
 type ProductStockProps = {
-  product: ProductFragment;
+  product: Product;
   className?: string;
   bordered?: boolean;
   lowStockCount?: number;

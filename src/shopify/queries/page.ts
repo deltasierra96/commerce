@@ -1,7 +1,6 @@
-import { gql } from '@apollo/client';
 import { PAGE_FRAGMENT } from '../fragments/page';
 
-export const GET_PAGE_QUERY = gql`
+export const GET_PAGE_QUERY = /* GraphQL */ `
   query getPage($handle: String!) {
     pageByHandle(handle: $handle) {
       ...page
@@ -10,7 +9,7 @@ export const GET_PAGE_QUERY = gql`
   ${PAGE_FRAGMENT}
 `;
 
-export const GET_PAGES_QUERY = gql`
+export const GET_PAGES_QUERY = /* GraphQL */ `
   query getPages {
     pages(first: 100) {
       edges {

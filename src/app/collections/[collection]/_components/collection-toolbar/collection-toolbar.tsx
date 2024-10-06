@@ -1,15 +1,15 @@
 'use client';
-import { CollectionFragment } from '@/__generated__/graphql';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { DialogHeader } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
+import { Collection } from '@/shopify/types';
 import { CollectionLimit } from './_components/collection-limit';
 import { CollectionSort } from './_components/collection-sort';
 
 type CollectionToolbarProps = {
-  collection: CollectionFragment;
+  collection: Collection;
 };
 
 export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarProps) => {
