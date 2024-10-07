@@ -1,8 +1,9 @@
+import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { Menu } from '@/shopify/types';
 import { clsx } from '@/utils';
-import { Account, Search } from './_components';
+import { Account, Navigation, Search } from './_components';
 
 type MobileHeaderProps = {
   menu: Menu;
@@ -14,7 +15,7 @@ export const MobileHeader = ({ menu }: MobileHeaderProps) => {
       <Container>
         <div className="flex items-center justify-between gap-x-8">
           <div className="flex basis-2/12 justify-start">
-            {/* <Navigation menu={menu} /> */}
+            <Navigation menu={menu} />
             <Search />
           </div>
           <div className="flex basis-2/12 items-center justify-center">
@@ -23,7 +24,7 @@ export const MobileHeader = ({ menu }: MobileHeaderProps) => {
 
           <div className="flex basis-2/12 justify-end">
             <Account />
-            {/* <Cart /> */}
+            <Cart />
           </div>
         </div>
       </Container>

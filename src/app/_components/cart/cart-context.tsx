@@ -174,7 +174,7 @@ export function CartProvider({
       isCartOpen,
       setIsCartOpen
     }),
-    [optimisticCart]
+    [optimisticCart, setIsCartOpen, isCartOpen]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

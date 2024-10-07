@@ -9,8 +9,6 @@ import { CollectionCard } from './_components/collection-card';
 export async function generateMetadata(): Promise<Metadata> {
   const collections = await getCollections();
 
-  console.log('collections', collections);
-
   if (!collections) return notFound();
 
   return {

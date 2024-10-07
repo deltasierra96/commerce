@@ -2,60 +2,21 @@
 
 import Price from '@/app/_components/price';
 import { DEFAULT_OPTION, PRODUCT_PATH } from '@/app/constants';
-import { Button, sharedButtonStyles } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie, redirectToCheckout } from './actions';
 import { useCart } from './cart-context';
 import { CartItem } from './cart-item';
 
-import { ButtonIcon, buttonIconCounterStyles } from '@/components/ui/button-icon';
+import { ButtonIcon } from '@/components/ui/button-icon';
 import { DialogHeader } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { createUrl } from '@/shopify/lib/utils';
-import { clsx } from '@/utils';
 
 type MerchandiseSearchParams = {
   [key: string]: string;
-};
-
-export const CartDesktopTrigger = () => {
-  const { cart, setIsCartOpen } = useCart();
-  const cartQty = cart?.totalQuantity;
-
-  return (
-    <div className="flex max-lg:hidden">
-      <Button
-        onPress={() => setIsCartOpen(true)}
-        className={clsx(sharedButtonStyles({ variant: 'ghost' }))}
-      >
-        <div className="relative">
-          <Icon className="h-5 w-5" icon="shopping-cart" />
-          <div
-            className={clsx(
-              buttonIconCounterStyles({ counterPosition: 'left', size: 'sm' }),
-              '-left-2 -top-2'
-            )}
-          >
-            <span className="flex">{cartQty}</span>
-          </div>
-        </div>
-        {cart?.lines.length ? (
-          <>
-            {/* <span>{hasCartItems ? `${cartQty} items` : `${cartQty} item`}</span> */}
-            <span>{`${new Intl.NumberFormat(undefined, {
-              style: 'currency',
-              currency: cart?.cost.totalAmount.currencyCode,
-              currencyDisplay: 'narrowSymbol'
-            }).format(parseFloat(cart?.cost.totalAmount.amount))}`}</span>
-          </>
-        ) : (
-          'Your cart is empty'
-        )}
-      </Button>
-    </div>
-  );
 };
 
 export const Cart = () => {
@@ -87,7 +48,9 @@ export const Cart = () => {
   return (
     <>
       <ButtonIcon
-        onPress={() => setIsCartOpen(true)}
+        onPress={() => {
+          setIsCartOpen(true);
+        }}
         variant={'ghost'}
         counter={cart?.totalQuantity}
         icon="shopping-cart"

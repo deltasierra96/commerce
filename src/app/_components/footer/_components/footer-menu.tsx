@@ -50,7 +50,6 @@ const FooterMenuBlock = (menuItem: MenuItem) => (
 );
 
 export default function FooterMenu({ menu }: { menu: Menu }) {
-  console.log('footerMenu', menu);
   if (menu && !menu.items?.length) return null;
   return (
     <nav>

@@ -16,8 +16,8 @@ export const Navigation = ({ menu, ...props }: NavigationProps) => {
       <Drawer.Content>
         <DialogHeader>Navigation</DialogHeader>
         <div className="space-y-4 p-6">
-          {menu.items.map((menuItem) => (
-            <ButtonLink key={menuItem.title} block href={menuItem.path}>
+          {menu.items?.map((menuItem) => (
+            <ButtonLink key={menuItem.title} block href={menuItem.url}>
               {menuItem.title}
             </ButtonLink>
           ))}
