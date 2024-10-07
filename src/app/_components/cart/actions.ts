@@ -1,6 +1,6 @@
 'use server';
 
-import { TAGS } from '@/lib/constants';
+import { TAGS } from '@/app/constants';
 import { addToCart } from '@/shopify/addToCart';
 import { createCart } from '@/shopify/createCart';
 import { getCart } from '@/shopify/getCart';

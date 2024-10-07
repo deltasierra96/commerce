@@ -1,6 +1,6 @@
-import { TAGS } from '@/lib/constants';
-import { shopifyFetch } from './fetch';
-import { reshapeCart } from './helpers';
+import { TAGS } from '@/app/constants';
+import { shopifyFetch } from './lib/fetch';
+import { reshapeCart } from './lib/helpers';
 import { GET_CART_QUERY } from './queries';
 import { Cart, ShopifyCartOperation } from './types';
 

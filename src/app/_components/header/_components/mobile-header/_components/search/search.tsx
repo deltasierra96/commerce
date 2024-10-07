@@ -1,10 +1,10 @@
 'use client';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { DialogHeader } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
-import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/lib/constants';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 

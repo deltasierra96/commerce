@@ -1,6 +1,6 @@
 'use client';
 
-import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
 import { useSearchParams } from 'next/navigation';
 import { Fragment } from 'react';
 

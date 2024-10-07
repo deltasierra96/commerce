@@ -24,7 +24,7 @@ import { Banner } from './_components/banner';
 import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
-import { Incentives } from './_components/incentives';
+import { MAIN_MENU_HANDLE } from './constants';
 import { rootMetadata } from './meta-data';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
@@ -33,7 +33,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
 
   const cart = getCart(cartId);
 
-  const menu = await getMenu('next-js-frontend-header-menu');
+  const menu = await getMenu(MAIN_MENU_HANDLE);
 
   return (
     <Providers>
@@ -74,7 +74,6 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                   <div className="flex-1">
                     <main>{children}</main>
                   </div>
-                  <Incentives />
                   <Footer />
                 </div>
               </div>

@@ -6,7 +6,7 @@ import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
 type DesktopHeaderProps = {
-  menu: Menu[];
+  menu: Menu;
   isFullWidth?: boolean;
 };
 

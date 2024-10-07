@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation';
 
 import { AddToCart } from '@/app/_components/cart/add-to-cart';
 import { GridTileImage } from '@/app/_components/grid/tile';
+import { HIDDEN_PRODUCT_TAG, PRODUCT_PATH } from '@/app/constants';
 import { ProductProvider } from '@/app/product/[handle]/_components/product-context';
 import { Container } from '@/components/ui/container';
-import { HIDDEN_PRODUCT_TAG, STORE_ROUTE_PRODUCT } from '@/lib/constants';
 import { getProduct } from '@/shopify/getProduct';
 import { getProductRecommendations } from '@/shopify/getProductRecommendation';
 import { Metadata } from 'next';
@@ -156,7 +156,7 @@ async function RelatedProducts({ id }: { id: string }) {
             >
               <Link
                 className="relative h-full w-full"
-                href={`${STORE_ROUTE_PRODUCT}/${product.handle}`}
+                href={`${PRODUCT_PATH}/${product.handle}`}
                 prefetch={true}
               >
                 <GridTileImage

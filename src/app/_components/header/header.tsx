@@ -1,4 +1,3 @@
-'use client';
 import { Menu } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { DesktopHeader } from './_components/desktop-header';
@@ -6,7 +5,7 @@ import { MobileHeader } from './_components/mobile-header';
 
 export type HeaderProps = {
   className?: string;
-  menu: Menu[];
+  menu: Menu;
 };
 
 export const Header = async ({ className, menu, ...rest }: HeaderProps) => {

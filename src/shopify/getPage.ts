@@ -1,4 +1,4 @@
-import { shopifyFetch } from './fetch';
+import { shopifyFetch } from './lib/fetch';
 import { GET_PAGE_QUERY } from './queries';
 import { Page, ShopifyPageOperation } from './types';
 

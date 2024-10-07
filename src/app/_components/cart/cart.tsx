@@ -1,9 +1,8 @@
 'use client';
 
 import Price from '@/app/_components/price';
+import { DEFAULT_OPTION, PRODUCT_PATH } from '@/app/constants';
 import { Button, sharedButtonStyles } from '@/components/ui/button';
-import { DEFAULT_OPTION, STORE_ROUTE_PRODUCT } from '@/lib/constants';
-import { createUrl } from '@/lib/utils';
 import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie, redirectToCheckout } from './actions';
@@ -14,6 +13,7 @@ import { ButtonIcon, buttonIconCounterStyles } from '@/components/ui/button-icon
 import { DialogHeader } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
+import { createUrl } from '@/shopify/lib/utils';
 import { clsx } from '@/utils';
 
 type MerchandiseSearchParams = {
@@ -127,7 +127,7 @@ export const Cart = () => {
                         });
 
                         const merchandiseUrl = createUrl(
-                          `${STORE_ROUTE_PRODUCT}/${item.merchandise.product.handle}`,
+                          `${PRODUCT_PATH}/${item.merchandise.product.handle}`,
                           new URLSearchParams(merchandiseSearchParams)
                         );
 

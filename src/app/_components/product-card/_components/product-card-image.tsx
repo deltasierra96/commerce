@@ -1,5 +1,5 @@
 'use client';
-import { STORE_ROUTE_PRODUCT } from '@/lib/constants';
+import { PRODUCT_PATH } from '@/app/constants';
 import { Product } from '@/shopify/types';
 import { clsx } from '@/utils';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ export const ProductCardImage = ({
   showQuickView = false,
   ...props
 }: ProductCardImageProps) => {
-  const productUrl = `${STORE_ROUTE_PRODUCT}/${product.handle}`;
+  const productUrl = `${PRODUCT_PATH}/${product.handle}`;
 
   return (
     <div className="relative flex flex-col items-center justify-end">

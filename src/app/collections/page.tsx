@@ -1,20 +1,23 @@
 import { Container } from '@/components/ui/container';
-import { getCollections } from '@/lib/shopify';
+import { getCollections } from '@/shopify/getCollections';
 import { clsx } from '@/utils';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { CollectionCard } from './_components/collection-card';
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   const collections = await getCollections();
+export async function generateMetadata(): Promise<Metadata> {
+  const collections = await getCollections();
 
-//   if (!collections) return notFound();
+  console.log('collections', collections);
 
-//   return {
-//     title: collections.seo?.title || collection.title,
-//     description:
-//       collection.seo?.description || collection.description || `${collection.title} products`
-//   };
-// }
+  if (!collections) return notFound();
+
+  return {
+    title: 'Collections',
+    description: 'Browse all available collections.'
+  };
+}
 
 const collectionGridStyles = clsx(
   'grid grid-flow-row grid-cols-2 gap-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6'

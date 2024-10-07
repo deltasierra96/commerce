@@ -47,9 +47,15 @@ export type Image = {
   height: number;
 };
 
-export type Menu = {
+export type MenuItem = {
+  id: string;
   title: string;
-  path: string;
+  url: string;
+  items?: MenuItem[];
+};
+
+export type Menu = MenuItem & {
+  items?: MenuItem[];
 };
 
 export type Money = {
@@ -225,12 +231,7 @@ export type ShopifyCollectionsOperation = {
 
 export type ShopifyMenuOperation = {
   data: {
-    menu?: {
-      items: {
-        title: string;
-        url: string;
-      }[];
-    };
+    menu: Menu;
   };
   variables: {
     handle: string;

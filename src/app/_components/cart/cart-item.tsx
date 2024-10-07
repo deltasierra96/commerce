@@ -1,5 +1,5 @@
 import Price from '@/app/_components/price';
-import { DEFAULT_OPTION } from '@/lib/constants';
+import { DEFAULT_OPTION } from '@/app/constants';
 import { CartItem as ShopifyCartItem } from '@/shopify/types';
 import Image from 'next/image';
 import { Group, Link } from 'react-aria-components';

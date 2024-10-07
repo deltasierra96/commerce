@@ -6,7 +6,7 @@ import { Drawer } from '@/components/ui/drawer';
 import { Menu } from '@/shopify/types';
 
 type NavigationProps = {
-  menu: Menu[];
+  menu: Menu;
 };
 
 export const Navigation = ({ menu, ...props }: NavigationProps) => {
@@ -16,7 +16,7 @@ export const Navigation = ({ menu, ...props }: NavigationProps) => {
       <Drawer.Content>
         <DialogHeader>Navigation</DialogHeader>
         <div className="space-y-4 p-6">
-          {menu.map((menuItem) => (
+          {menu.items.map((menuItem) => (
             <ButtonLink key={menuItem.title} block href={menuItem.path}>
               {menuItem.title}
             </ButtonLink>

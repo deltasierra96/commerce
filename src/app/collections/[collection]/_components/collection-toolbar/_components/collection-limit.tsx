@@ -1,12 +1,12 @@
 'use client';
-import { Select, SelectItem } from '@/components/ui/select';
 import {
   COLLECTION_PRODUCTS_DEFAULT_LIMIT,
   COLLECTION_PRODUCTS_LIMIT,
   COLLECTION_PRODUCTS_LIMIT_URL_PARAM,
   COLLECTION_PRODUCTS_SORT_URL_PARAM
-} from '@/lib/constants';
-import { createUrl } from '@/lib/utils';
+} from '@/app/constants';
+import { Select, SelectItem } from '@/components/ui/select';
+import { createUrl } from '@/shopify/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 export const CollectionLimit = () => {

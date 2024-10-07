@@ -1,4 +1,4 @@
-import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/app/constants';
 import { getProducts } from '@/shopify/getProducts';
 import { ProductCard } from '../_components/product-card';
 

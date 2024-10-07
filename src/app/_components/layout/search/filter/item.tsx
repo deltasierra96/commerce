@@ -1,7 +1,7 @@
 'use client';
 
-import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM, type SortFilterItem } from '@/lib/constants';
-import { createUrl } from '@/lib/utils';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM, type SortFilterItem } from '@/app/constants';
+import { createUrl } from '@/shopify/lib/utils';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';

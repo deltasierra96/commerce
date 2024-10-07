@@ -1,6 +1,6 @@
-import { TAGS } from '@/lib/constants';
-import { shopifyFetch } from './fetch';
-import { removeEdgesAndNodes, reshapeProducts } from './helpers';
+import { TAGS } from '@/app/constants';
+import { shopifyFetch } from './lib/fetch';
+import { removeEdgesAndNodes, reshapeProducts } from './lib/helpers';
 import { GET_PRODUCTS_QUERY } from './queries';
 import { Product, ShopifyProductsOperation } from './types';
 

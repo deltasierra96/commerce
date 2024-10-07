@@ -1,5 +1,5 @@
-import { shopifyFetch } from './fetch';
-import { removeEdgesAndNodes } from './helpers';
+import { shopifyFetch } from './lib/fetch';
+import { removeEdgesAndNodes } from './lib/helpers';
 import { GET_PAGES_QUERY } from './queries';
 import { Page, ShopifyPagesOperation } from './types';
 

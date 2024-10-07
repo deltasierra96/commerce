@@ -4,7 +4,7 @@ import {
   COLLECTION_PRODUCTS_DEFAULT_SORTING,
   COLLECTION_PRODUCTS_LIMIT,
   COLLECTION_PRODUCTS_SORTING
-} from '@/lib/constants';
+} from '@/app/constants';
 import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 import { clsx } from '@/utils';
 

@@ -1,6 +1,6 @@
-import { SHOPIFY_GRAPHQL_API_ENDPOINT } from '@/lib/constants';
-import { isShopifyError } from '@/lib/type-guards';
-import { ensureStartsWith } from '@/lib/utils';
+import { SHOPIFY_GRAPHQL_API_ENDPOINT } from '@/app/constants';
+import { isShopifyError } from './type-guards';
+import { ensureStartsWith } from './utils';
 
 type ExtractVariables<T> = T extends { variables: object } ? T['variables'] : never;
 

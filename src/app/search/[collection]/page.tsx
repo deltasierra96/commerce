@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { ProductCard } from '@/app/_components/product-card';
-import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/lib/constants';
+import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/app/constants';
 import { getCollection } from '@/shopify/getCollection';
 import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 

@@ -1,4 +1,4 @@
-import { HIDDEN_PRODUCT_TAG } from '@/lib/constants';
+import { COLLECTION_PATH, HIDDEN_PRODUCT_TAG } from '@/app/constants';
 import {
   Cart,
   Collection,
@@ -7,7 +7,7 @@ import {
   ShopifyCart,
   ShopifyCollection,
   ShopifyProduct
-} from './types';
+} from '../types';
 
 export const removeEdgesAndNodes = <T>(array: Connection<T>): T[] => {
   return array.edges.map((edge) => edge?.node);
@@ -34,7 +34,7 @@ export const reshapeCollection = (collection: ShopifyCollection): Collection | u
 
   return {
     ...collection,
-    path: `/search/${collection.handle}`
+    path: `${COLLECTION_PATH}/${collection.handle}`
   };
 };
 

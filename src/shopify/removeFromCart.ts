@@ -1,5 +1,5 @@
-import { shopifyFetch } from './fetch';
-import { reshapeCart } from './helpers';
+import { shopifyFetch } from './lib/fetch';
+import { reshapeCart } from './lib/helpers';
 import { REMOVE_FROM_CART_MUTATION } from './mutations';
 import { Cart, ShopifyRemoveFromCartOperation } from './types';
 

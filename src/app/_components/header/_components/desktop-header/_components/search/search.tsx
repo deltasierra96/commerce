@@ -1,7 +1,7 @@
 'use client';
+import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
-import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/lib/constants';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 
