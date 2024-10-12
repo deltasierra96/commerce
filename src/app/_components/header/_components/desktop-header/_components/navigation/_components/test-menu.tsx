@@ -10,7 +10,8 @@ import {
   MenuItemProps,
   MenuProps,
   MenuTrigger,
-  MenuTriggerProps
+  MenuTriggerProps,
+  SubmenuTrigger
 } from 'react-aria-components';
 
 interface MyMenuButtonProps<T> extends MenuProps<T>, Omit<MenuTriggerProps, 'children'> {
@@ -79,17 +80,48 @@ export const TestMenu = ({ menu }: { menu: ShopifyMenu }) => {
           <Popover>
             <div className="p-2">
               <Menu className="outline-none">
-                {menuItem.items?.map((subMenuItem) => (
-                  <MenuItem
-                    href={subMenuItem.url}
-                    className={clsx(
-                      'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
-                    )}
-                    textValue={subMenuItem.title}
-                  >
-                    {subMenuItem.title}
-                  </MenuItem>
-                ))}
+                {menuItem.items?.map((subMenuItem) =>
+                  !subMenuItem.items?.length ? (
+                    <MenuItem
+                      href={subMenuItem.url}
+                      className={clsx(
+                        'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                      )}
+                      textValue={subMenuItem.title}
+                    >
+                      {subMenuItem.title}
+                    </MenuItem>
+                  ) : (
+                    <SubmenuTrigger>
+                      <MenuItem
+                        href={subMenuItem.url}
+                        className={clsx(
+                          'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                        )}
+                        textValue={subMenuItem.title}
+                      >
+                        {subMenuItem.title}
+                      </MenuItem>
+                      <Popover>
+                        <div className="p-2">
+                          <Menu className="outline-none">
+                            {subMenuItem.items?.map((subSubMenuItem) => (
+                              <MenuItem
+                                href={subSubMenuItem.url}
+                                className={clsx(
+                                  'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                                )}
+                                textValue={subSubMenuItem.title}
+                              >
+                                {subSubMenuItem.title}
+                              </MenuItem>
+                            ))}
+                          </Menu>
+                        </div>
+                      </Popover>
+                    </SubmenuTrigger>
+                  )
+                )}
               </Menu>
             </div>
           </Popover>
