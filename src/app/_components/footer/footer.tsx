@@ -1,7 +1,9 @@
 import { FOOTER_MENU_HANDLE } from '@/app/constants';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
+import { getCollections } from '@/shopify/getCollections';
 import { getMenu } from '@/shopify/getMenu';
+import { getStoreInformation } from '@/shopify/getStoreInformation';
 import { Suspense } from 'react';
 import FooterMenu from './_components/footer-menu';
 import { FooterNewsletter } from './_components/footer-newsletter';
@@ -11,6 +13,8 @@ const { COMPANY_NAME, SITE_NAME } = process.env;
 
 export const Footer = async () => {
   const menu = await getMenu(FOOTER_MENU_HANDLE);
+  const collections = await getCollections();
+  const storeInformation = await getStoreInformation();
   console.log('menu', menu);
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
@@ -18,7 +22,10 @@ export const Footer = async () => {
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
-    <footer className="border-t border-neutral-200 bg-white" aria-labelledby="footer-heading">
+    <footer
+      className="border-t border-neutral-200 bg-neutral-800 text-white"
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -26,6 +33,7 @@ export const Footer = async () => {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div>
             <Logo className={'h-10'} />
+            <p>{storeInformation.description}</p>
           </div>
           <div className="mt-16 xl:mt-0">
             {menu && menu.items?.length ? (

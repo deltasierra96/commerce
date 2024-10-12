@@ -101,11 +101,12 @@ export const TestMenu = ({ menu }: { menu: ShopifyMenu }) => {
                         <MenuItem
                           href={subMenuItem.url}
                           className={clsx(
-                            'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                            'flex items-center gap-x-3 rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
                           )}
                           textValue={subMenuItem.title}
                         >
-                          {subMenuItem.title}
+                          <span className="block">{subMenuItem.title}</span>
+                          <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" />
                         </MenuItem>
                         <Popover>
                           <div className="p-2">

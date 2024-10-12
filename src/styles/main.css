@@ -213,7 +213,7 @@ input[type='search']::-webkit-search-results-decoration {
 
   /* Typography */
   --font-sans: var(--font-inter);
-  --font-sans: var(--font-satoshi);
+  /* --font-sans: var(--font-satoshi); */
 
   /* Heading */
   --heading-font: var(--font-sans);
@@ -333,17 +333,17 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-brands-mss-900);
   --colors-primary-950: var(--colors-brands-mss-950);
 
-  --colors-neutral-50: var(--colors-slate-50);
-  --colors-neutral-100: var(--colors-slate-100);
-  --colors-neutral-200: var(--colors-slate-200);
-  --colors-neutral-300: var(--colors-slate-300);
-  --colors-neutral-400: var(--colors-slate-400);
-  --colors-neutral-500: var(--colors-slate-500);
-  --colors-neutral-600: var(--colors-slate-600);
-  --colors-neutral-700: var(--colors-slate-700);
-  --colors-neutral-800: var(--colors-slate-800);
-  --colors-neutral-900: var(--colors-slate-900);
-  --colors-neutral-950: var(--colors-slate-950);
+  --colors-neutral-50: var(--colors-zinc-50);
+  --colors-neutral-100: var(--colors-zinc-100);
+  --colors-neutral-200: var(--colors-zinc-200);
+  --colors-neutral-300: var(--colors-zinc-300);
+  --colors-neutral-400: var(--colors-zinc-400);
+  --colors-neutral-500: var(--colors-zinc-500);
+  --colors-neutral-600: var(--colors-zinc-600);
+  --colors-neutral-700: var(--colors-zinc-700);
+  --colors-neutral-800: var(--colors-zinc-800);
+  --colors-neutral-900: var(--colors-zinc-900);
+  --colors-neutral-950: var(--colors-zinc-950);
 
   /* No Radius */
   --border-radius: 0rem;

@@ -101,6 +101,11 @@ export type SEO = {
   description: string;
 };
 
+export type StoreInformation = {
+  name: string;
+  description: string;
+};
+
 export type ShopifyCart = {
   id: string | undefined;
   checkoutUrl: string;
@@ -226,6 +231,12 @@ export type ShopifyCollectionProductsOperation = {
 export type ShopifyCollectionsOperation = {
   data: {
     collections: Connection<ShopifyCollection>;
+  };
+};
+
+export type ShopifyStoreInformationOperation = {
+  data: {
+    shop: StoreInformation;
   };
 };
 
