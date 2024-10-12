@@ -6,19 +6,16 @@ import {
   type ModalOverlayProps as RACModalOverlayProps
 } from 'react-aria-components';
 
-const overlayStyles = cva(
-  'fixed inset-0 isolate z-header-safe flex w-full bg-black/30 backdrop-blur-sm',
-  {
-    variants: {
-      isEntering: {
-        true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards'
-      },
-      isExiting: {
-        true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards'
-      }
+const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full bg-black/30', {
+  variants: {
+    isEntering: {
+      true: 'duration-300 ease-out animate-in fade-in fill-mode-forwards'
+    },
+    isExiting: {
+      true: 'duration-200 ease-in animate-out fade-out fill-mode-forwards'
     }
   }
-);
+});
 
 export type OverlayProps = RACModalOverlayProps & VariantProps<typeof overlayStyles>;
 
