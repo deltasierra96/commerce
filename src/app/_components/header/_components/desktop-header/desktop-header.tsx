@@ -39,7 +39,7 @@ export const DesktopHeader = ({ menu, isFullWidth = false }: DesktopHeaderProps)
 
       <div className="border-t border-neutral-100 py-1.5">
         <Container fullWidth={isFullWidth}>
-          <Navigation menu={menu} />
+          <Navigation />
         </Container>
       </div>
     </div>

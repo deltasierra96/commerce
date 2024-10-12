@@ -1,22 +1,16 @@
-'use client';
-import { Menu } from '@/shopify/types';
-import { clsx } from '@/utils';
-import { Link } from 'react-aria-components';
+import { MAIN_MENU_HANDLE } from '@/app/constants';
+import { getMenu } from '@/shopify/getMenu';
+import { TestMenu } from './_components/test-menu';
 
-export const Navigation = ({ menu }: { menu: Menu }) => {
+export const Navigation = async () => {
+  const menu = await getMenu(MAIN_MENU_HANDLE);
+
   return (
-    <nav className="flex lg:space-x-4" aria-label="Global navigation">
-      {menu.items?.map((item) => (
-        <Link
-          key={item.url}
-          href={item.url}
-          className={clsx(
-            'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100'
-          )}
-        >
-          {item.title}
-        </Link>
-      ))}
-    </nav>
+    <TestMenu menu={menu} />
+    // <nav aria-label="Global navigation">
+    //   <ul className="flex lg:space-x-4">
+    //     <li>{menu.items?.map((item) => <NavigationMenuItem item={item} />)}</li>
+    //   </ul>
+    // </nav>
   );
 };
