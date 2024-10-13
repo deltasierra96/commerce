@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
-import { Account, Navigation, Search } from './_components';
+import { Account, Menu, Search } from './_components';
 
 type MobileHeaderProps = Object;
 
@@ -16,7 +16,7 @@ export const MobileHeader = async ({ ...props }: MobileHeaderProps) => {
       <Container>
         <div className="flex items-center justify-between gap-x-8">
           <div className="flex basis-2/12 justify-start">
-            <Navigation menu={menu} />
+            <Menu menu={menu} />
             <Search />
           </div>
           <div className="flex basis-2/12 items-center justify-center">

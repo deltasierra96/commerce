@@ -1,3 +1,3 @@
 export { Account } from './account';
-export { Navigation } from './navigation';
+export { Menu } from './menu';
 export { Search } from './search';
