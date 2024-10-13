@@ -14,8 +14,12 @@ export const Navigation = ({ menu, ...props }: NavigationProps) => {
     <Drawer position="left" size={'lg'} {...props}>
       <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />
       <Drawer.Content>
-        <DialogHeader>Navigation</DialogHeader>
-        <NavigationMenu menu={menu} />
+        <div className="flex h-full flex-col">
+          <DialogHeader>Navigation</DialogHeader>
+          <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
+            <NavigationMenu menu={menu} />
+          </div>
+        </div>
       </Drawer.Content>
     </Drawer>
   );
