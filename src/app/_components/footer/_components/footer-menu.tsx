@@ -1,35 +1,7 @@
 'use client';
 
 import { Menu, MenuItem } from '@/shopify/types';
-import clsx from 'clsx';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-export function FooterMenuItem({ item }: { item: MenuItem }) {
-  const pathname = usePathname();
-  const [active, setActive] = useState(pathname === item.url);
-
-  useEffect(() => {
-    setActive(pathname === item.url);
-  }, [pathname, item.url]);
-
-  return (
-    <li>
-      <Link
-        href={item.url}
-        className={clsx(
-          'block p-2 text-lg underline-offset-4 hover:text-black hover:underline dark:hover:text-neutral-300 md:inline-block md:text-sm',
-          {
-            'text-black dark:text-neutral-300': active
-          }
-        )}
-      >
-        {item.title}
-      </Link>
-    </li>
-  );
-}
 
 const FooterMenuBlock = (menuItem: MenuItem) => (
   <div key={menuItem.id}>
@@ -40,8 +12,9 @@ const FooterMenuBlock = (menuItem: MenuItem) => (
       {menuItem.items?.map((item) => {
         return (
           <li key={item.id}>
-            <Link href={item.url}>{item.title}</Link>
-            {item.items?.map((derp) => <div key={derp.id}>{derp.title}</div>)}
+            <Link className="text-sm" href={item.url}>
+              {item.title}
+            </Link>
           </li>
         );
       })}

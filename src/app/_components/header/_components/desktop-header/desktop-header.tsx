@@ -1,16 +1,14 @@
 import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { Menu } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
 type DesktopHeaderProps = {
-  menu: Menu;
   isFullWidth?: boolean;
 };
 
-export const DesktopHeader = ({ menu, isFullWidth = false }: DesktopHeaderProps) => {
+export const DesktopHeader = ({ isFullWidth = false }: DesktopHeaderProps) => {
   return (
     <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
       <Container fullWidth={isFullWidth}>

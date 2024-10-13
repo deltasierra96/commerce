@@ -11,8 +11,8 @@ export type HeaderProps = {
 export const Header = async ({ className, menu, ...rest }: HeaderProps) => {
   return (
     <header className={clsx('w-full border-b border-neutral-200 bg-white', className)} {...rest}>
-      <MobileHeader menu={menu} />
-      <DesktopHeader menu={menu} />
+      <MobileHeader />
+      <DesktopHeader />
     </header>
   );
 };

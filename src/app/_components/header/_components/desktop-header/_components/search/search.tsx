@@ -1,5 +1,6 @@
 'use client';
 import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
+import { useOverlayStore } from '@/app/store';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
@@ -22,10 +23,12 @@ export function SearchSkeleton() {
 }
 
 export const Search = ({ ...props }: SearchProps) => {
+  const { toggleOverlay } = useOverlayStore();
   const searchParams = useSearchParams();
   return (
     <Form action="/search" className="relative w-full lg:w-80 xl:w-full">
       <SearchInput
+        onFocusChange={() => toggleOverlay()}
         type="text"
         name="q"
         defaultValue={searchParams?.get(COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM) || ''}

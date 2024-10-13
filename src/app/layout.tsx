@@ -26,6 +26,7 @@ import { Footer } from './_components/footer';
 import { Header } from './_components/header';
 import { MAIN_MENU_HANDLE } from './constants';
 import { rootMetadata } from './meta-data';
+import { Overlay } from './overlay';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const cartId = cookies().get('cartId')?.value;
@@ -67,14 +68,17 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
             <div className="flex h-full min-h-screen flex-col">
               <div className="flex-1">
                 <div className="flex flex-col">
-                  <Banner />
-                  <div className="sticky top-0 z-header">
+                  <div className="relative z-[31]">
+                    <Banner />
+                  </div>
+                  <div className="sticky top-0 z-[31]">
                     <Header menu={menu} />
                   </div>
                   <div className="flex-1">
                     <main>{children}</main>
                   </div>
                   <Footer />
+                  <Overlay />
                 </div>
               </div>
             </div>

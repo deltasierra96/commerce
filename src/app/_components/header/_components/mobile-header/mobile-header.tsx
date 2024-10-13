@@ -1,15 +1,16 @@
 import { Cart } from '@/app/_components/cart';
+import { MAIN_MENU_HANDLE } from '@/app/constants';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { Menu } from '@/shopify/types';
+import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
-type MobileHeaderProps = {
-  menu: Menu;
-};
+type MobileHeaderProps = Object;
 
-export const MobileHeader = ({ menu }: MobileHeaderProps) => {
+export const MobileHeader = async ({ ...props }: MobileHeaderProps) => {
+  const menu = await getMenu(MAIN_MENU_HANDLE);
+
   return (
     <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
       <Container>

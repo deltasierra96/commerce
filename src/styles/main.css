@@ -221,6 +221,7 @@ input[type='search']::-webkit-search-results-decoration {
 
   /* Layout */
   --header-z-index: 999;
+  --overlay-z-index: 40;
   --header-safe-z-index: calc(var(--header-z-index) + 1);
   --header-height: 5rem;
   --sidebar-width: 16rem;
@@ -297,7 +298,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-violet-900);
   --colors-primary-950: var(--colors-violet-950);
 
-  --colors-primary-50: var(--colors-brands-forest-50);
+  /* --colors-primary-50: var(--colors-brands-forest-50);
   --colors-primary-100: var(--colors-brands-forest-100);
   --colors-primary-200: var(--colors-brands-forest-200);
   --colors-primary-300: var(--colors-brands-forest-300);
@@ -307,7 +308,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-forest-700);
   --colors-primary-800: var(--colors-brands-forest-800);
   --colors-primary-900: var(--colors-brands-forest-900);
-  --colors-primary-950: var(--colors-brands-forest-950);
+  --colors-primary-950: var(--colors-brands-forest-950); */
 
   /* --colors-primary-50: var(--colors-brands-christies-50);
   --colors-primary-100: var(--colors-brands-christies-100);
@@ -320,7 +321,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-800: var(--colors-brands-christies-800);
   --colors-primary-900: var(--colors-brands-christies-900);
   --colors-primary-950: var(--colors-brands-christies-950); */
-
+  /* 
   --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
@@ -331,7 +332,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950);
+  --colors-primary-950: var(--colors-brands-mss-950); */
 
   --colors-neutral-50: var(--colors-zinc-50);
   --colors-neutral-100: var(--colors-zinc-100);

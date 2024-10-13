@@ -1,10 +1,10 @@
+import { clsx } from '@/utils';
+import React from 'react';
 import {
   OverlayArrow,
   Popover as RACPopover,
   type PopoverProps as RACPopoverProps
 } from 'react-aria-components';
-import React from 'react';
-import { clsx } from '@/utils';
 
 export type PopoverProps = Omit<RACPopoverProps, 'children'> & {
   showArrow?: boolean;
@@ -20,13 +20,18 @@ export function Popover({
   showArrow = true,
   className,
   placement,
+  offset = 10,
+  crossOffset,
   ...props
 }: PopoverProps) {
+  const popoverOffset = showArrow && offset ? offset + 2 : offset;
+  const popoverCrossOffset = showArrow && crossOffset ? crossOffset + 2 : crossOffset;
   return (
     <RACPopover
       {...props}
       placement={placement}
-      offset={showArrow ? 10 : 8}
+      crossOffset={popoverCrossOffset}
+      offset={popoverOffset}
       className={({ isEntering, isExiting }) =>
         clsx(
           isEntering && 'duration-200 ease-out animate-in fade-in',

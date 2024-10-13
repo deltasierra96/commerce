@@ -48,7 +48,7 @@
     "tailwind-variants": "^0.1.19",
     "tailwindcss-react-aria-components": "^1.0.0",
     "zod": "3.23.8",
-    "zustand": "^4.5.0"
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
