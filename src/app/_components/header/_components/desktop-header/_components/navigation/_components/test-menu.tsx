@@ -106,7 +106,7 @@ const MenuBlock = ({ menuItem }: MenuBlockProps) => {
                   {subMenuItem.title}
                 </MenuItem>
               ) : (
-                <SubmenuTrigger>
+                <SubmenuTrigger delay={50}>
                   <MenuItem
                     href={subMenuItem.url}
                     className={clsx(
@@ -117,7 +117,7 @@ const MenuBlock = ({ menuItem }: MenuBlockProps) => {
                     <span className="block">{subMenuItem.title}</span>
                     <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" />
                   </MenuItem>
-                  <Popover offset={12} placement="right top" crossOffset={0}>
+                  <Popover offset={12} placement="right top">
                     <div className="p-2">
                       <Menu className="outline-none">
                         {subMenuItem.items?.map((subSubMenuItem) => (
