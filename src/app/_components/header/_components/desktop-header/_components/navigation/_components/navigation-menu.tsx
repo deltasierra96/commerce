@@ -105,48 +105,6 @@ const NavigationMenuDropdown = ({ menuItem }: NavigationMenuDropdownProps) => {
   );
 };
 
-type NavigationMenuPanelProps = {
-  menuItem: ShopifyMenuItem;
-};
-
-const NavigationMenuPanel = ({ menuItem }: NavigationMenuPanelProps) => {
-  return (
-    <Popover>
-      <div className="p-2">
-        <Menu className="outline-none">
-          {menuItem.items?.map((subMenuItem) =>
-            !subMenuItem.items?.length ? (
-              <NavigationMenuItem menuItem={subMenuItem} />
-            ) : (
-              <SubmenuTrigger>
-                <NavigationMenuItem menuItem={subMenuItem} />
-                <Popover>
-                  <div className="p-2">
-                    <Menu className="outline-none">
-                      {subMenuItem.items?.map((subSubMenuItem) => (
-                        <NavigationMenuItem menuItem={subSubMenuItem} />
-                      ))}
-                    </Menu>
-                  </div>
-                </Popover>
-              </SubmenuTrigger>
-            )
-          )}
-          <Separator className="my-2 block h-px w-full bg-neutral-100" />
-          <MenuItem
-            href={menuItem.url}
-            className={clsx(
-              'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
-            )}
-          >
-            View all {menuItem.title}
-          </MenuItem>
-        </Menu>
-      </div>
-    </Popover>
-  );
-};
-
 const NavigationMenuButton = <T extends object>({
   menuItem,
   children,
@@ -154,6 +112,7 @@ const NavigationMenuButton = <T extends object>({
 }: NavigationMenuButtonProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const overlayStore = useOverlayStore();
+
   return (
     <MenuTrigger
       {...props}
@@ -167,8 +126,39 @@ const NavigationMenuButton = <T extends object>({
         {menuItem.title}
         <Icon icon="chevron-down" className="ml-2 h-4 w-4 text-neutral-500" />
       </Button>
-      <NavigationMenuPanel menuItem={menuItem} />
-      {/* <NavigationMenuDropdown menuItem={menuItem}/> */}
+      <Popover>
+        <div className="p-2">
+          <Menu className="outline-none">
+            {menuItem.items?.map((subMenuItem) =>
+              !subMenuItem.items?.length ? (
+                <NavigationMenuItem menuItem={subMenuItem} />
+              ) : (
+                <SubmenuTrigger>
+                  <NavigationMenuItem menuItem={subMenuItem} />
+                  <Popover>
+                    <div className="p-2">
+                      <Menu className="outline-none">
+                        {subMenuItem.items?.map((subSubMenuItem) => (
+                          <NavigationMenuItem menuItem={subSubMenuItem} />
+                        ))}
+                      </Menu>
+                    </div>
+                  </Popover>
+                </SubmenuTrigger>
+              )
+            )}
+            <Separator className="my-2 block h-px w-full bg-neutral-100" />
+            <MenuItem
+              href={menuItem.url}
+              className={clsx(
+                'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+              )}
+            >
+              View all {menuItem.title}
+            </MenuItem>
+          </Menu>
+        </div>
+      </Popover>
     </MenuTrigger>
   );
 };
