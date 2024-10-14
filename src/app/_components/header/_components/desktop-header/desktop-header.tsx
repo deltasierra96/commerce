@@ -4,14 +4,12 @@ import { Logo } from '@/components/ui/logo';
 import { clsx } from '@/utils';
 import { Account, Navigation, Search } from './_components';
 
-type DesktopHeaderProps = {
-  isFullWidth?: boolean;
-};
+type DesktopHeaderProps = Object;
 
-export const DesktopHeader = ({ isFullWidth = false }: DesktopHeaderProps) => {
+export const DesktopHeader = ({ ...props }: DesktopHeaderProps) => {
   return (
     <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
-      <Container fullWidth={isFullWidth}>
+      <Container>
         <div className="flex items-center justify-between gap-x-8 py-5">
           <div className="flex basis-2/12 justify-start">
             <Logo className="h-10" />
@@ -36,7 +34,7 @@ export const DesktopHeader = ({ isFullWidth = false }: DesktopHeaderProps) => {
       </Container>
 
       <div className="border-t border-neutral-100 py-1.5">
-        <Container fullWidth={isFullWidth}>
+        <Container>
           <Navigation />
         </Container>
       </div>
