@@ -25,21 +25,6 @@ const NavigationMenuButtonStyles = clsx(
   'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
 );
 
-type NavigationMenuBlockProps = {
-  menuItem: ShopifyMenuItem;
-};
-
-type NavigationMenuButtonProps<T> = MenuProps<T> &
-  Omit<MenuTriggerProps, 'children'> & {
-    menuItem: ShopifyMenuItem;
-  };
-
-type NavigationMenuItemProps<T> = MenuItemProps<T> &
-  Omit<MenuTriggerProps, 'children'> & {
-    menuItem: ShopifyMenuItem;
-    showViewAll?: boolean;
-  };
-
 type NavigationMenuButtonLinkProps = LinkProps & {
   menuItem: ShopifyMenuItem;
 };
@@ -53,6 +38,12 @@ const NavigationMenuButtonLink = ({ menuItem }: NavigationMenuButtonLinkProps) =
   );
 };
 
+type NavigationMenuItemProps<T> = MenuItemProps<T> &
+  Omit<MenuTriggerProps, 'children'> & {
+    menuItem: ShopifyMenuItem;
+    showViewAll?: boolean;
+  };
+
 const NavigationMenuItem = <T extends object>({ menuItem }: NavigationMenuItemProps<T>) => {
   const { title, url, items } = menuItem;
   return (
@@ -63,47 +54,10 @@ const NavigationMenuItem = <T extends object>({ menuItem }: NavigationMenuItemPr
   );
 };
 
-type NavigationMenuDropdownProps = {
-  menuItem: ShopifyMenuItem;
-};
-
-const NavigationMenuDropdown = ({ menuItem }: NavigationMenuDropdownProps) => {
-  return (
-    <Popover>
-      <div className="p-2">
-        <Menu className="outline-none">
-          {menuItem.items?.map((subMenuItem) =>
-            !subMenuItem.items?.length ? (
-              <NavigationMenuItem menuItem={subMenuItem} />
-            ) : (
-              <SubmenuTrigger>
-                <NavigationMenuItem menuItem={subMenuItem} />
-                <Popover>
-                  <div className="p-2">
-                    <Menu className="outline-none">
-                      {subMenuItem.items?.map((subSubMenuItem) => (
-                        <NavigationMenuItem menuItem={subSubMenuItem} />
-                      ))}
-                    </Menu>
-                  </div>
-                </Popover>
-              </SubmenuTrigger>
-            )
-          )}
-          <Separator className="my-2 block h-px w-full bg-neutral-100" />
-          <MenuItem
-            href={menuItem.url}
-            className={clsx(
-              'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
-            )}
-          >
-            View all {menuItem.title}
-          </MenuItem>
-        </Menu>
-      </div>
-    </Popover>
-  );
-};
+type NavigationMenuButtonProps<T> = MenuProps<T> &
+  Omit<MenuTriggerProps, 'children'> & {
+    menuItem: ShopifyMenuItem;
+  };
 
 const NavigationMenuButton = <T extends object>({
   menuItem,
@@ -131,16 +85,25 @@ const NavigationMenuButton = <T extends object>({
           <Menu className="outline-none">
             {menuItem.items?.map((subMenuItem) =>
               !subMenuItem.items?.length ? (
-                <NavigationMenuItem menuItem={subMenuItem} />
+                <NavigationMenuItem key={subMenuItem.id} menuItem={subMenuItem} />
               ) : (
                 <SubmenuTrigger>
-                  <NavigationMenuItem menuItem={subMenuItem} />
+                  <NavigationMenuItem key={subMenuItem.id} menuItem={subMenuItem} />
                   <Popover>
                     <div className="p-2">
                       <Menu className="outline-none">
                         {subMenuItem.items?.map((subSubMenuItem) => (
-                          <NavigationMenuItem menuItem={subSubMenuItem} />
+                          <NavigationMenuItem key={subSubMenuItem.id} menuItem={subSubMenuItem} />
                         ))}
+                        <Separator className="my-2 block h-px w-full bg-neutral-100" />
+                        <MenuItem
+                          href={subMenuItem.url}
+                          className={clsx(
+                            'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                          )}
+                        >
+                          View all {subMenuItem.title}
+                        </MenuItem>
                       </Menu>
                     </div>
                   </Popover>
@@ -163,18 +126,17 @@ const NavigationMenuButton = <T extends object>({
   );
 };
 
-const NavigationMenuBlock = ({ menuItem }: NavigationMenuBlockProps) => {
-  return menuItem.items?.length ? (
-    <NavigationMenuButton menuItem={menuItem} />
-  ) : (
-    <NavigationMenuButtonLink menuItem={menuItem} />
-  );
-};
-
 export const NavigationMenu = ({ menu }: { menu: ShopifyMenu }) => {
   return (
     <div className="flex items-center space-x-2">
-      {menu.items?.map((menuItem) => <NavigationMenuBlock menuItem={menuItem} />)}
+      {}
+      {menu.items?.map((menuItem) =>
+        menuItem.items?.length ? (
+          <NavigationMenuButton menuItem={menuItem} />
+        ) : (
+          <NavigationMenuButtonLink menuItem={menuItem} />
+        )
+      )}
     </div>
   );
 };
