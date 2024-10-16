@@ -6,9 +6,10 @@ import { useState } from 'react';
 import { Link } from 'react-aria-components';
 
 export const variants: Variants = {
-  'in-view': { x: '0px', transition: { type: 'tween', ease: 'easeOut' } },
+  'in-view': { x: '0px', opacity: 1, transition: { type: 'tween', ease: 'easeOut' } },
   'out-of-view': (index: number) => ({
     x: index > 0 ? '250px' : '-250px',
+    opacity: index > 0 ? 1 : 0,
     transition: { type: 'tween', ease: 'easeOut' }
   })
 };
@@ -33,10 +34,8 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
     setSelectedItems([...selectedItemClone]);
   };
 
-  const getSelectedItemNavItems = (selectedItems: MenuItem[]) => {
-    const lastItem = Array.from(selectedItems.values()).pop();
-    return lastItem;
-  };
+  const getSelectedItemNavItems = (selectedItems: MenuItem[]) =>
+    Array.from(selectedItems.values()).pop();
 
   return (
     <div className="relative flex flex-col">
@@ -94,7 +93,6 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
                     </button>
                   </li>
                   {selected?.items?.map((item: MenuItem) => {
-                    console.log('item', item);
                     return (
                       <li key={item.id} className="px-4 py-2">
                         {!item.items || item.items?.length === 0 ? (
