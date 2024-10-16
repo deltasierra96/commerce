@@ -118,7 +118,6 @@ const navigationData = [
 
 export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
-  console.log('selectedItems', selectedItems);
 
   const goToNextLevel = (item: any) => {
     if (!item.links) {
@@ -163,6 +162,7 @@ export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
       links = [...result];
       itr++;
     }
+    console.log('result', result);
     return result;
   };
 
