@@ -20,7 +20,7 @@ type NavigationMenuProps = {
 
 export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
   const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
-
+  console.log('selectedItems', selectedItems);
   const goToNextLevel = (item: MenuItem) => {
     if (item.items?.length === 0) {
       return;

@@ -118,6 +118,7 @@ const navigationData = [
 
 export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  console.log('selectedItems', selectedItems);
 
   const goToNextLevel = (item: any) => {
     if (!item.links) {
@@ -174,7 +175,7 @@ export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
           initial="in-view"
           animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
           custom={selectedItems.length > 0 ? -1 : 0}
-          className="top-0 w-full duration-200"
+          className="absolute top-0 w-full duration-200"
         >
           {/* First level items */}
           {navigationData?.map((item: any) => {
@@ -204,7 +205,7 @@ export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
                   animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
                   exit="out-of-view"
                   custom={index + 1 === selectedItems.length ? 1 : -1}
-                  className="top-0 w-full duration-200"
+                  className="absolute top-0 w-full duration-200"
                 >
                   <li className="pb-4">
                     <button className="flex items-center" onClick={goBack}>
