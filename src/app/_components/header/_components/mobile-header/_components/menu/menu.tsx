@@ -27,6 +27,8 @@ type NavigationMenuItem = {
 };
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
+  console.log('menu', menu);
+
   const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
   const [selectedItemTitle, setSelectedItemTitle] = useState<string>();
 
@@ -79,8 +81,8 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
             </div>
           </DialogHeader>
           <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
-            <div className="flex flex-col">
-              <nav className="relative overflow-x-hidden bg-white [--menu:--drawer-lg]">
+            <div className="flex h-full flex-col">
+              <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu:--drawer-lg]">
                 <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
                   <motion.ul
                     variants={variants}
