@@ -27,8 +27,6 @@ type NavigationMenuItem = {
 };
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
-  console.log('menu', menu);
-
   const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
   const [selectedItemTitle, setSelectedItemTitle] = useState<string>();
 

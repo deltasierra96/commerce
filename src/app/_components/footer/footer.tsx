@@ -15,7 +15,6 @@ export const Footer = async () => {
   const menu = await getMenu(FOOTER_MENU_HANDLE);
   const collections = await getCollections();
   const storeInformation = await getStoreInformation();
-  console.log('menu', menu);
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
   const skeleton = 'w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700';

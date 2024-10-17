@@ -212,8 +212,8 @@ input[type='search']::-webkit-search-results-decoration {
   --card-border-radius: theme(borderRadius.lg);
 
   /* Typography */
-  --font-sans: var(--font-inter);
-  /* --font-sans: var(--font-satoshi); */
+  /* --font-sans: var(--font-inter); */
+  --font-sans: var(--font-satoshi);
 
   /* Heading */
   --heading-font: var(--font-sans);
