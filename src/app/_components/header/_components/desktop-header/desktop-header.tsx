@@ -5,7 +5,6 @@ import { Logo } from '@/components/ui/logo';
 import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
 import { Menu } from '../mobile-header/_components';
-import { Menu2 } from '../mobile-header/_components/menu/menu-2';
 import { Account, Navigation, Search } from './_components';
 
 type DesktopHeaderProps = Object;
@@ -20,7 +19,6 @@ export const DesktopHeader = async ({ ...props }: DesktopHeaderProps) => {
           <div className="flex basis-2/12 justify-start">
             <Logo className="h-10" />
             <Menu menu={menu} />
-            <Menu2 />
           </div>
 
           <div className="flex basis-8/12 items-center justify-center">

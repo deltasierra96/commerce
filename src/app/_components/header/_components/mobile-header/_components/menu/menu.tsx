@@ -5,7 +5,7 @@ import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { MenuItem, Menu as ShopifyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { AnimatePresence, motion, MotionConfig, Variants } from 'framer-motion';
 import { useState } from 'react';
 import { Button, Link } from 'react-aria-components';
 
@@ -13,14 +13,12 @@ type MenuProps = {
   menu: ShopifyMenu;
 };
 
-const MENU_TRANSITION = 5;
-
 export const variants: Variants = {
-  'in-view': { x: '0px', opacity: 1, transition: { type: 'tween', duration: MENU_TRANSITION } },
+  'in-view': {
+    x: '0px'
+  },
   'out-of-view': (index: number) => ({
-    x: index > 0 ? 'var(--menu)' : 'var(--menu-exit)',
-    opacity: index > 0 ? 1 : 0,
-    transition: { type: 'tween', duration: MENU_TRANSITION }
+    x: `calc(${index} * var(--menu))`
   })
 };
 
@@ -29,20 +27,40 @@ type NavigationMenuItem = {
 };
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
-  const [selectedItem, setSelectedItem] = useState<MenuItem>();
-  console.log('selectedItem', selectedItem);
+  const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
+  const [selectedItemTitle, setSelectedItemTitle] = useState<string>();
 
-  const NavigationMenuItem = ({ item }: NavigationMenuItem) => {
+  const goToNextLevel = (item: MenuItem) => {
+    if (item.items?.length === 0) {
+      return;
+    }
+    setSelectedItems([...selectedItems, item]);
+  };
+
+  const goBack = () => {
+    const selectedItemClone = [...selectedItems];
+    selectedItemClone.pop();
+    setSelectedItems([...selectedItemClone]);
+  };
+
+  const NavigationMenuItem = ({ item, ...props }: NavigationMenuItem) => {
     const navigationMenuItemStyles = clsx(
-      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm outline-none pressed:bg-neutral-100'
+      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none pressed:bg-neutral-100'
     );
 
     return !item.items || item.items?.length === 0 ? (
-      <Link className={navigationMenuItemStyles} href={item.url}>
+      <Link className={navigationMenuItemStyles} href={item.url} {...props}>
         {item.title}
       </Link>
     ) : (
-      <Button className={navigationMenuItemStyles}>
+      <Button
+        {...props}
+        onPress={() => {
+          goToNextLevel(item);
+          setSelectedItemTitle(item.title);
+        }}
+        className={navigationMenuItemStyles}
+      >
         <span>{item.title}</span>
         <Icon icon="chevron-right" className="text-neutral-500" />
       </Button>
@@ -50,65 +68,60 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   return (
-    <Drawer position="left" size={'lg'} {...props}>
+    <Drawer onOpenChange={() => setSelectedItems([])} position="left" size={'lg'} {...props}>
       <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />
       <Drawer.Content>
         <div className="flex h-full w-full min-w-fit flex-col">
-          <DialogHeader>Menu</DialogHeader>
+          <DialogHeader>
+            <div className="flex items-center">
+              <ButtonIcon size="sm" icon="arrow-left" onPress={goBack} />
+              <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
+            </div>
+          </DialogHeader>
           <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
-            <div className="relative flex flex-col">
-              <div className="divide-y divide-neutral-100">
-                {menu.items?.map((menuItem) => (
-                  <div className="space-y-4 p-4" key={menuItem.id}>
-                    <Button className={'flex underline'} onPress={() => setSelectedItem(menuItem)}>
-                      {menuItem.title}
-                    </Button>
-                    <AnimatePresence mode="wait">
-                      {menuItem.items?.map((menuItemSub) => {
-                        return (
-                          <motion.div
-                            key={menuItemSub.id}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="bg-red-50"
-                          >
-                            <Button
-                              className={'flex underline'}
-                              onPress={() => setSelectedItem(menuItemSub)}
-                            >
-                              {menuItemSub.title}
-                              {menuItemSub.id}
-                            </Button>
+            <div className="flex flex-col">
+              <nav className="relative overflow-x-hidden bg-white [--menu:--drawer-lg]">
+                <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
+                  <motion.ul
+                    variants={variants}
+                    initial="in-view"
+                    animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
+                    custom={selectedItems.length > 0 ? -1 : 0}
+                    className="w-full divide-y divide-neutral-100 bg-white"
+                  >
+                    {/* First level items */}
+                    {menu.items?.map((item) => {
+                      return <NavigationMenuItem key={item.id} item={item} />;
+                    })}
+                  </motion.ul>
 
-                            <motion.div
-                              key={menuItemSub.id}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="bg-green-50"
-                            >
-                              {menuItemSub.items?.map((menuItemSubSub) => {
-                                return (
-                                  <Link
-                                    className={'flex py-2'}
-                                    key={menuItemSubSub.id}
-                                    href={menuItemSubSub.url}
-                                  >
-                                    {menuItemSubSub.title}
-                                  </Link>
-                                );
-                              })}
-                            </motion.div>
-                          </motion.div>
+                  <AnimatePresence>
+                    {/* Subsequent levels */}
+                    {selectedItems.length > 0 &&
+                      selectedItems.map((menuItem, index) => {
+                        return (
+                          <motion.ul
+                            key={menuItem.id}
+                            variants={variants}
+                            initial="out-of-view"
+                            animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
+                            exit="out-of-view"
+                            custom={index + 1 === selectedItems.length ? 1 : -1}
+                            className="absolute top-0 w-full divide-y divide-neutral-100 bg-white"
+                          >
+                            {menuItem?.items?.map((item: MenuItem) => {
+                              return (
+                                <li key={item.id}>
+                                  <NavigationMenuItem key={item.id} item={item} />
+                                </li>
+                              );
+                            })}
+                          </motion.ul>
                         );
                       })}
-                    </AnimatePresence>
-                  </div>
-                ))}
-              </div>
+                  </AnimatePresence>
+                </MotionConfig>
+              </nav>
             </div>
           </div>
         </div>

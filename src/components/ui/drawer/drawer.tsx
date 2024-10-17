@@ -21,7 +21,7 @@ const DrawerContext = React.createContext<_DrawerProps>({} as _DrawerProps);
 const _Drawer = ({ children, ...props }: _DrawerProps) => {
   return (
     <DrawerContext.Provider value={{ ...props }}>
-      <DialogTrigger>
+      <DialogTrigger {...props}>
         <>{children}</>
       </DialogTrigger>
     </DrawerContext.Provider>

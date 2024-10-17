@@ -14,7 +14,6 @@ import {
   Menu,
   MenuItem,
   MenuItemProps,
-  MenuProps,
   MenuTrigger,
   MenuTriggerProps,
   Separator,
@@ -54,29 +53,23 @@ const NavigationMenuItem = <T extends object>({ menuItem }: NavigationMenuItemPr
   );
 };
 
-type NavigationMenuButtonProps<T> = MenuProps<T> &
-  Omit<MenuTriggerProps, 'children'> & {
-    menuItem: ShopifyMenuItem;
-  };
+type NavigationMenuButtonProps = {
+  menuItem: ShopifyMenuItem;
+};
 
-const NavigationMenuButton = <T extends object>({
-  menuItem,
-  children,
-  ...props
-}: NavigationMenuButtonProps<T>) => {
+const NavigationMenuButton = ({ menuItem, ...props }: NavigationMenuButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const overlayStore = useOverlayStore();
 
   return (
     <MenuTrigger
-      {...props}
       isOpen={isOpen}
       onOpenChange={(e) => {
         overlayStore.toggleOverlay();
         setIsOpen(e);
       }}
     >
-      <Button className={clsx(NavigationMenuButtonStyles)}>
+      <Button {...props} className={clsx(NavigationMenuButtonStyles)}>
         {menuItem.title}
         <Icon icon="chevron-down" className="ml-2 h-4 w-4 text-neutral-500" />
       </Button>
@@ -129,12 +122,11 @@ const NavigationMenuButton = <T extends object>({
 export const NavigationMenu = ({ menu }: { menu: ShopifyMenu }) => {
   return (
     <div className="flex items-center space-x-2">
-      {}
       {menu.items?.map((menuItem) =>
-        menuItem.items?.length ? (
-          <NavigationMenuButton menuItem={menuItem} />
+        menuItem.items?.length !== 0 ? (
+          <NavigationMenuButton key={menuItem.id} menuItem={menuItem} />
         ) : (
-          <NavigationMenuButtonLink menuItem={menuItem} />
+          <NavigationMenuButtonLink key={menuItem.id} menuItem={menuItem} />
         )
       )}
     </div>
