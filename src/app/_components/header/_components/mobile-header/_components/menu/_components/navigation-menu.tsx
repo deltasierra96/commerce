@@ -1,136 +1,142 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
-import { Menu, MenuItem } from '@/shopify/types';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-import { Link } from 'react-aria-components';
+import { Menu as ShopifyMenu } from '@/shopify/types';
 
-type NavigationMenuProps = {
-  menu: Menu;
-  width: number;
+import { useOverlayStore } from '@/app/store';
+import { Icon } from '@/components/ui/icon';
+import { Popover } from '@/components/ui/popover';
+import { MenuItem as ShopifyMenuItem } from '@/shopify/types';
+import { clsx } from '@/utils';
+import { useState } from 'react';
+import {
+  Button,
+  Link,
+  LinkProps,
+  Menu,
+  MenuItem,
+  MenuItemProps,
+  MenuProps,
+  MenuTrigger,
+  MenuTriggerProps,
+  Separator,
+  SubmenuTrigger
+} from 'react-aria-components';
+
+const NavigationMenuButtonStyles = clsx(
+  'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+);
+
+type NavigationMenuButtonLinkProps = LinkProps & {
+  menuItem: ShopifyMenuItem;
 };
 
-export const NavigationMenu = ({ menu, width, ...props }: NavigationMenuProps) => {
-  const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
-  const drawerWidth = `${width}px`;
+const NavigationMenuButtonLink = ({ menuItem }: NavigationMenuButtonLinkProps) => {
+  const { title, url } = menuItem;
+  return (
+    <Link href={url} className={NavigationMenuButtonStyles}>
+      {title}
+    </Link>
+  );
+};
 
-  const goToNextLevel = (item: MenuItem) => {
-    if (item.items?.length === 0) {
-      return;
-    }
-    setSelectedItems([...selectedItems, item]);
+type NavigationMenuItemProps<T> = MenuItemProps<T> &
+  Omit<MenuTriggerProps, 'children'> & {
+    menuItem: ShopifyMenuItem;
+    showViewAll?: boolean;
   };
 
-  const goBack = () => {
-    const selectedItemClone = [...selectedItems];
-    selectedItemClone.pop();
-    setSelectedItems([...selectedItemClone]);
+const NavigationMenuItem = <T extends object>({ menuItem }: NavigationMenuItemProps<T>) => {
+  const { title, url, items } = menuItem;
+  return (
+    <MenuItem href={url} className={NavigationMenuButtonStyles} textValue={title}>
+      {title}
+      {items?.length ? <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" /> : null}
+    </MenuItem>
+  );
+};
+
+type NavigationMenuButtonProps<T> = MenuProps<T> &
+  Omit<MenuTriggerProps, 'children'> & {
+    menuItem: ShopifyMenuItem;
   };
 
-  const getSelectedItemNavItems = (selectedItems: MenuItem[]) =>
-    Array.from(selectedItems.values()).pop();
+const NavigationMenuButton = <T extends object>({
+  menuItem,
+  children,
+  ...props
+}: NavigationMenuButtonProps<T>) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const overlayStore = useOverlayStore();
 
   return (
-    <div className="relative flex flex-col">
-      <nav className="relative">
-        <motion.ul
-          variants={{
-            'in-view': { x: '0px', opacity: 1 },
-            'out-of-view': (index: number) => ({
-              x: index > 0 ? `${drawerWidth}` : `-${drawerWidth}`
-            })
-          }}
-          transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 }
-          }}
-          initial="in-view"
-          animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
-          custom={selectedItems.length > 0 ? -1 : 0}
-          className="absolute top-0 w-full duration-200"
-        >
-          {/* First level items */}
-          {menu.items?.map((item) => {
-            return (
-              <li key={item.id} className="px-4 py-2">
-                {item.items && item.items?.length === 0 ? (
-                  <Link href={item.url}>{item.title}</Link>
-                ) : (
-                  <button
-                    onClick={() => {
-                      goToNextLevel(item);
-                    }}
-                    className="flex w-full flex-row items-center"
-                  >
-                    <span className="pr-2">{item.title}</span>
-                    <Icon icon="chevron-right" />
-                  </button>
-                )}
-              </li>
-            );
-          })}
-        </motion.ul>
+    <MenuTrigger
+      {...props}
+      isOpen={isOpen}
+      onOpenChange={(e) => {
+        overlayStore.toggleOverlay();
+        setIsOpen(e);
+      }}
+    >
+      <Button className={clsx(NavigationMenuButtonStyles)}>
+        {menuItem.title}
+        <Icon icon="chevron-down" className="ml-2 h-4 w-4 text-neutral-500" />
+      </Button>
+      <Popover>
+        <div className="p-2">
+          <Menu className="outline-none">
+            {menuItem.items?.map((subMenuItem) =>
+              !subMenuItem.items?.length ? (
+                <NavigationMenuItem key={subMenuItem.id} menuItem={subMenuItem} />
+              ) : (
+                <SubmenuTrigger>
+                  <NavigationMenuItem key={subMenuItem.id} menuItem={subMenuItem} />
+                  <Popover>
+                    <div className="p-2">
+                      <Menu className="outline-none">
+                        {subMenuItem.items?.map((subSubMenuItem) => (
+                          <NavigationMenuItem key={subSubMenuItem.id} menuItem={subSubMenuItem} />
+                        ))}
+                        <Separator className="my-2 block h-px w-full bg-neutral-100" />
+                        <MenuItem
+                          href={subMenuItem.url}
+                          className={clsx(
+                            'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+                          )}
+                        >
+                          View all {subMenuItem.title}
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  </Popover>
+                </SubmenuTrigger>
+              )
+            )}
+            <Separator className="my-2 block h-px w-full bg-neutral-100" />
+            <MenuItem
+              href={menuItem.url}
+              className={clsx(
+                'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+              )}
+            >
+              View all {menuItem.title}
+            </MenuItem>
+          </Menu>
+        </div>
+      </Popover>
+    </MenuTrigger>
+  );
+};
 
-        {/* Subsequent levels */}
-        <AnimatePresence>
-          {selectedItems.length > 0 &&
-            selectedItems.map((menuItem, index) => {
-              const selected = getSelectedItemNavItems(selectedItems.slice(0, index + 1));
-              return (
-                <motion.ul
-                  key={menuItem.id}
-                  variants={{
-                    'in-view': {
-                      x: '0px',
-                      opacity: 1
-                    },
-                    'out-of-view': (index: number) => ({
-                      x: index > 0 ? `${drawerWidth}` : `-${drawerWidth}`,
-                      opacity: index > 0 ? 1 : 0
-                    })
-                  }}
-                  transition={{
-                    // x: { type: 'spring', stiffness: 300, damping: 30 },
-                    opacity: { duration: 0.2 }
-                  }}
-                  initial="out-of-view"
-                  animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
-                  exit="out-of-view"
-                  custom={index + 1 === selectedItems.length ? 1 : -1}
-                  className="absolute top-0 w-full duration-200"
-                >
-                  <li>
-                    <span>{selected?.title}</span>
-                  </li>
-                  <li className="pb-4">
-                    <button className="flex items-center" onClick={goBack}>
-                      <Icon icon="chevron-left" /> <span className="pl-2">Back</span>
-                    </button>
-                  </li>
-                  {selected?.items?.map((item: MenuItem) => {
-                    return (
-                      <li key={item.id} className="px-4 py-2">
-                        {!item.items || item.items?.length === 0 ? (
-                          <Link href={item.url}>{item.title}</Link>
-                        ) : (
-                          <Button
-                            variant={'filled'}
-                            onPress={() => goToNextLevel(item)}
-                            className="flex w-full items-center"
-                          >
-                            <span className="pr-2">{item.title}</span>
-                            {item.items && <Icon icon="chevron-right" />}
-                          </Button>
-                        )}
-                      </li>
-                    );
-                  })}
-                </motion.ul>
-              );
-            })}
-        </AnimatePresence>
-      </nav>
+export const NavigationMenu = ({ menu }: { menu: ShopifyMenu }) => {
+  return (
+    <div className="flex items-center space-x-2">
+      {}
+      {menu.items?.map((menuItem) =>
+        menuItem.items?.length ? (
+          <NavigationMenuButton menuItem={menuItem} />
+        ) : (
+          <NavigationMenuButtonLink menuItem={menuItem} />
+        )
+      )}
     </div>
   );
 };

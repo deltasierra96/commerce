@@ -5,7 +5,7 @@ import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { MenuItem, Menu as ShopifyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useState } from 'react';
 import { Button, Link } from 'react-aria-components';
 
@@ -29,24 +29,8 @@ type NavigationMenuItem = {
 };
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
-  const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
-  const [selectedItemTitle, setSelectedItemTitle] = useState<string>();
-
-  const goToNextLevel = (item: MenuItem) => {
-    if (item.items?.length === 0) {
-      return;
-    }
-    setSelectedItems([...selectedItems, item]);
-  };
-
-  const goBack = () => {
-    const selectedItemClone = [...selectedItems];
-    selectedItemClone.pop();
-    setSelectedItems([...selectedItemClone]);
-  };
-
-  const getSelectedItemNavItems = (selectedItems: MenuItem[]) =>
-    Array.from(selectedItems.values()).pop();
+  const [selectedItem, setSelectedItem] = useState<MenuItem>();
+  console.log('selectedItem', selectedItem);
 
   const NavigationMenuItem = ({ item }: NavigationMenuItem) => {
     const navigationMenuItemStyles = clsx(
@@ -58,13 +42,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         {item.title}
       </Link>
     ) : (
-      <Button
-        onPress={() => {
-          goToNextLevel(item);
-          setSelectedItemTitle(item.title);
-        }}
-        className={navigationMenuItemStyles}
-      >
+      <Button className={navigationMenuItemStyles}>
         <span>{item.title}</span>
         <Icon icon="chevron-right" className="text-neutral-500" />
       </Button>
@@ -76,55 +54,61 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
       <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />
       <Drawer.Content>
         <div className="flex h-full w-full min-w-fit flex-col">
-          <DialogHeader>
-            <div className="flex items-center">
-              <ButtonIcon size="sm" icon="arrow-left" onPress={goBack} />
-              <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
-            </div>
-          </DialogHeader>
+          <DialogHeader>Menu</DialogHeader>
           <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <div className="relative flex flex-col">
-              <nav className="relative [--menu-exit:calc(var(--menu)*-1)] [--menu:--drawer-lg]">
-                <motion.ul
-                  variants={variants}
-                  initial="in-view"
-                  animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
-                  custom={selectedItems.length > 0 ? -1 : 0}
-                  className="absolute top-0 w-full divide-y divide-neutral-100"
-                >
-                  {/* First level items */}
-                  {menu.items?.map((item) => {
-                    return <NavigationMenuItem key={item.id} item={item} />;
-                  })}
-                </motion.ul>
+              <div className="divide-y divide-neutral-100">
+                {menu.items?.map((menuItem) => (
+                  <div className="space-y-4 p-4" key={menuItem.id}>
+                    <Button className={'flex underline'} onPress={() => setSelectedItem(menuItem)}>
+                      {menuItem.title}
+                    </Button>
+                    <AnimatePresence mode="wait">
+                      {menuItem.items?.map((menuItemSub) => {
+                        return (
+                          <motion.div
+                            key={menuItemSub.id}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-red-50"
+                          >
+                            <Button
+                              className={'flex underline'}
+                              onPress={() => setSelectedItem(menuItemSub)}
+                            >
+                              {menuItemSub.title}
+                              {menuItemSub.id}
+                            </Button>
 
-                {/* Subsequent levels */}
-                <AnimatePresence mode="popLayout">
-                  {selectedItems.length > 0 &&
-                    selectedItems.map((menuItem, index) => {
-                      const selected = getSelectedItemNavItems(selectedItems.slice(0, index + 1));
-                      return (
-                        <motion.ul
-                          key={menuItem.id}
-                          variants={variants}
-                          initial="out-of-view"
-                          animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
-                          exit="out-of-view"
-                          custom={index + 1 === selectedItems.length ? 1 : -1}
-                          className="absolute top-0 w-full divide-y divide-neutral-100"
-                        >
-                          {selected?.items?.map((item: MenuItem) => {
-                            return (
-                              <li key={item.id}>
-                                <NavigationMenuItem key={item.id} item={item} />
-                              </li>
-                            );
-                          })}
-                        </motion.ul>
-                      );
-                    })}
-                </AnimatePresence>
-              </nav>
+                            <motion.div
+                              key={menuItemSub.id}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="bg-green-50"
+                            >
+                              {menuItemSub.items?.map((menuItemSubSub) => {
+                                return (
+                                  <Link
+                                    className={'flex py-2'}
+                                    key={menuItemSubSub.id}
+                                    href={menuItemSubSub.url}
+                                  >
+                                    {menuItemSubSub.title}
+                                  </Link>
+                                );
+                              })}
+                            </motion.div>
+                          </motion.div>
+                        );
+                      })}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
