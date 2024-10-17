@@ -52,6 +52,13 @@ module.exports = {
           950: 'rgb(var(--colors-neutral-950) / <alpha-value>)'
         }
       },
+      flexBasis: {
+        'drawer-xs': 'var(--drawer-xs)',
+        'drawer-sm': 'var(--drawer-sm)',
+        drawer: 'var(--drawer)',
+        'drawer-lg': 'var(--drawer-lg)',
+        'drawer-xl': 'var(--drawer-xl)'
+      },
       ringWidth: {
         3: '3px',
         global: 'var(--ring-global-width)'
@@ -105,9 +112,6 @@ module.exports = {
         'button-icon-compact-lg': 'var(--button-icon-compact-width-lg)'
       },
       spacing: {
-        sidebar: 'var(--sidebar-width)',
-        header: 'var(--header-height)',
-        'layout-safespace': 'var(--layout-safespace)',
         4.5: '1.125rem',
         5.5: '1.375rem',
         10.5: '2.625rem',

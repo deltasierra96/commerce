@@ -1,45 +1,76 @@
 'use client';
+
 import { Icon } from '@/components/ui/icon';
-import { Menu, MenuItem } from '@/shopify/types';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useState } from 'react';
-import { Link } from 'react-aria-components';
+import { navigationData } from './nav-data';
 
 export const variants: Variants = {
-  'in-view': { x: '0px', opacity: 1, transition: { type: 'tween', ease: 'easeOut' } },
+  'in-view': { x: '0px', transition: { type: 'tween', ease: 'easeOut' } },
   'out-of-view': (index: number) => ({
     x: index > 0 ? '250px' : '-250px',
-    opacity: index > 0 ? 1 : 0,
     transition: { type: 'tween', ease: 'easeOut' }
   })
 };
 
-type NavigationMenuProps = {
-  menu: Menu;
-};
+function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
-export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
-  const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
-  console.log('selectedItems', selectedItems);
-  const goToNextLevel = (item: MenuItem) => {
-    if (item.items?.length === 0) {
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const goToNextLevel = (item: any) => {
+    if (!item.links) {
       return;
     }
-    setSelectedItems([...selectedItems, item]);
+    setSelectedItems([...selectedItems, item.id]);
   };
 
   const goBack = () => {
-    const selectedItemClone = [...selectedItems];
-    selectedItemClone.pop();
-    setSelectedItems([...selectedItemClone]);
+    const selectedItemsClone = [...selectedItems];
+    selectedItemsClone.pop();
+    setSelectedItems([...selectedItemsClone]);
   };
 
-  const getSelectedItemNavItems = (selectedItems: MenuItem[]) =>
-    Array.from(selectedItems.values()).pop();
+  const getNavItems = (selectedItems: string[]) => {
+    let result: any[] = [];
+    let links: any[] = [...navigationData];
+    let itr = 0;
+
+    if (selectedItems.length === 0) {
+      return navigationData;
+    }
+
+    // We will run the loop until we reach the correct level
+    while (itr < selectedItems.length) {
+      let selectedLink: any;
+
+      // Finding the selected item for this level
+      for (let i = 0; i < links.length; i++) {
+        if (links[i].id === selectedItems[itr]) {
+          selectedLink = links[i];
+
+          // We keep a track of the next level links
+          if (selectedLink.links) {
+            result = [...selectedLink.links];
+          }
+          break;
+        }
+      }
+      links = [...result];
+      itr++;
+    }
+    return result;
+  };
 
   return (
     <div className="relative flex flex-col">
-      <nav className="relative">
+      <button className="absolute right-0 top-0 [&>svg]:text-[32px]" onClick={toggleMenu}>
+        {isOpen ? <Icon icon="chevron-left" /> : <Icon icon="chevron-right" />}
+      </button>
+      <nav className="relative mt-24">
         <motion.ul
           variants={variants}
           initial="in-view"
@@ -48,22 +79,16 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
           className="absolute top-0 w-full duration-200"
         >
           {/* First level items */}
-          {menu.items?.map((item) => {
+          {navigationData?.map((item: any) => {
             return (
               <li key={item.id} className="px-4 py-2">
-                {item.items && item.items?.length === 0 ? (
-                  <Link href={item.url}>{item.title}</Link>
-                ) : (
-                  <button
-                    onClick={() => {
-                      goToNextLevel(item);
-                    }}
-                    className="flex w-full flex-row items-center"
-                  >
-                    <span className="pr-2">{item.title}</span>
-                    <Icon icon="chevron-right" />
-                  </button>
-                )}
+                <button
+                  onClick={() => goToNextLevel(item)}
+                  className="flex w-full flex-row items-center"
+                >
+                  <span className="pr-2">{item.label}</span>
+                  {item.links && <Icon icon="chevron-right" />}
+                </button>
               </li>
             );
           })}
@@ -72,11 +97,10 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
         {/* Subsequent levels */}
         <AnimatePresence>
           {selectedItems.length > 0 &&
-            selectedItems.map((menuItem, index) => {
-              const selected = getSelectedItemNavItems(selectedItems.slice(0, index + 1));
+            selectedItems.map((id, index) => {
               return (
                 <motion.ul
-                  key={menuItem.id}
+                  key={id}
                   variants={variants}
                   initial="out-of-view"
                   animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
@@ -84,28 +108,21 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
                   custom={index + 1 === selectedItems.length ? 1 : -1}
                   className="absolute top-0 w-full duration-200"
                 >
-                  <li>
-                    <span>{selected?.title}</span>
-                  </li>
                   <li className="pb-4">
                     <button className="flex items-center" onClick={goBack}>
                       <Icon icon="chevron-left" /> <span className="pl-2">Back</span>
                     </button>
                   </li>
-                  {selected?.items?.map((item: MenuItem) => {
+                  {getNavItems(selectedItems.slice(0, index + 1))?.map((item: any) => {
                     return (
                       <li key={item.id} className="px-4 py-2">
-                        {!item.items || item.items?.length === 0 ? (
-                          <Link href={item.url}>{item.title}</Link>
-                        ) : (
-                          <button
-                            onClick={() => goToNextLevel(item)}
-                            className="flex w-full items-center"
-                          >
-                            <span className="pr-2">{item.title}</span>
-                            {item.items && <Icon icon="chevron-right" />}
-                          </button>
-                        )}
+                        <button
+                          onClick={() => goToNextLevel(item)}
+                          className="flex w-full flex-row items-center"
+                        >
+                          <span className="pr-2">{item.label}</span>
+                          {item.links && <Icon icon="chevron-right" />}
+                        </button>
                       </li>
                     );
                   })}
@@ -116,4 +133,6 @@ export const Derp = ({ menu, ...props }: NavigationMenuProps) => {
       </nav>
     </div>
   );
-};
+}
+
+export default Sidebar;

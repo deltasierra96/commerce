@@ -85,7 +85,7 @@ const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full', {
   }
 });
 
-const drawerContentStyles = cva('overflow-hidden', {
+const drawerContentStyles = cva('shrink-0 grow-0 overflow-hidden', {
   variants: {
     position: {
       top: null,
@@ -115,7 +115,7 @@ const drawerContentStyles = cva('overflow-hidden', {
   compoundVariants: [
     {
       position: ['left', 'right'],
-      className: 'h-[--visual-viewport-height] max-h-full min-h-dvh max-w-full'
+      className: 'h-[--visual-viewport-height] max-h-full min-h-dvh w-full max-w-full'
     },
     {
       position: ['top', 'bottom'],
@@ -124,27 +124,27 @@ const drawerContentStyles = cva('overflow-hidden', {
     {
       position: ['left', 'right'],
       size: 'xs',
-      className: 'flex-[0_0_18rem]'
+      className: 'basis-drawer-xs'
     },
     {
       position: ['left', 'right'],
       size: 'sm',
-      className: 'flex-[0_0_22rem]'
+      className: 'basis-drawer-sm'
     },
     {
       position: ['left', 'right'],
       size: 'default',
-      className: 'flex-[0_0_32rem]'
+      className: 'basis-drawer'
     },
     {
       position: ['left', 'right'],
       size: 'lg',
-      className: 'flex-[0_0_35rem]'
+      className: 'basis-drawer-lg'
     },
     {
       position: ['left', 'right'],
       size: 'xl',
-      className: 'flex-[0_0_44rem]'
+      className: 'basis-drawer-xl'
     },
     {
       position: ['left', 'right'],
@@ -262,7 +262,6 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }
       })}
     >
       <RACModal
-        ref={ref}
         {...contentProps}
         isDismissable={isDismissable}
         className={({ isEntering, isExiting }) =>

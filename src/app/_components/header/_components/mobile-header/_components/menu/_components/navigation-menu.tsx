@@ -1,193 +1,72 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
-import { Menu } from '@/shopify/types';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { Menu, MenuItem } from '@/shopify/types';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-
-export const variants: Variants = {
-  'in-view': { x: '0px', opacity: 1, transition: { type: 'tween', ease: 'easeOut' } },
-  'out-of-view': (index: number) => ({
-    x: index > 0 ? '250px' : '-250px',
-    opacity: index > 0 ? 1 : 0,
-    transition: { type: 'tween', ease: 'easeOut' }
-  })
-};
+import { Link } from 'react-aria-components';
 
 type NavigationMenuProps = {
   menu: Menu;
+  width: number;
 };
 
-const navigationData = [
-  {
-    id: Math.random(),
-    label: 'Link 1 (level 1)',
-    links: [
-      {
-        id: Math.random(),
-        label: 'Link 1 (level 2)',
-        links: [
-          {
-            id: Math.random(),
-            label: 'Link 1 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 2 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 3 (level 3)'
-          }
-        ]
-      },
-      {
-        id: Math.random(),
-        label: 'Link 2 (level 2)'
-      },
-      {
-        id: Math.random(),
-        label: 'Link 3 (level 2)'
-      }
-    ]
-  },
-  {
-    id: Math.random(),
-    label: 'Link 2 (level 1)',
-    links: [
-      {
-        id: Math.random(),
-        label: 'Link 1 (level 2)',
-        links: [
-          {
-            id: Math.random(),
-            label: 'Link 1 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 2 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 3 (level 3)'
-          }
-        ]
-      },
-      {
-        id: Math.random(),
-        label: 'Link 2 (level 2)'
-      },
-      {
-        id: Math.random(),
-        label: 'Link 3 (level 2)'
-      }
-    ]
-  },
-  {
-    id: Math.random(),
-    label: 'Link 3 (level 1)',
-    links: [
-      {
-        id: Math.random(),
-        label: 'Link 1 (level 2)',
-        links: [
-          {
-            id: Math.random(),
-            label: 'Link 1 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 2 (level 3)'
-          },
-          {
-            id: Math.random(),
-            label: 'Link 3 (level 3)'
-          }
-        ]
-      },
-      {
-        id: Math.random(),
-        label: 'Link 2 (level 2)'
-      },
-      {
-        id: Math.random(),
-        label: 'Link 3 (level 2)'
-      }
-    ]
-  }
-];
+export const NavigationMenu = ({ menu, width, ...props }: NavigationMenuProps) => {
+  const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
+  const drawerWidth = `${width}px`;
 
-export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
-  console.log('selectedItems', selectedItems);
-
-  const goToNextLevel = (item: any) => {
-    if (!item.links) {
+  const goToNextLevel = (item: MenuItem) => {
+    if (item.items?.length === 0) {
       return;
     }
-    setSelectedItems([...selectedItems, item.id]);
+    setSelectedItems([...selectedItems, item]);
   };
 
   const goBack = () => {
-    const selectedItemsClone = [...selectedItems];
-    selectedItemsClone.pop();
-    setSelectedItems([...selectedItemsClone]);
+    const selectedItemClone = [...selectedItems];
+    selectedItemClone.pop();
+    setSelectedItems([...selectedItemClone]);
   };
 
-  const getNavItems = (selectedItems: string[]) => {
-    let result: any[] = [];
-    let links: any[] = [...navigationData];
-    console.log('links working', links);
-    let itr = 0;
-
-    if (selectedItems.length === 0) {
-      return navigationData;
-    }
-
-    // We will run the loop until we reach the correct level
-    while (itr < selectedItems.length) {
-      let selectedLink: any;
-
-      // Finding the selected item for this level
-      for (let i = 0; i < links.length; i++) {
-        console.log('merp working');
-        if (links[i].id === selectedItems[itr]) {
-          selectedLink = links[i];
-
-          // We keep a track of the next level links
-          if (selectedLink.links) {
-            result = [...selectedLink.links];
-          }
-          break;
-        }
-      }
-      links = [...result];
-      itr++;
-    }
-    console.log('result', result);
-    return result;
-  };
+  const getSelectedItemNavItems = (selectedItems: MenuItem[]) =>
+    Array.from(selectedItems.values()).pop();
 
   return (
     <div className="relative flex flex-col">
-      <nav className="relative mt-24">
+      <nav className="relative">
         <motion.ul
-          variants={variants}
+          variants={{
+            'in-view': { x: '0px', opacity: 1 },
+            'out-of-view': (index: number) => ({
+              x: index > 0 ? `${drawerWidth}` : `-${drawerWidth}`
+            })
+          }}
+          transition={{
+            x: { type: 'spring', stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
           initial="in-view"
           animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
           custom={selectedItems.length > 0 ? -1 : 0}
           className="absolute top-0 w-full duration-200"
         >
           {/* First level items */}
-          {navigationData?.map((item: any) => {
+          {menu.items?.map((item) => {
             return (
               <li key={item.id} className="px-4 py-2">
-                <button
-                  onClick={() => goToNextLevel(item)}
-                  className="flex w-full flex-row items-center"
-                >
-                  <span className="pr-2">{item.label}</span>
-                  {item.links && <Icon icon="chevron-right" />}
-                </button>
+                {item.items && item.items?.length === 0 ? (
+                  <Link href={item.url}>{item.title}</Link>
+                ) : (
+                  <button
+                    onClick={() => {
+                      goToNextLevel(item);
+                    }}
+                    className="flex w-full flex-row items-center"
+                  >
+                    <span className="pr-2">{item.title}</span>
+                    <Icon icon="chevron-right" />
+                  </button>
+                )}
               </li>
             );
           })}
@@ -196,32 +75,54 @@ export const NavigationMenu = ({ menu, ...props }: NavigationMenuProps) => {
         {/* Subsequent levels */}
         <AnimatePresence>
           {selectedItems.length > 0 &&
-            selectedItems.map((id, index) => {
+            selectedItems.map((menuItem, index) => {
+              const selected = getSelectedItemNavItems(selectedItems.slice(0, index + 1));
               return (
                 <motion.ul
-                  key={id}
-                  variants={variants}
+                  key={menuItem.id}
+                  variants={{
+                    'in-view': {
+                      x: '0px',
+                      opacity: 1
+                    },
+                    'out-of-view': (index: number) => ({
+                      x: index > 0 ? `${drawerWidth}` : `-${drawerWidth}`,
+                      opacity: index > 0 ? 1 : 0
+                    })
+                  }}
+                  transition={{
+                    // x: { type: 'spring', stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 }
+                  }}
                   initial="out-of-view"
                   animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
                   exit="out-of-view"
                   custom={index + 1 === selectedItems.length ? 1 : -1}
                   className="absolute top-0 w-full duration-200"
                 >
+                  <li>
+                    <span>{selected?.title}</span>
+                  </li>
                   <li className="pb-4">
                     <button className="flex items-center" onClick={goBack}>
                       <Icon icon="chevron-left" /> <span className="pl-2">Back</span>
                     </button>
                   </li>
-                  {getNavItems(selectedItems.slice(0, index + 1))?.map((item: any) => {
+                  {selected?.items?.map((item: MenuItem) => {
                     return (
                       <li key={item.id} className="px-4 py-2">
-                        <button
-                          onClick={() => goToNextLevel(item)}
-                          className="flex w-full flex-row items-center"
-                        >
-                          <span className="pr-2">{item.label}</span>
-                          {item.links && <Icon icon="chevron-right" />}
-                        </button>
+                        {!item.items || item.items?.length === 0 ? (
+                          <Link href={item.url}>{item.title}</Link>
+                        ) : (
+                          <Button
+                            variant={'filled'}
+                            onPress={() => goToNextLevel(item)}
+                            className="flex w-full items-center"
+                          >
+                            <span className="pr-2">{item.title}</span>
+                            {item.items && <Icon icon="chevron-right" />}
+                          </Button>
+                        )}
                       </li>
                     );
                   })}

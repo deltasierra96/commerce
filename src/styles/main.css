@@ -223,9 +223,14 @@ input[type='search']::-webkit-search-results-decoration {
   --header-z-index: 999;
   --overlay-z-index: 40;
   --header-safe-z-index: calc(var(--header-z-index) + 1);
-  --header-height: 5rem;
-  --sidebar-width: 16rem;
-  --layout-safespace: theme(spacing.8);
+
+  /* Drawer */
+
+  --drawer-xs: 18rem;
+  --drawer-sm: 22rem;
+  --drawer: 32rem;
+  --drawer-lg: 36rem;
+  --drawer-xl: 44rem;
 
   /* Icon */
   --icon-stroke-width: 1.75;
@@ -322,7 +327,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-900: var(--colors-brands-christies-900);
   --colors-primary-950: var(--colors-brands-christies-950);
 
-  --colors-primary-50: var(--colors-brands-mss-50);
+  /* --colors-primary-50: var(--colors-brands-mss-50);
   --colors-primary-100: var(--colors-brands-mss-100);
   --colors-primary-200: var(--colors-brands-mss-200);
   --colors-primary-300: var(--colors-brands-mss-300);
@@ -332,7 +337,7 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-primary-700: var(--colors-brands-mss-700);
   --colors-primary-800: var(--colors-brands-mss-800);
   --colors-primary-900: var(--colors-brands-mss-900);
-  --colors-primary-950: var(--colors-brands-mss-950);
+  --colors-primary-950: var(--colors-brands-mss-950); */
 
   --colors-neutral-50: var(--colors-zinc-50);
   --colors-neutral-100: var(--colors-zinc-100);
