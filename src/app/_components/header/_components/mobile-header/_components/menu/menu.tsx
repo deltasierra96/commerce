@@ -6,6 +6,7 @@ import { Icon } from '@/components/ui/icon';
 import { MenuItem, Menu as ShopifyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { AnimatePresence, motion, MotionConfig, Variants } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button, Link } from 'react-aria-components';
 
@@ -15,10 +16,12 @@ type MenuProps = {
 
 export const variants: Variants = {
   'in-view': {
-    x: '0px'
+    x: '0px',
+    opacity: 1
   },
   'out-of-view': (index: number) => ({
-    x: `calc(${index} * var(--menu))`
+    x: `calc(${index} * var(--menu-width))`,
+    opacity: 0
   })
 };
 
@@ -29,6 +32,15 @@ type NavigationMenuItem = {
 export const Menu = ({ menu, ...props }: MenuProps) => {
   const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
   const [selectedItemTitle, setSelectedItemTitle] = useState<string>();
+  const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+  // const pathname = usePathname();
+
+  // useEffect(() => {
+  //   setIsNavOpen(false);
+  //   setSelectedItems([]);
+  // }, [pathname]);
 
   const goToNextLevel = (item: MenuItem) => {
     if (item.items?.length === 0) {
@@ -40,16 +52,27 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   const goBack = () => {
     const selectedItemClone = [...selectedItems];
     selectedItemClone.pop();
+    const prevItemTitle = selectedItemClone[selectedItemClone.length - 1]?.title;
+    setSelectedItemTitle(prevItemTitle);
     setSelectedItems([...selectedItemClone]);
   };
 
   const NavigationMenuItem = ({ item, ...props }: NavigationMenuItem) => {
     const navigationMenuItemStyles = clsx(
-      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none pressed:bg-neutral-100'
+      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus:bg-neutral-100 focus:underline pressed:bg-neutral-100'
     );
 
     return !item.items || item.items?.length === 0 ? (
-      <Link className={navigationMenuItemStyles} href={item.url} {...props}>
+      <Link
+        className={navigationMenuItemStyles}
+        onPress={() => {
+          setIsNavOpen(false);
+          setSelectedItems([]);
+          router.push(item.url);
+        }}
+        href={item.url}
+        {...props}
+      >
         {item.title}
       </Link>
     ) : (
@@ -68,26 +91,42 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   return (
-    <Drawer onOpenChange={() => setSelectedItems([])} position="left" size={'lg'} {...props}>
-      <ButtonIcon aria-label="Open mobile navigation" icon="menu" variant="ghost" color="neutral" />
+    <Drawer
+      isOpen={isNavOpen}
+      onOpenChange={(e) => setIsNavOpen(e)}
+      position="left"
+      size={'lg'}
+      {...props}
+    >
+      <ButtonIcon
+        aria-label="Open mobile navigation"
+        onPress={() => setIsNavOpen(true)}
+        icon="menu"
+        variant="ghost"
+        color="neutral"
+      />
       <Drawer.Content>
         <div className="flex h-full w-full min-w-fit flex-col">
           <DialogHeader>
-            <div className="flex items-center">
-              <ButtonIcon size="sm" icon="arrow-left" onPress={goBack} />
-              <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
-            </div>
+            {selectedItems.length !== 0 ? (
+              <div className="flex items-center gap-x-2">
+                <ButtonIcon compact icon="arrow-left" variant={'ghost'} onPress={goBack} />
+                <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
+              </div>
+            ) : (
+              'Menu'
+            )}
           </DialogHeader>
           <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <div className="flex h-full flex-col">
-              <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu:--drawer-lg]">
+              <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
                 <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
                   <motion.ul
                     variants={variants}
                     initial="in-view"
                     animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
                     custom={selectedItems.length > 0 ? -1 : 0}
-                    className="w-full divide-y divide-neutral-100 bg-white"
+                    className="w-full divide-y divide-neutral-100"
                   >
                     {/* First level items */}
                     {menu.items?.map((item) => {
@@ -101,13 +140,13 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
                       selectedItems.map((menuItem, index) => {
                         return (
                           <motion.ul
+                            className="absolute top-0 w-full divide-y divide-neutral-100"
                             key={menuItem.id}
                             variants={variants}
                             initial="out-of-view"
                             animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
                             exit="out-of-view"
                             custom={index + 1 === selectedItems.length ? 1 : -1}
-                            className="absolute top-0 w-full divide-y divide-neutral-100 bg-white"
                           >
                             {menuItem?.items?.map((item: MenuItem) => {
                               return (
