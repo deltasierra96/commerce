@@ -8,7 +8,7 @@ import { clsx } from '@/utils';
 import { AnimatePresence, motion, MotionConfig, Variants } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Button, Link } from 'react-aria-components';
+import { ListBox, ListBoxItem, ListBoxItemProps } from 'react-aria-components';
 
 type MenuProps = {
   menu: ShopifyMenu;
@@ -25,8 +25,9 @@ export const variants: Variants = {
   })
 };
 
-type NavigationMenuItem = {
+type NavigationMenuItem = ListBoxItemProps & {
   item: MenuItem;
+  isDisabled?: boolean;
 };
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
@@ -35,12 +36,6 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
   const router = useRouter();
-  // const pathname = usePathname();
-
-  // useEffect(() => {
-  //   setIsNavOpen(false);
-  //   setSelectedItems([]);
-  // }, [pathname]);
 
   const goToNextLevel = (item: MenuItem) => {
     if (item.items?.length === 0) {
@@ -59,34 +54,30 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
 
   const NavigationMenuItem = ({ item, ...props }: NavigationMenuItem) => {
     const navigationMenuItemStyles = clsx(
-      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus:bg-neutral-100 focus:underline pressed:bg-neutral-100'
+      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus:bg-neutral-100 focus:underline pressed:bg-neutral-100 disabled:opacity-20'
     );
 
-    return !item.items || item.items?.length === 0 ? (
-      <Link
-        className={navigationMenuItemStyles}
-        onPress={() => {
-          setIsNavOpen(false);
-          setSelectedItems([]);
-          router.push(item.url);
-        }}
-        href={item.url}
+    const isLink = !item.items || item.items?.length === 0;
+
+    return (
+      <ListBoxItem
         {...props}
-      >
-        {item.title}
-      </Link>
-    ) : (
-      <Button
-        {...props}
-        onPress={() => {
-          goToNextLevel(item);
-          setSelectedItemTitle(item.title);
-        }}
         className={navigationMenuItemStyles}
+        onAction={() => {
+          if (isLink) {
+            setIsNavOpen(false);
+            setSelectedItems([]);
+            router.push(item.url);
+          } else {
+            goToNextLevel(item);
+            setSelectedItemTitle(item.title);
+          }
+        }}
+        href={isLink ? item.url : undefined}
       >
         <span>{item.title}</span>
-        <Icon icon="chevron-right" className="text-neutral-500" />
-      </Button>
+        {!isLink ? <Icon icon="chevron-right" className="text-neutral-500" /> : null}
+      </ListBoxItem>
     );
   };
 
@@ -121,26 +112,32 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
             <div className="flex h-full flex-col">
               <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
                 <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
-                  <motion.ul
+                  <motion.div
                     variants={variants}
                     initial="in-view"
                     animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
                     custom={selectedItems.length > 0 ? -1 : 0}
                     className="w-full divide-y divide-neutral-100"
                   >
-                    {/* First level items */}
-                    {menu.items?.map((item) => {
-                      return <NavigationMenuItem key={item.id} item={item} />;
-                    })}
-                  </motion.ul>
+                    <ListBox
+                      orientation="vertical"
+                      autoFocus
+                      selectionMode="single"
+                      className={'divide-y divide-neutral-100 outline-none'}
+                    >
+                      {/* First level items */}
+                      {menu.items?.map((item) => {
+                        return <NavigationMenuItem key={item.id} item={item} />;
+                      })}
+                    </ListBox>
+                  </motion.div>
 
                   <AnimatePresence>
-                    {/* Subsequent levels */}
                     {selectedItems.length > 0 &&
                       selectedItems.map((menuItem, index) => {
                         return (
-                          <motion.ul
-                            className="absolute top-0 w-full divide-y divide-neutral-100"
+                          <motion.div
+                            className="absolute top-0 w-full"
                             key={menuItem.id}
                             variants={variants}
                             initial="out-of-view"
@@ -148,14 +145,19 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
                             exit="out-of-view"
                             custom={index + 1 === selectedItems.length ? 1 : -1}
                           >
-                            {menuItem?.items?.map((item: MenuItem) => {
-                              return (
-                                <li key={item.id}>
-                                  <NavigationMenuItem key={item.id} item={item} />
-                                </li>
-                              );
-                            })}
-                          </motion.ul>
+                            <ListBox
+                              className={'divide-y divide-neutral-100 outline-none'}
+                              orientation="vertical"
+                              autoFocus
+                              selectionMode="single"
+                            >
+                              {menuItem?.items?.map((item: MenuItem) => {
+                                return (
+                                  <NavigationMenuItem key={item.id} id={item.id} item={item} />
+                                );
+                              })}
+                            </ListBox>
+                          </motion.div>
                         );
                       })}
                   </AnimatePresence>
