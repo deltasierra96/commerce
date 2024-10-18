@@ -62,6 +62,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
     return (
       <ListBoxItem
         {...props}
+        textValue={item.title}
         className={navigationMenuItemStyles}
         onAction={() => {
           if (isLink) {
@@ -120,15 +121,13 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
                     className="w-full divide-y divide-neutral-100"
                   >
                     <ListBox
+                      items={menu.items}
                       orientation="vertical"
                       autoFocus
                       selectionMode="single"
-                      className={'divide-y divide-neutral-100 outline-none'}
+                      className={'w-full divide-y divide-neutral-100 outline-none'}
                     >
-                      {/* First level items */}
-                      {menu.items?.map((item) => {
-                        return <NavigationMenuItem key={item.id} item={item} />;
-                      })}
+                      {(item) => <NavigationMenuItem id={item.id} item={item} />}
                     </ListBox>
                   </motion.div>
 
@@ -146,16 +145,13 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
                             custom={index + 1 === selectedItems.length ? 1 : -1}
                           >
                             <ListBox
-                              className={'divide-y divide-neutral-100 outline-none'}
+                              items={menuItem?.items}
+                              className={'w-full divide-y divide-neutral-100 outline-none'}
                               orientation="vertical"
                               autoFocus
                               selectionMode="single"
                             >
-                              {menuItem?.items?.map((item: MenuItem) => {
-                                return (
-                                  <NavigationMenuItem key={item.id} id={item.id} item={item} />
-                                );
-                              })}
+                              {(item) => <NavigationMenuItem id={item.id} item={item} />}
                             </ListBox>
                           </motion.div>
                         );
