@@ -8,7 +8,7 @@ import { clsx } from '@/utils';
 import { AnimatePresence, motion, MotionConfig, Variants } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { ListBox, ListBoxItem, ListBoxItemProps } from 'react-aria-components';
+import { ListBox, ListBoxItem, ListBoxItemProps, ListBoxProps } from 'react-aria-components';
 
 type MenuProps = {
   menu: ShopifyMenu;
@@ -29,6 +29,21 @@ type NavigationMenuItem = ListBoxItemProps & {
   item: MenuItem;
   isDisabled?: boolean;
 };
+
+type MenuListBoxProps<T> = ListBoxProps<T>;
+
+const MenuListBox = <T extends object>({ children, ...props }: MenuListBoxProps<T>) => (
+  <ListBox
+    layout="stack"
+    orientation="vertical"
+    autoFocus
+    selectionMode="single"
+    className={'w-full divide-y divide-neutral-100 outline-none'}
+    {...props}
+  >
+    {children}
+  </ListBox>
+);
 
 export const Menu = ({ menu, ...props }: MenuProps) => {
   const [selectedItems, setSelectedItems] = useState<MenuItem[]>([]);
@@ -53,17 +68,15 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   const NavigationMenuItem = ({ item, ...props }: NavigationMenuItem) => {
-    const navigationMenuItemStyles = clsx(
-      'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus:bg-neutral-100 focus:underline pressed:bg-neutral-100 disabled:opacity-20'
-    );
-
     const isLink = !item.items || item.items?.length === 0;
 
     return (
       <ListBoxItem
         {...props}
         textValue={item.title}
-        className={navigationMenuItemStyles}
+        className={clsx(
+          'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus-visible:bg-neutral-100 focus-visible:underline pressed:bg-neutral-100 disabled:opacity-20'
+        )}
         onAction={() => {
           if (isLink) {
             setIsNavOpen(false);
@@ -98,7 +111,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         color="neutral"
       />
       <Drawer.Content>
-        <div className="flex h-full w-full min-w-fit flex-col">
+        <div className="flex flex-col w-full h-full min-w-fit">
           <DialogHeader>
             {selectedItems.length !== 0 ? (
               <div className="flex items-center gap-x-2">
@@ -109,8 +122,8 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
               'Menu'
             )}
           </DialogHeader>
-          <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
-            <div className="flex h-full flex-col">
+          <div className="flex flex-col flex-1 min-h-0 overflow-y-scroll scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200">
+            <div className="flex flex-col h-full">
               <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
                 <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
                   <motion.div
@@ -120,42 +133,29 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
                     custom={selectedItems.length > 0 ? -1 : 0}
                     className="w-full divide-y divide-neutral-100"
                   >
-                    <ListBox
-                      items={menu.items}
-                      orientation="vertical"
-                      autoFocus
-                      selectionMode="single"
-                      className={'w-full divide-y divide-neutral-100 outline-none'}
-                    >
+                    <MenuListBox items={menu.items}>
                       {(item) => <NavigationMenuItem id={item.id} item={item} />}
-                    </ListBox>
+                    </MenuListBox>
                   </motion.div>
 
                   <AnimatePresence>
-                    {selectedItems.length > 0 &&
-                      selectedItems.map((menuItem, index) => {
-                        return (
-                          <motion.div
-                            className="absolute top-0 w-full"
-                            key={menuItem.id}
-                            variants={variants}
-                            initial="out-of-view"
-                            animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
-                            exit="out-of-view"
-                            custom={index + 1 === selectedItems.length ? 1 : -1}
-                          >
-                            <ListBox
-                              items={menuItem?.items}
-                              className={'w-full divide-y divide-neutral-100 outline-none'}
-                              orientation="vertical"
-                              autoFocus
-                              selectionMode="single"
-                            >
-                              {(item) => <NavigationMenuItem id={item.id} item={item} />}
-                            </ListBox>
-                          </motion.div>
-                        );
-                      })}
+                    {selectedItems.map((menuItem, index) => {
+                      return (
+                        <motion.div
+                          className="absolute top-0 w-full"
+                          key={menuItem.id}
+                          variants={variants}
+                          initial="out-of-view"
+                          animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
+                          exit="out-of-view"
+                          custom={index + 1 === selectedItems.length ? 1 : -1}
+                        >
+                          <MenuListBox items={menuItem?.items}>
+                            {(item) => <NavigationMenuItem id={item.id} item={item} />}
+                          </MenuListBox>
+                        </motion.div>
+                      );
+                    })}
                   </AnimatePresence>
                 </MotionConfig>
               </nav>
