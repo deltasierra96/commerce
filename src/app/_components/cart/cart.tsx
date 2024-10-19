@@ -10,7 +10,7 @@ import { useCart } from './cart-context';
 import { CartItem } from './cart-item';
 
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { Drawer, DrawerHeader, DrawerTrigger } from '@/components/ui/drawer';
+import { Drawer, DrawerHeader } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { createUrl } from '@/shopify/lib/utils';
 
@@ -46,16 +46,16 @@ export const Cart = () => {
 
   return (
     <>
-      <DrawerTrigger>
-        <ButtonIcon
-          onPress={() => {
-            setIsCartOpen(true);
-          }}
-          variant={'ghost'}
-          counter={cart?.totalQuantity}
-          icon="shopping-cart"
-        />
-        <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
+      <ButtonIcon
+        onPress={() => {
+          setIsCartOpen(true);
+        }}
+        variant={'ghost'}
+        counter={cart?.totalQuantity}
+        icon="shopping-cart"
+      />
+      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
+        <Drawer.Content>
           <div className="flex h-full flex-col">
             <DrawerHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DrawerHeader>
             {!cart || cart.lines.length === 0 ? (
@@ -134,8 +134,8 @@ export const Cart = () => {
               </>
             )}
           </div>
-        </Drawer>
-      </DrawerTrigger>
+        </Drawer.Content>
+      </Drawer>
     </>
   );
 };

@@ -2,7 +2,7 @@
 import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { DialogHeader } from '@/components/ui/dialog';
-import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
+import { Drawer } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
@@ -27,10 +27,9 @@ export function SearchSkeleton() {
 export const Search = ({ ...props }: SearchProps) => {
   const searchParams = useSearchParams();
   return (
-    <DrawerTrigger>
+    <Drawer>
       <ButtonIcon icon="search" variant={'ghost'} />
-
-      <Drawer>
+      <Drawer.Content>
         <DialogHeader>Search</DialogHeader>
         <div className="p-6">
           <Form action="/search" className="relative w-full">
@@ -45,7 +44,7 @@ export const Search = ({ ...props }: SearchProps) => {
             />
           </Form>
         </div>
-      </Drawer>
-    </DrawerTrigger>
+      </Drawer.Content>
+    </Drawer>
   );
 };
