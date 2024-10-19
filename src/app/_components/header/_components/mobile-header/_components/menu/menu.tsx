@@ -1,7 +1,7 @@
 'use client';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { DialogHeader } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { MenuItem, Menu as ShopifyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
@@ -75,7 +75,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         {...props}
         textValue={item.title}
         className={clsx(
-          'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus-visible:bg-neutral-100 focus-visible:underline pressed:bg-neutral-100 disabled:opacity-20'
+          'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none hover:bg-neutral-50 focus-visible:bg-neutral-100 focus-visible:underline pressed:bg-neutral-100 disabled:opacity-20'
         )}
         onAction={() => {
           if (isLink) {
@@ -96,13 +96,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   return (
-    <Drawer
-      isOpen={isNavOpen}
-      onOpenChange={(e) => setIsNavOpen(e)}
-      position="left"
-      size={'lg'}
-      {...props}
-    >
+    <DrawerTrigger isOpen={isNavOpen} onOpenChange={(e) => setIsNavOpen(e)}>
       <ButtonIcon
         aria-label="Open mobile navigation"
         onPress={() => setIsNavOpen(true)}
@@ -110,8 +104,8 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         variant="ghost"
         color="neutral"
       />
-      <Drawer.Content>
-        <div className="flex flex-col w-full h-full min-w-fit">
+      <Drawer positon="left" isOpen={isNavOpen} onOpenChange={(e) => setIsNavOpen(e)}>
+        <div className="flex h-full w-full min-w-fit flex-col">
           <DialogHeader>
             {selectedItems.length !== 0 ? (
               <div className="flex items-center gap-x-2">
@@ -122,8 +116,8 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
               'Menu'
             )}
           </DialogHeader>
-          <div className="flex flex-col flex-1 min-h-0 overflow-y-scroll scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200">
-            <div className="flex flex-col h-full">
+          <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
+            <div className="flex h-full flex-col">
               <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
                 <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
                   <motion.div
@@ -162,7 +156,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
             </div>
           </div>
         </div>
-      </Drawer.Content>
-    </Drawer>
+      </Drawer>
+    </DrawerTrigger>
   );
 };

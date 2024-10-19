@@ -1,5 +1,5 @@
 import { clsx } from '@/utils';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef } from 'react';
 import {
   ModalOverlay as RACModalOverlay,
@@ -19,10 +19,10 @@ const overlayStyles = cva('fixed inset-0 isolate z-header-safe flex w-full bg-bl
 
 export type OverlayProps = RACModalOverlayProps & VariantProps<typeof overlayStyles>;
 
-export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(({ className, ...rest }, ref) => {
+export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(({ className, ...props }, ref) => {
   return (
     <RACModalOverlay
-      {...rest}
+      {...props}
       ref={ref}
       className={({ isEntering, isExiting }) =>
         clsx(

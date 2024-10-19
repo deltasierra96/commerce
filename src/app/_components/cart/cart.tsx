@@ -10,8 +10,7 @@ import { useCart } from './cart-context';
 import { CartItem } from './cart-item';
 
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { DialogHeader } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Drawer, DrawerHeader, DrawerTrigger } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { createUrl } from '@/shopify/lib/utils';
 
@@ -47,18 +46,18 @@ export const Cart = () => {
 
   return (
     <>
-      <ButtonIcon
-        onPress={() => {
-          setIsCartOpen(true);
-        }}
-        variant={'ghost'}
-        counter={cart?.totalQuantity}
-        icon="shopping-cart"
-      />
-      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
-        <Drawer.Content>
+      <DrawerTrigger>
+        <ButtonIcon
+          onPress={() => {
+            setIsCartOpen(true);
+          }}
+          variant={'ghost'}
+          counter={cart?.totalQuantity}
+          icon="shopping-cart"
+        />
+        <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
           <div className="flex h-full flex-col">
-            <DialogHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DialogHeader>
+            <DrawerHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DrawerHeader>
             {!cart || cart.lines.length === 0 ? (
               <div className="flex h-full flex-col items-center justify-center self-center p-8 text-center">
                 <Icon icon="shopping-cart" className="h-12 w-12 text-neutral-400" />
@@ -135,8 +134,8 @@ export const Cart = () => {
               </>
             )}
           </div>
-        </Drawer.Content>
-      </Drawer>
+        </Drawer>
+      </DrawerTrigger>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Container } from '@/components/ui/container';
 import { DialogHeader } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Drawer, DrawerTrigger } from '@/components/ui/drawer';
 import { Collection } from '@/shopify/types';
 import { CollectionLimit } from './_components/collection-limit';
 import { CollectionSort } from './_components/collection-sort';
@@ -16,7 +16,7 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
   return (
     <>
       <div className="lg:hidden">
-        <Drawer>
+        <DrawerTrigger>
           <Button rounded block variant={'outline'} leftIcon="filter">
             Filter
           </Button>
@@ -28,12 +28,12 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
             <Icon icon="filter" className="w-4 h-4" />
             <span>Filter</span>
           </Button> */}
-          <Drawer.Content>
+          <Drawer>
             <DialogHeader>Filter</DialogHeader>
             <CollectionLimit />
             <CollectionSort />
-          </Drawer.Content>
-        </Drawer>
+          </Drawer>
+        </DrawerTrigger>
       </div>
       <div className="hidden lg:flex">
         <Container>
