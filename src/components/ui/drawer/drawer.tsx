@@ -1,13 +1,7 @@
 import { clsx } from '@/utils';
-import { AnimatePresence, motion, MotionProps, Variants } from 'framer-motion';
-import React, { forwardRef } from 'react';
-import {
-  Dialog,
-  DialogTrigger,
-  Modal,
-  ModalOverlay,
-  type ModalOverlayProps
-} from 'react-aria-components';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { CSSProperties, forwardRef } from 'react';
+import { Dialog, Modal, ModalOverlay, type ModalOverlayProps } from 'react-aria-components';
 import { DialogHeader, DialogHeaderProps } from '../dialog';
 
 const duration = 0.3;
@@ -51,11 +45,10 @@ const motionDialogContent: Variants = {
 type DrawerPositionProps = 'left' | 'right';
 type DrawerSizeProps = 'lg' | 'xl';
 
-type _DrawerProps = ModalOverlayProps &
-  MotionProps & {
-    position?: DrawerPositionProps;
-    size?: DrawerSizeProps;
-  };
+type _DrawerProps = ModalOverlayProps & {
+  position?: DrawerPositionProps;
+  size?: DrawerSizeProps;
+};
 
 type _ModalProps = _DrawerProps;
 
@@ -71,43 +64,24 @@ const _ModalOverlay = forwardRef<HTMLDivElement, _ModalOverlayProps>((props, ref
 
 export const DrawerHeader = (props: DialogHeaderProps) => <DialogHeader {...props} />;
 
-const MotionModal = motion(_Modal);
-const MotionOverlay = motion(_ModalOverlay);
+const MotionModal = motion(_Modal, { forwardMotionProps: true });
+const MotionOverlay = motion(_ModalOverlay, { forwardMotionProps: true });
 
-const DrawerContext = React.createContext<_DrawerProps>({} as _DrawerProps);
-
-const _Drawer = ({ children, ...props }: _DrawerProps) => {
-  return (
-    <DrawerContext.Provider value={{ ...props }}>
-      <DialogTrigger>
-        <>{children}</>
-      </DialogTrigger>
-    </DrawerContext.Provider>
-  );
-};
-
-const useDrawer = () => {
-  const context = React.useContext(DrawerContext);
-  if (context === undefined) {
-    throw new Error('useDrawer should be used within <Drawer> component.');
-  }
-  return context;
-};
-
-const Content = ({ children }: { children: React.ReactNode }) => {
-  const {
-    position = 'right',
-    size = 'xl',
-    isDismissable = true,
-    isOpen,
-    ...restDrawerProps
-  } = useDrawer();
-
+export const Drawer = ({
+  position = 'right',
+  size = 'xl',
+  isDismissable = true,
+  style,
+  isOpen,
+  children,
+  ...props
+}: _DrawerProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
         <MotionOverlay
-          {...restDrawerProps}
+          {...props}
+          style={style as CSSProperties}
           isOpen={isOpen}
           variants={motionOverlay}
           initial={'closed'}
@@ -117,7 +91,8 @@ const Content = ({ children }: { children: React.ReactNode }) => {
           className={clsx('fixed inset-0 z-header-safe bg-black/30')}
         >
           <MotionModal
-            {...restDrawerProps}
+            {...props}
+            style={style as CSSProperties}
             isOpen={isOpen}
             variants={motionModal}
             initial={'closed'}
@@ -126,7 +101,7 @@ const Content = ({ children }: { children: React.ReactNode }) => {
             custom={position}
             isDismissable={isDismissable}
             className={clsx(
-              'fixed inset-y-0 h-full p-4',
+              'fixed inset-y-0 h-full p-1 sm:p-4',
               size === 'lg' && 'w-drawer-lg [--menu-width:--drawer-lg]',
               size === 'xl' && 'w-drawer-xl [--menu-width:--drawer-xl]',
               position === 'left' && 'left-0',
@@ -143,7 +118,7 @@ const Content = ({ children }: { children: React.ReactNode }) => {
                 animate={'open'}
                 exit={'closed'}
               >
-                {children}
+                <>{children}</>
               </motion.div>
             </Dialog>
           </MotionModal>
@@ -152,11 +127,3 @@ const Content = ({ children }: { children: React.ReactNode }) => {
     </AnimatePresence>
   );
 };
-
-Content.displayName = 'Content';
-
-export const Drawer = _Drawer as typeof _Drawer & {
-  Content: typeof Content;
-};
-
-Drawer.Content = Content;

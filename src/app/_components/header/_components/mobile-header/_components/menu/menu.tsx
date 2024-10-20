@@ -104,60 +104,58 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         variant="ghost"
         color="neutral"
       />
-      <Drawer position="left" isOpen={isNavOpen} onOpenChange={(e) => setIsNavOpen(e)}>
-        <Drawer.Content>
-          <div className="flex h-full w-full min-w-fit flex-col">
-            <DialogHeader>
-              {selectedItems.length !== 0 ? (
-                <div className="flex items-center gap-x-2">
-                  <ButtonIcon compact icon="arrow-left" variant={'ghost'} onPress={goBack} />
-                  <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
-                </div>
-              ) : (
-                'Menu'
-              )}
-            </DialogHeader>
-            <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
-              <div className="flex h-full flex-col">
-                <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
-                  <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
-                    <motion.div
-                      variants={variants}
-                      initial="in-view"
-                      animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
-                      custom={selectedItems.length > 0 ? -1 : 0}
-                      className="w-full divide-y divide-neutral-100"
-                    >
-                      <MenuListBox items={menu.items}>
-                        {(item) => <NavigationMenuItem id={item.id} item={item} />}
-                      </MenuListBox>
-                    </motion.div>
-
-                    <AnimatePresence>
-                      {selectedItems.map((menuItem, index) => {
-                        return (
-                          <motion.div
-                            className="absolute top-0 w-full"
-                            key={menuItem.id}
-                            variants={variants}
-                            initial="out-of-view"
-                            animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
-                            exit="out-of-view"
-                            custom={index + 1 === selectedItems.length ? 1 : -1}
-                          >
-                            <MenuListBox items={menuItem?.items}>
-                              {(item) => <NavigationMenuItem id={item.id} item={item} />}
-                            </MenuListBox>
-                          </motion.div>
-                        );
-                      })}
-                    </AnimatePresence>
-                  </MotionConfig>
-                </nav>
+      <Drawer position="left" isOpen={isNavOpen} onOpenChange={setIsNavOpen}>
+        <div className="flex h-full w-full min-w-fit flex-col">
+          <DialogHeader>
+            {selectedItems.length !== 0 ? (
+              <div className="flex items-center gap-x-2">
+                <ButtonIcon compact icon="arrow-left" variant={'ghost'} onPress={goBack} />
+                <span>{selectedItemTitle ? selectedItemTitle : 'Menu'}</span>
               </div>
+            ) : (
+              'Menu'
+            )}
+          </DialogHeader>
+          <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
+            <div className="flex h-full flex-col">
+              <nav className="relative min-h-0 flex-1 overflow-x-hidden bg-white [--menu-width:--drawer-lg]">
+                <MotionConfig transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}>
+                  <motion.div
+                    variants={variants}
+                    initial="in-view"
+                    animate={selectedItems.length > 0 ? 'out-of-view' : 'in-view'}
+                    custom={selectedItems.length > 0 ? -1 : 0}
+                    className="w-full divide-y divide-neutral-100"
+                  >
+                    <MenuListBox items={menu.items}>
+                      {(item) => <NavigationMenuItem id={item.id} item={item} />}
+                    </MenuListBox>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {selectedItems.map((menuItem, index) => {
+                      return (
+                        <motion.div
+                          className="absolute top-0 w-full"
+                          key={menuItem.id}
+                          variants={variants}
+                          initial="out-of-view"
+                          animate={index + 1 === selectedItems.length ? 'in-view' : 'out-of-view'}
+                          exit="out-of-view"
+                          custom={index + 1 === selectedItems.length ? 1 : -1}
+                        >
+                          <MenuListBox items={menuItem?.items}>
+                            {(item) => <NavigationMenuItem id={item.id} item={item} />}
+                          </MenuListBox>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </MotionConfig>
+              </nav>
             </div>
           </div>
-        </Drawer.Content>
+        </div>
       </Drawer>
     </>
   );

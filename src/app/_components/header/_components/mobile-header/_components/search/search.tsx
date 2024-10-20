@@ -7,6 +7,7 @@ import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
+import { DialogTrigger } from 'react-aria-components';
 
 type SearchProps = Object;
 
@@ -27,9 +28,9 @@ export function SearchSkeleton() {
 export const Search = ({ ...props }: SearchProps) => {
   const searchParams = useSearchParams();
   return (
-    <Drawer>
+    <DialogTrigger>
       <ButtonIcon icon="search" variant={'ghost'} />
-      <Drawer.Content>
+      <Drawer>
         <DialogHeader>Search</DialogHeader>
         <div className="p-6">
           <Form action="/search" className="relative w-full">
@@ -44,7 +45,7 @@ export const Search = ({ ...props }: SearchProps) => {
             />
           </Form>
         </div>
-      </Drawer.Content>
-    </Drawer>
+      </Drawer>
+    </DialogTrigger>
   );
 };

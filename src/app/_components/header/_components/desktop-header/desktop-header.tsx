@@ -4,8 +4,8 @@ import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
 import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
-import { Menu } from '../mobile-header/_components';
-import { Account, Navigation, Search } from './_components';
+import { Menu, Search } from '../mobile-header/_components';
+import { Account, Navigation } from './_components';
 
 type DesktopHeaderProps = Object;
 
@@ -22,18 +22,13 @@ export const DesktopHeader = async ({ ...props }: DesktopHeaderProps) => {
           </div>
 
           <div className="flex basis-8/12 items-center justify-center">
-            <div className="mx-auto w-full max-w-screen-md">
-              <Search />
-            </div>
+            <div className="mx-auto w-full max-w-screen-md">{/* <Search /> */}</div>
           </div>
           <div className="flex basis-2/12 justify-end">
             <div className="hidden items-center justify-end space-x-2 sm:flex">
-              <div className="hidden sm:block">
-                <Account />
-              </div>
-              <div className="hidden sm:block">
-                <Cart />
-              </div>
+              <Account />
+              <Search />
+              <Cart />
             </div>
           </div>
         </div>

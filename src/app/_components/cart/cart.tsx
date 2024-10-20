@@ -55,86 +55,84 @@ export const Cart = () => {
         icon="shopping-cart"
       />
       <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
-        <Drawer.Content>
-          <div className="flex h-full flex-col">
-            <DrawerHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DrawerHeader>
-            {!cart || cart.lines.length === 0 ? (
-              <div className="flex h-full flex-col items-center justify-center self-center p-8 text-center">
-                <Icon icon="shopping-cart" className="h-12 w-12 text-neutral-400" />
-                <h3 className="mt-2 text-base font-medium text-neutral-900">Your cart is empty</h3>
-                <p className="mt-1 text-sm text-neutral-500">
-                  Looks like you haven't added anything to your cart
+        <div className="flex h-full flex-col">
+          <DrawerHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DrawerHeader>
+          {!cart || cart.lines.length === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center self-center p-8 text-center">
+              <Icon icon="shopping-cart" className="h-12 w-12 text-neutral-400" />
+              <h3 className="mt-2 text-base font-medium text-neutral-900">Your cart is empty</h3>
+              <p className="mt-1 text-sm text-neutral-500">
+                Looks like you haven't added anything to your cart
+              </p>
+              <div className="mt-6">
+                <Button variant={'filled'} color={'primary'} onPress={() => setIsCartOpen(false)}>
+                  Continue shopping
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
+                <ul className="divide-y divide-neutral-100">
+                  {cart.lines
+                    .sort((a, b) =>
+                      a.merchandise.product.title.localeCompare(b.merchandise.product.title)
+                    )
+                    .map((item, i) => {
+                      const merchandiseSearchParams = {} as MerchandiseSearchParams;
+
+                      item.merchandise.selectedOptions.forEach(({ name, value }) => {
+                        if (value !== DEFAULT_OPTION) {
+                          merchandiseSearchParams[name.toLowerCase()] = value;
+                        }
+                      });
+
+                      const merchandiseUrl = createUrl(
+                        `${PRODUCT_PATH}/${item.merchandise.product.handle}`,
+                        new URLSearchParams(merchandiseSearchParams)
+                      );
+
+                      return (
+                        <li key={i}>
+                          <CartItem
+                            cartItem={item}
+                            merchandiseUrl={merchandiseUrl}
+                            updateCartItem={updateCartItem}
+                          />
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+              <div className="flex flex-shrink-0 flex-col justify-end border-t border-neutral-100 px-4 py-4">
+                <div className="flex justify-between text-base font-medium text-neutral-900">
+                  <p>Subtotal</p>
+                  <Price
+                    amount={cart.cost.totalAmount.amount}
+                    currencyCode={cart.cost.totalAmount.currencyCode}
+                  />
+                </div>
+                <p className="mt-0.5 text-sm text-neutral-500">
+                  Shipping and taxes calculated at checkout.
                 </p>
-                <div className="mt-6">
-                  <Button variant={'filled'} color={'primary'} onPress={() => setIsCartOpen(false)}>
-                    Continue shopping
+                <div className="mt-6 space-y-2">
+                  <form action={redirectToCheckout}>
+                    <CheckoutButton />
+                  </form>
+                  <Button
+                    size={'lg'}
+                    block
+                    variant={'outline'}
+                    color="neutral"
+                    onPress={() => setIsCartOpen(false)}
+                  >
+                    Continue Shopping
                   </Button>
                 </div>
               </div>
-            ) : (
-              <>
-                <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 flex min-h-0 flex-1 flex-col overflow-y-scroll">
-                  <ul className="divide-y divide-neutral-100">
-                    {cart.lines
-                      .sort((a, b) =>
-                        a.merchandise.product.title.localeCompare(b.merchandise.product.title)
-                      )
-                      .map((item, i) => {
-                        const merchandiseSearchParams = {} as MerchandiseSearchParams;
-
-                        item.merchandise.selectedOptions.forEach(({ name, value }) => {
-                          if (value !== DEFAULT_OPTION) {
-                            merchandiseSearchParams[name.toLowerCase()] = value;
-                          }
-                        });
-
-                        const merchandiseUrl = createUrl(
-                          `${PRODUCT_PATH}/${item.merchandise.product.handle}`,
-                          new URLSearchParams(merchandiseSearchParams)
-                        );
-
-                        return (
-                          <li key={i}>
-                            <CartItem
-                              cartItem={item}
-                              merchandiseUrl={merchandiseUrl}
-                              updateCartItem={updateCartItem}
-                            />
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </div>
-                <div className="flex flex-shrink-0 flex-col justify-end border-t border-neutral-100 px-4 py-4">
-                  <div className="flex justify-between text-base font-medium text-neutral-900">
-                    <p>Subtotal</p>
-                    <Price
-                      amount={cart.cost.totalAmount.amount}
-                      currencyCode={cart.cost.totalAmount.currencyCode}
-                    />
-                  </div>
-                  <p className="mt-0.5 text-sm text-neutral-500">
-                    Shipping and taxes calculated at checkout.
-                  </p>
-                  <div className="mt-6 space-y-2">
-                    <form action={redirectToCheckout}>
-                      <CheckoutButton />
-                    </form>
-                    <Button
-                      size={'lg'}
-                      block
-                      variant={'outline'}
-                      color="neutral"
-                      onPress={() => setIsCartOpen(false)}
-                    >
-                      Continue Shopping
-                    </Button>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </Drawer.Content>
+            </>
+          )}
+        </div>
       </Drawer>
     </>
   );
