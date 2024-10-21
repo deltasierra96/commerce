@@ -47,15 +47,17 @@ export const Cart = () => {
 
   return (
     <>
-      <ButtonIcon
-        onPress={() => {
-          setIsCartOpen(true);
-        }}
-        variant={'ghost'}
-        counter={cart?.totalQuantity}
-        icon="shopping-cart"
-      />
       <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
+        <Drawer.Trigger>
+          <ButtonIcon
+            onPress={() => {
+              setIsCartOpen(true);
+            }}
+            variant={'ghost'}
+            counter={cart?.totalQuantity}
+            icon="shopping-cart"
+          />
+        </Drawer.Trigger>
         <Drawer.Content>
           <div className="flex h-full flex-col">
             <DialogHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DialogHeader>

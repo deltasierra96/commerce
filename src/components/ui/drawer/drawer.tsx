@@ -3,22 +3,26 @@ import { motion, MotionProps, Variants } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import {
   Dialog,
+  DialogProps,
   DialogTrigger,
+  DialogTriggerProps,
   Modal,
   ModalOverlay,
   type ModalOverlayProps
 } from 'react-aria-components';
 import { DialogHeader, DialogHeaderProps } from '../dialog';
 
-const duration = 0.3;
+const duration = 0.25;
+const easing = [0.72, 0.32, 0, 1];
 
 const motionOverlay: Variants = {
   visible: {
-    opacity: 1
+    opacity: 1,
+    transition: { duration: duration, ease: easing }
   },
   hidden: {
     opacity: 0,
-    transition: { delay: 0.5, duration: duration, ease: [0.32, 0.72, 0, 1] }
+    transition: { duration: duration, delay: 0.5, ease: easing }
   }
 };
 
@@ -27,25 +31,27 @@ const motionModal: Variants = {
     visibility: 'visible',
     opacity: 1,
     x: 0,
-    transition: { delay: 0.125, duration: duration, ease: [0.32, 0.72, 0, 1] }
+    transition: { duration: duration, ease: easing }
   }),
   hidden: (position: DrawerPositionProps) => ({
     visibility: 'hidden',
     opacity: 0,
     x: position === 'right' ? 'var(--menu-width)' : 'calc(var(--menu-width) * -1)',
-    transition: { delay: 0.25, duration: duration, ease: [0.72, 0.32, 0, 1] }
+    transition: { duration: duration, delay: 0.25, ease: easing }
   })
 };
 
 const motionDialogContent: Variants = {
-  visible: {
+  visible: (position: DrawerPositionProps) => ({
+    x: 0,
     opacity: 1,
-    transition: { delay: 0.25, duration: duration, ease: [0.32, 0.72, 0, 1] }
-  },
-  hidden: {
+    transition: { duration: duration, delay: 0.125, ease: easing }
+  }),
+  hidden: (position: DrawerPositionProps) => ({
+    x: position === 'right' ? '10px' : '-10px',
     opacity: 0,
-    transition: { duration: duration, ease: [0.32, 0.72, 0, 1] }
-  }
+    transition: { duration: duration, ease: easing }
+  })
 };
 
 type DrawerPositionProps = 'left' | 'right';
@@ -69,22 +75,26 @@ const _ModalOverlay = forwardRef<HTMLDivElement, _ModalOverlayProps>((props, ref
   <ModalOverlay ref={ref} {...props} />
 ));
 
+type _ModalDialogProps = DialogProps;
+
+const _ModalDialog = forwardRef<HTMLElement, _ModalDialogProps>((props, ref) => (
+  <Dialog ref={ref} {...props} />
+));
+
 export const DrawerHeader = (props: DialogHeaderProps) => <DialogHeader {...props} />;
 
 const MotionModal = motion(_Modal);
 const MotionOverlay = motion(_ModalOverlay);
+const MotionDialog = motion(_ModalDialog);
 
-const DrawerContext = React.createContext<_DrawerProps>({} as _DrawerProps);
+type AnimationState = 'unmounted' | 'hidden' | 'visible';
 
-const _Drawer = ({ children, ...props }: _DrawerProps) => {
-  return (
-    <DrawerContext.Provider value={{ ...props }}>
-      <DialogTrigger {...props}>
-        <>{children}</>
-      </DialogTrigger>
-    </DrawerContext.Provider>
-  );
+type Animation = {
+  animation: AnimationState;
+  setAnimation: React.Dispatch<React.SetStateAction<AnimationState>>;
 };
+
+const DrawerContext = React.createContext<_DrawerProps & Animation>({} as _DrawerProps & Animation);
 
 const useDrawer = () => {
   const context = React.useContext(DrawerContext);
@@ -94,71 +104,84 @@ const useDrawer = () => {
   return context;
 };
 
-type AnimationState = 'unmounted' | 'hidden' | 'visible';
+type _DialogTriggerProps = DialogTriggerProps;
 
-const Content = ({ children }: { children: React.ReactNode }) => {
+const _DrawerTrigger = ({ children, ...props }: _DialogTriggerProps) => {
+  const { onOpenChange, setAnimation } = useDrawer();
+
+  return (
+    <DialogTrigger
+      onOpenChange={(isOpen) => {
+        setAnimation(isOpen ? 'visible' : 'hidden');
+        onOpenChange ? onOpenChange(isOpen) : null;
+      }}
+    >
+      <>{children}</>
+    </DialogTrigger>
+  );
+};
+
+const _Drawer = ({ children, position = 'left', size = 'lg', ...props }: _DrawerProps) => {
   let [animation, setAnimation] = React.useState<AnimationState>('unmounted');
 
-  const { position = 'right', size = 'xl', onOpenChange, ...restDrawerProps } = useDrawer();
+  return (
+    <DrawerContext.Provider value={{ size, position, animation, setAnimation, ...props }}>
+      <>{children}</>
+    </DrawerContext.Provider>
+  );
+};
+
+const _DrawerContent = ({ children }: { children: React.ReactNode }) => {
+  const { position, size, animation, setAnimation } = useDrawer();
 
   return (
     <MotionOverlay
-      onOpenChange={(e) => {
-        onOpenChange && onOpenChange(e);
-        setAnimation(e ? 'visible' : 'hidden');
-      }}
       isDismissable
-      {...restDrawerProps}
-      data-animation={animation}
-      variants={motionOverlay}
-      initial={'hidden'}
-      animate={animation}
-      exit={'hidden'}
       // Prevent modal from unmounting during animation.
       isExiting={animation === 'hidden'}
       // Reset animation state once it is complete.
       onAnimationComplete={(animation) => {
         setAnimation((a) => (animation === 'hidden' && a === 'hidden' ? 'unmounted' : a));
       }}
-      className={clsx('fixed inset-0 z-header-safe h-full bg-black/30')}
+      data-animation={animation}
+      variants={motionOverlay}
+      initial={'hidden'}
+      animate={animation}
+      exit={'hidden'}
+      className={clsx('fixed inset-0 z-header-safe h-full w-full bg-black/30')}
     >
       <MotionModal
-        {...restDrawerProps}
+        data-position={position}
         variants={motionModal}
-        initial={'hidden'}
-        animate={animation}
-        exit={'hidden'}
         custom={position}
         className={clsx(
           'fixed inset-y-0 h-full p-4',
           size === 'lg' && 'w-drawer-lg [--menu-width:--drawer-lg]',
           size === 'xl' && 'w-drawer-xl [--menu-width:--drawer-xl]',
-          position === 'left' && 'left-0',
-          position === 'right' && 'right-0'
+          position === 'left' && 'left-0 right-auto',
+          position === 'right' && 'left-auto right-0'
         )}
       >
-        <Dialog
+        <MotionDialog
+          custom={position}
+          variants={motionDialogContent}
           role="dialog"
-          className={clsx('h-full w-full overflow-hidden rounded-md bg-white outline-none')}
+          className={clsx('h-full w-full overflow-hidden rounded-md bg-white')}
         >
-          <motion.div
-            variants={motionDialogContent}
-            initial={'hidden'}
-            animate={animation}
-            exit={'hidden'}
-          >
-            {children}
-          </motion.div>
-        </Dialog>
+          {children}
+        </MotionDialog>
       </MotionModal>
     </MotionOverlay>
   );
 };
 
-Content.displayName = 'Content';
-
 export const Drawer = _Drawer as typeof _Drawer & {
-  Content: typeof Content;
+  Content: typeof _DrawerContent;
+  Trigger: typeof _DrawerTrigger;
 };
 
-Drawer.Content = Content;
+_DrawerContent.displayName = 'Content';
+_DrawerTrigger.displayName = 'Trigger';
+
+Drawer.Content = _DrawerContent;
+Drawer.Trigger = _DrawerTrigger;
