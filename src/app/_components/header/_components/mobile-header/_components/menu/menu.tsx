@@ -75,7 +75,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         {...props}
         textValue={item.title}
         className={clsx(
-          'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none hover:bg-neutral-50 focus-visible:bg-neutral-100 focus-visible:underline pressed:bg-neutral-100 disabled:opacity-20'
+          'flex w-full items-center justify-between gap-x-2 px-4 py-4 text-sm font-medium outline-none focus-visible:bg-neutral-100 focus-visible:underline pressed:bg-neutral-100 disabled:opacity-20'
         )}
         onAction={() => {
           if (isLink) {
@@ -96,7 +96,13 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   return (
-    <>
+    <Drawer
+      isOpen={isNavOpen}
+      onOpenChange={(e) => setIsNavOpen(e)}
+      position="left"
+      size={'lg'}
+      {...props}
+    >
       <ButtonIcon
         aria-label="Open mobile navigation"
         onPress={() => setIsNavOpen(true)}
@@ -104,7 +110,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         variant="ghost"
         color="neutral"
       />
-      <Drawer position="left" isOpen={isNavOpen} onOpenChange={setIsNavOpen}>
+      <Drawer.Content>
         <div className="flex h-full w-full min-w-fit flex-col">
           <DialogHeader>
             {selectedItems.length !== 0 ? (
@@ -156,7 +162,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
             </div>
           </div>
         </div>
-      </Drawer>
-    </>
+      </Drawer.Content>
+    </Drawer>
   );
 };

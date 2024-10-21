@@ -1,129 +1,129 @@
+'use client';
 import { clsx } from '@/utils';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
-import { CSSProperties, forwardRef } from 'react';
-import { Dialog, Modal, ModalOverlay, type ModalOverlayProps } from 'react-aria-components';
-import { DialogHeader, DialogHeaderProps } from '../dialog';
+import React, { forwardRef } from 'react';
+import { mergeProps } from 'react-aria';
+import {
+  Dialog,
+  DialogTrigger,
+  Modal as RACModal,
+  type ModalOverlayProps as RACModalOverlayProps
+} from 'react-aria-components';
+import { Overlay } from '../overlay';
 
-const duration = 0.3;
-
-const motionOverlay: Variants = {
-  open: {
-    opacity: 1
-  },
-  closed: {
-    opacity: 0,
-    transition: { delay: 0.5, duration: duration, ease: [0.32, 0.72, 0, 1] }
-  }
+export type DrawerProps = RACModalOverlayProps & {
+  size?: ContentSizeProps;
+  position?: ContentPositionProps;
 };
 
-const motionModal: Variants = {
-  open: (position: DrawerPositionProps) => ({
-    visibility: 'visible',
-    opacity: 1,
-    x: 0,
-    transition: { delay: 0.125, duration: duration, ease: [0.32, 0.72, 0, 1] }
-  }),
-  closed: (position: DrawerPositionProps) => ({
-    visibility: 'hidden',
-    opacity: 0,
-    x: position === 'right' ? 'var(--menu-width)' : 'calc(var(--menu-width) * -1)',
-    transition: { delay: 0.25, duration: duration, ease: [0.72, 0.32, 0, 1] }
-  })
-};
+const DrawerContext = React.createContext<DrawerProps>({} as DrawerProps);
 
-const motionDialogContent: Variants = {
-  open: {
-    opacity: 1,
-    transition: { delay: 0.25, duration: duration, ease: [0.32, 0.72, 0, 1] }
-  },
-  closed: {
-    opacity: 0,
-    transition: { duration: duration, ease: [0.32, 0.72, 0, 1] }
-  }
-};
-
-type DrawerPositionProps = 'left' | 'right';
-type DrawerSizeProps = 'lg' | 'xl';
-
-type _DrawerProps = ModalOverlayProps & {
-  position?: DrawerPositionProps;
-  size?: DrawerSizeProps;
-};
-
-type _ModalProps = _DrawerProps;
-
-const _Modal = forwardRef<HTMLDivElement, _ModalProps>((props, ref) => (
-  <Modal ref={ref} {...props} />
-));
-
-type _ModalOverlayProps = ModalOverlayProps;
-
-const _ModalOverlay = forwardRef<HTMLDivElement, _ModalOverlayProps>((props, ref) => (
-  <ModalOverlay ref={ref} {...props} />
-));
-
-export const DrawerHeader = (props: DialogHeaderProps) => <DialogHeader {...props} />;
-
-const MotionModal = motion(_Modal, { forwardMotionProps: true });
-const MotionOverlay = motion(_ModalOverlay, { forwardMotionProps: true });
-
-export const Drawer = ({
-  position = 'right',
-  size = 'xl',
-  isDismissable = true,
-  style,
-  isOpen,
-  children,
-  ...props
-}: _DrawerProps) => {
+const _Drawer = ({ children, ...props }: DrawerProps) => {
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <MotionOverlay
-          {...props}
-          style={style as CSSProperties}
-          isOpen={isOpen}
-          variants={motionOverlay}
-          initial={'closed'}
-          animate={'open'}
-          exit={'closed'}
-          isDismissable={isDismissable}
-          className={clsx('fixed inset-0 z-header-safe bg-black/30')}
-        >
-          <MotionModal
-            {...props}
-            style={style as CSSProperties}
-            isOpen={isOpen}
-            variants={motionModal}
-            initial={'closed'}
-            animate={'open'}
-            exit={'closed'}
-            custom={position}
-            isDismissable={isDismissable}
-            className={clsx(
-              'fixed inset-y-0 h-full p-1 sm:p-4',
-              size === 'lg' && 'w-drawer-lg [--menu-width:--drawer-lg]',
-              size === 'xl' && 'w-drawer-xl [--menu-width:--drawer-xl]',
-              position === 'left' && 'left-0',
-              position === 'right' && 'right-0'
-            )}
-          >
-            <Dialog
-              role="dialog"
-              className={clsx('h-full w-full overflow-hidden rounded-md bg-white outline-none')}
-            >
-              <motion.div
-                variants={motionDialogContent}
-                initial={'closed'}
-                animate={'open'}
-                exit={'closed'}
-              >
-                <>{children}</>
-              </motion.div>
-            </Dialog>
-          </MotionModal>
-        </MotionOverlay>
-      )}
-    </AnimatePresence>
+    <DrawerContext.Provider value={{ ...props }}>
+      <DialogTrigger>
+        <>{children}</>
+      </DialogTrigger>
+    </DrawerContext.Provider>
   );
 };
+
+const useDrawer = () => {
+  const context = React.useContext(DrawerContext);
+  if (context === undefined) {
+    throw new Error('useDrawer should be used within <Drawer> component.');
+  }
+  return context;
+};
+
+type ContentSizeProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+type ContentPositionProps = 'left' | 'right' | 'top' | 'bottom';
+
+type ContentProps = RACModalOverlayProps;
+
+const Content = forwardRef<HTMLDivElement, ContentProps>(({ children, ...props }, ref) => {
+  const drawer = useDrawer();
+  const {
+    position = 'right',
+    size = 'md',
+    isDismissable = true,
+    ...mergedProps
+  } = mergeProps(drawer, props);
+
+  return (
+    <Overlay
+      {...mergedProps}
+      isDismissable={isDismissable}
+      ref={ref}
+      className={clsx(
+        'fixed inset-0 isolate z-header-safe flex w-full',
+        position === 'left' && 'justify-start',
+        position === 'right' && 'justify-end',
+        position === 'top' && 'items-start',
+        position === 'bottom' && 'items-end'
+      )}
+    >
+      <RACModal
+        {...mergedProps}
+        isDismissable={isDismissable}
+        className={({ isEntering, isExiting }) =>
+          clsx(
+            'w-full shrink-0 grow-0 overflow-hidden border-none bg-white',
+            size === 'xs' && 'basis-drawer-xs',
+            size === 'sm' && 'basis-drawer-sm',
+            size === 'md' && 'basis-drawer',
+            size === 'lg' && 'basis-drawer-lg',
+            size === 'xl' && 'basis-drawer-xl',
+            size === 'full' && 'basis-drawer-full',
+            position === 'left' ||
+              (position === 'right' &&
+                'h-[--visual-viewport-height] max-h-full min-h-dvh w-full max-w-full'),
+            isEntering && 'duration-300 ease-out animate-in',
+            isExiting && 'duration-300 ease-in animate-out',
+
+            isEntering && position === 'left' && 'slide-in-from-left-96',
+            isEntering && position === 'right' && 'delay-1000 slide-in-from-right-96',
+            isEntering && position === 'top' && 'slide-in-from-top-96',
+            isEntering && position === 'bottom' && 'slide-in-from-bottom-96',
+
+            isExiting && position === 'left' && 'slide-out-to-left-96',
+            isExiting && position === 'right' && 'slide-out-to-right-96',
+            isExiting && position === 'top' && 'slide-out-to-top-96',
+            isExiting && position === 'bottom' && 'slide-out-to-bottom-96'
+          )
+        }
+      >
+        <Dialog
+          role="dialog"
+          className={clsx(
+            // '[[data-entering=true]_&]:bg-red-500',
+            // '[[data-entering=true]_&]:duration-300',
+            // '[[data-entering=true]_&]:animate-in',
+            // '[[data-entering=true]_&]:ease-out',
+            // // '[[data-entering=true]_&]:fill-mode-forwards',
+            // '[[data-entering=true]_&]:fade-in',
+            // // exiting
+            // '[[data-exiting=true]_&]:bg-green-500',
+            // '[[data-exiting=true]_&]:fade-out',
+            // '[[data-exiting=true]_&]:duration-300',
+            // '[[data-exiting=true]_&]:delay-700',
+            // '[[data-exiting=true]_&]:animate-out',
+            // '[[data-exiting=true]_&]:ease-out',
+            // '[[data-exiting=true]_&]:fill-mode-forwards',
+            // '[[data-exiting=true]_&]:fade-out',
+            'scrollbar-thin relative flex h-full w-full flex-col overflow-hidden outline-none'
+          )}
+        >
+          <>{children}</>
+        </Dialog>
+      </RACModal>
+    </Overlay>
+  );
+});
+
+Content.displayName = 'Content';
+
+export const Drawer = _Drawer as typeof _Drawer & {
+  Content: typeof Content;
+};
+
+Drawer.Content = Content;
