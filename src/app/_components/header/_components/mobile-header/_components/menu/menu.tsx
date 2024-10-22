@@ -96,13 +96,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
   };
 
   return (
-    <Drawer
-      isOpen={isNavOpen}
-      onOpenChange={(e) => setIsNavOpen(e)}
-      position="left"
-      size={'lg'}
-      {...props}
-    >
+    <>
       <ButtonIcon
         aria-label="Open mobile navigation"
         onPress={() => setIsNavOpen(true)}
@@ -110,7 +104,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         variant="ghost"
         color="neutral"
       />
-      <Drawer.Content>
+      <Drawer isOpen={isNavOpen} onOpenChange={(e) => setIsNavOpen(e)} position="left">
         <div className="flex h-full w-full min-w-fit flex-col">
           <DialogHeader>
             {selectedItems.length !== 0 ? (
@@ -162,7 +156,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
             </div>
           </div>
         </div>
-      </Drawer.Content>
-    </Drawer>
+      </Drawer>
+    </>
   );
 };

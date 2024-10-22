@@ -95,13 +95,6 @@ module.exports = {
         'button-icon-compact': 'var(--button-icon-compact-height)',
         'button-icon-compact-lg': 'var(--button-icon-compact-height-lg)'
       },
-      flexBasis: {
-        'drawer-xs': 'var(--drawer-xs)',
-        'drawer-sm': 'var(--drawer-sm)',
-        drawer: 'var(--drawer)',
-        'drawer-lg': 'var(--drawer-lg)',
-        'drawer-xl': 'var(--drawer-xl)'
-      },
       width: {
         'button-icon-sm': 'var(--button-icon-width-sm)',
         'button-icon': 'var(--button-icon-width)',
@@ -115,7 +108,12 @@ module.exports = {
         4.5: '1.125rem',
         5.5: '1.375rem',
         10.5: '2.625rem',
-        '8xl': '84rem'
+        '8xl': '84rem',
+        'drawer-xs': 'var(--drawer-xs)',
+        'drawer-sm': 'var(--drawer-sm)',
+        drawer: 'var(--drawer)',
+        'drawer-lg': 'var(--drawer-lg)',
+        'drawer-xl': 'var(--drawer-xl)'
       },
       strokeWidth: {
         icon: 'var(--icon-stroke-width)'
