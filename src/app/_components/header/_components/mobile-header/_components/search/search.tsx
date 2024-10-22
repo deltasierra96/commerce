@@ -30,7 +30,7 @@ export const Search = ({ ...props }: SearchProps) => {
   return (
     <>
       <ButtonIcon onPress={() => setIsSearchOpen(true)} icon="search" variant={'ghost'} />
-      <Drawer isOpen={isSearchOpen} onOpenChange={setIsSearchOpen}>
+      <Drawer isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} position="top">
         <DrawerHeader>Search</DrawerHeader>
         <div className="p-6">
           <Form action="/search" className="relative w-full">
