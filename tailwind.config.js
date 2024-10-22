@@ -109,11 +109,17 @@ module.exports = {
         5.5: '1.375rem',
         10.5: '2.625rem',
         '8xl': '84rem',
-        'drawer-xs': 'var(--drawer-xs)',
-        'drawer-sm': 'var(--drawer-sm)',
-        drawer: 'var(--drawer)',
-        'drawer-lg': 'var(--drawer-lg)',
-        'drawer-xl': 'var(--drawer-xl)'
+        'drawer-w-xs': 'var(--drawer-w-xs)',
+        'drawer-w-sm': 'var(--drawer-w-sm)',
+        'drawer-w': 'var(--drawer-w)',
+        'drawer-w-lg': 'var(--drawer-w-lg)',
+        'drawer-w-xl': 'var(--drawer-w-xl)',
+
+        'drawer-h-xs': 'var(--drawer-h-xs)',
+        'drawer-h-sm': 'var(--drawer-h-sm)',
+        'drawer-h': 'var(--drawer-h)',
+        'drawer-h-lg': 'var(--drawer-h-lg)',
+        'drawer-h-xl': 'var(--drawer-h-xl)'
       },
       strokeWidth: {
         icon: 'var(--icon-stroke-width)'

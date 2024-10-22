@@ -13,7 +13,7 @@ export function Example() {
     // </Drawer>
     <>
       <Button onPress={() => setIsOpen(true)}>Open</Button>
-      <Drawer isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Drawer isOpen={isOpen} size="xs" position="top" onOpenChange={setIsOpen}>
         I am drawer content
       </Drawer>
     </>

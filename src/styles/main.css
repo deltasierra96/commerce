@@ -226,11 +226,17 @@ input[type='search']::-webkit-search-results-decoration {
 
   /* Drawer */
 
-  --drawer-xs: 18rem;
-  --drawer-sm: 22rem;
-  --drawer: 32rem;
-  --drawer-lg: 36rem;
-  --drawer-xl: 44rem;
+  --drawer-w-xs: 18rem;
+  --drawer-w-sm: 22rem;
+  --drawer-w: 32rem;
+  --drawer-w-lg: 36rem;
+  --drawer-w-xl: 44rem;
+
+  --drawer-h-xs: 10rem;
+  --drawer-h-sm: 14rem;
+  --drawer-h: 20rem;
+  --drawer-h-lg: 24rem;
+  --drawer-h-xl: 28rem;
 
   /* Icon */
   --icon-stroke-width: 1.75;

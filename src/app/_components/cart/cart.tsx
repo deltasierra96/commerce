@@ -54,7 +54,7 @@ export const Cart = () => {
         counter={cart?.totalQuantity}
         icon="shopping-cart"
       />
-      <Drawer onOpenChange={setIsCartOpen} isOpen={isCartOpen}>
+      <Drawer onOpenChange={setIsCartOpen} position="bottom" isOpen={isCartOpen}>
         <div className="flex h-full flex-col">
           <DrawerHeader>{`Your shopping cart ${hasCartItems ? `(${cartQty} items)` : `(${cartQty} item)`}`}</DrawerHeader>
           {!cart || cart.lines.length === 0 ? (

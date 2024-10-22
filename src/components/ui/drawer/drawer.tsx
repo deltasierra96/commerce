@@ -28,12 +28,24 @@ const motionOverlay: Variants = {
 const motionModal: Variants = {
   open: (position: DrawerPositionProps) => ({
     opacity: 1,
-    x: 0,
+    x: position === 'right' || position === 'left' ? 0 : undefined,
+    y: position === 'top' || position === 'bottom' ? 0 : undefined,
     transition: { delay: 0.125, duration: duration, ease: easing }
   }),
   closed: (position: DrawerPositionProps) => ({
     opacity: 0,
-    x: position === 'right' ? 'var(--menu-width)' : 'calc(var(--menu-width) * -1)',
+    x:
+      position === 'right' || position === 'left'
+        ? position === 'right'
+          ? 'var(--drawer-width)'
+          : 'calc(var(--drawer-width) * -1)'
+        : undefined,
+    y:
+      position === 'top' || position === 'bottom'
+        ? position === 'bottom'
+          ? 'var(--drawer-height)'
+          : 'calc(var(--drawer-height) * -1)'
+        : undefined,
     transition: { delay: 0.25, duration: duration, ease: easing }
   })
 };
@@ -60,8 +72,8 @@ const motionDialogContent: Variants = {
   }
 };
 
-type DrawerPositionProps = 'left' | 'right';
-type DrawerSizeProps = 'lg' | 'xl';
+type DrawerPositionProps = 'left' | 'right' | 'top' | 'bottom';
+type DrawerSizeProps = 'xs' | 'sm' | 'lg' | 'xl';
 
 const _Modal = forwardRef<HTMLDivElement, ModalOverlayProps>((props, ref) => (
   <Modal ref={ref} {...props} />
@@ -122,11 +134,66 @@ export const Drawer = ({
             exit={'closed'}
             custom={position}
             className={clsx(
-              'fixed inset-y-0 h-full w-full p-4',
-              size === 'lg' && 'max-w-drawer-lg [--menu-width:--drawer-lg]',
-              size === 'xl' && 'max-w-drawer-xl [--menu-width:--drawer-xl]',
+              'fixed h-full w-full p-4',
+              position === 'left' || (position === 'right' && 'inset-y-0'),
+              position === 'bottom' && 'bottom-0',
+              position === 'top' && 'top-0',
+              size === 'xs' &&
+                position === 'left' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-xs]',
+              size === 'sm' &&
+                position === 'left' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-sm]',
+              size === 'lg' &&
+                position === 'left' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-lg]',
+              size === 'xl' &&
+                position === 'left' &&
+                'max-w-drawer-w-xl [--drawer-width:--drawer-w-xl]',
+
+              size === 'xs' &&
+                position === 'right' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-xs]',
+              size === 'sm' &&
+                position === 'right' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-sm]',
+              size === 'lg' &&
+                position === 'right' &&
+                'max-w-drawer-w-lg [--drawer-width:--drawer-w-lg]',
+              size === 'xl' &&
+                position === 'right' &&
+                'max-w-drawer-w-xl [--drawer-width:--drawer-w-xl]',
+
+              size === 'xs' &&
+                position === 'top' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-xs]',
+              size === 'sm' &&
+                position === 'top' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-sm]',
+              size === 'lg' &&
+                position === 'top' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-lg]',
+              size === 'xl' &&
+                position === 'top' &&
+                'max-h-drawer-h-xl [--drawer-height:--drawer-h-xl]',
+
+              size === 'xs' &&
+                position === 'bottom' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-xs]',
+              size === 'sm' &&
+                position === 'bottom' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-sm]',
+              size === 'lg' &&
+                position === 'bottom' &&
+                'max-h-drawer-h-lg [--drawer-height:--drawer-h-lg]',
+              size === 'xl' &&
+                position === 'bottom' &&
+                'max-h-drawer-h-xl [--drawer-height:--drawer-h-xl]',
+
               position === 'left' && 'left-0',
-              position === 'right' && 'right-0'
+              position === 'right' && 'right-0',
+              position === 'top' && 'top-0',
+              position === 'bottom' && 'bottom-0'
             )}
           >
             <MotionDialog
