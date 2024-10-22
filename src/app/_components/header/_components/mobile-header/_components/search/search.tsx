@@ -1,12 +1,12 @@
 'use client';
 import { COLLECTION_PRODUCTS_SEARCH_QUERY_URL_PARAM } from '@/app/constants';
 import { ButtonIcon } from '@/components/ui/button-icon';
-import { DialogHeader } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Drawer, DrawerHeader } from '@/components/ui/drawer';
 import { Icon } from '@/components/ui/icon';
 import { SearchInput } from '@/components/ui/search-input';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 type SearchProps = Object;
 
@@ -26,11 +26,12 @@ export function SearchSkeleton() {
 
 export const Search = ({ ...props }: SearchProps) => {
   const searchParams = useSearchParams();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
-    <Drawer>
-      <ButtonIcon icon="search" variant={'ghost'} />
-      <Drawer.Content>
-        <DialogHeader>Search</DialogHeader>
+    <>
+      <ButtonIcon onPress={() => setIsSearchOpen(true)} icon="search" variant={'ghost'} />
+      <Drawer isOpen={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <DrawerHeader>Search</DrawerHeader>
         <div className="p-6">
           <Form action="/search" className="relative w-full">
             <SearchInput
@@ -44,7 +45,7 @@ export const Search = ({ ...props }: SearchProps) => {
             />
           </Form>
         </div>
-      </Drawer.Content>
-    </Drawer>
+      </Drawer>
+    </>
   );
 };
