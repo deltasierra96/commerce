@@ -15,43 +15,76 @@ const easing = [0.32, 0.72, 0, 1];
 const duration = 0.35;
 
 export const Header = ({ menu }: HeaderProps) => {
-  const [ref, { height }] = useMeasure();
-
-  const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
-  const lastYRef = useRef(0);
+  const [desktopHeaderRef, { height: desktopHeaderHeight }] = useMeasure();
+  const [desktopHeaderHidden, setDesktopHeaderHidden] = useState(false);
+  const desktopHeaderLastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, 'change', (y) => {
-    const difference = y - lastYRef.current;
-    if (Math.abs(difference) > height * 2) {
-      setHidden(difference > 0);
-      lastYRef.current = y;
+    const difference = y - desktopHeaderLastYRef.current;
+    if (Math.abs(difference) > desktopHeaderHeight * 2) {
+      setDesktopHeaderHidden(difference > 0);
+      desktopHeaderLastYRef.current = y;
     }
 
-    if (y < height * 4) {
-      setHidden(false);
+    if (y < desktopHeaderHeight * 4) {
+      setDesktopHeaderHidden(false);
+    }
+  });
+
+  // Mobile
+  const [mobileHeaderHidden, setMobileHeaderHidden] = useState(false);
+  const [mobileHeaderRef, { height: mobileHeaderHeight }] = useMeasure();
+  const mobileHeaderLastYRef = useRef(0);
+
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const difference = y - mobileHeaderLastYRef.current;
+    if (Math.abs(difference) > mobileHeaderHeight * 2) {
+      setMobileHeaderHidden(difference > 0);
+      mobileHeaderLastYRef.current = y;
+    }
+
+    if (y < mobileHeaderHeight * 4) {
+      setMobileHeaderHidden(false);
     }
   });
 
   return (
     <>
-      <MobileHeader menu={menu} />
       <motion.div
-        className={clsx('sticky top-0 z-header hidden lg:block')}
-        animate={hidden ? 'hidden' : 'visible'}
+        className={clsx('sticky top-0 z-header lg:hidden')}
+        animate={mobileHeaderHidden ? 'hidden' : 'visible'}
         initial="visible"
-        whileHover={hidden ? 'peeking' : 'visible'}
-        onFocusCapture={hidden ? () => setHidden(false) : undefined}
+        whileHover={mobileHeaderHidden ? 'peeking' : 'visible'}
+        onFocusCapture={mobileHeaderHidden ? () => setMobileHeaderHidden(false) : undefined}
         variants={
           {
             visible: { y: 0 },
-            hidden: { y: -height },
-            peeking: { y: 0, cursor: 'pointer' }
+            hidden: { y: -mobileHeaderHeight },
+            peeking: { y: 0 }
           } as Variants
         }
         transition={{ duration, ease: easing }}
       >
-        <DesktopHeader menu={menu} ref={ref} />
+        <MobileHeader ref={mobileHeaderRef} menu={menu} />
+      </motion.div>
+
+      <motion.div
+        className={clsx('sticky top-0 z-header hidden lg:block')}
+        animate={desktopHeaderHidden ? 'hidden' : 'visible'}
+        initial="visible"
+        whileHover={desktopHeaderHidden ? 'peeking' : 'visible'}
+        onFocusCapture={desktopHeaderHidden ? () => setDesktopHeaderHidden(false) : undefined}
+        variants={
+          {
+            visible: { y: 0 },
+            hidden: { y: -desktopHeaderHeight },
+            peeking: { y: 0 }
+          } as Variants
+        }
+        transition={{ duration, ease: easing }}
+      >
+        <DesktopHeader menu={menu} ref={desktopHeaderRef} />
       </motion.div>
     </>
   );

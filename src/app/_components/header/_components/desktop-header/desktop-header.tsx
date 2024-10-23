@@ -7,6 +7,7 @@ import { clsx } from '@/utils';
 import { forwardRef } from 'react';
 import { Menu, Search } from '../mobile-header/_components';
 import { Account, Navigation } from './_components';
+
 type DesktopHeaderProps = {
   menu: ShopfiyMenu;
 };
