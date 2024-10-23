@@ -13,6 +13,7 @@ import {
 } from '@/fonts/next-fonts';
 import Providers from '@/providers/providers';
 import { getCart } from '@/shopify/getCart';
+import { getMenu } from '@/shopify/getMenu';
 import { clsx } from '@/utils';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -23,6 +24,7 @@ import { Banner } from './_components/banner';
 import { CartProvider } from './_components/cart';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
+import { MAIN_MENU_HANDLE } from './constants';
 import { rootMetadata } from './meta-data';
 import { Overlay } from './overlay';
 
@@ -31,6 +33,8 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
   // Don't await the fetch, pass the Promise to the context provider
 
   const cart = getCart(cartId);
+
+  const menu = await getMenu(MAIN_MENU_HANDLE);
 
   return (
     <Providers>
@@ -68,7 +72,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                     <Banner />
                   </div>
 
-                  <Header />
+                  <Header menu={menu} />
 
                   <div className="flex-1">
                     <main>{children}</main>
