@@ -14,6 +14,8 @@ type DesktopHeaderProps = {
 };
 
 const MotionHeader = motion('header');
+const easing = [0.32, 0.72, 0, 1];
+const duration = 0.35;
 
 export const DesktopHeader = ({ menu, ...props }: DesktopHeaderProps) => {
   const [isHidden, setIsHidden] = useState(false);
@@ -41,13 +43,15 @@ export const DesktopHeader = ({ menu, ...props }: DesktopHeaderProps) => {
       onFocusCapture={() => setIsHidden(false)}
       variants={{
         hidden: {
+          position: 'static',
           y: '-100%'
         },
         visible: {
+          position: 'sticky',
           y: '0%'
         }
       }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: duration, ease: easing }}
     >
       <Container>
         <div className="flex items-center justify-between gap-x-8 py-5">
