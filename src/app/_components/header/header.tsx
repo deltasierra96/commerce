@@ -1,18 +1,15 @@
-import { Menu } from '@/shopify/types';
-import { clsx } from '@/utils';
+import { MAIN_MENU_HANDLE } from '@/app/constants';
+import { getMenu } from '@/shopify/getMenu';
 import { DesktopHeader } from './_components/desktop-header';
 import { MobileHeader } from './_components/mobile-header';
 
-export type HeaderProps = {
-  className?: string;
-  menu: Menu;
-};
+export const Header = async () => {
+  const menu = await getMenu(MAIN_MENU_HANDLE);
 
-export const Header = async ({ className, menu, ...rest }: HeaderProps) => {
   return (
-    <header className={clsx('w-full border-b border-neutral-200 bg-white', className)} {...rest}>
-      <MobileHeader />
-      <DesktopHeader />
-    </header>
+    <>
+      <MobileHeader menu={menu} />
+      <DesktopHeader menu={menu} />
+    </>
   );
 };

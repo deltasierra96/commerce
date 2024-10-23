@@ -1,19 +1,54 @@
+'use client';
 import { Cart } from '@/app/_components/cart';
-import { MAIN_MENU_HANDLE } from '@/app/constants';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { getMenu } from '@/shopify/getMenu';
+import { Menu as ShopfiyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useRef, useState } from 'react';
+import useMeasure from 'react-use-measure';
 import { Menu, Search } from '../mobile-header/_components';
 import { Account, Navigation } from './_components';
+type DesktopHeaderProps = {
+  menu: ShopfiyMenu;
+};
 
-type DesktopHeaderProps = Object;
+const MotionHeader = motion('header');
 
-export const DesktopHeader = async ({ ...props }: DesktopHeaderProps) => {
-  const menu = await getMenu(MAIN_MENU_HANDLE);
+export const DesktopHeader = ({ menu, ...props }: DesktopHeaderProps) => {
+  const [isHidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+  const lastYRef = useRef(0);
+  const [ref, { height }] = useMeasure();
+
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const difference = y - lastYRef.current;
+    if (Math.abs(difference) > height) {
+      setIsHidden(difference > 0);
+
+      lastYRef.current = y;
+    }
+  });
 
   return (
-    <div className={clsx('hidden w-full lg:flex lg:flex-col')}>
+    <MotionHeader
+      className={clsx(
+        'sticky top-0 z-[31] hidden w-full border-b border-neutral-200 bg-white lg:flex lg:flex-col'
+      )}
+      ref={ref}
+      animate={isHidden ? 'hidden' : 'visible'}
+      whileHover="visible"
+      onFocusCapture={() => setIsHidden(false)}
+      variants={{
+        hidden: {
+          y: '-100%'
+        },
+        visible: {
+          y: '0%'
+        }
+      }}
+      transition={{ duration: 0.2 }}
+    >
       <Container>
         <div className="flex items-center justify-between gap-x-8 py-5">
           <div className="flex basis-2/12 justify-start">
@@ -36,9 +71,9 @@ export const DesktopHeader = async ({ ...props }: DesktopHeaderProps) => {
 
       <div className="border-t border-neutral-100 py-1.5">
         <Container>
-          <Navigation />
+          <Navigation menu={menu} />
         </Container>
       </div>
-    </div>
+    </MotionHeader>
   );
 };

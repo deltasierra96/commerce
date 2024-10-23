@@ -12,7 +12,7 @@ import {
 } from 'react-aria-components';
 import { DialogHeader, DialogHeaderProps } from '../dialog';
 
-const duration = 0.5;
+const duration = 0.35;
 const easing = [0.32, 0.72, 0, 1];
 
 const motionOverlay: Variants = {
@@ -102,6 +102,7 @@ const MotionDialog = motion(_ModalDialog);
 export type DrawerProps = ModalOverlayProps & {
   position?: DrawerPositionProps;
   size?: DrawerSizeProps;
+  enableBorderGap?: boolean;
 };
 
 export const Drawer = ({
@@ -109,6 +110,7 @@ export const Drawer = ({
   position = 'right',
   size = 'lg',
   isDismissable = true,
+  enableBorderGap = true,
   style,
   isOpen,
   ...props
@@ -134,7 +136,8 @@ export const Drawer = ({
             exit={'closed'}
             custom={position}
             className={clsx(
-              'fixed h-full w-full p-4',
+              'fixed h-full w-full',
+              enableBorderGap && 'p-4',
               position === 'left' || (position === 'right' && 'inset-y-0'),
               position === 'bottom' && 'bottom-0',
               position === 'top' && 'top-0',
@@ -202,13 +205,21 @@ export const Drawer = ({
               initial={'closed'}
               animate={'open'}
               exit={'closed'}
-              className={clsx('h-full w-full overflow-hidden rounded-md bg-white outline-none')}
+              className={clsx(
+                'flex h-full w-full flex-col overflow-hidden bg-white outline-none',
+                enableBorderGap && 'rounded-card',
+                !enableBorderGap && position === 'left' && 'rounded-r-card',
+                !enableBorderGap && position === 'right' && 'rounded-l-card',
+                !enableBorderGap && position === 'top' && 'rounded-b-card',
+                !enableBorderGap && position === 'bottom' && 'rounded-t-card'
+              )}
             >
               <motion.div
                 variants={motionDialogContent}
                 initial={'closed'}
                 animate={'open'}
                 exit={'closed'}
+                className="flex-1"
               >
                 <>{children}</>
               </motion.div>

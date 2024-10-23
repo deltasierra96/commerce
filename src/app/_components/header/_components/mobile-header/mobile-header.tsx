@@ -1,18 +1,18 @@
+'use client';
 import { Cart } from '@/app/_components/cart';
-import { MAIN_MENU_HANDLE } from '@/app/constants';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { getMenu } from '@/shopify/getMenu';
+import { Menu as ShopifyMenu } from '@/shopify/types';
 import { clsx } from '@/utils';
 import { Account, Menu, Search } from './_components';
 
-type MobileHeaderProps = Object;
+type MobileHeaderProps = {
+  menu: ShopifyMenu;
+};
 
-export const MobileHeader = async ({ ...props }: MobileHeaderProps) => {
-  const menu = await getMenu(MAIN_MENU_HANDLE);
-
+export const MobileHeader = ({ menu, ...props }: MobileHeaderProps) => {
   return (
-    <div className={clsx('flex w-full items-center py-2 lg:hidden')}>
+    <header className={clsx('flex w-full items-center py-2 lg:hidden')}>
       <Container>
         <div className="flex items-center justify-between gap-x-8">
           <div className="flex basis-2/12 justify-start">
@@ -29,6 +29,6 @@ export const MobileHeader = async ({ ...props }: MobileHeaderProps) => {
           </div>
         </div>
       </Container>
-    </div>
+    </header>
   );
 };
