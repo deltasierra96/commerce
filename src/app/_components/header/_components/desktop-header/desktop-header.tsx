@@ -56,7 +56,6 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
         )}
         ref={mergedRefs}
         animate={desktopHeaderPositionSticky ? 'sticky' : 'relative'}
-        initial="sticky"
         custom={desktopHeaderContentTransform}
         variants={{
           sticky: (transform: boolean) => ({
