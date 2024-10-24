@@ -14,13 +14,14 @@ import useMeasure from 'react-use-measure';
 
 type MobileHeaderProps = {
   menu: ShopifyMenu;
+  isAnimatedSticky?: boolean;
 };
 
 const easing = [0.32, 0.72, 0, 1];
 const duration = 0.35;
 
 export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
-  ({ menu, ...props }, ref) => {
+  ({ menu, isAnimatedSticky = true, ...props }, ref) => {
     const { scrollY } = useScroll();
     const [mobileHeaderRef, { height: mobileHeaderHeight }] = useMeasure();
     const [mobileHeaderPositionSticky, setMobileHeaderPositionSticky] = useState(false);
@@ -52,7 +53,7 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
         className={clsx(
           'sticky top-0 z-header flex w-full items-center border-b border-neutral-200 bg-white py-2 opacity-100 lg:hidden'
         )}
-        animate={mobileHeaderPositionSticky ? 'sticky' : 'relative'}
+        animate={isAnimatedSticky ? (mobileHeaderPositionSticky ? 'sticky' : 'relative') : false}
         custom={mobileHeaderContentTransform}
         variants={{
           sticky: (transform: boolean) => ({

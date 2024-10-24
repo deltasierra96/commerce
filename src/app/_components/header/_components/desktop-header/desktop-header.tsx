@@ -16,13 +16,14 @@ import { Search } from '../search';
 
 type DesktopHeaderProps = {
   menu: ShopfiyMenu;
+  isAnimatedSticky?: boolean;
 };
 
 const easing = [0.32, 0.72, 0, 1];
 const duration = 0.3;
 
 export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
-  ({ menu, ...props }, ref) => {
+  ({ menu, isAnimatedSticky = true, ...props }, ref) => {
     const { scrollY } = useScroll();
     const [desktopHeaderRef, { height: desktopHeaderHeight }] = useMeasure();
     const [desktopHeaderPositionSticky, setDesktopHeaderPositionSticky] = useState(false);
@@ -55,7 +56,7 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
           'sticky top-0 z-header-safe hidden w-full border-b border-neutral-100 bg-white opacity-100 lg:flex lg:flex-col'
         )}
         ref={mergedRefs}
-        animate={desktopHeaderPositionSticky ? 'sticky' : 'relative'}
+        animate={isAnimatedSticky ? (desktopHeaderPositionSticky ? 'sticky' : 'relative') : false}
         custom={desktopHeaderContentTransform}
         variants={{
           sticky: (transform: boolean) => ({
