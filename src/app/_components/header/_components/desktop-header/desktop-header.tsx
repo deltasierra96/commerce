@@ -1,30 +1,85 @@
 'use client';
+import { Menu as ShopfiyMenu } from '@/shopify/types';
+
 import { Cart } from '@/app/_components/cart';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { Menu as ShopfiyMenu } from '@/shopify/types';
-import { clsx } from '@/utils';
 import { forwardRef } from 'react';
-import { Menu, Search } from '../mobile-header/_components';
 import { Account, Navigation } from './_components';
+
+import { clsx } from '@/utils';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useState } from 'react';
+import { mergeRefs } from 'react-merge-refs';
+import useMeasure from 'react-use-measure';
+import { Search } from '../search';
 
 type DesktopHeaderProps = {
   menu: ShopfiyMenu;
 };
 
+const easing = [0.32, 0.72, 0, 1];
+const duration = 0.3;
+
 export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
   ({ menu, ...props }, ref) => {
+    const { scrollY } = useScroll();
+    const [desktopHeaderRef, { height: desktopHeaderHeight }] = useMeasure();
+    const [desktopHeaderPositionSticky, setDesktopHeaderPositionSticky] = useState(false);
+    const [desktopHeaderContentTransform, setDesktopHeaderContentTransform] = useState(false);
+
+    useMotionValueEvent(scrollY, 'change', (y) => {
+      if (y > desktopHeaderHeight * 5) {
+        setDesktopHeaderPositionSticky(true);
+      }
+
+      if (y > desktopHeaderHeight * 2) {
+        setDesktopHeaderContentTransform(true);
+      }
+
+      if (y < desktopHeaderHeight * 4) {
+        setDesktopHeaderContentTransform(false);
+      }
+
+      if (y < desktopHeaderHeight * 3) {
+        setDesktopHeaderPositionSticky(false);
+      }
+    });
+
+    const mergedRefs = mergeRefs([desktopHeaderRef, ref]);
+
     return (
-      <header
-        className={clsx('w-full border-b border-neutral-200 bg-white lg:flex lg:flex-col')}
-        ref={ref}
+      <motion.header
         {...props}
+        className={clsx(
+          'sticky top-0 z-10 hidden w-full border-b bg-white lg:flex lg:flex-col',
+          desktopHeaderPositionSticky ? 'border-white' : 'border-neutral-100'
+        )}
+        ref={mergedRefs}
+        animate={desktopHeaderPositionSticky ? 'sticky' : 'relative'}
+        initial="sticky"
+        // onFocusCapture={
+        //   desktopHeaderPositionSticky ? () => setDesktopHeaderPositionSticky(false) : undefined
+        // }
+        custom={desktopHeaderContentTransform}
+        variants={{
+          sticky: (transform: boolean) => ({
+            y: transform ? 0 : -desktopHeaderHeight,
+            opacity: transform ? 1 : 0,
+            position: 'sticky'
+          }),
+          relative: (transform: boolean) => ({
+            y: transform ? -desktopHeaderHeight : 0,
+            position: 'relative',
+            opacity: transform ? 0 : 1
+          })
+        }}
+        transition={{ duration, ease: easing }}
       >
         <Container>
           <div className="flex items-center justify-between gap-x-8 py-5">
             <div className="flex basis-2/12 justify-start">
               <Logo className="h-10" />
-              <Menu menu={menu} />
             </div>
 
             <div className="flex basis-8/12 items-center justify-center">
@@ -41,7 +96,7 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
             </div>
           </div>
         </Container>
-      </header>
+      </motion.header>
     );
   }
 );

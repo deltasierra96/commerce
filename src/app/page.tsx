@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-        <h1 className="text-4xl font-bold tracking-tight lg:text-6xl">New arrivals are here</h1>
+        <h1 className="text-4xl font-black tracking-tight lg:text-6xl">New arrivals are here</h1>
         <p className="mt-4 text-xl">
           The new arrivals have, well, newly arrived. Check out the latest options from our summer
           small-batch release while they're still in stock.
