@@ -50,14 +50,10 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
         {...props}
         ref={mergedRefs}
         className={clsx(
-          'sticky top-0 z-header flex w-full items-center border-b border-neutral-200 bg-white py-2 lg:hidden'
+          'sticky top-0 z-header flex w-full items-center border-b border-neutral-200 bg-white py-2 opacity-100 lg:hidden'
         )}
         animate={mobileHeaderPositionSticky ? 'sticky' : 'relative'}
-        initial="visible"
-        // whileHover={mobileHeaderPositionSticky ? 'peeking' : 'visible'}
-        onFocusCapture={
-          mobileHeaderPositionSticky ? () => setMobileHeaderPositionSticky(false) : undefined
-        }
+        initial="sticky"
         custom={mobileHeaderContentTransform}
         variants={{
           sticky: (transform: boolean) => ({

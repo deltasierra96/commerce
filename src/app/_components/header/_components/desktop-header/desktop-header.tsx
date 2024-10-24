@@ -52,15 +52,11 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
       <motion.header
         {...props}
         className={clsx(
-          'sticky top-0 z-10 hidden w-full border-b bg-white lg:flex lg:flex-col',
-          desktopHeaderPositionSticky ? 'border-white' : 'border-neutral-100'
+          'sticky top-0 z-header-safe hidden w-full border-b border-neutral-100 bg-white opacity-100 lg:flex lg:flex-col'
         )}
         ref={mergedRefs}
         animate={desktopHeaderPositionSticky ? 'sticky' : 'relative'}
         initial="sticky"
-        // onFocusCapture={
-        //   desktopHeaderPositionSticky ? () => setDesktopHeaderPositionSticky(false) : undefined
-        // }
         custom={desktopHeaderContentTransform}
         variants={{
           sticky: (transform: boolean) => ({
