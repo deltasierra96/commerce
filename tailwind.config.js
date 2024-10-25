@@ -35,16 +35,6 @@ module.exports = {
           'text-disabled': 'rgb(var(--colors-theme-text-disabled) / <alpha-value>)',
           disabled: 'rgb(var(--colors-theme-disabled) / <alpha-value>)'
         },
-        secondary: {
-          DEFAULT: 'rgb(var(--colors-secondary) / <alpha-value>)',
-          text: 'rgb(var(--colors-secondary-text) / <alpha-value>)',
-          hover: 'rgb(var(--colors-secondary-hover) / <alpha-value>)',
-          focus: 'rgb(var(--colors-secondary-focus) / <alpha-value>)',
-          pressed: 'rgb(var(--colors-secondary-pressed) / <alpha-value>)',
-          active: 'rgb(var(--colors-secondary-active) / <alpha-value>)',
-          'text-disabled': 'rgb(var(--colors-secondary-text-disabled) / <alpha-value>)',
-          disabled: 'rgb(var(--colors-secondary-disabled) / <alpha-value>)'
-        },
         neutral: {
           50: 'rgb(var(--colors-neutral-50) / <alpha-value>)',
           100: 'rgb(var(--colors-neutral-100) / <alpha-value>)',
