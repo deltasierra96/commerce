@@ -35,14 +35,12 @@ export const CollectionToolbar = ({ collection, ...props }: CollectionToolbarPro
           </Drawer>
         </DrawerTrigger>
       </div>
-      <div className="hidden lg:flex">
+      <div className="hidden w-full py-4 bg-white lg:flex">
         <Container>
-          <div className="rounded-lg bg-white p-3">
-            <div className="flex items-center justify-end gap-x-4">
-              <ButtonIcon icon="grid" variant={'outline'} />
-              <CollectionLimit />
-              <CollectionSort />
-            </div>
+          <div className="flex items-center justify-end gap-x-4">
+            <ButtonIcon icon="grid" variant={'outline'} />
+            <CollectionLimit />
+            <CollectionSort />
           </div>
         </Container>
       </div>

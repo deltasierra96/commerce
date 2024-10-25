@@ -39,30 +39,28 @@ export default async function CollectionPage({
   if (!collection) notFound();
 
   return (
-    <section className="py-12">
+    <section className="pb-12">
       <Suspense fallback={<CollectionHeaderSkeleton />}>
         <CollectionHeader collection={collection} />
       </Suspense>
-      <div className="divide-y divide-neutral-100 lg:space-y-8">
-        <CollectionToolbar collection={collection} />
-        <div>
-          <Container className="px-0 sm:px-0">
-            <div className="pb-24 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-12">
-              <div className="hidden lg:col-span-3 xl:block">
-                <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 sticky top-40 -mx-3 h-[calc(100vh-12rem)] shrink-0 self-start overflow-y-scroll px-3">
-                  <div className="rounded-lg bg-white p-6">
-                    <CollectionFilters />
-                  </div>
+      <CollectionToolbar collection={collection} />
+      <div className="pt-6">
+        <Container className="px-0 sm:px-0">
+          <div className="pb-24 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-12">
+            <div className="hidden lg:col-span-3 xl:block">
+              <div className="scrollbar-thin scrollbar-track-neutral-50 scrollbar-thumb-neutral-200 sticky top-40 -mx-3 h-[calc(100vh-12rem)] shrink-0 self-start overflow-y-scroll px-3">
+                <div className="p-6 bg-white rounded-lg">
+                  <CollectionFilters />
                 </div>
               </div>
-              <div className="col-span-12 lg:col-span-9">
-                <Suspense fallback={<p>loading</p>}>
-                  <CollectionProducts params={params} searchParams={searchParams} />
-                </Suspense>
-              </div>
             </div>
-          </Container>
-        </div>
+            <div className="col-span-12 lg:col-span-9">
+              <Suspense fallback={<p>loading</p>}>
+                <CollectionProducts params={params} searchParams={searchParams} />
+              </Suspense>
+            </div>
+          </div>
+        </Container>
       </div>
     </section>
   );
