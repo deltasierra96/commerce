@@ -1,5 +1,5 @@
 import { Carousel } from '@/app/_components/carousel';
-import { ButtonLink } from '@/components/ui/button';
+import { Hero } from './_components/hero';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
@@ -11,31 +11,20 @@ export const metadata = {
 export default function HomePage() {
   return (
     <div className="bg-white">
-      <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-        <h1 className="text-4xl font-black tracking-tight lg:text-6xl">New arrivals are here</h1>
-        <p className="mt-4 text-xl">
-          The new arrivals have, well, newly arrived. Check out the latest options from our summer
-          small-batch release while they're still in stock.
-        </p>
-        <div className="mt-8">
-          <ButtonLink href="#" color={'primary'}>
-            Shop New Arrivals
-          </ButtonLink>
-        </div>
-      </div>
+      <Hero />
       <Carousel />
       <section aria-labelledby="perks-heading" className="border-t border-gray-200 bg-gray-50">
         <h2 id="perks-heading" className="sr-only">
           Our perks
         </h2>
 
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8">
           <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-0">
             <div className="text-center md:flex md:items-start md:text-left lg:block lg:text-center">
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="-my-1 mx-auto h-24 w-auto"
+                    className="w-auto h-24 mx-auto -my-1"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg"
                     alt=""
                   />
@@ -54,7 +43,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="-my-1 mx-auto h-24 w-auto"
+                    className="w-auto h-24 mx-auto -my-1"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg"
                     alt=""
                   />
@@ -73,7 +62,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="-my-1 mx-auto h-24 w-auto"
+                    className="w-auto h-24 mx-auto -my-1"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg"
                     alt=""
                   />
@@ -92,7 +81,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="-my-1 mx-auto h-24 w-auto"
+                    className="w-auto h-24 mx-auto -my-1"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg"
                     alt=""
                   />

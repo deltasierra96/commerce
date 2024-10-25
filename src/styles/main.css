@@ -357,6 +357,12 @@ input[type='search']::-webkit-search-results-decoration {
   --colors-neutral-900: var(--colors-zinc-900);
   --colors-neutral-950: var(--colors-zinc-950);
 
+  --colors-theme: var(--colors-neutral-950);
+  --colors-theme-hover: var(--colors-neutral-900);
+  --colors-theme-focus: var(--colors-neutral-800);
+  --colors-theme-active: var(--colors-neutral-800);
+  --colors-theme-disabled: var(--colors-neutral-700);
+
   /* No Radius */
   --border-radius: 0rem;
   --border-radius--sm: 0rem;

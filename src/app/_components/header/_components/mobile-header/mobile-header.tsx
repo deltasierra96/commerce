@@ -28,19 +28,19 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
     const [mobileHeaderContentTransform, setMobileHeaderContentTransform] = useState(false);
 
     useMotionValueEvent(scrollY, 'change', (y) => {
-      if (y > mobileHeaderHeight * 5) {
+      if (y > mobileHeaderHeight) {
         setMobileHeaderPositionSticky(true);
       }
 
-      if (y > mobileHeaderHeight * 2) {
-        setMobileHeaderContentTransform(true);
-      }
-
-      if (y < mobileHeaderHeight * 4) {
-        setMobileHeaderContentTransform(false);
+      if (y > mobileHeaderHeight * 4) {
+        setMobileHeaderPositionSticky(true);
       }
 
       if (y < mobileHeaderHeight * 3) {
+        setMobileHeaderPositionSticky(false);
+      }
+
+      if (y < mobileHeaderHeight * 2) {
         setMobileHeaderPositionSticky(false);
       }
     });
@@ -69,15 +69,15 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
       >
         <Container>
           <div className="flex items-center justify-between gap-x-8">
-            <div className="flex basis-2/12 justify-start">
+            <div className="flex justify-start basis-2/12">
               <Menu menu={menu} />
               <Search />
             </div>
-            <div className="flex basis-2/12 items-center justify-center">
+            <div className="flex items-center justify-center basis-2/12">
               <Logo className="h-8 sm:h-10" />
             </div>
 
-            <div className="flex basis-2/12 justify-end">
+            <div className="flex justify-end basis-2/12">
               <Account />
               <Cart />
             </div>

@@ -50,7 +50,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           fontPoppins.variable
         )}
       >
-        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 text-neutral-950 antialiased">
+        <body className="font-sans text-base antialiased font-normal leading-6 scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-neutral-100 text-neutral-950">
           <NextTopLoader
             initialPosition={0.1}
             crawlSpeed={200}
@@ -61,7 +61,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
             speed={750}
           />
           <CartProvider cartPromise={cart}>
-            <div className="flex h-full min-h-screen flex-col">
+            <div className="flex flex-col h-full min-h-screen">
               <div className="flex-1">
                 <div className="flex flex-col">
                   <div className="relative z-[31]">

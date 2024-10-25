@@ -24,6 +24,13 @@ module.exports = {
     },
     extend: {
       colors: {
+        theme: {
+          DEFAULT: 'rgb(var(--colors-theme) / <alpha-value>)',
+          hover: 'rgb(var(--colors-theme-hover) / <alpha-value>)',
+          focus: 'rgb(var(--colors-theme-focus) / <alpha-value>)',
+          active: 'rgb(var(--colors-theme-active) / <alpha-value>)',
+          disabled: 'rgb(var(--colors-theme-disabled) / <alpha-value>)'
+        },
         primary: {
           DEFAULT: 'rgb(var(--colors-primary-500) / <alpha-value>)',
           50: 'rgb(var(--colors-primary-50) / <alpha-value>)',

@@ -28,34 +28,34 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
     const [desktopHeaderRef, { height: desktopHeaderHeight }] = useMeasure();
     const [desktopHeaderPositionSticky, setDesktopHeaderPositionSticky] = useState(false);
     const [desktopHeaderContentTransform, setDesktopHeaderContentTransform] = useState(false);
+    const mergedRefs = mergeRefs([desktopHeaderRef, ref]);
 
     useMotionValueEvent(scrollY, 'change', (y) => {
-      if (y > desktopHeaderHeight * 5) {
-        setDesktopHeaderPositionSticky(true);
-      }
-
-      if (y > desktopHeaderHeight * 2) {
+      if (y > desktopHeaderHeight) {
         setDesktopHeaderContentTransform(true);
       }
 
-      if (y < desktopHeaderHeight * 4) {
-        setDesktopHeaderContentTransform(false);
+      if (y > desktopHeaderHeight * 4) {
+        setDesktopHeaderPositionSticky(true);
       }
 
       if (y < desktopHeaderHeight * 3) {
+        setDesktopHeaderContentTransform(false);
+      }
+
+      if (y < desktopHeaderHeight * 2) {
         setDesktopHeaderPositionSticky(false);
       }
     });
-
-    const mergedRefs = mergeRefs([desktopHeaderRef, ref]);
 
     return (
       <motion.header
         {...props}
         className={clsx(
-          'sticky top-0 z-header-safe hidden w-full border-b border-neutral-100 bg-white opacity-100 lg:flex lg:flex-col'
+          'sticky top-0 z-header-safe hidden w-full border-b border-neutral-100 bg-white opacity-100 will-change-transform lg:flex lg:flex-col'
         )}
         ref={mergedRefs}
+        layout="position"
         animate={isAnimatedSticky ? (desktopHeaderPositionSticky ? 'sticky' : 'relative') : false}
         custom={desktopHeaderContentTransform}
         variants={{
@@ -73,18 +73,18 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
         transition={{ duration, ease: easing }}
       >
         <Container>
-          <div className="flex items-center justify-between gap-x-8 py-5">
-            <div className="flex basis-2/12 justify-start">
+          <div className="flex items-center justify-between py-5 gap-x-8">
+            <div className="flex justify-start basis-2/12">
               <Logo className="h-10" />
             </div>
 
-            <div className="flex basis-8/12 items-center justify-center">
-              <div className="mx-auto w-full max-w-screen-md">
+            <div className="flex items-center justify-center basis-8/12">
+              <div className="w-full max-w-screen-md mx-auto">
                 <Navigation menu={menu} />
               </div>
             </div>
-            <div className="flex basis-2/12 justify-end">
-              <div className="hidden items-center justify-end space-x-2 sm:flex">
+            <div className="flex justify-end basis-2/12">
+              <div className="items-center justify-end hidden space-x-2 sm:flex">
                 <Account />
                 <Search />
                 <Cart />

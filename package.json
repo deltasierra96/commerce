@@ -46,6 +46,7 @@
     "sonner": "^1.5.0",
     "string-width": "^7.2.0",
     "strip-ansi": "^7.1.0",
+    "swiper": "^11.1.14",
     "tailwind-merge": "1.14.0",
     "tailwind-variants": "^0.1.19",
     "tailwindcss-react-aria-components": "^1.0.0",
