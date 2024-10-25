@@ -47,7 +47,7 @@ export const sharedButtonStyles = cva(
         variant: 'filled',
         className: clsx([
           'bg-theme',
-          'text-theme-text-alt',
+          'text-theme-text-light',
           'border-theme',
           'hover:bg-theme-hover',
           'hover:border-theme-hover',
@@ -68,11 +68,11 @@ export const sharedButtonStyles = cva(
           'hover:text-theme',
           'pressed:text-theme',
           'hover:bg-theme',
-          'hover:text-theme-text-alt',
+          'hover:text-theme-text-light',
           'hover:border-theme',
           'pressed:bg-theme-pressed',
           'pressed:border-theme-pressed',
-          'focus:pressed:text-theme-text-alt',
+          'focus:pressed:text-theme-text-light',
           'disabled:text-theme-text-disabled'
         ])
       },
@@ -85,10 +85,10 @@ export const sharedButtonStyles = cva(
           'border-theme',
           'hover:bg-theme',
           'hover:border-theme',
-          'hover:text-theme-text-alt',
+          'hover:text-theme-text-light',
           'pressed:bg-theme-pressed',
           'pressed:border-theme-pressed',
-          'focus:pressed:text-theme-text-alt',
+          'focus:pressed:text-theme-text-light',
           'disabled:border-theme-disabled',
           'disabled:text-theme-text-disabled'
         ])
@@ -97,53 +97,53 @@ export const sharedButtonStyles = cva(
         color: 'secondary',
         variant: 'link',
         className: clsx([
-          'text-secondary-text',
-          'pressed:text-secondary-pressed',
-          'disabled:text-secondary-text-disabled'
+          'text-neutral-950',
+          'pressed:text-neutral-700',
+          'disabled:text-neutral-400'
         ])
       },
       {
         color: 'secondary',
         variant: 'filled',
         className: clsx([
-          'text-secondary-text',
-          'bg-secondary',
-          'border-secondary',
-          'hover:bg-secondary-hover',
-          'hover:border-secondary-hover',
-          'pressed:bg-secondary-pressed',
-          'pressed:border-secondary-pressed',
-          'disabled:bg-secondary-disabled',
-          'disabled:border-secondary-disabled',
-          'disabled:text-secondary-text-disabled'
+          'text-neutral-950',
+          'bg-neutral-100',
+          'border-neutral-100',
+          'hover:bg-neutral-200',
+          'hover:border-neutral-200',
+          'pressed:bg-neutral-300',
+          'pressed:border-neutral-300',
+          'disabled:bg-neutral-100',
+          'disabled:border-neutral-100',
+          'disabled:text-neutral-400'
         ])
       },
       {
         color: 'secondary',
         variant: 'ghost',
         className: clsx([
-          'text-secondary-text',
           'bg-transparent',
+          'text-neutral-950',
           'border-transparent',
-          'hover:bg-secondary',
-          'hover:border-secondary',
-          'pressed:bg-secondary-pressed',
-          'pressed:border-secondary-pressed',
-          'disabled:text-secondary-text-disabled'
+          'hover:bg-neutral-100',
+          'hover:border-neutral-100',
+          'pressed:bg-neutral-200',
+          'pressed:border-neutral-200',
+          'disabled:text-neutral-400'
         ])
       },
       {
         color: 'secondary',
         variant: 'outline',
         className: clsx([
-          'text-secondary-text',
-          'border-secondary',
-          'hover:bg-secondary',
-          'hover:border-secondary',
-          'pressed:bg-secondary-pressed',
-          'pressed:border-secondary-pressed',
-          'disabled:border-secondary-disabled',
-          'disabled:text-secondary-text-disabled'
+          'text-neutral-950',
+          'border-neutral-100',
+          'hover:bg-neutral-100',
+          'hover:border-neutral-100',
+          'pressed:bg-neutral-200',
+          'pressed:border-neutral-200',
+          'disabled:border-neutral-100',
+          'disabled:text-neutral-400'
         ])
       }
     ],

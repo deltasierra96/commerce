@@ -299,22 +299,13 @@ input[type='search']::-webkit-search-results-decoration {
 
   --colors-theme: var(--colors-neutral-950);
   --colors-theme-text: var(--colors-neutral-950);
-  --colors-theme-text-alt: 255 255 255;
+  --colors-theme-text-light: 255 255 255;
   --colors-theme-hover: var(--colors-neutral-900);
   --colors-theme-pressed: var(--colors-neutral-800);
   --colors-theme-focus: var(--colors-neutral-800);
   --colors-theme-active: var(--colors-neutral-800);
   --colors-theme-disabled: var(--colors-neutral-100);
   --colors-theme-text-disabled: var(--colors-neutral-400);
-
-  --colors-secondary: var(--colors-neutral-100);
-  --colors-secondary-text: var(--colors-neutral-950);
-  --colors-secondary-hover: var(--colors-neutral-200);
-  --colors-secondary-pressed: var(--colors-neutral-300);
-  --colors-secondary-focus: var(--colors-neutral-800);
-  --colors-secondary-active: var(--colors-neutral-800);
-  --colors-secondary-disabled: var(--colors-neutral-100);
-  --colors-secondary-text-disabled: var(--colors-neutral-400);
 
   /* No Radius */
   --border-radius: 0rem;
