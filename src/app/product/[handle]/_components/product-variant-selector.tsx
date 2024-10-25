@@ -96,9 +96,9 @@ export const ProductVariantSelector = ({ product }: ProductVariantSelectorProps)
               //       borderStyles({ isFocusVisible: true }),
               //       'flex min-w-14 items-center justify-center rounded-button border-button px-4 py-3 text-sm font-semibold outline-none transition-all duration-75',
               //       {
-              //         'cursor-default border-primary-500 bg-white text-primary-500 focus-visible:border-primary-500 pressed:bg-primary-500/5':
+              //         'cursor-default border-theme bg-white text-theme focus-visible:border-theme pressed:bg-theme/5':
               //           isActive,
-              //         'hover:border-primary-500': !isActive && isAvailableForSale,
+              //         'hover:border-theme': !isActive && isAvailableForSale,
               //         'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform':
               //           !isAvailableForSale
               //       }

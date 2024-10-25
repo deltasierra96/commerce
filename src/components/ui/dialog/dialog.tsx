@@ -45,7 +45,7 @@ export const DialogHeader = ({
       className={clsx('sticky top-0 z-10 border-b border-neutral-100 bg-white p-2 px-4', className)}
     >
       <div className={clsx('flex items-stretch')}>
-        <div className="flex flex-1 items-center">
+        <div className="flex items-center flex-1">
           <RACHeading className={clsx('break-all text-base font-semibold')} slot="title">
             {children}
           </RACHeading>
@@ -56,7 +56,7 @@ export const DialogHeader = ({
           ) : null}
         </div>
         {showCloseButton ? (
-          <ButtonIcon icon="x" variant="ghost" color="neutral" onPress={() => state.close()} />
+          <ButtonIcon icon="x" variant="ghost" color="secondary" onPress={() => state.close()} />
         ) : null}
       </div>
     </div>

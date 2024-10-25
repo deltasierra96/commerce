@@ -6,7 +6,7 @@ export type ProductVendorProps = {
 
 export const ProductVendor = ({ product, ...props }: ProductVendorProps) => {
   return (
-    <p className="text-base font-medium text-primary-500" {...props}>
+    <p className="text-theme text-base font-medium" {...props}>
       {product.vendor}
     </p>
   );

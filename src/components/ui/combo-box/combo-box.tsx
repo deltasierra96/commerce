@@ -1,13 +1,13 @@
 'use client';
+import { clsx } from '@/utils';
+import React from 'react';
 import {
-  type ComboBoxProps as RACComboBoxProps,
   ComboBox as RACComboBox,
-  type ValidationResult,
-  Group as RACGroup
+  Group as RACGroup,
+  type ComboBoxProps as RACComboBoxProps,
+  type ValidationResult
 } from 'react-aria-components';
-import { Label } from '../label';
-import { Popover } from '../popover';
-import { Input, type InputBaseProps } from '../input';
+import { ButtonIcon } from '../button-icon';
 import {
   FieldDescription,
   FieldError,
@@ -15,16 +15,16 @@ import {
   fieldWrapperSizeStyles,
   type FieldWrapperProps
 } from '../form';
-import { ButtonIcon } from '../button-icon';
-import React from 'react';
+import { Input, type InputBaseProps } from '../input';
+import { Label } from '../label';
 import {
   DropdownItem,
-  type DropdownItemProps,
+  ListBox,
   ListBoxSection,
-  type ListBoxSectionProps,
-  ListBox
+  type DropdownItemProps,
+  type ListBoxSectionProps
 } from '../list-box';
-import { clsx } from '@/utils';
+import { Popover } from '../popover';
 
 export type ComboBoxProps<T extends object> = Omit<RACComboBoxProps<T>, 'children'> &
   InputBaseProps &
@@ -72,7 +72,7 @@ const Root = <T extends object>(
         {leftSection ? leftSection : null}
         <RACGroup className="group flex w-full min-w-0 items-center pr-1 text-left">
           <Input className={clsx(fieldWrapperSizeStyles({ size }))} />
-          <ButtonIcon variant={'ghost'} color={'neutral'} compact size={size} icon="selector" />
+          <ButtonIcon variant={'ghost'} color={'secondary'} compact size={size} icon="selector" />
         </RACGroup>
         {rightSection ? rightSection : null}
       </FieldWrapper>

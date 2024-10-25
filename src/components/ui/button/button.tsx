@@ -8,7 +8,7 @@ import { borderStyles } from '../focus-ring/focus-ring';
 import { Icon, type IconTypeProps } from '../icon';
 
 export const sharedButtonStyles = cva(
-  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent leading-none outline-none transition-all duration-150 disabled:border-neutral-100 disabled:bg-neutral-100 disabled:text-neutral-400',
+  'relative inline-flex select-none items-center justify-center whitespace-nowrap border-button border-transparent leading-none outline-none transition-all duration-150',
   {
     variants: {
       rounded: {
@@ -22,13 +22,11 @@ export const sharedButtonStyles = cva(
       },
       color: {
         primary: '',
-        neutral: '',
-        danger: ''
+        secondary: ''
       },
       variant: {
         filled: '',
         outline: '',
-        subtle: '',
         ghost: '',
         link: 'underline'
       }
@@ -37,45 +35,45 @@ export const sharedButtonStyles = cva(
       {
         color: 'primary',
         variant: 'link',
-        className: clsx(['pressed:text-primary-400', 'text-primary-500'])
+        className: clsx([
+          'text-theme',
+          'pressed:text-theme-pressed',
+          'focus:pressed:text-theme-pressed',
+          'disabled:text-theme-text-disabled'
+        ])
       },
       {
         color: 'primary',
         variant: 'filled',
         className: clsx([
-          'text-white',
-          'bg-primary-500',
-          'border-primary-500',
-          'hover:bg-primary-400',
-          'hover:border-primary-400',
-          'pressed:bg-primary-600',
-          'pressed:border-primary-600'
+          'bg-theme',
+          'text-theme-text-alt',
+          'border-theme',
+          'hover:bg-theme-hover',
+          'hover:border-theme-hover',
+          'pressed:bg-theme-pressed',
+          'pressed:border-theme-pressed',
+          'disabled:bg-theme-disabled',
+          'disabled:border-theme-disabled',
+          'disabled:text-theme-text-disabled'
         ])
       },
       {
         color: 'primary',
         variant: 'ghost',
         className: clsx([
-          'text-primary-500',
+          'text-theme',
           'bg-transparent',
           'border-transparent',
-          'hover:bg-primary-50',
-          'hover:border-primary-50',
-          'pressed:bg-primary-100',
-          'pressed:border-primary-100'
-        ])
-      },
-      {
-        color: 'primary',
-        variant: 'subtle',
-        className: clsx([
-          'text-primary-500',
-          'bg-primary-50',
-          'border-primary-50',
-          'hover:bg-primary-100',
-          'hover:border-primary-100',
-          'pressed:bg-primary-200',
-          'pressed:border-primary-200'
+          'hover:text-theme',
+          'pressed:text-theme',
+          'hover:bg-theme',
+          'hover:text-theme-text-alt',
+          'hover:border-theme',
+          'pressed:bg-theme-pressed',
+          'pressed:border-theme-pressed',
+          'focus:pressed:text-theme-text-alt',
+          'disabled:text-theme-text-disabled'
         ])
       },
       {
@@ -83,113 +81,75 @@ export const sharedButtonStyles = cva(
         variant: 'outline',
         className: clsx([
           'bg-white',
-          'text-primary-500',
-          'border-primary-500',
-          'hover:bg-primary-500',
-          'hover:border-primary-500',
-          'hover:text-white',
-          'pressed:bg-primary-600',
-          'pressed:border-primary-600'
+          'text-theme',
+          'border-theme',
+          'hover:bg-theme',
+          'hover:border-theme',
+          'hover:text-theme-text-alt',
+          'pressed:bg-theme-pressed',
+          'pressed:border-theme-pressed',
+          'focus:pressed:text-theme-text-alt',
+          'disabled:border-theme-disabled',
+          'disabled:text-theme-text-disabled'
         ])
       },
       {
-        color: 'neutral',
+        color: 'secondary',
         variant: 'link',
-        className: clsx(['text-neutral-500'])
+        className: clsx([
+          'text-secondary-text',
+          'pressed:text-secondary-pressed',
+          'disabled:text-secondary-text-disabled'
+        ])
       },
       {
-        color: 'neutral',
+        color: 'secondary',
         variant: 'filled',
         className: clsx([
-          'bg-neutral-100',
-          'border-neutral-100',
-          'text-neutral-600',
-          'hover:border-neutral-200',
-          'hover:bg-neutral-200',
-          'pressed:border-neutral-300',
-          'pressed:bg-neutral-300'
+          'text-secondary-text',
+          'bg-secondary',
+          'border-secondary',
+          'hover:bg-secondary-hover',
+          'hover:border-secondary-hover',
+          'pressed:bg-secondary-pressed',
+          'pressed:border-secondary-pressed',
+          'disabled:bg-secondary-disabled',
+          'disabled:border-secondary-disabled',
+          'disabled:text-secondary-text-disabled'
         ])
       },
       {
-        color: 'neutral',
-        variant: 'outline',
-        className: clsx([
-          'bg-white',
-          'border-neutral-100',
-          'text-neutral-600',
-          'hover:border-neutral-100',
-          'hover:bg-neutral-100',
-          'hover:text-neutral-900',
-          'pressed:border-neutral-200',
-          'pressed:bg-neutral-200'
-        ])
-      },
-      {
-        color: 'neutral',
-        variant: 'subtle',
-        className: clsx([
-          'border-neutral-100',
-          'bg-neutral-100',
-          'text-neutral-700',
-          'hover:border-neutral-200',
-          'hover:bg-neutral-200',
-          'pressed:border-neutral-300',
-          'pressed:bg-neutral-300'
-        ])
-      },
-      {
-        color: 'neutral',
+        color: 'secondary',
         variant: 'ghost',
         className: clsx([
-          'border-transparent',
+          'text-secondary-text',
           'bg-transparent',
-          'text-neutral-700',
-          'hover:border-neutral-100',
-          'hover:bg-neutral-100',
-          'hover:text-neutral-900',
-          'pressed:border-neutral-200',
-          'pressed:bg-neutral-200',
-          'pressed:text-neutral-900'
+          'border-transparent',
+          'hover:bg-secondary',
+          'hover:border-secondary',
+          'pressed:bg-secondary-pressed',
+          'pressed:border-secondary-pressed',
+          'disabled:text-secondary-text-disabled'
         ])
       },
-
       {
-        color: 'danger',
-        variant: 'link',
-        className: clsx('text-red-500 pressed:text-red-400')
-      },
-      {
-        color: 'danger',
-        variant: 'filled',
-        className: clsx(
-          'border-red-500 bg-red-500 text-white hover:border-red-400 hover:bg-red-400 pressed:border-red-600 pressed:bg-red-600'
-        )
-      },
-      {
-        color: 'danger',
+        color: 'secondary',
         variant: 'outline',
-        className: clsx(
-          'border-red-500 bg-white text-red-500 hover:bg-red-100 hover:text-red-700 pressed:bg-red-200'
-        )
-      },
-      {
-        color: 'danger',
-        variant: 'subtle',
-        className: clsx(
-          'border-red-50 bg-red-50 text-red-500 hover:border-red-100 hover:bg-red-100 pressed:border-red-200 pressed:bg-red-200'
-        )
-      },
-      {
-        color: 'danger',
-        variant: 'ghost',
-        className: clsx(
-          'border-transparent bg-transparent text-red-500 hover:border-red-50 hover:bg-red-50 pressed:border-red-100 pressed:bg-red-100'
-        )
+        className: clsx([
+          'text-secondary-text',
+          'border-secondary',
+          'hover:bg-secondary',
+          'hover:border-secondary',
+          'pressed:bg-secondary-pressed',
+          'pressed:border-secondary-pressed',
+          'disabled:border-secondary-disabled',
+          'disabled:text-secondary-text-disabled'
+        ])
       }
     ],
     defaultVariants: {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       rounded: false,
       borderStyle: 'solid'
     }
@@ -301,7 +261,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps & RACButtonProps
     const hasLoadingIconRight = isLoading && loaderPosition === 'right';
 
     const Loader = () => (
-      <div className="flex animate-spin items-center justify-center">
+      <div className="flex items-center justify-center animate-spin">
         <Icon className={clsx(buttonIconNodeStyles({ size }))} icon="loader" />
       </div>
     );

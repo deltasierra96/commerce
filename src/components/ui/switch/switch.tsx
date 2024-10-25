@@ -1,7 +1,9 @@
 'use client';
 
 import { clsx } from '@/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
+import { useId } from 'react-aria';
 import {
   Switch as AriaSwitch,
   SwitchContext,
@@ -9,9 +11,7 @@ import {
   type SwitchProps as AriaSwitchProps
 } from 'react-aria-components';
 import { focusRing } from '../focus-ring';
-import { useId } from 'react-aria';
 import { Icon } from '../icon';
-import { type VariantProps, cva } from 'class-variance-authority';
 
 // ==============================================================================
 
@@ -40,7 +40,7 @@ type ToggleProps = {
 } & VariantProps<typeof ToggleTrackStyles>;
 
 const ToggleTrackStyles = cva(
-  'group-hovered:bg-neutral-300 group-hovered:border-neutral-300 group-hovered:group-pressed:bg-neutral-100 group-hovered:group-pressed:border-neutral-100 group-selected:group-hovered:border-primary-dark group-selected:group-hovered:group-pressed:border-primary-dark group-selected:group-hovered:bg-primary-dark group-selected:group-hovered:group-pressed:bg-primary-dark group-selected:group-pressed:border-primary-dark group-selected:group-pressed:bg-primary-dark flex shrink-0 cursor-pointer items-center rounded-full border border-neutral-100 bg-neutral-200 transition-colors duration-200 group-pressed:border-neutral-300 group-pressed:bg-neutral-300 group-selected:bg-primary-500 group-disabled:cursor-not-allowed group-disabled:border-neutral-100 group-disabled:bg-neutral-100 group-disabled:group-selected:border-neutral-100 group-disabled:group-selected:bg-neutral-100',
+  'group-hovered:bg-neutral-300 group-hovered:border-neutral-300 group-hovered:group-pressed:bg-neutral-100 group-hovered:group-pressed:border-neutral-100 group-selected:group-hovered:border-primary-dark group-selected:group-hovered:group-pressed:border-primary-dark group-selected:group-hovered:bg-primary-dark group-selected:group-hovered:group-pressed:bg-primary-dark group-selected:group-pressed:border-primary-dark group-selected:group-pressed:bg-primary-dark group-selected:bg-theme flex shrink-0 cursor-pointer items-center rounded-full border border-neutral-100 bg-neutral-200 transition-colors duration-200 group-pressed:border-neutral-300 group-pressed:bg-neutral-300 group-disabled:cursor-not-allowed group-disabled:border-neutral-100 group-disabled:bg-neutral-100 group-disabled:group-selected:border-neutral-100 group-disabled:group-selected:bg-neutral-100',
   {
     variants: {
       variant: {

@@ -1,7 +1,6 @@
 'use client';
 import { ButtonLink } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import Image from 'next/image';
 
 export const Hero = () => {
   return (
@@ -112,7 +111,7 @@ export const Hero = () => {
                     <ButtonLink
                       href='/'
                       variant={'filled'}
-                      color={'neutral'}
+                      color={'secondary'}
                       rightIcon='arrow-right'
                     >
                       Learn more

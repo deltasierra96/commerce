@@ -26,24 +26,25 @@ module.exports = {
       colors: {
         theme: {
           DEFAULT: 'rgb(var(--colors-theme) / <alpha-value>)',
+          text: 'rgb(var(--colors-theme-text) / <alpha-value>)',
+          'text-alt': 'rgb(var(--colors-theme-text-alt) / <alpha-value>)',
           hover: 'rgb(var(--colors-theme-hover) / <alpha-value>)',
           focus: 'rgb(var(--colors-theme-focus) / <alpha-value>)',
+          pressed: 'rgb(var(--colors-theme-pressed) / <alpha-value>)',
           active: 'rgb(var(--colors-theme-active) / <alpha-value>)',
+          'text-disabled': 'rgb(var(--colors-theme-text-disabled) / <alpha-value>)',
           disabled: 'rgb(var(--colors-theme-disabled) / <alpha-value>)'
         },
-        primary: {
-          DEFAULT: 'rgb(var(--colors-primary-500) / <alpha-value>)',
-          50: 'rgb(var(--colors-primary-50) / <alpha-value>)',
-          100: 'rgb(var(--colors-primary-100) / <alpha-value>)',
-          200: 'rgb(var(--colors-primary-200) / <alpha-value>)',
-          300: 'rgb(var(--colors-primary-300) / <alpha-value>)',
-          400: 'rgb(var(--colors-primary-400) / <alpha-value>)',
-          500: 'rgb(var(--colors-primary-500) / <alpha-value>)',
-          600: 'rgb(var(--colors-primary-600) / <alpha-value>)',
-          700: 'rgb(var(--colors-primary-700) / <alpha-value>)',
-          800: 'rgb(var(--colors-primary-800) / <alpha-value>)',
-          900: 'rgb(var(--colors-primary-900) / <alpha-value>)',
-          950: 'rgb(var(--colors-primary-950) / <alpha-value>)'
+
+        secondary: {
+          DEFAULT: 'rgb(var(--colors-secondary) / <alpha-value>)',
+          text: 'rgb(var(--colors-secondary-text) / <alpha-value>)',
+          hover: 'rgb(var(--colors-secondary-hover) / <alpha-value>)',
+          focus: 'rgb(var(--colors-secondary-focus) / <alpha-value>)',
+          pressed: 'rgb(var(--colors-secondary-pressed) / <alpha-value>)',
+          active: 'rgb(var(--colors-secondary-active) / <alpha-value>)',
+          'text-disabled': 'rgb(var(--colors-secondary-text-disabled) / <alpha-value>)',
+          disabled: 'rgb(var(--colors-secondary-disabled) / <alpha-value>)'
         },
         neutral: {
           50: 'rgb(var(--colors-neutral-50) / <alpha-value>)',

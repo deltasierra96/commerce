@@ -121,7 +121,7 @@ export const buttonIconCounterStyles = cva(
         right: '-right-0.5'
       },
       counterVariant: {
-        primary: 'bg-primary-500 text-white'
+        primary: 'bg-theme text-white'
       },
       size: {
         sm: 'h-4 w-4 text-xs',

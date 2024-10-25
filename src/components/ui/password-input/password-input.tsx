@@ -4,7 +4,7 @@ import {
   TextField as RACTextField,
   type TextFieldProps as RACTextFieldProps
 } from 'react-aria-components';
-import { Label } from '../label';
+import { Button } from '../button';
 import {
   FieldDescription,
   FieldError,
@@ -12,9 +12,9 @@ import {
   fieldWrapperIconSizeStyles,
   type FieldWrapperProps
 } from '../form';
-import { Input, type InputBaseProps } from '../input';
-import { Button } from '../button';
 import { Icon } from '../icon';
+import { Input, type InputBaseProps } from '../input';
+import { Label } from '../label';
 
 export type PasswordInputProps = InputBaseProps &
   FieldWrapperProps &
@@ -67,12 +67,12 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
                   size={size}
                   compact={true}
                   variant={'ghost'}
-                  color="neutral"
+                  color="secondary"
                   // leftIcon={isPasswordInputVisible ? 'eye-off' : 'eye'}
                   aria-hidden={!visibilityToggleLabel}
                   aria-label={visibilityToggleLabel}
                   isDisabled={props.isDisabled}
-                  // variant='filled' color='neutral'
+                  // variant='filled' color='secondary'
                   onPress={() => setPasswordInputVisible(!isPasswordInputVisible)}
                 >
                   {isPasswordInputVisible ? 'Hide' : 'Show'} Password

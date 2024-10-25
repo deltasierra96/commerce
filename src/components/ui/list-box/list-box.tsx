@@ -19,7 +19,7 @@ export const ListBox = <T extends object>({ className, ...props }: ListBoxProps<
 );
 
 export const listBoxItemStyles = clsx(
-  'group relative flex cursor-default select-none items-center rounded border-button border-transparent px-2 py-1.5 text-sm text-neutral-900 outline outline-0 forced-color-adjust-none focus:bg-primary-500 focus:text-white focus:pressed:bg-primary-600 disabled:text-neutral-500 forced-colors:focus:bg-[Highlight] forced-colors:focus:text-[HighlightText] forced-colors:disabled:!text-[GrayText]'
+  'focus:bg-theme focus:pressed:bg-theme-pressed group relative flex cursor-default select-none items-center rounded border-button border-transparent px-2 py-1.5 text-sm text-neutral-900 outline outline-0 forced-color-adjust-none focus:text-white disabled:text-neutral-500 forced-colors:focus:bg-[Highlight] forced-colors:focus:text-[HighlightText] forced-colors:disabled:!text-[GrayText]'
 );
 
 export type ListBoxItemDefaultProps = {
@@ -54,7 +54,7 @@ export const ListBoxSection = <T extends object>({
 }: ListBoxSectionProps<T>) => {
   return (
     <RACSection {...props}>
-      <RACHeader className="font-base truncate px-2 py-1 text-xs tracking-normal text-neutral-500">
+      <RACHeader className="px-2 py-1 text-xs tracking-normal truncate font-base text-neutral-500">
         {title}
       </RACHeader>
       <RACCollection items={items}>{children}</RACCollection>
@@ -71,12 +71,12 @@ export const DropdownItem = ({ showCheck = true, icon, ...props }: DropdownItemP
     <RACListBoxItem {...props} textValue={textValue} className={clsx(listBoxItemStyles)}>
       {({ selectionMode, isSelected }) => (
         <div className={clsx('flex w-full items-center gap-x-3 whitespace-nowrap')}>
-          {icon && selectionMode !== 'multiple' && <Icon icon={icon} className="h-4 w-4" />}
-          <span className="truncate font-normal">
+          {icon && selectionMode !== 'multiple' && <Icon icon={icon} className="w-4 h-4" />}
+          <span className="font-normal truncate">
             <>{props.children}</>
           </span>
           {showCheck && selectionMode !== 'none' && isSelected ? (
-            <Icon icon="check" aria-hidden className="ml-auto h-4 w-4" />
+            <Icon icon="check" aria-hidden className="w-4 h-4 ml-auto" />
           ) : null}
         </div>
       )}

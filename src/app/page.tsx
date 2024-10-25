@@ -1,4 +1,5 @@
 import { Carousel } from '@/app/_components/carousel';
+import { Button } from '@/components/ui/button';
 import { Hero } from './_components/hero';
 
 export const metadata = {
@@ -11,6 +12,64 @@ export const metadata = {
 export default function HomePage() {
   return (
     <div className="bg-white">
+      <div className="py-4 space-y-4">
+        <div className="flex justify-center gap-x-4">
+          <Button color={'primary'} variant={'filled'}>
+            Filled
+          </Button>
+          <Button color={'primary'} variant={'outline'}>
+            Outline
+          </Button>
+          <Button color={'primary'} variant={'ghost'}>
+            Ghost
+          </Button>
+          <Button color={'primary'} variant={'link'}>
+            Link
+          </Button>
+        </div>
+        <div className="flex justify-center gap-x-4">
+          <Button color={'primary'} variant={'filled'} isDisabled>
+            Filled
+          </Button>
+          <Button color={'primary'} variant={'outline'} isDisabled>
+            Outline
+          </Button>
+          <Button color={'primary'} variant={'ghost'} isDisabled>
+            Ghost
+          </Button>
+          <Button color={'primary'} variant={'link'} isDisabled>
+            Link
+          </Button>
+        </div>
+        <div className="flex justify-center gap-x-4">
+          <Button color={'secondary'} variant={'filled'}>
+            Filled
+          </Button>
+          <Button color={'secondary'} variant={'outline'}>
+            Outline
+          </Button>
+          <Button color={'secondary'} variant={'ghost'}>
+            Ghost
+          </Button>
+          <Button color={'secondary'} variant={'link'}>
+            Link
+          </Button>
+        </div>
+        <div className="flex justify-center gap-x-4">
+          <Button color={'secondary'} variant={'filled'} isDisabled>
+            Filled
+          </Button>
+          <Button color={'secondary'} variant={'outline'} isDisabled>
+            Outline
+          </Button>
+          <Button color={'secondary'} variant={'ghost'} isDisabled>
+            Ghost
+          </Button>
+          <Button color={'secondary'} variant={'link'} isDisabled>
+            Link
+          </Button>
+        </div>
+      </div>
       <Hero />
       <Carousel />
       <section aria-labelledby="perks-heading" className="border-t border-gray-200 bg-gray-50">

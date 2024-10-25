@@ -123,7 +123,7 @@ export const Cart = () => {
                     size={'lg'}
                     block
                     variant={'outline'}
-                    color="neutral"
+                    color="secondary"
                     onPress={() => setIsCartOpen(false)}
                   >
                     Continue Shopping

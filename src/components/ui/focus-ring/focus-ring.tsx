@@ -41,8 +41,8 @@ export const borderStyles = cva(
     variants: {
       isFocused: {
         true: [
-          'focus:border-primary-500',
-          'focus:pressed:border-primary-500',
+          'focus:border-theme',
+          'focus:pressed:border-theme',
           'focus:hover:border-primary-400',
           'focus:invalid:border-red-500',
           'focus:invalid:hover:border-red-400',
@@ -51,8 +51,8 @@ export const borderStyles = cva(
       },
       isFocusWithin: {
         true: [
-          'focus-within:border-primary-500',
-          'focus-within:pressed:border-primary-500',
+          'focus-within:border-theme',
+          'focus-within:pressed:border-theme',
           'focus-within:hover:border-primary-400',
           'focus-within:invalid:border-red-500',
           'focus-within:invalid:hover:border-red-400',
@@ -61,8 +61,8 @@ export const borderStyles = cva(
       },
       isFocusVisible: {
         true: [
-          'focus-visible:border-primary-500',
-          'focus-visible:pressed:border-primary-500',
+          'focus-visible:border-theme',
+          'focus-visible:pressed:border-theme',
           'focus-visible:hover:border-primary-400',
           'focus-visible:invalid:border-red-500',
           'focus-visible:invalid:hover:border-red-400',
@@ -71,8 +71,8 @@ export const borderStyles = cva(
       },
       groupIsFocusVisible: {
         true: [
-          'group-focus-visible:border-primary-500',
-          'group-focus-visible:group-pressed:border-primary-500',
+          'group-focus-visible:border-theme',
+          'group-focus-visible:group-pressed:border-theme',
           'group-focus-visible:group-hover:border-primary-400',
           'group-focus-visible:group-invalid:border-red-500',
           'group-focus-visible:group-invalid:group-hover:border-red-400',

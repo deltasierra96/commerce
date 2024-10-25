@@ -1,12 +1,11 @@
 'use client';
+import { clsx } from '@/utils';
 import { forwardRef } from 'react';
 import {
   SearchField as RACSearchField,
   type SearchFieldProps as RACSearchFieldProps
 } from 'react-aria-components';
 import { ButtonIcon } from '../button-icon';
-import { Icon } from '../icon';
-import { Label } from '../label';
 import {
   FieldDescription,
   FieldError,
@@ -14,8 +13,9 @@ import {
   fieldWrapperIconSizeStyles,
   type FieldWrapperProps
 } from '../form';
+import { Icon } from '../icon';
 import { Input, type InputBaseProps, type InputProps } from '../input';
-import { clsx } from '@/utils';
+import { Label } from '../label';
 
 type SearchFieldProps = Omit<RACSearchFieldProps, 'size'>;
 
@@ -66,7 +66,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps & Field
               rounded={rounded}
               className="group-empty:invisible"
               variant="ghost"
-              color="neutral"
+              color="secondary"
               icon="x"
               compact
             />

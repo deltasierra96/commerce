@@ -102,7 +102,7 @@ export const Menu = ({ menu, ...props }: MenuProps) => {
         onPress={() => setIsNavOpen(true)}
         icon="menu"
         variant="ghost"
-        color="neutral"
+        color="secondary"
       />
       <Drawer isOpen={isNavOpen} onOpenChange={(e) => setIsNavOpen(e)} position="left">
         <div className="flex h-full w-full min-w-fit flex-col">
