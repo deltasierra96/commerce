@@ -46,7 +46,7 @@ const NavigationMenuItem = <T extends object>({
 };
 
 const NavigationMenuRootItemStyles = clsx(
-  'flex items-center break-keep rounded-md px-3 py-2 text-base font-semibold text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+  'flex items-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
 );
 
 export const Navigation = ({ menu }: { menu: ShopifyMenu }) => {

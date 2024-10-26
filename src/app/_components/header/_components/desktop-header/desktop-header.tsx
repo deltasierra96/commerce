@@ -52,7 +52,7 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
       <motion.header
         {...props}
         className={clsx(
-          'sticky top-0 z-header-safe hidden w-full border-b border-neutral-100 bg-white opacity-100 will-change-transform lg:flex lg:flex-col'
+          'sticky top-0 z-header-safe flex w-full flex-col border-b border-neutral-100 bg-white opacity-100 will-change-transform'
         )}
         ref={mergedRefs}
         layout="position"

@@ -1,3 +1,4 @@
+import { getCollection } from '@/shopify/getCollection';
 import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 import { Carousel } from './_components/carousel';
 
@@ -6,6 +7,8 @@ export async function ProductCarousel() {
     collection: 'hidden-homepage-carousel',
     limit: 10
   });
+
+  const collection = await getCollection('hidden-homepage-carousel');
 
   if (!products?.length) return null;
 

@@ -214,11 +214,11 @@ input[type='search']::-webkit-search-results-decoration {
   /* Typography */
   /* --font-sans: var(--font-inter); */
   --font-sans: var(--font-satoshi);
-  --font-sans: var(--font-din-next);
+  /* --font-sans: var(--font-din-next); */
 
   /* Heading */
   --heading-font: var(--font-sans);
-  --heading-font-weight: theme(fontWeight.bold);
+  --heading-font-weight: theme(fontWeight.extrabold);
 
   /* Layout */
   --header-z-index: 999;

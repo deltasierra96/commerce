@@ -31,7 +31,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <MotionGroup
-      className={clsx('group relative w-full overflow-hidden rounded-md bg-white p-6', className)}
+      className={clsx('group relative w-full overflow-hidden rounded-md bg-white p-8', className)}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

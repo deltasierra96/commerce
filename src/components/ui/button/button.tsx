@@ -125,10 +125,10 @@ export const sharedButtonStyles = cva(
           'bg-transparent',
           'text-neutral-950',
           'border-transparent',
-          'hover:bg-neutral-100',
-          'hover:border-neutral-100',
-          'pressed:bg-neutral-200',
-          'pressed:border-neutral-200',
+          'hover:bg-neutral-200',
+          'hover:border-neutral-200',
+          'pressed:bg-neutral-300',
+          'pressed:border-neutral-300',
           'disabled:text-neutral-400'
         ])
       },
@@ -261,7 +261,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps & RACButtonProps
     const hasLoadingIconRight = isLoading && loaderPosition === 'right';
 
     const Loader = () => (
-      <div className="flex items-center justify-center animate-spin">
+      <div className="flex animate-spin items-center justify-center">
         <Icon className={clsx(buttonIconNodeStyles({ size }))} icon="loader" />
       </div>
     );

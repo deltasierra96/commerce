@@ -51,7 +51,7 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
         {...props}
         ref={mergedRefs}
         className={clsx(
-          'sticky top-0 z-header flex w-full items-center border-b border-neutral-200 bg-white py-2 opacity-100 lg:hidden'
+          'sticky top-0 z-header flex w-full items-center border-b border-neutral-200 bg-white py-2 opacity-100'
         )}
         animate={isAnimatedSticky ? (mobileHeaderPositionSticky ? 'sticky' : 'relative') : false}
         custom={mobileHeaderContentTransform}
@@ -69,15 +69,15 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
       >
         <Container>
           <div className="flex items-center justify-between gap-x-8">
-            <div className="flex justify-start basis-2/12">
+            <div className="flex basis-2/12 justify-start">
               <Menu menu={menu} />
               <Search />
             </div>
-            <div className="flex items-center justify-center basis-2/12">
+            <div className="flex basis-2/12 items-center justify-center">
               <Logo className="h-8 sm:h-10" />
             </div>
 
-            <div className="flex justify-end basis-2/12">
+            <div className="flex basis-2/12 justify-end">
               <Account />
               <Cart />
             </div>
