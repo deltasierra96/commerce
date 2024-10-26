@@ -1,6 +1,6 @@
-import { Carousel } from '@/app/_components/carousel';
 import { Button } from '@/components/ui/button';
 import { Hero } from './_components/hero';
+import { ProductCarousel } from './_components/product-carousel/product-carousel';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
@@ -71,7 +71,7 @@ export default function HomePage() {
         </div>
       </div>
       <Hero />
-      <Carousel />
+      <ProductCarousel />
       <section aria-labelledby="perks-heading" className="border-t border-gray-200 bg-gray-50">
         <h2 id="perks-heading" className="sr-only">
           Our perks
