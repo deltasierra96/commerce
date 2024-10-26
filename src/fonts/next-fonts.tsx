@@ -130,6 +130,38 @@ export const fontStolzl = localFont({
   ]
 });
 
+export const fontDinNext = localFont({
+  variable: '--font-din-next',
+  display: 'swap',
+  src: [
+    {
+      path: '../../public/fonts/din-next/PFDINTextPro-ThinItalic.woff2',
+      weight: '100',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/din-next/PFDINTextPro-MediumItalic.woff2',
+      weight: '500',
+      style: 'italic'
+    },
+    {
+      path: '../../public/fonts/din-next/PFDINTextPro-Light.woff2',
+      weight: '300',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/din-next/PFDINTextPro-Bold.woff2',
+      weight: 'bold',
+      style: 'normal'
+    },
+    {
+      path: '../../public/fonts/din-next/PFDINTextPro-Regular.woff2',
+      weight: 'normal',
+      style: 'normal'
+    }
+  ]
+});
+
 export const fontGeogrotesque = localFont({
   variable: '--font-geogrotesque',
   display: 'swap',

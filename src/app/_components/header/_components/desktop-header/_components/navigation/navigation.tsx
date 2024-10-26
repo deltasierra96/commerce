@@ -40,13 +40,13 @@ const NavigationMenuItem = <T extends object>({
       textValue={title}
     >
       {title}
-      {items?.length ? <Icon icon="chevron-right" aria-hidden className="w-4 h-4 ml-auto" /> : null}
+      {items?.length ? <Icon icon="chevron-right" aria-hidden className="ml-auto h-4 w-4" /> : null}
     </MenuItem>
   );
 };
 
 const NavigationMenuRootItemStyles = clsx(
-  'flex items-center rounded-md px-3 py-2 text-sm font-medium text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
+  'flex items-center break-keep rounded-md px-3 py-2 text-base font-semibold text-neutral-950 outline-none transition-colors duration-75 hover:bg-neutral-100 focus:bg-neutral-100'
 );
 
 export const Navigation = ({ menu }: { menu: ShopifyMenu }) => {
@@ -72,7 +72,7 @@ export const Navigation = ({ menu }: { menu: ShopifyMenu }) => {
           >
             <Button className={clsx(NavigationMenuRootItemStyles)}>
               {menuItem.title}
-              <Icon icon="chevron-down" className="w-4 h-4 ml-2 text-neutral-500" />
+              <Icon icon="chevron-down" className="ml-2 h-4 w-4 text-neutral-500" />
             </Button>
             <Popover offset={30}>
               <div className="p-2">
@@ -92,7 +92,7 @@ export const Navigation = ({ menu }: { menu: ShopifyMenu }) => {
                                   menuItem={subSubMenuItem}
                                 />
                               ))}
-                              <Separator className="block w-full h-px my-2 bg-neutral-100" />
+                              <Separator className="my-2 block h-px w-full bg-neutral-100" />
                               <MenuItem
                                 href={subMenuItem.url}
                                 className={clsx(
@@ -107,7 +107,7 @@ export const Navigation = ({ menu }: { menu: ShopifyMenu }) => {
                       </SubmenuTrigger>
                     )
                   )}
-                  <Separator className="block w-full h-px my-2 bg-neutral-100" />
+                  <Separator className="my-2 block h-px w-full bg-neutral-100" />
                   <MenuItem
                     href={menuItem.url}
                     className={clsx(

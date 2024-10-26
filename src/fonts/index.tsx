@@ -1,10 +1,11 @@
 export {
   fontBasierCircle,
-  fontUncutSans,
+  fontDinNext,
   fontFiraCode,
   fontFutura,
   fontGreycliff,
   fontInter,
   fontPoppins,
-  fontRecoleta
+  fontRecoleta,
+  fontUncutSans
 } from './next-fonts';

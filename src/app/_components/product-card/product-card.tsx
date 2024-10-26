@@ -31,12 +31,12 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <MotionGroup
-      className={clsx('group relative w-full overflow-hidden rounded-md bg-white p-4', className)}
+      className={clsx('group relative w-full overflow-hidden rounded-md bg-white p-6', className)}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="absolute z-10 right-4 top-4">
+      <div className="absolute right-4 top-4 z-10">
         <div
           className={clsx(
             'duration-150 animate-in animate-out fill-mode-forwards',
@@ -51,10 +51,10 @@ export const ProductCard = ({
           <ProductCardHoverActions product={product} />
         </div>
       </div>
-      <div className="py-4 overflow-hidden bg-white rounded-card">
+      <div className="overflow-hidden rounded-card bg-white py-4">
         <ProductCardImage product={product} />
       </div>
-      <div className="pb-4 space-y-3">
+      <div className="space-y-3 pb-4">
         <div className="flex flex-col gap-y-1">
           <ProductCardVendor product={product} />
           <ProductCardTitle product={product} />

@@ -24,12 +24,11 @@ type CarouselProps = {
 
 export const Carousel = ({ items }: CarouselProps) => {
   return (
-    <section className="py-12">
+    <section className="py-16">
       <Container>
-        <h1 className="mb-6 text-3xl font-heading">Best selling</h1>
+        <h1 className="mb-6 font-heading text-4xl">Best selling</h1>
         <div>
           <Swiper
-            className="!overflow-visible"
             // install Swiper modules
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={20}
@@ -43,7 +42,7 @@ export const Carousel = ({ items }: CarouselProps) => {
             {items.map((product) => {
               return (
                 <SwiperSlide key={product.id}>
-                  <ProductCard showCartActions={false} product={product} />
+                  <ProductCard product={product} />
                 </SwiperSlide>
               );
             })}

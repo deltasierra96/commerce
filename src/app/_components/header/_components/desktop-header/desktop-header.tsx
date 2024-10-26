@@ -73,18 +73,18 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
         transition={{ duration, ease: easing }}
       >
         <Container>
-          <div className="flex items-center justify-between py-5 gap-x-8">
-            <div className="flex justify-start basis-2/12">
+          <div className="flex items-center justify-between gap-x-8 py-6">
+            <div className="flex basis-2/12 justify-start">
               <Logo className="h-10" />
             </div>
 
-            <div className="flex items-center justify-center basis-8/12">
-              <div className="w-full max-w-screen-md mx-auto">
+            <div className="flex basis-8/12 items-center justify-center">
+              <div className="mx-auto w-full max-w-screen-md">
                 <Navigation menu={menu} />
               </div>
             </div>
-            <div className="flex justify-end basis-2/12">
-              <div className="items-center justify-end hidden space-x-2 sm:flex">
+            <div className="flex basis-2/12 justify-end">
+              <div className="hidden items-center justify-end space-x-2 sm:flex">
                 <Account />
                 <Search />
                 <Cart />

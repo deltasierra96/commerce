@@ -14,7 +14,7 @@ export const ProductCardTitle = ({ product, ...props }: ProductCardTitleProps) =
     <Link
       {...props}
       href={productUrl}
-      className={'text-sm font-medium outline-none hover:underline'}
+      className={'text-base font-semibold outline-none hover:underline'}
     >
       <h3 className="min-w-0 truncate">{product.title}</h3>
     </Link>
