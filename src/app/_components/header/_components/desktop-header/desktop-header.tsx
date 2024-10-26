@@ -31,19 +31,19 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
     const mergedRefs = mergeRefs([desktopHeaderRef, ref]);
 
     useMotionValueEvent(scrollY, 'change', (y) => {
-      if (y > desktopHeaderHeight) {
+      if (y > desktopHeaderHeight * 2) {
         setDesktopHeaderContentTransform(true);
       }
 
-      if (y > desktopHeaderHeight * 4) {
+      if (y > desktopHeaderHeight * 6) {
         setDesktopHeaderPositionSticky(true);
       }
 
-      if (y < desktopHeaderHeight * 3) {
+      if (y < desktopHeaderHeight * 5) {
         setDesktopHeaderContentTransform(false);
       }
 
-      if (y < desktopHeaderHeight * 2) {
+      if (y < desktopHeaderHeight * 4) {
         setDesktopHeaderPositionSticky(false);
       }
     });

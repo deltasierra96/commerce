@@ -332,11 +332,11 @@ input[type='search']::-webkit-search-results-decoration {
   --border-radius--2xl: 1.44rem;
   --border-radius--3xl: 2.16rem; */
 
-  /* --border-radius--sm: 0.2692rem;
+  --border-radius--sm: 0.2692rem;
   --border-radius: 0.4595rem;
   --border-radius--md: 0.648rem;
   --border-radius--lg: 1.0368rem;
   --border-radius--xl: 1.5552rem;
   --border-radius--2xl: 2.0736rem;
-  --border-radius--3xl: 3.1104rem; */
+  --border-radius--3xl: 3.1104rem;
 }

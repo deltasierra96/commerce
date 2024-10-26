@@ -13,33 +13,43 @@ import 'swiper/css/thumbs';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { Container } from '@/components/ui/container';
 import { Product } from '@/shopify/types';
 import { ProductCard } from '../../product-card';
 
 type CarouselProps = {
   items: Product[];
+  title?: string;
 };
 
 export const Carousel = ({ items }: CarouselProps) => {
   return (
-    <Swiper
-      // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={50}
-      slidesPerView={5}
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
-    >
-      {items.map((product) => {
-        return (
-          <SwiperSlide key={product.id}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <section className="py-12">
+      <Container>
+        <h1 className="mb-6 text-3xl font-heading">Best selling</h1>
+        <div>
+          <Swiper
+            className="!overflow-visible"
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={20}
+            slidesPerView={4}
+            navigation
+            pagination={{ clickable: true }}
+            // scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+          >
+            {items.map((product) => {
+              return (
+                <SwiperSlide key={product.id}>
+                  <ProductCard showCartActions={false} product={product} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </Container>
+    </section>
   );
 };

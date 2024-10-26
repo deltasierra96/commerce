@@ -11,8 +11,8 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="bg-white">
-      <div className="py-4 space-y-4">
+    <>
+      <div className="hidden py-4 space-y-4">
         <div className="flex justify-center gap-x-4">
           <Button color={'primary'} variant={'filled'}>
             Filled
@@ -157,6 +157,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

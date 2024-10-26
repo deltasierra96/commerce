@@ -80,7 +80,7 @@ export const sharedButtonStyles = cva(
         color: 'primary',
         variant: 'outline',
         className: clsx([
-          'bg-white',
+          'bg-transparent',
           'text-theme',
           'border-theme',
           'hover:bg-theme',
@@ -150,7 +150,7 @@ export const sharedButtonStyles = cva(
     defaultVariants: {
       variant: 'filled',
       color: 'secondary',
-      rounded: false,
+      rounded: true,
       borderStyle: 'solid'
     }
   }
