@@ -52,7 +52,7 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
       <motion.header
         {...props}
         className={clsx(
-          'sticky top-0 z-header-safe flex w-full flex-col border-b border-neutral-100 bg-white opacity-100 will-change-transform'
+          'sticky top-0 z-header-safe flex w-full flex-col border-b border-neutral-100 bg-white opacity-100 will-change-transform max-xl:hidden'
         )}
         ref={mergedRefs}
         layout="position"
@@ -72,7 +72,7 @@ export const DesktopHeader = forwardRef<HTMLElement, DesktopHeaderProps>(
         }}
         transition={{ duration, ease: easing }}
       >
-        <Container fullWidth>
+        <Container>
           <div className="flex items-center justify-between gap-x-8 py-6">
             <div className="flex basis-2/12 justify-start">
               <Logo className="h-10" />

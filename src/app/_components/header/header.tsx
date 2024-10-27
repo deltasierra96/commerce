@@ -10,12 +10,8 @@ export const Header = async ({ ...props }: HeaderProps) => {
 
   return (
     <>
-      <div className="xl:hidden">
-        <MobileHeader menu={menu} />
-      </div>
-      <div className="max-xl:hidden">
-        <DesktopHeader menu={menu} />
-      </div>
+      <MobileHeader menu={menu} />
+      <DesktopHeader menu={menu} />
     </>
   );
 };

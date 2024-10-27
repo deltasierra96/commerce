@@ -4,12 +4,12 @@ import { Container } from '@/components/ui/container';
 
 export const Hero = () => {
   return (
-    <section>
+    <section className="bg-white">
       <div className="relative">
         <Container fullWidth>
           <div className="relative z-10 lg:w-full lg:max-w-2xl">
             <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
-              <div className="mx-auto max-w-2xl text-white lg:mx-0 lg:max-w-2xl">
+              <div className="mx-auto max-w-2xl text-neutral-950 lg:mx-0 lg:max-w-2xl lg:text-white">
                 <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl">
                   This month's new drops
                 </h1>
@@ -55,10 +55,10 @@ export const Hero = () => {
             // src='https://motorsportandspares.com/cdn/shop/files/gtechniq_c2_sealant_1800x.jpg'
             // src='https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply'
             alt=''
-            className='absolute inset-0 -z-10 h-full w-full object-cover'
+            className='absolute inset-0 object-cover w-full h-full -z-10'
           />
           <div className='hidden'>
-            <div className='absolute inset-x-0 -z-10 h-full w-full transform-gpu overflow-hidden bg-gradient-to-t from-black to-black/50' />
+            <div className='absolute inset-x-0 w-full h-full overflow-hidden -z-10 transform-gpu bg-gradient-to-t from-black to-black/50' />
 
             <div className='absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]'>
               <svg
@@ -86,9 +86,9 @@ export const Hero = () => {
               </svg>
             </div>
             <div className='px-6 lg:px-8'>
-              <div className='mx-auto max-w-2xl py-28 sm:py-24'>
+              <div className='max-w-2xl mx-auto py-28 sm:py-24'>
                 <div className='hidden sm:mb-8 sm:flex sm:justify-center'>
-                  <div className='relative rounded-full px-3 py-1 text-sm leading-6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20'>
+                  <div className='relative px-3 py-1 text-sm leading-6 text-gray-400 rounded-full ring-1 ring-white/10 hover:ring-white/20'>
                     Announcing our next round of funding.{' '}
                     <a href='#' className='font-semibold text-white'>
                       <span className='absolute inset-0' aria-hidden='true' />
@@ -104,7 +104,7 @@ export const Hero = () => {
                     Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
                     commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                   </p>
-                  <div className='mt-10 flex items-center justify-center gap-x-6'>
+                  <div className='flex items-center justify-center mt-10 gap-x-6'>
                     <ButtonLink href='/' variant={'filled'} color={'primary'}>
                       Get started
                     </ButtonLink>
