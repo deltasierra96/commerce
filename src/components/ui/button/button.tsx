@@ -107,14 +107,14 @@ export const sharedButtonStyles = cva(
         variant: 'filled',
         className: clsx([
           'text-neutral-950',
-          'bg-neutral-100',
-          'border-neutral-100',
-          'hover:bg-neutral-200',
-          'hover:border-neutral-200',
-          'pressed:bg-neutral-300',
-          'pressed:border-neutral-300',
-          'disabled:bg-neutral-100',
-          'disabled:border-neutral-100',
+          'bg-neutral-200',
+          'border-neutral-200',
+          'hover:bg-neutral-300',
+          'hover:border-neutral-300',
+          'pressed:bg-neutral-400',
+          'pressed:border-neutral-400',
+          'disabled:bg-neutral-200',
+          'disabled:border-neutral-200',
           'disabled:text-neutral-400'
         ])
       },
@@ -137,12 +137,12 @@ export const sharedButtonStyles = cva(
         variant: 'outline',
         className: clsx([
           'text-neutral-950',
-          'border-neutral-100',
-          'hover:bg-neutral-100',
-          'hover:border-neutral-100',
-          'pressed:bg-neutral-200',
-          'pressed:border-neutral-200',
-          'disabled:border-neutral-100',
+          'border-neutral-200',
+          'hover:bg-neutral-200',
+          'hover:border-neutral-200',
+          'pressed:bg-neutral-300',
+          'pressed:border-neutral-300',
+          'disabled:border-neutral-200',
           'disabled:text-neutral-400'
         ])
       }

@@ -20,21 +20,21 @@ export const CollectionHeader = ({ collection }: CollectionHeaderProps) => {
   return (
     <div className="bg-white lg:bg-transparent">
       <div className="relative flex flex-col justify-center md:h-[18rem] lg:h-[15rem] xl:h-[28rem]">
-        <div className="overflow-hidden rounded-lg md:absolute md:inset-0">
+        <div className="overflow-hidden md:absolute md:inset-0">
           {collection.image ? (
             <Image
               height={500}
               width={1920}
-              className="object-cover w-full h-full"
+              className="h-full w-full object-cover"
               src={collection.image?.url}
               alt={collection.image?.altText!}
             />
           ) : null}
           <div className="bg-black/60 bg-blend-overlay md:absolute md:inset-0" aria-hidden="true" />
         </div>
-        <Container className="relative py-4 mx-auto md:py-32 md:text-white">
-          <span className="text-xs uppercase font-heading">Men's</span>
-          <h1 className="text-xl tracking-tight uppercase font-heading md:text-2xl md:text-white lg:text-4xl">
+        <Container className="relative mx-auto py-4 md:py-32 md:text-white">
+          <span className="font-heading text-xs uppercase">Men's</span>
+          <h1 className="font-heading text-xl uppercase tracking-tight md:text-2xl md:text-white lg:text-4xl">
             {collection.title}
           </h1>
           <p
