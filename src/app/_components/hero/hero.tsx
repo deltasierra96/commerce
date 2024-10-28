@@ -6,9 +6,9 @@ export const Hero = () => {
   return (
     <section className="bg-white">
       <div className="relative">
-        <Container fullWidth>
+        <Container>
           <div className="relative z-10 lg:w-full lg:max-w-2xl">
-            <div className="relative px-6 py-32 sm:py-40 lg:px-8 lg:py-56 lg:pr-0">
+            <div className="relative py-32 sm:py-40 lg:py-56 lg:pr-0">
               <div className="mx-auto max-w-2xl text-neutral-950 lg:mx-0 lg:max-w-2xl lg:text-white">
                 <h1 className="font-heading text-4xl uppercase tracking-tight sm:text-5xl">
                   This month's new drops
