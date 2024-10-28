@@ -185,12 +185,12 @@ export const buttonStyles = cva('text-center font-button tracking-normal', {
     {
       compact: false,
       size: 'default',
-      className: 'h-button px-4'
+      className: 'h-button px-6'
     },
     {
       compact: true,
       size: 'default',
-      className: 'h-button-compact px-2'
+      className: 'h-button-compact px-4'
     },
     {
       compact: false,

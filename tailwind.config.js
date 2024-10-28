@@ -20,7 +20,7 @@ module.exports = {
       md: '768px',
       lg: '1024px',
       xl: '1440px',
-      '2xl': '1600px'
+      '2xl': '1650px'
     },
     extend: {
       colors: {
@@ -48,6 +48,9 @@ module.exports = {
           900: 'rgb(var(--colors-neutral-900) / <alpha-value>)',
           950: 'rgb(var(--colors-neutral-950) / <alpha-value>)'
         }
+      },
+      letterSpacing: {
+        heading: 'var(--heading-letter-spacing)'
       },
       ringWidth: {
         3: '3px',

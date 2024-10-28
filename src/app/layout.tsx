@@ -52,7 +52,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
           fontDinNext.variable
         )}
       >
-        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-neutral-100 font-sans text-base font-normal leading-6 text-neutral-950 antialiased">
+        <body className="scrollbar-thin scrollbar-track-neutral-400 scrollbar-thumb-neutral-200 bg-white font-sans text-base font-normal leading-6 tracking-normal text-neutral-950 antialiased">
           <NextTopLoader
             initialPosition={0.1}
             crawlSpeed={200}

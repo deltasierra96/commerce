@@ -212,13 +212,14 @@ input[type='search']::-webkit-search-results-decoration {
   --card-border-radius: theme(borderRadius.lg);
 
   /* Typography */
-  /* --font-sans: var(--font-inter); */
-  --font-sans: var(--font-satoshi);
+  --font-sans: var(--font-inter);
+  /* --font-sans: var(--font-satoshi); */
   /* --font-sans: var(--font-din-next); */
 
   /* Heading */
   --heading-font: var(--font-sans);
-  --heading-font-weight: theme(fontWeight.extrabold);
+  --heading-font-weight: theme(fontWeight.bold);
+  --heading-letter-spacing: theme(letterSpacing.tighter);
 
   /* Layout */
   --header-z-index: 999;
@@ -247,13 +248,12 @@ input[type='search']::-webkit-search-results-decoration {
   --ring-global-offset: 2px;
 
   /* Form Input */
-  --input-border-width: 2px;
+  --input-border-width: 1px;
   --input-border-radius: theme(borderRadius.md);
-  /* --input-border-radius: 999px; */
 
   --input-height-sm: theme(spacing.10);
-  --input-height: theme(spacing.11);
-  --input-height-lg: theme(spacing.12);
+  --input-height: theme(spacing.12);
+  --input-height-lg: theme(spacing.14);
 
   /* Textarea */
   --textarea-height: calc(var(--input-height) * 2);

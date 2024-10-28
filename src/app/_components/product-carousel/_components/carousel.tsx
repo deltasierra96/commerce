@@ -70,7 +70,7 @@ export const Carousel = ({ items }: CarouselProps) => {
     <section className="py-16">
       <Container>
         <div className="mb-8 flex items-center justify-between gap-x-2">
-          <h1 className="font-heading text-3xl leading-none">Best selling</h1>
+          <h1 className="tracking-heading font-heading text-4xl leading-none">Best selling</h1>
           <ButtonLink rightIcon="chevron-right" href="#" variant={'outline'}>
             View all
           </ButtonLink>
