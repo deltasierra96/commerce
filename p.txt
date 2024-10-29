@@ -1,7 +1,19 @@
-COMPANY_NAME="Vercel Inc."
-TWITTER_CREATOR="@vercel"
-TWITTER_SITE="https://nextjs.org/commerce"
-SITE_NAME="Next.js Commerce"
+COMPANY_NAME="Motorsport and Spares"
+TWITTER_CREATOR="@dxrkside96"
+TWITTER_SITE="https://x.com/dxrkside96"
+SITE_NAME="Motorsport and Spares"
 SHOPIFY_REVALIDATION_SECRET=""
 SHOPIFY_STOREFRONT_ACCESS_TOKEN="aae65b86f233dd35b7740b4601cf89b7"
 SHOPIFY_STORE_DOMAIN="motorsportandspares.myshopify.com"
+
+
+# The Contentful space in which the content is stored
+CONTENTFUL_SPACE_ID=tkz0yaepobog      
+# Used to fetch content from Contentful
+CONTENTFUL_ACCESS_TOKEN=X1IhQsM8ipIXX2PQhKqG3Di33zCLtbsZsylBtLEQwtE    
+# Used to fetch content/changes that is not yet published
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=xSFaXf1sU47SMXFV3sX6sLHBaPYQAGaqfBraEbAqyFc
+# Used to generate TypeScript types for Contentful
+CONTENTFUL_MANAGEMENT_TOKEN=...     
+# Used to all
+CONTENTFUL_PREVIEW_SECRET=...       

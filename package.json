@@ -11,7 +11,8 @@
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "generate": "graphql-codegen",
-    "test": "pnpm prettier:check"
+    "test": "pnpm prettier:check",
+    "types:contentful": "export $(cat .env.local | awk '!/^\\s*#/' | awk '!/^\\s*$/'); cf-content-types-generator --spaceId $CONTENTFUL_SPACE_ID --token $CONTENTFUL_MANAGEMENT_TOKEN -o src/contentful/types -X && prettier --write src/contentful/types"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
@@ -26,6 +27,7 @@
     "@tanstack/react-query": "^5.59.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "contentful": "^11.2.0",
     "date-fns": "^2.30.0",
     "dateformat": "^5.0.3",
     "framer-motion": "^11.11.9",
@@ -65,6 +67,7 @@
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "autoprefixer": "^10.4.20",
+    "cf-content-types-generator": "^2.15.5",
     "graphql": "^16.9.0",
     "postcss": "^8.4.45",
     "postcss-import": "16.1.0",
