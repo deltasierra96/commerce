@@ -23,7 +23,7 @@ export const sharedButtonStyles = cva(
       color: {
         primary: '',
         secondary: '',
-        white: 'text-primary-950 bg-white hover:bg-neutral-50 pressed:bg-neutral-100'
+        white: 'bg-white text-neutral-950 hover:bg-neutral-50 pressed:bg-neutral-100'
       },
       variant: {
         filled: '',

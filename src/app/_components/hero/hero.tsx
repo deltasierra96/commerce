@@ -17,7 +17,7 @@ export const Hero = () => {
                   Go grab what you like then we’ll meet you at the gym (duh)
                 </p>
                 <div className="mt-10 flex items-center gap-x-4">
-                  <ButtonLink size={'lg'} href="#">
+                  <ButtonLink size={'lg'} href="#" color={'white'}>
                     Shop Women
                   </ButtonLink>
                   <ButtonLink size={'lg'} href="#" color={'primary'} variant={'filled'}>

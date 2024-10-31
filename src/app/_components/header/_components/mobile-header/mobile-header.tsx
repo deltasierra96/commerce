@@ -26,25 +26,25 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
     const [mobileHeaderRef, { height: mobileHeaderHeight }] = useMeasure();
     const [mobileHeaderPositionSticky, setMobileHeaderPositionSticky] = useState(false);
     const [mobileHeaderContentTransform, setMobileHeaderContentTransform] = useState(false);
+    const mergedRefs = mergeRefs([mobileHeaderRef, ref]);
 
     useMotionValueEvent(scrollY, 'change', (y) => {
-      if (y > mobileHeaderHeight) {
+      if (y > mobileHeaderHeight * 2) {
+        setMobileHeaderContentTransform(true);
+      }
+
+      if (y > mobileHeaderHeight * 6) {
         setMobileHeaderPositionSticky(true);
       }
 
-      if (y > mobileHeaderHeight * 4) {
-        setMobileHeaderPositionSticky(true);
+      if (y < mobileHeaderHeight * 5) {
+        setMobileHeaderContentTransform(false);
       }
 
-      if (y < mobileHeaderHeight * 3) {
-        setMobileHeaderPositionSticky(false);
-      }
-
-      if (y < mobileHeaderHeight * 2) {
+      if (y < mobileHeaderHeight * 4) {
         setMobileHeaderPositionSticky(false);
       }
     });
-    const mergedRefs = mergeRefs([mobileHeaderRef, ref]);
 
     return (
       <motion.header
@@ -58,11 +58,13 @@ export const MobileHeader = forwardRef<HTMLElement, MobileHeaderProps>(
         variants={{
           sticky: (transform: boolean) => ({
             y: transform ? 0 : -mobileHeaderHeight,
+            opacity: transform ? 1 : 0,
             position: 'sticky'
           }),
           relative: (transform: boolean) => ({
             y: transform ? -mobileHeaderHeight : 0,
-            position: 'relative'
+            position: 'relative',
+            opacity: transform ? 0 : 1
           })
         }}
         transition={{ duration, ease: easing }}

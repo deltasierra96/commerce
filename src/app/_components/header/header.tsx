@@ -10,8 +10,8 @@ export const Header = async ({ ...props }: HeaderProps) => {
 
   return (
     <>
-      <MobileHeader menu={menu} />
       <DesktopHeader menu={menu} />
+      <MobileHeader menu={menu} />
     </>
   );
 };
