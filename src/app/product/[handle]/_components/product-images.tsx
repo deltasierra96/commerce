@@ -41,10 +41,10 @@ export const ProductImages = ({
       <div className="aspect-h-1 aspect-w-1 relative flex-1 overflow-hidden bg-white lg:rounded-card">
         {images[imageIndex] && (
           <Image
-            className="object-contain object-center"
+            className="object-fill object-center"
             width={900}
             height={900}
-            sizes="(min-width: 1024px) 66vw, 100vw"
+            // sizes="(min-width: 1024px) 66vw, 100vw"
             alt={images[imageIndex]?.altText || product.title}
             src={images[imageIndex]?.src as string}
             priority={true}
@@ -56,6 +56,7 @@ export const ProductImages = ({
             <div className="inline-flex items-center gap-x-2">
               <ButtonIcon
                 rounded
+                color={'white'}
                 icon="chevron-left"
                 onPress={() => {
                   const newState = updateImage(previousImageIndex.toString());
@@ -65,6 +66,7 @@ export const ProductImages = ({
               />
               <ButtonIcon
                 rounded
+                color={'white'}
                 icon="chevron-right"
                 onPress={() => {
                   const newState = updateImage(nextImageIndex.toString());
@@ -101,9 +103,10 @@ export const ProductImages = ({
                       updateURL(newState);
                     }}
                     aria-label="Select product image"
-                    className="flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
+                    className="aspect-h-1 aspect-w-1 relative flex size-16 items-center justify-center overflow-hidden rounded-md bg-white sm:size-24"
                   >
                     <Image
+                      className="object-fill object-center"
                       alt={image.altText || product.title}
                       src={image.src}
                       width={80}
