@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Hero } from './_components/hero';
-import { ProductCarousel } from './_components/product-carousel/product-carousel';
+import { Hero } from '../_components/hero';
+import { ProductCarousel } from '../_components/product-carousel/product-carousel';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
@@ -12,7 +12,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      <div className="hidden py-4 space-y-4">
+      <div className="hidden space-y-4 py-4">
         <div className="flex justify-center gap-x-4">
           <Button color={'primary'} variant={'filled'}>
             Filled
@@ -77,13 +77,13 @@ export default function HomePage() {
           Our perks
         </h2>
 
-        <div className="px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
           <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-0">
             <div className="text-center md:flex md:items-start md:text-left lg:block lg:text-center">
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="w-auto h-24 mx-auto -my-1"
+                    className="-my-1 mx-auto h-24 w-auto"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg"
                     alt=""
                   />
@@ -102,7 +102,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="w-auto h-24 mx-auto -my-1"
+                    className="-my-1 mx-auto h-24 w-auto"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg"
                     alt=""
                   />
@@ -121,7 +121,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="w-auto h-24 mx-auto -my-1"
+                    className="-my-1 mx-auto h-24 w-auto"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg"
                     alt=""
                   />
@@ -140,7 +140,7 @@ export default function HomePage() {
               <div className="md:flex-shrink-0">
                 <div className="flow-root">
                   <img
-                    className="w-auto h-24 mx-auto -my-1"
+                    className="-my-1 mx-auto h-24 w-auto"
                     src="https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg"
                     alt=""
                   />

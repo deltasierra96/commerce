@@ -1,6 +1,6 @@
 import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from '@/app/constants';
 import { getProducts } from '@/shopify/getProducts';
-import { ProductCard } from '../_components/product-card';
+import { ProductCard } from '../../_components/product-card';
 
 export const metadata = {
   title: 'Search',

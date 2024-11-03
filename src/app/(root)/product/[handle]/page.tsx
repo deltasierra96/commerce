@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 
+import { ProductProvider } from '@/app/(root)/product/[handle]/_components/product-context';
 import { AddToCart } from '@/app/_components/cart/add-to-cart';
 import { GridTileImage } from '@/app/_components/grid/tile';
 import { HIDDEN_PRODUCT_TAG, PRODUCT_PATH } from '@/app/constants';
-import { ProductProvider } from '@/app/product/[handle]/_components/product-context';
 import { Container } from '@/components/ui/container';
 import { getProduct } from '@/shopify/getProduct';
 import { getProductRecommendations } from '@/shopify/getProductRecommendation';
@@ -20,11 +20,10 @@ import { ProductTitle } from './_components/product-title';
 import { ProductVariantSelector } from './_components/product-variant-selector';
 import { ProductVendor } from './_components/product-vendor';
 
-export async function generateMetadata({
-  params
-}: {
-  params: { handle: string };
+export async function generateMetadata(props: {
+  params: Promise<{ handle: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const product = await getProduct(params.handle);
   console.log('product', product);
 
@@ -59,7 +58,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductPage({ params }: { params: { handle: string } }) {
+export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
+  const params = await props.params;
   const product = await getProduct(params.handle);
 
   if (!product) return notFound();
