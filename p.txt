@@ -6,14 +6,12 @@ SHOPIFY_REVALIDATION_SECRET=""
 SHOPIFY_STOREFRONT_ACCESS_TOKEN="aae65b86f233dd35b7740b4601cf89b7"
 SHOPIFY_STORE_DOMAIN="motorsportandspares.myshopify.com"
 
+NEXT_PUBLIC_SANITY_PROJECT_ID="9ao3sodn"
+NEXT_PUBLIC_SANITY_DATASET="production"
+AUTH_SECRET="NGmTpskOrP93pFZk/H9V5vGyJ3tJBRUX6xt1rP6Muts="
+AUTH_GITHUB_ID="39ba4d93ceec8ed2fc2c"
+AUTH_GITHUB_SECRET="36c017df0faa144a97141311d5813152b6fbd965"
+AUTH_TRUST_HOST=http://localhost:3000
 
-# The Contentful space in which the content is stored
-CONTENTFUL_SPACE_ID=tkz0yaepobog      
-# Used to fetch content from Contentful
-CONTENTFUL_ACCESS_TOKEN=X1IhQsM8ipIXX2PQhKqG3Di33zCLtbsZsylBtLEQwtE    
-# Used to fetch content/changes that is not yet published
-CONTENTFUL_PREVIEW_ACCESS_TOKEN=xSFaXf1sU47SMXFV3sX6sLHBaPYQAGaqfBraEbAqyFc
-# Used to generate TypeScript types for Contentful
-CONTENTFUL_MANAGEMENT_TOKEN=...     
-# Used to all
-CONTENTFUL_PREVIEW_SECRET=...       
+NEXT_PUBLIC_SANITY_API_VERSION="vX"
+SANITY_WRITE_TOKEN="skYktAh6b03TLYtDDjnTBwccaNtBSTFsx1NL1QM07woJmomKYl01TzGK4JK0HkTgInkbH59ZXxZmGcNj6dGlRjZtAXM6cjZBPnPQ8PCCz3JPs5iVlt6Af7YQNlrh6pakkKyWPuyEQO9podRfG8bLhMIKKcNRYHfpTS8LsIhEMpoLypbsmMzl"
