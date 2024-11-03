@@ -7,17 +7,17 @@
 import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { imageHotspotArrayPlugin } from 'sanity-plugin-hotspot-array';
+import { markdownSchema } from 'sanity-plugin-markdown';
 import { media, mediaAssetSource } from 'sanity-plugin-media';
 
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { structure } from '@/sanity/desk';
-import { apiVersion, dataset, projectId } from '@/sanity/env';
-import { customDocumentActions } from '@/sanity/plugins/customDocumentActions';
-import { schemaTypes } from '@/sanity/schemaTypes';
-import { markdownSchema } from 'sanity-plugin-markdown';
+import { structure } from 'sanity/desk';
+import { apiVersion, dataset, projectId } from 'sanity/env';
+import { customDocumentActions } from './sanity/plugins/customDocumentActions';
+import { schemaTypes } from './sanity/schemaTypes';
 
 const sanityConfig = defineConfig({
   basePath: '/studio',

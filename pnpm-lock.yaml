@@ -21,6 +21,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.1
         version: 3.9.1(react-hook-form@7.52.2(react@19.0.0-rc-3208e73e-20240730))
+      '@portabletext/types':
+        specifier: ^2.0.13
+        version: 2.0.13
       '@radix-ui/react-avatar':
         specifier: ^1.1.1
         version: 1.1.1(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)(types-react-dom@19.0.0-rc.1)(types-react@19.0.0-rc.1)

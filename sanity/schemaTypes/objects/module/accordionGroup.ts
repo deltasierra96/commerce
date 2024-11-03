@@ -1,5 +1,5 @@
-import blocksToText from '@/sanity/utils/blocksToText';
 import { defineField } from 'sanity';
+import blocksToText from 'sanity/utils/blocksToText';
 
 export default defineField({
   name: 'accordionGroup',

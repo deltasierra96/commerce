@@ -3,7 +3,7 @@ import pluralize from 'pluralize-esm';
 import { defineField } from 'sanity';
 
 import { SANITY_API_VERSION } from '@/app/constants';
-import { getPriceRange } from '@/sanity/utils/getPriceRange';
+import { getPriceRange } from 'sanity/utils/getPriceRange';
 import ShopifyDocumentStatus from '../../../components/media/ShopifyDocumentStatus';
 
 export default defineField({

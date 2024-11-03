@@ -1,6 +1,6 @@
-import { validateSlug } from '@/sanity/utils';
 import { DocumentIcon } from '@sanity/icons';
 import { defineField } from 'sanity';
+import { validateSlug } from 'sanity/utils';
 
 export default defineField({
   name: 'page',
