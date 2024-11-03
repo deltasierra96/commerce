@@ -28,7 +28,7 @@ import { rootMetadata } from './meta-data';
 import { Overlay } from './overlay';
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = (await cookies()).get('cartId')?.value;
   // Don't await the fetch, pass the Promise to the context provider
 
   const cart = getCart(cartId);

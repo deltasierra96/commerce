@@ -3,7 +3,7 @@ import { useProduct } from '@/app/product/[handle]/_components/product-context';
 import { Button } from '@/components/ui/button';
 import { ButtonIcon } from '@/components/ui/button-icon';
 import { Product, ProductVariant } from '@/shopify/types';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { addItem } from './actions';
 import { useCart } from './cart-context';
 
@@ -42,7 +42,7 @@ export function AddToCart({ product }: { product: Product }) {
   const { variants, availableForSale } = product;
   const { addCartItem } = useCart();
   const { state } = useProduct();
-  const [message, formAction] = useFormState(addItem, null);
+  const [message, formAction] = useActionState(addItem, null);
 
   const variant = variants.find((variant: ProductVariant) =>
     variant.selectedOptions.every((option) => option.value === state[option.name.toLowerCase()])

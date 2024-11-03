@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+export default {
   devIndicators: {
     appIsrStatus: false,
     buildActivity: false
