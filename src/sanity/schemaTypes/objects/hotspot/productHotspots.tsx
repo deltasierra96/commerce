@@ -1,20 +1,20 @@
-import { defineField } from "sanity";
-import ProductTooltip from "@/sanity/components/hotspots/ProductTooltip";
+import ProductTooltip from '@/sanity/components/hotspots/ProductTooltip';
+import { defineField } from 'sanity';
 
 export default defineField({
-  name: "productHotspots",
-  title: "Hotspots",
-  type: "array",
+  name: 'productHotspots',
+  title: 'Hotspots',
+  type: 'array',
   of: [
     {
-      type: "spot"
+      type: 'spot'
     }
   ],
   options: {
     imageHotspot: {
-      imagePath: "image",
+      imagePath: 'image',
       tooltip: ProductTooltip,
-      pathRoot: "parent"
+      pathRoot: 'parent'
     }
   }
 });
