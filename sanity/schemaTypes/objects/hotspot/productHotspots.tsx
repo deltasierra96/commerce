@@ -1,5 +1,5 @@
 import { defineField } from 'sanity';
-import ProductTooltip from 'sanity/components/hotspots/ProductTooltip';
+import ProductTooltip from '../../../../sanity/components/hotspots/ProductTooltip';
 
 export default defineField({
   name: 'productHotspots',

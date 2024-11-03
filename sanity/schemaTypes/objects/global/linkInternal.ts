@@ -1,7 +1,7 @@
 import { PAGE_REFERENCES } from '@/app/constants';
 import { LinkIcon } from '@sanity/icons';
 import { defineField } from 'sanity';
-import { getPriceRange } from 'sanity/utils/getPriceRange';
+import { getPriceRange } from '../../../../sanity/utils/getPriceRange';
 
 export default defineField({
   title: 'Internal Link',

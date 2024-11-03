@@ -14,7 +14,7 @@
 
 // Source: schema.json
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
+  _type: 'sanity.imagePaletteSwatch';
   background?: string;
   foreground?: string;
   population?: number;
@@ -22,7 +22,7 @@ export type SanityImagePaletteSwatch = {
 };
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
+  _type: 'sanity.imagePalette';
   darkMuted?: SanityImagePaletteSwatch;
   lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
@@ -33,7 +33,7 @@ export type SanityImagePalette = {
 };
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
+  _type: 'sanity.imageDimensions';
   height?: number;
   width?: number;
   aspectRatio?: number;
@@ -41,7 +41,7 @@ export type SanityImageDimensions = {
 
 export type SanityFileAsset = {
   _id: string;
-  _type: "sanity.fileAsset";
+  _type: 'sanity.fileAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -62,7 +62,7 @@ export type SanityFileAsset = {
 };
 
 export type Geopoint = {
-  _type: "geopoint";
+  _type: 'geopoint';
   lat?: number;
   lng?: number;
   alt?: number;
@@ -70,7 +70,7 @@ export type Geopoint = {
 
 export type Startup = {
   _id: string;
-  _type: "startup";
+  _type: 'startup';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -78,9 +78,9 @@ export type Startup = {
   slug?: Slug;
   author?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
+    [internalGroqTypeReferenceTo]?: 'author';
   };
   views?: number;
   description?: string;
@@ -91,7 +91,7 @@ export type Startup = {
 
 export type Author = {
   _id: string;
-  _type: "author";
+  _type: 'author';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -103,63 +103,76 @@ export type Author = {
   bio?: string;
 };
 
-export type Body = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-  listItem?: "bullet" | "number";
-  markDefs?: Array<{
-    _key: string;
-  } & AnnotationProduct | {
-    _key: string;
-  } & AnnotationLinkEmail | {
-    _key: string;
-  } & AnnotationLinkInternal | {
-    _key: string;
-  } & AnnotationLinkExternal>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  _key: string;
-} & ModuleAccordion | {
-  _key: string;
-} & ModuleCallout | {
-  _key: string;
-} & ModuleGrid | {
-  _key: string;
-} & ModuleImages | {
-  _key: string;
-} & ModuleInstagram | {
-  _key: string;
-} & ModuleProducts>;
+export type Body = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<
+        | ({
+            _key: string;
+          } & AnnotationProduct)
+        | ({
+            _key: string;
+          } & AnnotationLinkEmail)
+        | ({
+            _key: string;
+          } & AnnotationLinkInternal)
+        | ({
+            _key: string;
+          } & AnnotationLinkExternal)
+      >;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & ModuleAccordion)
+  | ({
+      _key: string;
+    } & ModuleCallout)
+  | ({
+      _key: string;
+    } & ModuleGrid)
+  | ({
+      _key: string;
+    } & ModuleImages)
+  | ({
+      _key: string;
+    } & ModuleInstagram)
+  | ({
+      _key: string;
+    } & ModuleProducts)
+>;
 
 export type CollectionLinks = Array<{
   _ref: string;
-  _type: "reference";
+  _type: 'reference';
   _weak?: boolean;
   _key: string;
-  [internalGroqTypeReferenceTo]?: "collection";
+  [internalGroqTypeReferenceTo]?: 'collection';
 }>;
 
 export type CollectionGroup = {
-  _type: "collectionGroup";
+  _type: 'collectionGroup';
   title?: string;
   collectionLinks?: CollectionLinks;
   collectionProducts?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "collection";
+    [internalGroqTypeReferenceTo]?: 'collection';
   };
 };
 
 export type CollectionRule = {
-  _type: "collectionRule";
+  _type: 'collectionRule';
   column?: string;
   relation?: string;
   condition?: string;
@@ -171,7 +184,7 @@ export type ProxyString = string;
 
 export type ProductVariant = {
   _id: string;
-  _type: "productVariant";
+  _type: 'productVariant';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -181,10 +194,10 @@ export type ProductVariant = {
 };
 
 export type ShopifyProductVariant = {
-  _type: "shopifyProductVariant";
+  _type: 'shopifyProductVariant';
   createdAt?: string;
   updatedAt?: string;
-  status?: "active" | "archived" | "draft";
+  status?: 'active' | 'archived' | 'draft';
   isDeleted?: boolean;
   title?: string;
   sku?: string;
@@ -202,24 +215,26 @@ export type ShopifyProductVariant = {
 };
 
 export type Option = {
-  _type: "option";
+  _type: 'option';
   name?: string;
   values?: Array<string>;
 };
 
-export type ProductHotspots = Array<{
-  _key: string;
-} & Spot>;
+export type ProductHotspots = Array<
+  {
+    _key: string;
+  } & Spot
+>;
 
 export type Spot = {
-  _type: "spot";
+  _type: 'spot';
   productWithVariant?: ProductWithVariant;
   x?: number;
   y?: number;
 };
 
 export type PriceRange = {
-  _type: "priceRange";
+  _type: 'priceRange';
   minVariantPrice?: number;
   maxVariantPrice?: number;
 };
@@ -227,177 +242,206 @@ export type PriceRange = {
 export type PlaceholderString = string;
 
 export type ModuleProducts = {
-  _type: "module.products";
-  modules?: Array<{
-    _key: string;
-  } & ModuleProduct>;
-  layout?: "card" | "pill";
+  _type: 'module.products';
+  modules?: Array<
+    {
+      _key: string;
+    } & ModuleProduct
+  >;
+  layout?: 'card' | 'pill';
 };
 
 export type ModuleProduct = {
-  _type: "module.product";
+  _type: 'module.product';
   productWithVariant?: ProductWithVariant;
 };
 
 export type ModuleInstagram = {
-  _type: "module.instagram";
+  _type: 'module.instagram';
   url?: string;
 };
 
 export type ModuleImages = {
-  _type: "module.images";
-  modules?: Array<{
-    _key: string;
-  } & ModuleImage>;
+  _type: 'module.images';
+  modules?: Array<
+    {
+      _key: string;
+    } & ModuleImage
+  >;
   fullWidth?: boolean;
-  verticalAlign?: "top" | "center" | "bottom";
+  verticalAlign?: 'top' | 'center' | 'bottom';
 };
 
 export type ModuleImage = {
-  _type: "module.image";
+  _type: 'module.image';
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
-  variant?: string | "caption" | "callToAction" | "productHotspots" | "productTags";
+  variant?: string | 'caption' | 'callToAction' | 'productHotspots' | 'productTags';
   caption?: string;
   callToAction?: ImageCallToAction;
   productHotspots?: ProductHotspots;
-  productTags?: Array<{
-    _key: string;
-  } & ProductWithVariant>;
+  productTags?: Array<
+    {
+      _key: string;
+    } & ProductWithVariant
+  >;
 };
 
 export type ImageCallToAction = {
-  _type: "imageCallToAction";
+  _type: 'imageCallToAction';
   title?: string;
-  links?: Array<{
-    _key: string;
-  } & LinkInternal | {
-    _key: string;
-  } & LinkExternal>;
+  links?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
 };
 
 export type GridItem = {
-  _type: "gridItem";
+  _type: 'gridItem';
   title?: string;
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   body?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "normal";
+    style?: 'normal';
     listItem?: never;
-    markDefs?: Array<{
-      _key: string;
-    } & AnnotationProduct | {
-      _key: string;
-    } & AnnotationLinkEmail | {
-      _key: string;
-    } & AnnotationLinkInternal | {
-      _key: string;
-    } & AnnotationLinkExternal>;
+    markDefs?: Array<
+      | ({
+          _key: string;
+        } & AnnotationProduct)
+      | ({
+          _key: string;
+        } & AnnotationLinkEmail)
+      | ({
+          _key: string;
+        } & AnnotationLinkInternal)
+      | ({
+          _key: string;
+        } & AnnotationLinkExternal)
+    >;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }>;
 };
 
 export type ModuleGrid = {
-  _type: "module.grid";
-  items?: Array<{
-    _key: string;
-  } & GridItem>;
+  _type: 'module.grid';
+  items?: Array<
+    {
+      _key: string;
+    } & GridItem
+  >;
 };
 
 export type ModuleCollection = {
-  _type: "module.collection";
+  _type: 'module.collection';
   collection?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "collection";
+    [internalGroqTypeReferenceTo]?: 'collection';
   };
   showBackground?: boolean;
 };
 
 export type ModuleCallToAction = {
-  _type: "module.callToAction";
-  layout?: "left" | "right";
+  _type: 'module.callToAction';
+  layout?: 'left' | 'right';
   title?: string;
   body?: string;
-  links?: Array<{
-    _key: string;
-  } & LinkInternal | {
-    _key: string;
-  } & LinkExternal>;
-  content?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  } | {
-    _key: string;
-  } & ProductWithVariant>;
+  links?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
+  content?: Array<
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: 'image';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & ProductWithVariant)
+  >;
 };
 
 export type ModuleCallout = {
-  _type: "module.callout";
+  _type: 'module.callout';
   text?: string;
-  links?: Array<{
-    _key: string;
-  } & LinkInternal | {
-    _key: string;
-  } & LinkExternal>;
+  links?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
 };
 
 export type AccordionGroup = {
-  _type: "accordionGroup";
+  _type: 'accordionGroup';
   title?: string;
   body?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "normal";
+    style?: 'normal';
     listItem?: never;
-    markDefs?: Array<{
-      _key: string;
-    } & AnnotationLinkEmail | {
-      _key: string;
-    } & AnnotationLinkInternal | {
-      _key: string;
-    } & AnnotationLinkExternal>;
+    markDefs?: Array<
+      | ({
+          _key: string;
+        } & AnnotationLinkEmail)
+      | ({
+          _key: string;
+        } & AnnotationLinkInternal)
+      | ({
+          _key: string;
+        } & AnnotationLinkExternal)
+    >;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }>;
 };
@@ -406,250 +450,282 @@ export type AccordionBody = Array<{
   children?: Array<{
     marks?: Array<string>;
     text?: string;
-    _type: "span";
+    _type: 'span';
     _key: string;
   }>;
-  style?: "normal";
+  style?: 'normal';
   listItem?: never;
-  markDefs?: Array<{
-    _key: string;
-  } & AnnotationLinkEmail | {
-    _key: string;
-  } & AnnotationLinkInternal | {
-    _key: string;
-  } & AnnotationLinkExternal>;
+  markDefs?: Array<
+    | ({
+        _key: string;
+      } & AnnotationLinkEmail)
+    | ({
+        _key: string;
+      } & AnnotationLinkInternal)
+    | ({
+        _key: string;
+      } & AnnotationLinkExternal)
+  >;
   level?: number;
-  _type: "block";
+  _type: 'block';
   _key: string;
 }>;
 
 export type ModuleAccordion = {
-  _type: "module.accordion";
-  groups?: Array<{
-    _key: string;
-  } & AccordionGroup>;
+  _type: 'module.accordion';
+  groups?: Array<
+    {
+      _key: string;
+    } & AccordionGroup
+  >;
 };
 
 export type LinkInternal = {
-  _type: "linkInternal";
+  _type: 'linkInternal';
   title?: string;
-  reference?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "collection";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "home";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "product";
-  };
+  reference?:
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'collection';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'home';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'page';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'product';
+      };
 };
 
 export type LinkExternal = {
-  _type: "linkExternal";
+  _type: 'linkExternal';
   title?: string;
   url?: string;
   newWindow?: boolean;
 };
 
-export type MenuLinks = Array<{
-  _key: string;
-} & CollectionGroup | {
-  _key: string;
-} & LinkInternal | {
-  _key: string;
-} & LinkExternal>;
+export type MenuLinks = Array<
+  | ({
+      _key: string;
+    } & CollectionGroup)
+  | ({
+      _key: string;
+    } & LinkInternal)
+  | ({
+      _key: string;
+    } & LinkExternal)
+>;
 
 export type Inventory = {
-  _type: "inventory";
+  _type: 'inventory';
   isAvailable?: boolean;
   management?: string;
   policy?: string;
 };
 
 export type ImageWithProductHotspots = {
-  _type: "imageWithProductHotspots";
+  _type: 'imageWithProductHotspots';
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   showHotspots?: boolean;
   productHotspots?: ProductHotspots;
 };
 
 export type CustomProductOptionSizeObject = {
-  _type: "customProductOption.sizeObject";
+  _type: 'customProductOption.sizeObject';
   title?: string;
   width?: number;
   height?: number;
 };
 
 export type CustomProductOptionSize = {
-  _type: "customProductOption.size";
+  _type: 'customProductOption.size';
   title?: string;
-  sizes?: Array<{
-    _key: string;
-  } & CustomProductOptionSizeObject>;
+  sizes?: Array<
+    {
+      _key: string;
+    } & CustomProductOptionSizeObject
+  >;
 };
 
 export type CustomProductOptionColorObject = {
-  _type: "customProductOption.colorObject";
+  _type: 'customProductOption.colorObject';
   title?: string;
   color?: Color;
 };
 
 export type CustomProductOptionColor = {
-  _type: "customProductOption.color";
+  _type: 'customProductOption.color';
   title?: string;
-  colors?: Array<{
-    _key: string;
-  } & CustomProductOptionColorObject>;
+  colors?: Array<
+    {
+      _key: string;
+    } & CustomProductOptionColorObject
+  >;
 };
 
 export type Settings = {
   _id: string;
-  _type: "settings";
+  _type: 'settings';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   menu?: MenuSettings;
   footer?: FooterSettings;
-  customProductOptions?: Array<{
-    _key: string;
-  } & CustomProductOptionColor | {
-    _key: string;
-  } & CustomProductOptionSize>;
+  customProductOptions?: Array<
+    | ({
+        _key: string;
+      } & CustomProductOptionColor)
+    | ({
+        _key: string;
+      } & CustomProductOptionSize)
+  >;
   notFoundPage?: NotFoundPage;
   seo?: Seo;
 };
 
 export type Seo = {
-  _type: "seo";
+  _type: 'seo';
   title?: string;
   description?: string;
 };
 
 export type NotFoundPage = {
-  _type: "notFoundPage";
+  _type: 'notFoundPage';
   title?: string;
   body?: string;
   collection?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "collection";
+    [internalGroqTypeReferenceTo]?: 'collection';
   };
   colorTheme?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "colorTheme";
+    [internalGroqTypeReferenceTo]?: 'colorTheme';
   };
 };
 
 export type FooterSettings = {
-  _type: "footerSettings";
-  links?: Array<{
-    _key: string;
-  } & LinkInternal | {
-    _key: string;
-  } & LinkExternal>;
+  _type: 'footerSettings';
+  links?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
   text?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "normal";
+    style?: 'normal';
     listItem?: never;
-    markDefs?: Array<{
-      _key: string;
-    } & AnnotationLinkEmail | {
-      _key: string;
-    } & AnnotationLinkInternal | {
-      _key: string;
-    } & AnnotationLinkExternal>;
+    markDefs?: Array<
+      | ({
+          _key: string;
+        } & AnnotationLinkEmail)
+      | ({
+          _key: string;
+        } & AnnotationLinkInternal)
+      | ({
+          _key: string;
+        } & AnnotationLinkExternal)
+    >;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }>;
 };
 
 export type MenuSettings = {
-  _type: "menuSettings";
+  _type: 'menuSettings';
   links?: MenuLinks;
 };
 
 export type AnnotationProduct = {
-  _type: "annotationProduct";
+  _type: 'annotationProduct';
   productWithVariant?: ProductWithVariant;
-  linkAction?: "link" | "addToCart" | "buyNow";
+  linkAction?: 'link' | 'addToCart' | 'buyNow';
   quantity?: number;
 };
 
 export type ProductWithVariant = {
-  _type: "productWithVariant";
+  _type: 'productWithVariant';
   product?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "product";
+    [internalGroqTypeReferenceTo]?: 'product';
   };
   variant?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "productVariant";
+    [internalGroqTypeReferenceTo]?: 'productVariant';
   };
 };
 
 export type AnnotationLinkInternal = {
-  _type: "annotationLinkInternal";
-  reference?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "collection";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "home";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "product";
-  };
+  _type: 'annotationLinkInternal';
+  reference?:
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'collection';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'home';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'page';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'product';
+      };
 };
 
 export type Product = {
   _id: string;
-  _type: "product";
+  _type: 'product';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -658,9 +734,9 @@ export type Product = {
   slugProxy?: ProxyString;
   colorTheme?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "colorTheme";
+    [internalGroqTypeReferenceTo]?: 'colorTheme';
   };
   body?: Body;
   store?: ShopifyProduct;
@@ -668,10 +744,10 @@ export type Product = {
 };
 
 export type ShopifyProduct = {
-  _type: "shopifyProduct";
+  _type: 'shopifyProduct';
   createdAt?: string;
   updatedAt?: string;
-  status?: "active" | "archived" | "draft";
+  status?: 'active' | 'archived' | 'draft';
   isDeleted?: boolean;
   title?: string;
   id?: number;
@@ -683,21 +759,23 @@ export type ShopifyProduct = {
   tags?: string;
   priceRange?: PriceRange;
   previewImageUrl?: string;
-  options?: Array<{
-    _key: string;
-  } & Option>;
+  options?: Array<
+    {
+      _key: string;
+    } & Option
+  >;
   variants?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "productVariant";
+    [internalGroqTypeReferenceTo]?: 'productVariant';
   }>;
 };
 
 export type Page = {
   _id: string;
-  _type: "page";
+  _type: 'page';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -705,9 +783,9 @@ export type Page = {
   slug?: Slug;
   colorTheme?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "colorTheme";
+    [internalGroqTypeReferenceTo]?: 'colorTheme';
   };
   showHero?: boolean;
   hero?: HeroPage;
@@ -716,90 +794,106 @@ export type Page = {
 };
 
 export type SeoPage = {
-  _type: "seo.page";
+  _type: 'seo.page';
   title?: PlaceholderString;
   description?: SeoDescription;
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type HeroPage = {
-  _type: "hero.page";
+  _type: 'hero.page';
   title?: string;
-  content?: Array<{
-    _key: string;
-  } & ProductWithVariant | {
-    _key: string;
-  } & ImageWithProductHotspots>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & ProductWithVariant)
+    | ({
+        _key: string;
+      } & ImageWithProductHotspots)
+  >;
 };
 
 export type Home = {
   _id: string;
-  _type: "home";
+  _type: 'home';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   hero?: HeroHome;
-  modules?: Array<{
-    _key: string;
-  } & ModuleCallout | {
-    _key: string;
-  } & ModuleCallToAction | {
-    _key: string;
-  } & ModuleCollection | {
-    _key: string;
-  } & ModuleImage | {
-    _key: string;
-  } & ModuleInstagram | {
-    _key: string;
-  } & ModuleProduct>;
+  modules?: Array<
+    | ({
+        _key: string;
+      } & ModuleCallout)
+    | ({
+        _key: string;
+      } & ModuleCallToAction)
+    | ({
+        _key: string;
+      } & ModuleCollection)
+    | ({
+        _key: string;
+      } & ModuleImage)
+    | ({
+        _key: string;
+      } & ModuleInstagram)
+    | ({
+        _key: string;
+      } & ModuleProduct)
+  >;
   seo?: SeoHome;
 };
 
 export type SeoHome = {
-  _type: "seo.home";
+  _type: 'seo.home';
   title?: string;
   description?: SeoDescription;
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type HeroHome = {
-  _type: "hero.home";
+  _type: 'hero.home';
   title?: string;
-  links?: Array<{
-    _key: string;
-  } & LinkInternal | {
-    _key: string;
-  } & LinkExternal>;
-  content?: Array<{
-    _key: string;
-  } & ProductWithVariant | {
-    _key: string;
-  } & ImageWithProductHotspots>;
+  links?: Array<
+    | ({
+        _key: string;
+      } & LinkInternal)
+    | ({
+        _key: string;
+      } & LinkExternal)
+  >;
+  content?: Array<
+    | ({
+        _key: string;
+      } & ProductWithVariant)
+    | ({
+        _key: string;
+      } & ImageWithProductHotspots)
+  >;
 };
 
 export type Collection = {
   _id: string;
-  _type: "collection";
+  _type: 'collection';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -808,55 +902,60 @@ export type Collection = {
   slugProxy?: ProxyString;
   colorTheme?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "colorTheme";
+    [internalGroqTypeReferenceTo]?: 'colorTheme';
   };
   vector?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   showHero?: boolean;
   hero?: HeroCollection;
-  modules?: Array<{
-    _key: string;
-  } & ModuleCallout | {
-    _key: string;
-  } & ModuleCallToAction | {
-    _key: string;
-  } & ModuleImage | {
-    _key: string;
-  } & ModuleInstagram>;
+  modules?: Array<
+    | ({
+        _key: string;
+      } & ModuleCallout)
+    | ({
+        _key: string;
+      } & ModuleCallToAction)
+    | ({
+        _key: string;
+      } & ModuleImage)
+    | ({
+        _key: string;
+      } & ModuleInstagram)
+  >;
   store?: ShopifyCollection;
   seo?: SeoShopify;
 };
 
 export type SeoShopify = {
-  _type: "seo.shopify";
+  _type: 'seo.shopify';
   title?: PlaceholderString;
   description?: SeoDescription;
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type ShopifyCollection = {
-  _type: "shopifyCollection";
+  _type: 'shopifyCollection';
   createdAt?: string;
   updatedAt?: string;
   isDeleted?: boolean;
@@ -866,26 +965,31 @@ export type ShopifyCollection = {
   slug?: Slug;
   descriptionHtml?: string;
   imageUrl?: string;
-  rules?: Array<{
-    _key: string;
-  } & CollectionRule>;
+  rules?: Array<
+    {
+      _key: string;
+    } & CollectionRule
+  >;
   disjunctive?: boolean;
   sortOrder?: string;
 };
 
 export type HeroCollection = {
-  _type: "hero.collection";
+  _type: 'hero.collection';
   title?: string;
   description?: string;
-  content?: Array<{
-    _key: string;
-  } & ProductWithVariant | {
-    _key: string;
-  } & ImageWithProductHotspots>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & ProductWithVariant)
+    | ({
+        _key: string;
+      } & ImageWithProductHotspots)
+  >;
 };
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
+  _type: 'sanity.imageCrop';
   top?: number;
   bottom?: number;
   left?: number;
@@ -893,7 +997,7 @@ export type SanityImageCrop = {
 };
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
+  _type: 'sanity.imageHotspot';
   x?: number;
   y?: number;
   height?: number;
@@ -902,7 +1006,7 @@ export type SanityImageHotspot = {
 
 export type SanityImageAsset = {
   _id: string;
-  _type: "sanity.imageAsset";
+  _type: 'sanity.imageAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -924,14 +1028,14 @@ export type SanityImageAsset = {
 };
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
+  _type: 'sanity.assetSourceData';
   name?: string;
   id?: string;
   url?: string;
 };
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
+  _type: 'sanity.imageMetadata';
   location?: Geopoint;
   dimensions?: SanityImageDimensions;
   palette?: SanityImagePalette;
@@ -943,7 +1047,7 @@ export type SanityImageMetadata = {
 
 export type ColorTheme = {
   _id: string;
-  _type: "colorTheme";
+  _type: 'colorTheme';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -953,13 +1057,13 @@ export type ColorTheme = {
 };
 
 export type AnnotationLinkExternal = {
-  _type: "annotationLinkExternal";
+  _type: 'annotationLinkExternal';
   url?: string;
   newWindow?: boolean;
 };
 
 export type AnnotationLinkEmail = {
-  _type: "annotationLinkEmail";
+  _type: 'annotationLinkEmail';
   email?: string;
 };
 
@@ -967,7 +1071,7 @@ export type Markdown = string;
 
 export type MediaTag = {
   _id: string;
-  _type: "media.tag";
+  _type: 'media.tag';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -975,13 +1079,13 @@ export type MediaTag = {
 };
 
 export type Slug = {
-  _type: "slug";
+  _type: 'slug';
   current?: string;
   source?: string;
 };
 
 export type Color = {
-  _type: "color";
+  _type: 'color';
   hex?: string;
   alpha?: number;
   hsl?: HslaColor;
@@ -990,7 +1094,7 @@ export type Color = {
 };
 
 export type RgbaColor = {
-  _type: "rgbaColor";
+  _type: 'rgbaColor';
   r?: number;
   g?: number;
   b?: number;
@@ -998,7 +1102,7 @@ export type RgbaColor = {
 };
 
 export type HsvaColor = {
-  _type: "hsvaColor";
+  _type: 'hsvaColor';
   h?: number;
   s?: number;
   v?: number;
@@ -1006,12 +1110,90 @@ export type HsvaColor = {
 };
 
 export type HslaColor = {
-  _type: "hslaColor";
+  _type: 'hslaColor';
   h?: number;
   s?: number;
   l?: number;
   a?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Startup | Author | Body | CollectionLinks | CollectionGroup | CollectionRule | SeoDescription | ProxyString | ProductVariant | ShopifyProductVariant | Option | ProductHotspots | Spot | PriceRange | PlaceholderString | ModuleProducts | ModuleProduct | ModuleInstagram | ModuleImages | ModuleImage | ImageCallToAction | GridItem | ModuleGrid | ModuleCollection | ModuleCallToAction | ModuleCallout | AccordionGroup | AccordionBody | ModuleAccordion | LinkInternal | LinkExternal | MenuLinks | Inventory | ImageWithProductHotspots | CustomProductOptionSizeObject | CustomProductOptionSize | CustomProductOptionColorObject | CustomProductOptionColor | Settings | Seo | NotFoundPage | FooterSettings | MenuSettings | AnnotationProduct | ProductWithVariant | AnnotationLinkInternal | Product | ShopifyProduct | Page | SeoPage | HeroPage | Home | SeoHome | HeroHome | Collection | SeoShopify | ShopifyCollection | HeroCollection | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | ColorTheme | AnnotationLinkExternal | AnnotationLinkEmail | Markdown | MediaTag | Slug | Color | RgbaColor | HsvaColor | HslaColor;
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityFileAsset
+  | Geopoint
+  | Startup
+  | Author
+  | Body
+  | CollectionLinks
+  | CollectionGroup
+  | CollectionRule
+  | SeoDescription
+  | ProxyString
+  | ProductVariant
+  | ShopifyProductVariant
+  | Option
+  | ProductHotspots
+  | Spot
+  | PriceRange
+  | PlaceholderString
+  | ModuleProducts
+  | ModuleProduct
+  | ModuleInstagram
+  | ModuleImages
+  | ModuleImage
+  | ImageCallToAction
+  | GridItem
+  | ModuleGrid
+  | ModuleCollection
+  | ModuleCallToAction
+  | ModuleCallout
+  | AccordionGroup
+  | AccordionBody
+  | ModuleAccordion
+  | LinkInternal
+  | LinkExternal
+  | MenuLinks
+  | Inventory
+  | ImageWithProductHotspots
+  | CustomProductOptionSizeObject
+  | CustomProductOptionSize
+  | CustomProductOptionColorObject
+  | CustomProductOptionColor
+  | Settings
+  | Seo
+  | NotFoundPage
+  | FooterSettings
+  | MenuSettings
+  | AnnotationProduct
+  | ProductWithVariant
+  | AnnotationLinkInternal
+  | Product
+  | ShopifyProduct
+  | Page
+  | SeoPage
+  | HeroPage
+  | Home
+  | SeoHome
+  | HeroHome
+  | Collection
+  | SeoShopify
+  | ShopifyCollection
+  | HeroCollection
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityAssetSourceData
+  | SanityImageMetadata
+  | ColorTheme
+  | AnnotationLinkExternal
+  | AnnotationLinkEmail
+  | Markdown
+  | MediaTag
+  | Slug
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;

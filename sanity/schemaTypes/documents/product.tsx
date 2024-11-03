@@ -1,9 +1,9 @@
 import { TagIcon } from '@sanity/icons';
 import pluralize from 'pluralize-esm';
 import { defineField, defineType } from 'sanity';
-import { getPriceRange } from 'sanity/utils/getPriceRange';
 import ProductHiddenInput from '../../components/inputs/ProductHidden';
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus';
+import { getPriceRange } from './../../../sanity/utils/getPriceRange';
 
 const GROUPS = [
   {

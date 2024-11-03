@@ -6,11 +6,10 @@ import { COLLECTION_PRODUCTS_DEFAULT_SORTING, COLLECTION_PRODUCTS_SORTING } from
 import { getCollection } from '@/shopify/getCollection';
 import { getCollectionProducts } from '@/shopify/getCollectionProducts';
 
-export async function generateMetadata({
-  params
-}: {
-  params: { collection: string };
+export async function generateMetadata(props: {
+  params: Promise<{ collection: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const collection = await getCollection(params.collection);
 
   if (!collection) return notFound();
@@ -22,13 +21,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function CollectionPage({
-  params,
-  searchParams
-}: {
-  params: { collection: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+export default async function CollectionPage(props: {
+  params: Promise<{ collection: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const { sort } = searchParams as { [key: string]: string };
   const { sortKey, reverse } =
     COLLECTION_PRODUCTS_SORTING.find((item) => item.slug === sort) ||
