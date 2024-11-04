@@ -23,7 +23,11 @@ export default defineType({
       name: 'shop',
       type: 'reference',
       to: [{ type: 'collection' }],
-      description: 'This collection will show at: /shop',
+      description: (
+        <>
+          This collection will show at: <code>/shop</code>
+        </>
+      ),
       group: 'displays',
     }),
     defineField({

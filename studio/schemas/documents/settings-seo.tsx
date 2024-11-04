@@ -1,7 +1,7 @@
-import React from 'react'
+import { defineField, defineType } from 'sanity'
 import { decodeAssetUrl } from '../../lib/helpers'
 
-export default {
+export default defineType({
   title: 'Default SEO / Share',
   name: 'seoSettings',
   type: 'document',
@@ -11,7 +11,7 @@ export default {
     { title: 'Browser Icons', name: 'icons' }
   ],
   fields: [
-    {
+    defineField({
       name: 'seoNote',
       type: 'note',
       options: {
@@ -29,8 +29,8 @@ export default {
         tone: 'primary'
       },
       group: ['seo', 'social']
-    },
-    {
+    }),
+    defineField({
       title: 'Default Meta Title',
       name: 'metaTitle',
       type: 'string',
@@ -40,8 +40,8 @@ export default {
           'Longer titles may be truncated by search engines'
         ),
       group: 'seo'
-    },
-    {
+    }),
+    defineField({
       title: 'Default Meta Description',
       name: 'metaDesc',
       type: 'text',
@@ -52,8 +52,8 @@ export default {
           'Longer descriptions may be truncated by search engines'
         ),
       group: 'seo'
-    },
-    {
+    }),
+    defineField({
       title: 'Default Share Title',
       name: 'shareTitle',
       type: 'string',
@@ -61,8 +61,8 @@ export default {
       validation: Rule =>
         Rule.max(50).warning('Longer titles may be truncated by social sites'),
       group: 'social'
-    },
-    {
+    }),
+    defineField({
       title: 'Default Share Description',
       name: 'shareDesc',
       type: 'text',
@@ -73,15 +73,15 @@ export default {
           'Longer descriptions may be truncated by social sites'
         ),
       group: 'social'
-    },
-    {
+    }),
+    defineField({
       title: 'Default Share Graphic',
       name: 'shareGraphic',
       type: 'image',
       description: 'Recommended size: 1200x630 (PNG or JPG)',
       group: 'social'
-    },
-    {
+    }),
+    defineField({
       title: 'Browser Icon (Favicon)',
       name: 'favicon',
       type: 'image',
@@ -93,7 +93,7 @@ export default {
         return Rule.custom(field => {
           if (!field) return true
 
-          const { dimensions } = decodeAssetUrl(field.asset._ref)
+          const { dimensions } = decodeAssetUrl(field.asset?._ref)
 
           if (dimensions.width !== 16 || dimensions.height !== 16) {
             return 'Favicon must be a 16x16 SVG'
@@ -103,8 +103,8 @@ export default {
         })
       },
       group: 'icons'
-    },
-    {
+    }),
+    defineField({
       title: 'Legacy Browser Icon (.ico)',
       name: 'faviconLegacy',
       type: 'file',
@@ -113,7 +113,7 @@ export default {
         return Rule.custom(field => {
           if (!field) return true
 
-          const { format } = decodeAssetUrl(field.asset._ref)
+          const { format } = decodeAssetUrl(field.asset?._ref)
 
           if (format !== 'ico') {
             return 'Legacy Favicon must be a 32x32 ICO file'
@@ -123,14 +123,14 @@ export default {
         })
       },
       group: 'icons'
-    },
-    {
+    }),
+    defineField({
       title: 'Touch Icon',
       name: 'touchIcon',
       type: 'image',
       description: 'Recommended size: 192x192 (PNG)',
       group: 'icons'
-    }
+    })
   ],
   preview: {
     prepare() {
@@ -139,4 +139,4 @@ export default {
       }
     }
   }
-}
+})

@@ -11,13 +11,23 @@ export default defineType({
       title: 'From (slug)',
       name: 'from',
       type: 'string',
-      description: `Do not include the full domain or leading slash. For example: new-page`,
+      description: (
+        <>
+          Do not include the full domain or leading slash. For example:{' '}
+          <code>old-page</code>
+        </>
+      ),
     }),
     defineField({
       title: 'To (slug)',
       name: 'to',
       type: 'string',
-      description: `Do not include the full domain or leading slash. For example: new-page`,
+      description: (
+        <>
+          Do not include the full domain or leading slash. For example:{' '}
+          <code>new-page</code>
+        </>
+      ),
     }),
     defineField({
       title: 'Is this a permanent redirect (301)?',
