@@ -1,11 +1,12 @@
-import { sanityFetch } from "./live";
-import * as queries from "./queries";
+import { defineQuery } from 'groq';
+import { client } from './client';
+import * as queries from './queries';
 
 // Fetch a specific product with our global data
 export async function getPageBySlug(slug: string, preview: boolean) {
   const slugs = JSON.stringify([slug, `/${slug}`, `/${slug}/`]);
 
-  const query = `
+  const query = defineQuery(`
     {
       "page": *[_type == "page" && slug.current in ${slugs}] | order(_updatedAt desc)[0]{
         "id": _id,
@@ -24,7 +25,7 @@ export async function getPageBySlug(slug: string, preview: boolean) {
       },
       ${queries.SITE}
     }
-  `;
-  const data = await sanityFetch({ query });
+  `);
+  const data = await client.fetch(query);
   return data;
 }

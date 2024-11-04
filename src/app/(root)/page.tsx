@@ -1,4 +1,7 @@
 import { Button } from '@/components/ui/button';
+import { getPageBySlug } from '@/sanity/lib/getPageBySlug';
+import { sanityFetch } from '@/sanity/lib/live';
+import { STARTUPS_QUERY } from '@/sanity/lib/queries';
 import { Hero } from '../_components/hero';
 import { ProductCarousel } from '../_components/product-carousel/product-carousel';
 
@@ -9,7 +12,19 @@ export const metadata = {
   }
 };
 
-export default function HomePage() {
+export default async function Home({
+  searchParams
+}: {
+  searchParams: Promise<{ query?: string }>;
+}) {
+  const query = (await searchParams).query;
+  const params = { search: query || null };
+
+  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+  const page = await getPageBySlug('test', false);
+  console.log('posts', posts);
+  console.log('page', page);
+
   return (
     <>
       <div className="hidden space-y-4 py-4">
