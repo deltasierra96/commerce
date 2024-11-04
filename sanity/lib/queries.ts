@@ -1,5 +1,5 @@
-import { defineQuery } from "next-sanity";
-import { sortTypes } from "../schemaTypes/objects/shop-sort";
+import { defineQuery } from 'next-sanity';
+import { sortTypes } from '../schemas/objects/shop-sort';
 
 export const STARTUPS_QUERY =
   defineQuery(`*[_type == "startup" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search] | order(_createdAt desc) {
@@ -16,8 +16,7 @@ export const STARTUPS_QUERY =
   image,
 }`);
 
-export const STARTUP_BY_ID_QUERY =
-  defineQuery(`*[_type == "startup" && _id == $id][0]{
+export const STARTUP_BY_ID_QUERY = defineQuery(`*[_type == "startup" && _id == $id][0]{
   _id, 
   title, 
   slug,
@@ -105,7 +104,7 @@ export const PLAYLIST_BY_SLUG_QUERY =
 // Create our sorting fallback titles from Sanity
 const sortFallbacks = sortTypes
   .map((type) => `type == "${type.value}" => "${type.title}"`)
-  .join(",");
+  .join(',');
 
 // Construct our "home" and "error" page GROQ
 export const HOME_ID = `*[_type=="generalSettings"][0].home->_id`;

@@ -17,13 +17,13 @@ import { structureTool } from 'sanity/structure';
 import { structure } from './sanity/desk';
 import { apiVersion, dataset, projectId } from './sanity/env';
 import { customDocumentActions } from './sanity/plugins/customDocumentActions';
-import { schemaTypes } from './sanity/schemaTypes';
+import { schemaTypes } from './sanity/schemas';
 
 const sanityConfig = defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
+  // Add and edit the content schema in the './sanity/schemas' folder
   schema: {
     types: schemaTypes
   },
